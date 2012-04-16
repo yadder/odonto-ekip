@@ -1,6 +1,0 @@
-INDEX VERSION 1.122+C:\TCC\Trunk\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-2104571255.index
-2685733968.index
-1111896270.index
-586970482.index
-179453799.index
