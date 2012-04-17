@@ -45,7 +45,7 @@ public class Recepcionista extends Usuario {
 	}
 	
 	public Recepcionista() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Recepcionista(String rgRecepcionista, String cpfRecepcionista,
