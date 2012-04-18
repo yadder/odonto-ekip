@@ -13,7 +13,7 @@
 <form name="formLogin" action="servletLogin" method="post">
 	<fieldset id="fieldsetLogin">
 	<legend><span>Faça o login</span></legend>
-	<br><br><br>
+	
 	<ol>
 		<li>
 			<label for="login" title="login">Login<span></span></label>
