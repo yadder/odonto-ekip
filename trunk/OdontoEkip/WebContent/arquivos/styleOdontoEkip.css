@@ -1,0 +1,95 @@
+body{
+	font-family: helv, arial, verdana, sans-serif;
+	font-size: 66%;
+	color: #1e1903;
+	margin:0;
+	padding:0;	
+}
+
+#content{
+	position: relative;
+	width: 761px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+#content form{
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
+fieldset{
+	margin: 10px 0 0 0;
+	padding: 0;	
+	background: transparent url(imagem_form.jpg) no-repeat bottom right;
+}
+
+legend {
+	text-transform: uppercase;
+	font-size: 1.3em;
+	padding: 5px;
+	margin-left: 1em;
+	color: #ffffff;
+	background: #191970;  #191970
+}
+
+fieldset ol{
+	padding: 10px 10px 0 10px;
+	list-style: none;
+}
+
+fieldset li{
+	position: relative;
+	padding-bottom: 1em;
+	line-height: 3.4em;
+}
+
+label{
+	position: relative;
+	clear: left;
+	float: left;
+	width: 15em;
+	margin-right: 5px;
+	padding-right: 30px;
+	line-height: 3.4em;
+	text-align: right;
+}
+
+label.required{
+	background: transparent url(formularios_campoobrigatorio.gif) no-repeat center right;
+}
+
+input{
+	padding: 5px;
+	font-size: 1.4em;
+	border: 1px solid #191970;
+	color: #e1903;
+	background: #E6E6FA;
+}
+
+input.radio{
+	border: none;
+	background: transparent;
+}
+h1{
+	color:#191970;
+	font-family:sans-serif;
+	text-align:center;
+	text-transform: uppercase;
+}
+
+p{
+	font-family:"Times New Roman";
+	font-size:20px;
+}
+
+#formularioLogin{
+	width:350px;
+	text-align:right;
+	text-decoration:none;
+	font-family:serif;
+	font-size:20px;
+	color:white;
+	background-color:#4682B4;
+}
+

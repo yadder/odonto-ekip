@@ -8,6 +8,32 @@
 <title>OdontoEkip - Login</title>
 </head>
 <body>
-<h1>Faça seu login!</h1>
+<div id="content">
+
+<form name="formLogin" action="servletLogin" method="post">
+	<fieldset id="fieldsetLogin">
+	<legend><span>Faça o login</span></legend>
+	<br><br><br>
+	<ol>
+		<li>
+			<label for="login" title="login">Login<span></span></label>
+			<input type="text" name="login" />
+		</li>
+		<li>
+			<label for="senha" title="senha">Senha<span></span></label>
+			<input type="password" name="senha" />
+		</li>		
+	</ol>
+	<ol>
+		<li>
+			<input type="reset" value="Limpar campos" />
+			<input type="submit" value="Entrar" />
+		</li>
+	</ol>
+	</fieldset>
+	
+</form>
+
+</div>
 </body>
 </html>
