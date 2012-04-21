@@ -17,8 +17,10 @@ public class Dentista extends Usuario {
 	}
 
 	public Dentista(Integer croDentista) {
+		super();
 		this.croDentista = croDentista;
 	}
+
 	
 	
 }
