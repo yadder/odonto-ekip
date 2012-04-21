@@ -4,13 +4,6 @@ import java.util.Date;
 
 public class Paciente extends Usuario{
 
-	private String rgPaciente;
-	
-	private String cpfPaciente;
-	
-	private Date dataNascimento;
-	
-	private String sexoPaciente;
 	
 	private String responsavelPaciente;
 	
@@ -31,38 +24,6 @@ public class Paciente extends Usuario{
 	private String estadoPaciente;
 	
 	private String cepPaciente;
-
-	public String getRgPaciente() {
-		return rgPaciente;
-	}
-
-	public void setRgPaciente(String rgPaciente) {
-		this.rgPaciente = rgPaciente;
-	}
-
-	public String getCpfPaciente() {
-		return cpfPaciente;
-	}
-
-	public void setCpfPaciente(String cpfPaciente) {
-		this.cpfPaciente = cpfPaciente;
-	}
-
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
-	public String getSexoPaciente() {
-		return sexoPaciente;
-	}
-
-	public void setSexoPaciente(String sexoPaciente) {
-		this.sexoPaciente = sexoPaciente;
-	}
 
 	public String getResponsavelPaciente() {
 		return responsavelPaciente;
@@ -155,10 +116,6 @@ public class Paciente extends Usuario{
 			String complementoPaciente, String bairroPaciente,
 			String cidadePaciente, String estadoPaciente, String cepPaciente) {
 		super();
-		this.rgPaciente = rgPaciente;
-		this.cpfPaciente = cpfPaciente;
-		this.dataNascimento = dataNascimento;
-		this.sexoPaciente = sexoPaciente;
 		this.responsavelPaciente = responsavelPaciente;
 		this.statusPaciente = statusPaciente;
 		this.tipoConvenio = tipoConvenio;
