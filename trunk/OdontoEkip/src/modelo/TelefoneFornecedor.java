@@ -1,29 +1,47 @@
 package modelo;
 
-public class TelefoneFornecedor {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="TelefoneFornecedor")
+public class TelefoneFornecedor {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer codigoTelefone;
 	
-	private Integer codigoFornecedor;
-	
+	@Column(length=2)
 	private Integer ddd;
 	
+	@Column(length=8)
 	private String telefone;
 
+	@ManyToOne	
+    @JoinColumn(name="codigoFornecedor")
+	private Fornecedor fornecedor;
+	
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+
+	
 	public Integer getCodigoTelefone() {
 		return codigoTelefone;
 	}
 
 	public void setCodigoTelefone(Integer codigoTelefone) {
 		this.codigoTelefone = codigoTelefone;
-	}
-
-	public Integer getCodigoFornecedor() {
-		return codigoFornecedor;
-	}
-
-	public void setCodigoFornecedor(Integer codigoFornecedor) {
-		this.codigoFornecedor = codigoFornecedor;
 	}
 
 	public Integer getDdd() {
@@ -46,13 +64,14 @@ public class TelefoneFornecedor {
 		// TODO Auto-generated constructor stub
 	}
 
-	public TelefoneFornecedor(Integer codigoTelefone, Integer codigoFornecedor,
-			Integer ddd, String telefone) {
+	public TelefoneFornecedor(Integer codigoTelefone, Integer ddd,
+			String telefone, Fornecedor fornecedor) {
+		super();
 		this.codigoTelefone = codigoTelefone;
-		this.codigoFornecedor = codigoFornecedor;
 		this.ddd = ddd;
 		this.telefone = telefone;
+		this.fornecedor = fornecedor;
 	}
-	
+
 	
 }

@@ -9,42 +9,44 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="usuario")
 @Inheritance(strategy=InheritanceType.JOINED)
-
 public class Usuario {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column
 	private Integer codigoUsuario;
 	
-	@Column(length=50, nullable=false)
+	@Column(name="nomeUsuario", length=50, nullable=false)
 	private String nomeUsuario;
 	
-	@Column(length=50, nullable=false)
+	@Column(name="loginUsuario", length=50, nullable=false)
 	private String loginUsuario;
 	
-	@Column(length=50, nullable=false)
+	@Column(name="senhaUsuario",length=50, nullable=false)
 	private String senhaUsuario;
 	
-	@Column(length=50, nullable=false)
+	@Column(name="perfilUsuario",length=50, nullable=false)
 	private String perfilUsuario;
 	
-	@Column
+	@Column(name="rgUsuario", length=30)
 	private String rgUsuario;
 	
-	@Column
+	@Column(name="cpfUsuario", length=11)
 	private String cpfUsuario;
 	
-	@Column
+	@Column(name="dataNascimento")
+	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 	
-	@Column(columnDefinition="enum ('m','f')",nullable=false)
+	@Column(name="sexoUsuario", columnDefinition="enum ('m','f')",nullable=false)
 	private String sexoUsuario;
 	
-	@Column
+	@Column(name="tipoUsuario", columnDefinition="enum ('admin','comum')",nullable=false)
 	private String tipoUsuario;
 	
 

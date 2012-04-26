@@ -1,29 +1,50 @@
 package modelo;
 
-import java.util.Date;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="paciente")
+@PrimaryKeyJoinColumn(name="codigoUsuario")
 public class Paciente extends Usuario{
 
-	
+	@Column(name="responsavelPaciente", length=50)
 	private String responsavelPaciente;
-	
+	@Column(name="statusPaciente", nullable=false)
 	private String statusPaciente;
-	
+	@Column(name="tipoConvenio", nullable=false)
 	private String tipoConvenio;
-	
+	@Column(name="logradouroPaciente", length=100)
 	private String logradrouroPaciente;
-	
+	@Column(name="numeroPaciente")
 	private Integer numeroPaciente;
-	
+	@Column(name="complementoPaciente")
 	private String complementoPaciente;
-	
+	@Column(name="bairroPaciente")
 	private String bairroPaciente;
-	
+	@Column(name="cidadePaciente")
 	private String cidadePaciente;
-	
+	@Column(name="estadoPaciente")
 	private String estadoPaciente;
-	
+	@Column(name="cepPaciente", length=10)
 	private String cepPaciente;
+	
+	@OneToMany(mappedBy="paciente", fetch=FetchType.EAGER)
+	private List<TelefonePaciente> telefonePaciente;
+
+	
+	public List<TelefonePaciente> getTelefonePaciente() {
+		return telefonePaciente;
+	}
+
+	public void setTelefonePaciente(List<TelefonePaciente> telefonePaciente) {
+		this.telefonePaciente = telefonePaciente;
+	}
 
 	public String getResponsavelPaciente() {
 		return responsavelPaciente;
@@ -109,12 +130,12 @@ public class Paciente extends Usuario{
 	
 	}
 
-	public Paciente(String rgPaciente, String cpfPaciente, Date dataNascimento,
-			String sexoPaciente, String responsavelPaciente,
-			String statusPaciente, String tipoConvenio,
-			String logradrouroPaciente, Integer numeroPaciente,
-			String complementoPaciente, String bairroPaciente,
-			String cidadePaciente, String estadoPaciente, String cepPaciente) {
+	public Paciente(String responsavelPaciente, String statusPaciente,
+			String tipoConvenio, String logradrouroPaciente,
+			Integer numeroPaciente, String complementoPaciente,
+			String bairroPaciente, String cidadePaciente,
+			String estadoPaciente, String cepPaciente,
+			List<TelefonePaciente> telefonePaciente) {
 		super();
 		this.responsavelPaciente = responsavelPaciente;
 		this.statusPaciente = statusPaciente;
@@ -126,7 +147,9 @@ public class Paciente extends Usuario{
 		this.cidadePaciente = cidadePaciente;
 		this.estadoPaciente = estadoPaciente;
 		this.cepPaciente = cepPaciente;
+		this.telefonePaciente = telefonePaciente;
 	}
+	
 	
 	
 }
