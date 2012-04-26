@@ -1,32 +1,57 @@
 package modelo;
 
-public class Fornecedor {
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="Fornecedor")
+public class Fornecedor {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="codigoFornecedor")
 	private Integer codigoFornecedor;
-	
+	@Column(name="nomeFornecedor", nullable=false)
 	private String nomeFornecedor;
-	
+	@Column(name="nomeVendendor", nullable=false)
 	private String nomeVendendor;
-	
+	@Column(name="emailVendedor", length=100)
 	private String emailVendendor;
-	
+	@Column(name="siteFornecedor")
 	private String siteFornecedor;
-	
+	@Column(name="cnpjFornecedor", length=14)
 	private String cnpjFornecedor;
-	
+	@Column(name="logradouroFornecedor")
 	private String logradouroFornecedor;
-	
+	@Column(name="numeroFornecedor", length=10)
 	private Integer numeroFornecedor;
-	
+	@Column(name="complementoFornecedor")
 	private String complementoFornecedor;
-	
+	@Column(name="bairroFornecedor", length=50)
 	private String bairroFornecedor;
-	
+	@Column(name="cidadeFornecedor", length=50)
 	private String cidadeFornecedor;
-	
+	@Column(name="estadoFornecedor", length=50)
 	private String estadoFornecedor;
-	
+	@Column(name="cepFornecedor", length=8)
 	private String cepFornecedor;
+	
+	@OneToMany(mappedBy="fornecedor", fetch=FetchType.EAGER)
+	private List<TelefoneFornecedor> telefoneFornecedor;
+	
+	public List<TelefoneFornecedor> getTelefoneFornecedor() {
+		return telefoneFornecedor;
+	}
+
+	public void setTelefoneFornecedor(List<TelefoneFornecedor> telefoneFornecedor) {
+		this.telefoneFornecedor = telefoneFornecedor;
+	}
 
 	public Integer getCodigoFornecedor() {
 		return codigoFornecedor;
@@ -141,7 +166,9 @@ public class Fornecedor {
 			String cnpjFornecedor, String logradouroFornecedor,
 			Integer numeroFornecedor, String complementoFornecedor,
 			String bairroFornecedor, String cidadeFornecedor,
-			String estadoFornecedor, String cepFornecedor) {
+			String estadoFornecedor, String cepFornecedor,
+			List<TelefoneFornecedor> telefoneFornecedor) {
+		super();
 		this.codigoFornecedor = codigoFornecedor;
 		this.nomeFornecedor = nomeFornecedor;
 		this.nomeVendendor = nomeVendendor;
@@ -155,7 +182,9 @@ public class Fornecedor {
 		this.cidadeFornecedor = cidadeFornecedor;
 		this.estadoFornecedor = estadoFornecedor;
 		this.cepFornecedor = cepFornecedor;
+		this.telefoneFornecedor = telefoneFornecedor;
 	}
+
 	
 	
 }

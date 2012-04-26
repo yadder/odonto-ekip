@@ -25,6 +25,5 @@
     <mapping class="modelo.Consulta"/>
     <mapping class="modelo.Pagamento"/>
 
-
  </session-factory>
 </hibernate-configuration>
