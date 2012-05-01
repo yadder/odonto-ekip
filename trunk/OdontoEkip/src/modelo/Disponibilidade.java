@@ -32,7 +32,7 @@ public class Disponibilidade {
 	private Date horaFim;
 
 	@ManyToOne	
-    @JoinColumn(name="croDentista")
+    @JoinColumn(name="codigoDentista")
 	private Dentista dentista;
 		
 	public Dentista getDentista() {

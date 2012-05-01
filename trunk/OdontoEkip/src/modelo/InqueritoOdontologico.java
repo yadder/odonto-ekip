@@ -7,7 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="InqueritoOdontologico")
@@ -16,68 +20,81 @@ public class InqueritoOdontologico {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer codigoInqueritoOdontologico;
-	@Column
+	@Column(name="tratamentoOdontologico", columnDefinition="enum ('s','n')",nullable=false)
 	private String tratamentoOdontologico;
-	
+	@Column(name="usandoMedicacao", columnDefinition="enum ('s','n')",nullable=false)
 	private String usandoMedicacao;
-	
+	@Column(name="alergia", columnDefinition="enum ('s','n')",nullable=false)
 	private String alergia;
-	
+	@Column(name="anemia", columnDefinition="enum ('s','n')",nullable=false)
 	private String anemia;
-	
+	@Column(name="fumante", columnDefinition="enum ('s','n')",nullable=false)
 	private String fumante;
-	
+	@Column(name="hepatite", columnDefinition="enum ('s','n')",nullable=false)
 	private String hepatite;
-	
+	@Column(name="alcoolista", columnDefinition="enum ('s','n')",nullable=false)
 	private String alcoolista;
-	
+	@Column(name="sifilis", columnDefinition="enum ('s','n')",nullable=false)
 	private String sifilis;
-	
+	@Column(name="herpesAfitas", columnDefinition="enum ('s','n')",nullable=false)
 	private String herpesAfitas;
-	
+	@Column(name="hiv", columnDefinition="enum ('s','n')",nullable=false)
 	private String hiv;
-	
+	@Column(name="gravidez", columnDefinition="enum ('s','n')",nullable=false)
 	private String gravidez;
-	
+	@Column(name="tuberculose", columnDefinition="enum ('s','n')",nullable=false)
 	private String tuberculose;
-	
+	@Column(name="diabetes", columnDefinition="enum ('s','n')",nullable=false)
 	private String diabetes;
-	
+	@Column(name="asma", columnDefinition="enum ('s','n')",nullable=false)
 	private String asma;
-	
+	@Column(name="cardiaco", columnDefinition="enum ('s','n')",nullable=false)
 	private String cardiaco;
-	
+	@Column(name="dataUltimoAtendimento")
+	@Temporal(TemporalType.DATE)
 	private Date dataUltimoAtendimento;
-	
+	@Column(name="concluiuTratamento", columnDefinition="enum ('s','n')",nullable=false)
 	private String concluiuTratamento;
-	
+	@Column(name="experienciaNegativaTratamento", length=100)
 	private String experienciaNegativaTratamento;
-	
+	@Column(name="roerUnhas", columnDefinition="enum ('s','n')",nullable=false)
 	private String roerUnhas;
-	
+	@Column(name="respiraPelaBoca", columnDefinition="enum ('s','n')",nullable=false)
 	private String respirarPelaBoca;
-	
+	@Column(name="morderObjetos", columnDefinition="enum ('s','n')",nullable=false)
 	private String morderObjetos;
-	
+	@Column(name="rangerOsDentes", columnDefinition="enum ('s','n')",nullable=false)
 	private String rangerOsDentes;
-	
+	@Column(name="chuparDedoOuChupeta", columnDefinition="enum ('s','n')",nullable=false)
 	private String chuparDedoOuChupeta;
-	
+	@Column(name="outros", length=100)
 	private String outros;
-	
+	@Column(name="fioFitaDental", columnDefinition="enum ('s','n')",nullable=false)
 	private String fioFitaDental;
-	
+	@Column(name="palito", columnDefinition="enum ('s','n')",nullable=false)
 	private String palito;
-	
+	@Column(name="unitufoBitufo", columnDefinition="enum ('s','n')",nullable=false)
 	private String unitufoBitufo;
-	
+	@Column(name="escovaMaciaMediaDura", columnDefinition="enum ('macia','media','dura')",nullable=false)
 	private String escovaMaciaMediaDura;
-	
+	@Column(name="interdental", columnDefinition="enum ('s','n')",nullable=false)
 	private String interdental;
-	
+	@Column(name="cremeDental", columnDefinition="enum ('s','n')",nullable=false)
 	private String cremeDental;
-	
+	@Column(name="ingereAlimentosEntreRefeicoes", columnDefinition="enum ('s','n')",nullable=false)
 	private String ingereAlimentosEntreRefeicoes;
+	
+	@ManyToOne	
+    @JoinColumn(name="codigoPaciente")
+	private Paciente paciente;
+	
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
 
 	public Integer getCodigoInqueritoOdontologico() {
 		return codigoInqueritoOdontologico;
@@ -352,7 +369,9 @@ public class InqueritoOdontologico {
 			String rangerOsDentes, String chuparDedoOuChupeta, String outros,
 			String fioFitaDental, String palito, String unitufoBitufo,
 			String escovaMaciaMediaDura, String interdental,
-			String cremeDental, String ingereAlimentosEntreRefeicoes) {
+			String cremeDental, String ingereAlimentosEntreRefeicoes,
+			Paciente paciente) {
+		super();
 		this.codigoInqueritoOdontologico = codigoInqueritoOdontologico;
 		this.tratamentoOdontologico = tratamentoOdontologico;
 		this.usandoMedicacao = usandoMedicacao;
@@ -385,7 +404,9 @@ public class InqueritoOdontologico {
 		this.interdental = interdental;
 		this.cremeDental = cremeDental;
 		this.ingereAlimentosEntreRefeicoes = ingereAlimentosEntreRefeicoes;
+		this.paciente = paciente;
 	}
-	
+
+
 	
 }

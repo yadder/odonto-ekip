@@ -1,16 +1,19 @@
 package modelo;
 
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="paciente")
-@PrimaryKeyJoinColumn(name="codigoUsuario")
+@PrimaryKeyJoinColumn(name="codigoPaciente")
 public class Paciente extends Usuario{
 
 	@Column(name="responsavelPaciente", length=50)
@@ -37,7 +40,31 @@ public class Paciente extends Usuario{
 	@OneToMany(mappedBy="paciente", fetch=FetchType.EAGER)
 	private List<TelefonePaciente> telefonePaciente;
 
+	@OneToOne
+	@JoinColumn(name="codigoConvenio")
+	private Convenio convenio;
 	
+	@OneToMany(mappedBy="paciente", fetch=FetchType.EAGER)
+	private List<InqueritoOdontologico> inqueritoOdontologico;
+	
+	
+	public List<InqueritoOdontologico> getInqueritoOdontologico() {
+		return inqueritoOdontologico;
+	}
+
+	public void setInqueritoOdontologico(
+			List<InqueritoOdontologico> inqueritoOdontologico) {
+		this.inqueritoOdontologico = inqueritoOdontologico;
+	}
+
+	public Convenio getConvenio() {
+		return convenio;
+	}
+
+	public void setConvenio(Convenio convenio) {
+		this.convenio = convenio;
+	}
+
 	public List<TelefonePaciente> getTelefonePaciente() {
 		return telefonePaciente;
 	}
@@ -130,26 +157,6 @@ public class Paciente extends Usuario{
 	
 	}
 
-	public Paciente(String responsavelPaciente, String statusPaciente,
-			String tipoConvenio, String logradrouroPaciente,
-			Integer numeroPaciente, String complementoPaciente,
-			String bairroPaciente, String cidadePaciente,
-			String estadoPaciente, String cepPaciente,
-			List<TelefonePaciente> telefonePaciente) {
-		super();
-		this.responsavelPaciente = responsavelPaciente;
-		this.statusPaciente = statusPaciente;
-		this.tipoConvenio = tipoConvenio;
-		this.logradrouroPaciente = logradrouroPaciente;
-		this.numeroPaciente = numeroPaciente;
-		this.complementoPaciente = complementoPaciente;
-		this.bairroPaciente = bairroPaciente;
-		this.cidadePaciente = cidadePaciente;
-		this.estadoPaciente = estadoPaciente;
-		this.cepPaciente = cepPaciente;
-		this.telefonePaciente = telefonePaciente;
-	}
-	
 	
 	
 }

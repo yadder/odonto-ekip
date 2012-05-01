@@ -29,7 +29,7 @@ public class Consulta {
 	private String statusConsulta;
 
 	@ManyToOne	
-    @JoinColumn(name="croDentista")
+    @JoinColumn(name="codigoDentista")
 	private Dentista dentista;
 
 	public Integer getCodigoConsulta() {

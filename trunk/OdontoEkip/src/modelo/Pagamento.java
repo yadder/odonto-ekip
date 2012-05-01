@@ -1,13 +1,24 @@
 package modelo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="pagamento")
 public class Pagamento {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer codigoPagamento;
-	
+	@Column(name="numeroParcela")
 	private Integer numeroParcela;
-	
+	@Column(name="valorParcela")
 	private Double valorParcela;
-	
+	@Column(name="statusPagamento")
 	private String statusPagamento;
 
 	public Integer getCodigoPagamento() {
