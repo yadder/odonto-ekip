@@ -17,10 +17,10 @@ public class TelefoneFornecedor {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer codigoTelefone;
 	
-	@Column(length=2)
+	@Column(length=3)
 	private Integer ddd;
 	
-	@Column(length=8)
+	@Column(length=9)
 	private String telefone;
 
 	@ManyToOne	

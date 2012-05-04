@@ -46,9 +46,7 @@ public class Usuario {
 	@Column(name="sexoUsuario", columnDefinition="enum ('m','f')",nullable=false)
 	private String sexoUsuario;
 	
-	@Column(name="tipoUsuario", columnDefinition="enum ('admin','comum')",nullable=false)
-	private String tipoUsuario;
-	
+		
 
 	public Integer getCodigoUsuario() {
 		return codigoUsuario;
@@ -120,15 +118,7 @@ public class Usuario {
 
 	public void setSexoUsurio(String sexoUsurio) {
 		this.sexoUsuario = sexoUsurio;
-	}
-
-	public String getTipoUsuario() {
-		return tipoUsuario;
-	}
-
-	public void setTipoUsuario(String tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
-	}
+	}	
 
 	public Usuario() {
 	
