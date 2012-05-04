@@ -29,7 +29,7 @@
 		</li>
 		<li>
 			<label for="DddFornecedor" title="DDD do fornecedor">DDD<span></span></label>
-			<input type="text" name="cnpjFornecedor"size="3" maxlength="3" />
+			<input type="text" name="dddFornecedor"size="3" maxlength="3" />
 		</li>
 		<li>
 			<label for="TelefoneFornecedor" title="Telefone do fornecedor">Telefone<span></span></label>
@@ -88,7 +88,7 @@
 		</li>
 		<li>
 			<label for="CepFornecedor" title="CEP do fornecedor">CEP<span></span></label>
-			<input type="text" name="cepVendedor" size="9" maxlength="9"/>
+			<input type="text" name="cepFornecedor" size="9" maxlength="9"/>
 		</li>
 		<li>
 			<label for="NomeVendedor" title="Nome do vendedor">Nome do vendedor<span></span></label>
