@@ -102,11 +102,11 @@
 	</ol>
 	<ol>
 		<li>
-			<input type="reset" value="Limpar campos" />
-			<input type="submit" value="Gravar" />
-			<input type="submit" value="Excluir" />
-			<input type="submit" value="Pesquisar" />
-			<input type="submit" value="Sair" />
+			<input type="reset" value="Limpar campos" name="botao" />
+			<input type="submit" value="Gravar" name="botao" />
+			<input type="submit" value="Excluir" name="botao" />
+			<input type="submit" value="Pesquisar" name="botao" />
+			<input type="submit" value="Sair" name="botao" />
 		</li>
 	</ol>
 	</fieldset>
