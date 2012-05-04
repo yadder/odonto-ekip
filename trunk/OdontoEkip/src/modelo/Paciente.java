@@ -24,17 +24,17 @@ public class Paciente extends Usuario{
 	private String tipoConvenio;
 	@Column(name="logradouroPaciente", length=100)
 	private String logradrouroPaciente;
-	@Column(name="numeroPaciente")
+	@Column(name="numeroPaciente",length=10)
 	private Integer numeroPaciente;
-	@Column(name="complementoPaciente")
+	@Column(name="complementoPaciente",length=50)
 	private String complementoPaciente;
-	@Column(name="bairroPaciente")
+	@Column(name="bairroPaciente",length=50)
 	private String bairroPaciente;
-	@Column(name="cidadePaciente")
+	@Column(name="cidadePaciente",length=100)
 	private String cidadePaciente;
-	@Column(name="estadoPaciente")
+	@Column(name="estadoPaciente",length=2)
 	private String estadoPaciente;
-	@Column(name="cepPaciente", length=10)
+	@Column(name="cepPaciente", length=9)
 	private String cepPaciente;
 	
 	@OneToMany(mappedBy="paciente", fetch=FetchType.EAGER)

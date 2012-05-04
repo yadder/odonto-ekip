@@ -17,29 +17,29 @@ public class Fornecedor {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="codigoFornecedor")
 	private Integer codigoFornecedor;
-	@Column(name="nomeFornecedor", nullable=false)
+	@Column(name="nomeFornecedor",length=50, nullable=false)
 	private String nomeFornecedor;
-	@Column(name="nomeVendendor", nullable=false)
+	@Column(name="nomeVendendor",length=50, nullable=false)
 	private String nomeVendendor;
-	@Column(name="emailVendedor", length=100)
+	@Column(name="emailVendedor", length=50)
 	private String emailVendendor;
-	@Column(name="siteFornecedor")
+	@Column(name="siteFornecedor",length=30)
 	private String siteFornecedor;
-	@Column(name="cnpjFornecedor", length=14)
+	@Column(name="cnpjFornecedor", length=18)
 	private String cnpjFornecedor;
-	@Column(name="logradouroFornecedor")
+	@Column(name="logradouroFornecedor",length=100)
 	private String logradouroFornecedor;
 	@Column(name="numeroFornecedor", length=10)
 	private Integer numeroFornecedor;
-	@Column(name="complementoFornecedor")
+	@Column(name="complementoFornecedor",length=50)
 	private String complementoFornecedor;
 	@Column(name="bairroFornecedor", length=50)
 	private String bairroFornecedor;
 	@Column(name="cidadeFornecedor", length=50)
 	private String cidadeFornecedor;
-	@Column(name="estadoFornecedor", length=50)
+	@Column(name="estadoFornecedor", length=2)
 	private String estadoFornecedor;
-	@Column(name="cepFornecedor", length=8)
+	@Column(name="cepFornecedor", length=9)
 	private String cepFornecedor;
 	
 	@OneToMany(mappedBy="fornecedor", fetch=FetchType.EAGER)
