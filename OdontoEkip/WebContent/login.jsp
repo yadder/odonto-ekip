@@ -9,7 +9,6 @@
 </head>
 <body>
 <div id="content">
-
 <form name="formLogin" action="servletLogin" method="post">
 	<fieldset id="fieldsetLogin">
 	<legend><span>Faça o login</span></legend>
@@ -31,9 +30,9 @@
 		</li>
 	</ol>
 	</fieldset>
-	
 </form>
-
 </div>
+
+<b>${msg}</b>
 </body>
 </html>
