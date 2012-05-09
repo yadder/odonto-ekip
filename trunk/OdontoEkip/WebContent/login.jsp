@@ -8,9 +8,10 @@
 <title>OdontoEkip - Login</title>
 </head>
 <body>
+ ${msg}
 <div id="content">
-<form name="formLogin" action="servletLogin" method="post">
-	<fieldset id="fieldsetLogin">
+<form name="formLogin" action="ServletLogin" method="post">
+	<fieldset>
 	<legend><span>Faça o login</span></legend>
 	
 	<ol>
@@ -30,9 +31,10 @@
 		</li>
 	</ol>
 	</fieldset>
+
 </form>
 </div>
 
-<b>${msg}</b>
+
 </body>
 </html>
