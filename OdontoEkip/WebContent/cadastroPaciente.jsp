@@ -5,38 +5,30 @@
 <head>
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro de Paciente</title>
+<title>Cadastro de Pacientes</title>
 </head>
 <body>
 <div id="content">
 
 <form name="formCadastroPaciente" action="servletCadastroPaciente" method="post">
 	<fieldset id="fieldsetCadastroPaciente">
-	<legend><span>Cadastro de Paciente</span></legend>
+	<legend><span>Cadastro de Pacientes</span></legend>
 	
 	<ol>
 		<li>
-			<label for="NomePaciente" title="Nome do paciente">Nome do paciente<span></span></label>
-			<input type="text" name="nomePaciente" size="50" maxlength="50" />
-		</li>		
-		<li>
-			<label for="CpfPaciente" title="CPF do paciente">CPF do paciente<span></span></label>
-			<input type="text" name="cpfPaciente"size="18" maxlength="14" />
-		</li>
-		<li>
-			<label for="DddPaciente" title="DDD do paciente">DDD<span></span></label>
-			<input type="text" name="dddPaciente"size="3" maxlength="3" />
-		</li>
-		<li>
-			<label for="TelefonePaciente" title="Telefone do paciente">Telefone<span></span></label>
-			<input type="text" name="telefonePaciente"size="9" maxlength="9" />
-		</li>
+			<label for="TipoConvenio" title="Tipo de Convênio">Tipo de Convênio<span></span></label>			
+				<select>
+					  <option  value=""></option>						  		
+					  <option  value="CONVÊNIO">CONVÊNIO</option>
+					  <option  value="PARTICULAR">PARTICULAR</option>	                  	                   
+	            </select>
+		</li>							
 		<li>
 			<label for="LogradouroPaciente" title="Logradouro do paciente">Logradouro<span></span></label>
 			<input type="text" name="logradouroPaciente" size="50" maxlength="100"/>
 		</li>
 		<li>
-			<label for="NumeroPaciente" title="Numero do paciente">Numero<span></span></label>
+			<label for="NumeroPaciente" title="Numero do paciente">Número<span></span></label>
 			<input type="text" name="numeroPaciente"size="10" maxlength="10" />
 		</li>
 		<li>
@@ -85,6 +77,14 @@
 		<li>
 			<label for="CepPaciente" title="CEP do paciente">CEP<span></span></label>
 			<input type="text" name="cepPaciente" size="9" maxlength="9"/>
+		</li>
+		<li>
+			<label for="DddPaciente" title="DDD do paciente">DDD<span></span></label>
+			<input type="text" name="dddPaciente"size="3" maxlength="3" />
+		</li>
+		<li>
+			<label for="TelefonePaciente" title="Telefone do paciente">Telefone<span></span></label>
+			<input type="text" name="telefonePaciente"size="9" maxlength="9" />
 		</li>
 		<li>
 			<label for="ResponsavelPaciente" title="Responsável pelo paciente">Responsável<span></span></label>

@@ -5,36 +5,24 @@
 <head>
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro de Fornecedor</title>
+<title>Cadastro de Fornecedores</title>
 </head>
 <body>
 <div id="content">
 
 <form name="formCadastroFornecedor" action="servletCadastroFornecedor" method="post">
 	<fieldset id="fieldsetCadastroFornecedor">
-	<legend><span>Cadastro de fornecedor</span></legend>
+	<legend><span>Cadastro de Fornecedores</span></legend>
 	
 	<ol>
 		<li>
 			<label for="NomeFornecedor" title="Nome do fornecedor">Nome do fornecedor<span></span></label>
 			<input type="text" name="nomeFornecedor" size="50" maxlength="50" />
-		</li>
-		<li>
-			<label for="SiteFornecedor" title="Site do fornecedor">Site do fornecedor<span></span></label>
-			<input type="text" name="siteFornecedor"size="30" maxlength="30" />
-		</li>
+		</li>		
 		<li>
 			<label for="CnpjFornecedor" title="CNPJ do fornecedor">CNPJ do fornecedor<span></span></label>
 			<input type="text" name="cnpjFornecedor"size="18" maxlength="18" />
-		</li>
-		<li>
-			<label for="DddFornecedor" title="DDD do fornecedor">DDD<span></span></label>
-			<input type="text" name="dddFornecedor"size="3" maxlength="3" />
-		</li>
-		<li>
-			<label for="TelefoneFornecedor" title="Telefone do fornecedor">Telefone<span></span></label>
-			<input type="text" name="telefoneFornecedor"size="9" maxlength="9" />
-		</li>
+		</li>		
 		<li>
 			<label for="LogradouroFornecedor" title="Logradouro do fornecedor">Logradouro<span></span></label>
 			<input type="text" name="logradouroFornecedor" size="50" maxlength="100"/>
@@ -89,6 +77,14 @@
 		<li>
 			<label for="CepFornecedor" title="CEP do fornecedor">CEP<span></span></label>
 			<input type="text" name="cepFornecedor" size="9" maxlength="9"/>
+		</li>		
+		<li>
+			<label for="DddFornecedor" title="DDD do fornecedor">DDD<span></span></label>
+			<input type="text" name="dddFornecedor"size="3" maxlength="3" />
+		</li>
+		<li>
+			<label for="TelefoneFornecedor" title="Telefone do fornecedor">Telefone<span></span></label>
+			<input type="text" name="telefoneFornecedor"size="9" maxlength="9" />
 		</li>
 		<li>
 			<label for="NomeVendedor" title="Nome do vendedor">Nome do vendedor<span></span></label>
@@ -97,6 +93,10 @@
 		<li>
 			<label for="EmailVendedor" title="E-mail do vendedor">E-mail do vendedor<span></span></label>
 			<input type="text" name="emailVendedor"size="50" maxlength="50"/>
+		</li>
+		<li>
+			<label for="SiteFornecedor" title="Site do fornecedor">Site do fornecedor<span></span></label>
+			<input type="text" name="siteFornecedor"size="30" maxlength="30" />
 		</li>
 		
 	</ol>
