@@ -125,13 +125,23 @@ public class Usuario {
 	}
 
 	public Usuario(Integer codigoUsuario, String nomeUsuario,
-			String loginUsuario, String senhaUsuario, String perfilUsuario) {
+			String loginUsuario, String senhaUsuario, String perfilUsuario,
+			String rgUsuario, String cpfUsuario, Date dataNascimento,
+			String sexoUsuario, String tipoUsuario) {
 		this.codigoUsuario = codigoUsuario;
 		this.nomeUsuario = nomeUsuario;
 		this.loginUsuario = loginUsuario;
 		this.senhaUsuario = senhaUsuario;
 		this.perfilUsuario = perfilUsuario;
+		this.rgUsuario = rgUsuario;
+		this.cpfUsuario = cpfUsuario;
+		this.dataNascimento = dataNascimento;
+		this.sexoUsuario = sexoUsuario;
 	}
 	
+	public Usuario(String loginUsuario){
+		this.loginUsuario = loginUsuario;
+	}
+
 	
 }
