@@ -102,3 +102,11 @@ p{
 	background-color:#4682B4;
 }
 
+
+menuvertical{
+	border: 1px solid #191970;	
+	background: #E6E6FA;
+	border-bottom-width: 0;
+	width: 170px;	
+}
+

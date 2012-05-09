@@ -12,19 +12,21 @@ import javax.persistence.Table;
 public class Procedimento {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer codigoProcedimento;
+	@GeneratedValue(strategy=GenerationType.AUTO)	
+	private Integer idProcedimento;
+	@Column(name="codigoProcedimento",length=50)
+	private String codigoProcedimento;	
 	@Column(name="descricaoProcdimento", length=50)	
 	private String descricaoProcedimento;
 	@Column(name="valorProcedimento")
 	private Double valorProcedimento;
 
-	public Integer getCodigoProcedimento() {
-		return codigoProcedimento;
-	}
+	public Integer getIdProcedimento() {
+		return idProcedimento;
+	}	
 
-	public void setCodigoProcedimento(Integer codigoProcedimento) {
-		this.codigoProcedimento = codigoProcedimento;
+	public String getCodigoProcedimento() {
+		return codigoProcedimento;
 	}
 
 	public String getDescricaoProcedimento() {
@@ -47,11 +49,15 @@ public class Procedimento {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Procedimento(Integer codigoProcedimento,
+	public Procedimento(String codigoProcedimento,
 			String descricaoProcedimento, Double valorProcedimento) {
-		this.codigoProcedimento = codigoProcedimento;
+		this.setCodigoProcedimento(codigoProcedimento);
 		this.descricaoProcedimento = descricaoProcedimento;
 		this.valorProcedimento = valorProcedimento;
+	}
+
+	public void setCodigoProcedimento(String codigoProcedimento) {
+		this.codigoProcedimento = codigoProcedimento;
 	}
 	
 	

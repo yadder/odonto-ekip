@@ -24,19 +24,19 @@ public class Usuario {
 	@Column(name="nomeUsuario", length=50, nullable=false)
 	private String nomeUsuario;
 	
-	@Column(name="loginUsuario", length=50, nullable=false)
+	@Column(name="loginUsuario", length=20, nullable=false)
 	private String loginUsuario;
 	
-	@Column(name="senhaUsuario",length=50, nullable=false)
+	@Column(name="senhaUsuario",length=20, nullable=false)
 	private String senhaUsuario;
 	
-	@Column(name="perfilUsuario",length=50, nullable=false)
+	@Column(name="perfilUsuario",length=20, nullable=false)
 	private String perfilUsuario;
 	
-	@Column(name="rgUsuario", length=30)
+	@Column(name="rgUsuario", length=20)
 	private String rgUsuario;
 	
-	@Column(name="cpfUsuario", length=11)
+	@Column(name="cpfUsuario", length=14, nullable=false)
 	private String cpfUsuario;
 	
 	@Column(name="dataNascimento")
