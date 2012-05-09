@@ -71,6 +71,9 @@ input.radio{
 	border: none;
 	background: transparent;
 }
+<<<<<<< .mine
+
+=======
 
 select{
 	padding: 1px;
@@ -80,6 +83,7 @@ select{
 	background: #E6E6FA;
 }
 
+>>>>>>> .r103
 h1{
 	color:#191970;
 	font-family:sans-serif;
