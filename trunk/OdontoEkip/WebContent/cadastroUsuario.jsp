@@ -6,6 +6,16 @@
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cadastro de Usuários</title>
+<script language="javascript">
+function formatar(src, mask){
+	var i = src.value.length;
+	var saida = mask.substring(0,1);
+	var texto = mask.substring(i)
+	if (texto.substring(0,1) != saida){
+	    src.value += texto.substring(0,1);
+	}
+}
+</script>
 </head>
 <body>
 <div id="content">
@@ -21,15 +31,15 @@
 		</li>		
 		<li>
 			<label for="LoginUsuario" title="Login do Usuário">Login<span></span></label>
-			<input type="text" name="loginUsuario"size="20" maxlength="20" />
+			<input type="text" name="loginUsuario" size="20" maxlength="20" />
 		</li>
 		<li>
 			<label for="SenhaUsuario" title="Senha do Usuário">Senha<span></span></label>
-			<input type="password" name="senhaUsuario"size="20" maxlength="20" />
+			<input type="password" name="senhaUsuario" size="20" maxlength="20" />
 		</li>
 		<li>
 			<label for="DataNascimentoUsuario" title="Data Nascimento do Usuário">Data Nascimento<span></span></label>
-			<input type="text" name="dataNascimentoUsuario"size="10" maxlength="10" />
+			<input type="text" name="dataNascimentoUsuario" size="10" maxlength="10" OnKeyPress="formatar(this, '##/##/####')" />
 		</li>
 		<li>
 			<label for="SexoUsuario" title="Sexo do Usuário">Sexo<span></span></label>			
@@ -42,11 +52,11 @@
 		</li>				
 		<li>
 			<label for="CpfUsuario" title="CPF do usuário">CPF<span></span></label>
-			<input type="text" name="cpfUsuario"size="14" maxlength="14" />
+			<input type="text" name="cpfUsuario" size="14" maxlength="14" OnKeyPress="formatar(this, '###.###.###-##')"/>
 		</li>	
 		<li>
 			<label for="RgUsuario" title="RG do usuário">RG<span></span></label>
-			<input type="text" name="rgUsuario"size="20" maxlength="20" />
+			<input type="text" name="rgUsuario" size="20" maxlength="20" />
 		</li>	
 		<li>
 		<label for="PerfilUsuario" title="Perfil do Usuário">Perfil<span></span></label>			
