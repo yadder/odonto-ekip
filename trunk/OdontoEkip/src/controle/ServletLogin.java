@@ -28,7 +28,7 @@ public class ServletLogin extends HttpServlet {
     		Usuario usuario = new Usuario();
     		usuario.setLoginUsuario((String)request.getParameter("login"));
     		DaoUsuario daoUsuario = new DaoUsuario();
-    		usuario = daoUsuario.consultarUsuario(usuario);
+    		//usuario = daoUsuario.consultarUsuario(usuario);
     		if (usuario != null){
         		if (usuario.getSenhaUsuario().equals((String)request.getParameter("senha"))){
         			request.setAttribute("msg","Seja bem vindo, "+usuario.getNomeUsuario());

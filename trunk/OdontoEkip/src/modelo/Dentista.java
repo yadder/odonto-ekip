@@ -2,28 +2,11 @@ package modelo;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="dentista")
-@PrimaryKeyJoinColumn(name="codigoDentista")
 public class Dentista extends Usuario {
 
-	@Column(name="croDentista")
 	private Integer croDentista;
-	
-	@OneToMany(mappedBy="dentista", fetch=FetchType.EAGER)
 	private List<Disponibilidade> disponibilidade;
-
-	@OneToMany(mappedBy="dentista", fetch=FetchType.EAGER)
 	private List<Prescricao> prescricao;
-	
-	@OneToMany(mappedBy="dentista", fetch=FetchType.EAGER)
 	private List<Consulta> consulta;
 	
 	public List<Prescricao> getPrescricao() {

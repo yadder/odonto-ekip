@@ -2,50 +2,31 @@ package modelo;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="paciente")
-@PrimaryKeyJoinColumn(name="codigoPaciente")
 public class Paciente extends Usuario{
 
-	@Column(name="responsavelPaciente", length=50)
+	private Integer codigoPaciente;
 	private String responsavelPaciente;
-	@Column(name="statusPaciente", nullable=false)
 	private String statusPaciente;
-	@Column(name="logradouroPaciente", length=100)
 	private String logradrouroPaciente;
-	@Column(name="numeroPaciente",length=10)
 	private Integer numeroPaciente;
-	@Column(name="complementoPaciente",length=50)
 	private String complementoPaciente;
-	@Column(name="bairroPaciente",length=50)
 	private String bairroPaciente;
-	@Column(name="cidadePaciente",length=100)
 	private String cidadePaciente;
-	@Column(name="estadoPaciente",length=2)
 	private String estadoPaciente;
-	@Column(name="cepPaciente", length=9)
 	private String cepPaciente;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "codigoConvenio")
 	private Convenio convenio;	
-	
-	@OneToMany(mappedBy="paciente", fetch=FetchType.EAGER)
 	private List<TelefonePaciente> telefonePaciente;
-
-	@OneToMany(mappedBy="paciente", fetch=FetchType.EAGER)
 	private List<InqueritoOdontologico> inqueritoOdontologico;
 	
 	
+	public Integer getCodigoPaciente() {
+		return codigoPaciente;
+	}
+
+	public void setCodigoPaciente(Integer codigoPaciente) {
+		this.codigoPaciente = codigoPaciente;
+	}
+
 	public List<InqueritoOdontologico> getInqueritoOdontologico() {
 		return inqueritoOdontologico;
 	}
