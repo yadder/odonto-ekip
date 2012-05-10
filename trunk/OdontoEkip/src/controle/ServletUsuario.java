@@ -22,11 +22,7 @@ public class ServletUsuario extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setAttribute("msg","Login ou senha inválido");
-		request.getRequestDispatcher("cadastroUsuario.jsp").forward(request,response);
-		/*
-		
+			
 		
 		try{
 		DateFormat forma = new SimpleDateFormat("dd/MM/yyyy");    
@@ -57,7 +53,7 @@ public class ServletUsuario extends HttpServlet {
 		}catch(Exception e){
 			System.out.println("Erro ao cadastrar! "+ e.getMessage());
 		}
-*/	}
+	}
 	
 
 }
