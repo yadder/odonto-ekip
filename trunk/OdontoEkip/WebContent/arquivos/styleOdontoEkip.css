@@ -74,16 +74,7 @@ input.radio {
 	background: transparent;
 }
 
-<<<<<<< .mine
-=======
-<<<<<<< .mine
 select {
-=======
-=======
-
->>>>>>> .r119
-select{
->>>>>>> .r118
 	padding: 1px;
 	font-size: 1.4em;
 	border: 1px solid #191970;
@@ -91,22 +82,10 @@ select{
 	background: #E6E6FA;
 }
 
-<<<<<<< .mine
-
-=======
-<<<<<<< .mine
-h1 {
-	color: #191970;
-	font-family: sans-serif;
-	text-align: center;
-=======
->>>>>>> .r103
->>>>>>> .r119
 h1{
 	color:#191970;
 	font-family:sans-serif;
 	text-align:center;
->>>>>>> .r118
 	text-transform: uppercase;
 }
 
@@ -115,7 +94,6 @@ p {
 	font-size: 20px;
 }
 
-<<<<<<< .mine
 #formularioLogin {
 	width: 350px;
 	text-align: right;
@@ -124,15 +102,6 @@ p {
 	font-size: 20px;
 	color: white;
 	background-color: #4682B4;
-}=======
-#formularioLogin{
-	width:350px;
-	text-align:right;
-	text-decoration:none;
-	font-family:serif;
-	font-size:20px;
-	color:white;
-	background-color:#4682B4;
 }
 
 
@@ -142,5 +111,3 @@ menuvertical{
 	border-bottom-width: 0;
 	width: 170px;	
 }
-
->>>>>>> .r118
