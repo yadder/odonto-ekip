@@ -1,3 +1,4 @@
+<%@ page isELIgnored ="false" %> 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -6,8 +7,22 @@
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cadastro de Convênios</title>
+<script language="javascript">
+function formatar(src, mask){
+	var i = src.value.length;
+	var saida = mask.substring(0,1);
+	var texto = mask.substring(i)
+	if (texto.substring(0,1) != saida){
+	    src.value += texto.substring(0,1);
+	}
+}
+</script>
+
 </head>
 <body>
+<div id="msg">
+${msg}
+</div>
 <div id="content">
 
 <form name="formCadastroConvenio" action="servletCadastroConvenio" method="post">

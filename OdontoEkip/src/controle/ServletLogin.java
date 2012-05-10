@@ -5,8 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Usuario;
-import persistencia.DaoUsuario;
+
 
 public class ServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -19,6 +18,10 @@ public class ServletLogin extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setAttribute("msg","Login ou senha inválido");
+		request.getRequestDispatcher("login.jsp").forward(request,response);
+		/*
 		if (request.getParameter("login").equals("") || request.getParameter("senha").equals("")){
 			request.setAttribute("msg","Login ou senha inválido");
 			response.sendRedirect("login.jsp");
@@ -47,6 +50,6 @@ public class ServletLogin extends HttpServlet {
     	}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-	}
+*/	}
 
 }
