@@ -1,3 +1,4 @@
+<%@ page isELIgnored ="false" %> 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,6 +19,9 @@ function formatar(src, mask){
 </script>
 </head>
 <body>
+<div id="msg">
+${msg}
+</div>
 <div id="content">
 
 <form name="formCadastroUsuario" action="ServletUsuario" method="post">
