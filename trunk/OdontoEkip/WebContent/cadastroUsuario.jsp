@@ -10,7 +10,7 @@
 <body>
 <div id="content">
 
-<form name="formCadastroUsuario" action="servletCadastroUsuario" method="post">
+<form name="formCadastroUsuario" action="ServletUsuario" method="post">
 	<fieldset id="fieldsetCadastroUsuario">
 	<legend><span>Cadastro de Usuários</span></legend>
 	
@@ -33,10 +33,10 @@
 		</li>
 		<li>
 			<label for="SexoUsuario" title="Sexo do Usuário">Sexo<span></span></label>			
-				<select>
-					  <option  value=""></option>						  		
-					  <option  value="MASCULINO">MASCULINO</option>
-					  <option  value="FEMININO">FEMININO</option>	                  	                   
+				<select name="sexoUsuario">
+					  <option value=""></option>						  		
+					  <option value="M">MASCULINO</option>
+					  <option value="F">FEMININO</option>	                  	                   
 	            </select>
 		</li>				
 		<li>
@@ -49,7 +49,7 @@
 		</li>	
 		<li>
 		<label for="PerfilUsuario" title="Perfil do Usuário">Perfil<span></span></label>			
-				<select>
+				<select name="perfilUsuario">
 					  <option  value=""></option>						  		
 					  <option  value="ADMINISTRADOR">ADMINISTRADOR</option>
 					  <option  value="DENTISTA">DENTISTA</option>  

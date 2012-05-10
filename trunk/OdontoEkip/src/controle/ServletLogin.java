@@ -19,25 +19,30 @@ public class ServletLogin extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if (request.getParameter("login").equals("") || request.getParameter("senha").equals("")){
+			request.setAttribute("msg","Login ou senha inválido");
+			response.sendRedirect("login.jsp");
+			System.out.println("Login ou senha em branco");
+		}
 		try{
     		Usuario usuario = new Usuario();
-    		usuario.setLoginUsuario(request.getParameter("login"));
+    		usuario.setLoginUsuario((String)request.getParameter("login"));
     		DaoUsuario daoUsuario = new DaoUsuario();
     		usuario = daoUsuario.consultarUsuario(usuario);
     		if (usuario != null){
         		if (usuario.getSenhaUsuario().equals((String)request.getParameter("senha"))){
         			request.setAttribute("msg","Seja bem vindo, "+usuario.getNomeUsuario());
-        			request.getRequestDispatcher("NewFile.jsp").forward(request, response);
-        			System.out.println("Achei o login e a senha");
+        			response.sendRedirect("principal.jsp");
+        			System.out.println("Seja bem vindo");
         		}else{
         			request.setAttribute("msg","Login ou senha inválido");
-        			request.getRequestDispatcher("NewFile.jsp").forward(request, response);
-        			System.out.println("Achei o login e nao achei a senha");
+        			response.sendRedirect("login.jsp");
+        			System.out.println("Senha inválido");
         		}
     		}else{
     			request.setAttribute("msg","Login não existe");
-    			request.getRequestDispatcher("NewFile.jsp").forward(request, response);
-    			System.out.println("Não achei porra nenhuma");
+    			response.sendRedirect("login.jsp");
+    			System.out.println("Login não existe");
     		}
     	}catch (Exception e) {
 			System.out.println(e.getMessage());

@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Fornecedor")
+@Table(name="fornecedor")
 public class Fornecedor {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

@@ -14,7 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="InqueritoOdontologico")
+@Table(name="inqueritoOdontologico")
 public class InqueritoOdontologico {
 
 	@Id

@@ -15,7 +15,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="usuario")
 @Inheritance(strategy=InheritanceType.JOINED)
-public class Usuario {
+public class CopyOfUsuario {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column
@@ -120,11 +120,11 @@ public class Usuario {
 		this.sexoUsuario = sexoUsurio;
 	}	
 
-	public Usuario() {
+	public CopyOfUsuario() {
 	
 	}
 	
-	public Usuario(Integer codigoUsuario, String nomeUsuario,
+	public CopyOfUsuario(Integer codigoUsuario, String nomeUsuario,
 			String loginUsuario, String senhaUsuario, String perfilUsuario,
 			String rgUsuario, String cpfUsuario, Date dataNascimento,
 			String sexoUsuario) {
@@ -139,7 +139,7 @@ public class Usuario {
 		this.sexoUsuario = sexoUsuario;
 	}
 
-	public Usuario(String loginUsuario){
+	public CopyOfUsuario(String loginUsuario){
 		this.loginUsuario = loginUsuario;
 	}
 
