@@ -38,6 +38,7 @@
 					  <option value="M">MASCULINO</option>
 					  <option value="F">FEMININO</option>	                  	                   
 	            </select>
+	            
 		</li>				
 		<li>
 			<label for="CpfUsuario" title="CPF do usuário">CPF<span></span></label>
