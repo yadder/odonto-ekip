@@ -6,8 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -20,8 +20,6 @@ public class Paciente extends Usuario{
 	private String responsavelPaciente;
 	@Column(name="statusPaciente", nullable=false)
 	private String statusPaciente;
-	@Column(name="tipoConvenio", nullable=false)
-	private String tipoConvenio;
 	@Column(name="logradouroPaciente", length=100)
 	private String logradrouroPaciente;
 	@Column(name="numeroPaciente",length=10)
@@ -37,13 +35,13 @@ public class Paciente extends Usuario{
 	@Column(name="cepPaciente", length=9)
 	private String cepPaciente;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "codigoConvenio")
+	private Convenio convenio;	
+	
 	@OneToMany(mappedBy="paciente", fetch=FetchType.EAGER)
 	private List<TelefonePaciente> telefonePaciente;
 
-	@OneToOne
-	@JoinColumn(name="codigoConvenio")
-	private Convenio convenio;
-	
 	@OneToMany(mappedBy="paciente", fetch=FetchType.EAGER)
 	private List<InqueritoOdontologico> inqueritoOdontologico;
 	
@@ -87,14 +85,6 @@ public class Paciente extends Usuario{
 
 	public void setStatusPaciente(String statusPaciente) {
 		this.statusPaciente = statusPaciente;
-	}
-
-	public String getTipoConvenio() {
-		return tipoConvenio;
-	}
-
-	public void setTipoConvenio(String tipoConvenio) {
-		this.tipoConvenio = tipoConvenio;
 	}
 
 	public String getLogradrouroPaciente() {

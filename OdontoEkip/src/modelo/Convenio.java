@@ -1,12 +1,14 @@
 package modelo;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,19 +18,19 @@ public class Convenio {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer codigoConvenio;
+
 	@Column(name="nomeConvenio", length=50)
 	private String nomeConvenio;
 	
-	@OneToOne
-    @JoinColumn(name="codigoPaciente")
-	private Dentista dentista;
+	@OneToMany(mappedBy="convenio", fetch=FetchType.EAGER)
+	private List<Paciente> paciente;
 
-	public Dentista getDentista() {
-		return dentista;
+	public List<Paciente> getPaciente() {
+		return paciente;
 	}
 
-	public void setDentista(Dentista dentista) {
-		this.dentista = dentista;
+	public void setPaciente(List<Paciente> paciente) {
+		this.paciente = paciente;
 	}
 
 	public Integer getCodigoConvenio() {
