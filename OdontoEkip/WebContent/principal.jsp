@@ -10,6 +10,14 @@
 
 	${msg}
 	<hr/><BR/>
-	<a href="index.jsp">Início</a>
+	
+	<ol>
+		<li>
+			<a href="cadastroUsuario.jsp">Cadastro de usuário</a>
+		</li>
+		<li>
+			<a href="login.jsp">Login</a>
+		</li>
+	</ol>
 </body>
 </html>
