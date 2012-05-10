@@ -73,13 +73,15 @@ input.radio {
 	border: none;
 	background: transparent;
 }
-<<<<<<< .mine
 
+<<<<<<< .mine
+=======
 <<<<<<< .mine
 select {
 =======
 =======
 
+>>>>>>> .r119
 select{
 >>>>>>> .r118
 	padding: 1px;
@@ -90,12 +92,16 @@ select{
 }
 
 <<<<<<< .mine
+
+=======
+<<<<<<< .mine
 h1 {
 	color: #191970;
 	font-family: sans-serif;
 	text-align: center;
 =======
 >>>>>>> .r103
+>>>>>>> .r119
 h1{
 	color:#191970;
 	font-family:sans-serif;
