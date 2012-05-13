@@ -1,17 +1,8 @@
 package modelo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="elemento")
 public class Elemento {
 
-	@Id	
 	private Integer codigoElemento;
-	@Column(name="nomeElemento", length=2)
 	private String nomeElemento;
 
 	public Integer getCodigoElemento() {

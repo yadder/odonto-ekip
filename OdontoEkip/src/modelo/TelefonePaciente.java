@@ -1,30 +1,10 @@
 package modelo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="telefonePaciente")
 public class TelefonePaciente {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer codigoTelefone;
-	
-	@Column(length=3)
 	private Integer ddd;
-	
-	@Column(length=9)
 	private String telefone;
-
-	@ManyToOne	
-    @JoinColumn(name="codigoPaciente")
 	private Paciente paciente;
 	
 	public Paciente getPaciente() {
