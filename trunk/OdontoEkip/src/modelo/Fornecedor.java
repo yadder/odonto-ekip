@@ -1,48 +1,21 @@
 package modelo;
 
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
-@Entity
-@Table(name="fornecedor")
 public class Fornecedor {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="codigoFornecedor")
 	private Integer codigoFornecedor;
-	@Column(name="nomeFornecedor",length=50, nullable=false)
 	private String nomeFornecedor;
-	@Column(name="nomeVendendor",length=50, nullable=false)
 	private String nomeVendendor;
-	@Column(name="emailVendedor", length=50)
 	private String emailVendendor;
-	@Column(name="siteFornecedor",length=30)
 	private String siteFornecedor;
-	@Column(name="cnpjFornecedor", length=18)
 	private String cnpjFornecedor;
-	@Column(name="logradouroFornecedor",length=100)
 	private String logradouroFornecedor;
-	@Column(name="numeroFornecedor", length=10)
 	private Integer numeroFornecedor;
-	@Column(name="complementoFornecedor",length=50)
 	private String complementoFornecedor;
-	@Column(name="bairroFornecedor", length=50)
 	private String bairroFornecedor;
-	@Column(name="cidadeFornecedor", length=50)
 	private String cidadeFornecedor;
-	@Column(name="estadoFornecedor", length=2)
 	private String estadoFornecedor;
-	@Column(name="cepFornecedor", length=9)
 	private String cepFornecedor;
-	
-	@OneToMany(mappedBy="fornecedor", fetch=FetchType.EAGER)
 	private List<TelefoneFornecedor> telefoneFornecedor;
 	
 	public List<TelefoneFornecedor> getTelefoneFornecedor() {
