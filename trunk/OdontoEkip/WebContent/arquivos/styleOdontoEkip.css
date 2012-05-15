@@ -6,6 +6,13 @@ body {
 	padding: 0;
 }
 
+#msg {
+	font-family: helv, arial, verdana, sans-serif;
+	font-size: 1.8em;
+	color: red;
+	text-align: center;
+}
+
 #content {
 	position: relative;
 	width: 761px;
@@ -31,7 +38,6 @@ legend {
 	margin-left: 1em;
 	color: #ffffff;
 	background: #191970;
-	#191970
 }
 
 fieldset ol {
@@ -51,7 +57,7 @@ label {
 	float: left;
 	width: 15em;
 	margin-right: 5px;
-	padding-right: 10px;
+	padding-right: 5px;
 	line-height: 3.4em;
 	text-align: right;
 }

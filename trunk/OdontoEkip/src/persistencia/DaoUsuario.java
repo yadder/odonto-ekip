@@ -9,19 +9,43 @@ public class DaoUsuario extends Dao{
 	
 	public void cadastrar (Usuario u) throws Exception{
 		open();
-		//preparou o comando SQL e enviou para a base de dados
-		stmt = con.prepareStatement("insert into tb_usuario values(null,?,?,?,?,?,?,?,?)");
-		stmt.setString(1, u.getNomeUsuario());
-		stmt.setString(2, u.getLoginUsuario());
-		stmt.setString(3, u.getSenhaUsuario());
-		stmt.setString(4, u.getPerfilUsuario());
-		stmt.setString(5, u.getRgUsuario());
-		stmt.setString(6, u.getCpfUsuario());
-		stmt.setDate(7, (Date)u.getDataNascimento());
-		stmt.setString(8, u.getSexoUsurio());
-		stmt.execute();
-		stmt.close();		
+			stmt = con.prepareStatement("insert into tb_usuario values(null,?,?,?,?,?,?,?,?)");
+			stmt.setString(1, u.getNomeUsuario());
+			stmt.setString(2, u.getLoginUsuario());
+			stmt.setString(3, u.getSenhaUsuario());
+			stmt.setString(4, u.getPerfilUsuario());
+			stmt.setString(5, u.getRgUsuario());
+			stmt.setString(6, u.getCpfUsuario());
+			stmt.setDate(7, (Date)u.getDataNascimento());
+			stmt.setString(8, u.getSexoUsurio());
+			stmt.execute();
+			stmt.close();		
 		close();		
+	}
+	
+	public void alterar (Usuario u) throws Exception{
+		open();
+			stmt = con.prepareStatement("update tb_usuario set nome_usuario=?,login_usuario=?,senha_usuario=?,perfil_usuario=?,rg_usuario=?,cpf_usuario=?,data_nascimento_usuario=?,sexo_usuario=? where codigo_usuario=?");
+			stmt.setString(1, u.getNomeUsuario());
+			stmt.setString(2, u.getLoginUsuario());
+			stmt.setString(3, u.getSenhaUsuario());
+			stmt.setString(4, u.getPerfilUsuario());
+			stmt.setString(5, u.getRgUsuario());
+			stmt.setString(6, u.getCpfUsuario());
+			stmt.setDate(7, (Date)u.getDataNascimento());
+			stmt.setString(8, u.getSexoUsurio());
+			stmt.execute();
+			stmt.close();		
+		close();		
+	}
+	
+	public void excluir (Usuario u) throws Exception{
+		open();
+			stmt = con.prepareStatement("delete from tb_usuario where codigo_usuario = ?");
+			stmt.setInt(1, u.getCodigoUsuario());
+			stmt.execute();
+			stmt.close();
+		close();
 	}
 	
 	public List<Usuario> findAll() throws Exception{
