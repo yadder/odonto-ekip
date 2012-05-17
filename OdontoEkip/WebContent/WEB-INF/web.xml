@@ -24,4 +24,24 @@
     <servlet-name>ServletUsuario</servlet-name>
     <url-pattern>/ServletUsuario</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletFace</display-name>
+    <servlet-name>ServletFace</servlet-name>
+    <servlet-class>controle.ServletFace</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletFace</servlet-name>
+    <url-pattern>/ServletFace</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletConvenio</display-name>
+    <servlet-name>ServletConvenio</servlet-name>
+    <servlet-class>controle.ServletConvenio</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletConvenio</servlet-name>
+    <url-pattern>/ServletConvenio</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -22,11 +22,11 @@ ${msg}
 	<ol>
 		<li>
 			<label for="CodigoFace" title="Código da Face">Código Face<span></span></label>
-			<input type="text" name="codigoFace" size="11" maxlength="11" />
+			<input type="text" name="codigoFace" size="11" maxlength="11" disabled="disabled"/>
 		</li>		
 		<li>
 			<label for="NomeFace" title="Nome da Face">Nome Face<span></span></label>
-			<input type="text" name="loginUsuario" size="30" maxlength="30" />
+			<input type="text" name="nomeFace" size="30" maxlength="30" />
 		</li>		
 	</ol>
 	<ol>
