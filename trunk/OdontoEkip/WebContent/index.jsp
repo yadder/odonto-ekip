@@ -1,4 +1,4 @@
 <%
-	response.sendRedirect("cadastroUsuario.jsp");
+	response.sendRedirect("principal.jsp");
 %>
 

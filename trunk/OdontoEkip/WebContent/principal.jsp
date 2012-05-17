@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Saída dos dados</title>
+<title>Sistema OdontoEkip - Principal</title>
 <script language="javascript">
 function formatar(src, mask){
 	var i = src.value.length;
@@ -27,6 +27,12 @@ ${msg}
 	<ol>
 		<li>
 			<a href="cadastroUsuario.jsp">Cadastro de usuário</a>
+		</li>
+		<li>
+			<a href="cadastroConvenio.jsp">Cadastro de convênio</a>
+		</li>
+		<li>
+			<a href="cadastroFace.jsp">Cadastro de face</a>
 		</li>
 		<li>
 			<a href="login.jsp">Login</a>

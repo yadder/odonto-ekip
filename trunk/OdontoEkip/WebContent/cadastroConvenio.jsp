@@ -25,13 +25,17 @@ ${msg}
 </div>
 <div id="content">
 
-<form name="formCadastroConvenio" action="servletCadastroConvenio" method="post">
+<form name="formCadastroConvenio" action="ServletConvenio" method="post">
 	<fieldset id="fieldsetCadastroConvenio">
 	<legend><span>Cadastro de Convênios</span></legend>
 	
 	<ol>
 		<li>
-			<label for="Convenio" title="Convênio">Convênio<span></span></label>
+			<label for="CodigoConvenio" title="Código do convenio">Código convênio<span></span></label>
+			<input type="text" name="codigoConvenio" size="11" maxlength="11" disabled="disabled"/>
+		</li>
+		<li>
+			<label for="NomeConvenio" title="Nome do convênio">Nome convênio<span></span></label>
 			<input type="text" name="nomeConvenio" size="50" maxlength="50" />
 		</li>			
 	</ol>
