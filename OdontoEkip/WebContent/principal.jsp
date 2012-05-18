@@ -26,16 +26,16 @@ ${msg}
 	
 	<ol>
 		<li>
-			<a href="cadastroUsuario.jsp">Cadastro de usuário</a>
+			<a href="cadastroUsuario.jsf">Cadastro de usuário</a>
 		</li>
 		<li>
-			<a href="cadastroConvenio.jsp">Cadastro de convênio</a>
+			<a href="cadastroConvenio.jsf">Cadastro de convênio</a>
 		</li>
 		<li>
-			<a href="cadastroFace.jsp">Cadastro de face</a>
+			<a href="cadastroFace.jsf">Cadastro de face</a>
 		</li>
 		<li>
-			<a href="login.jsp">Login</a>
+			<a href="login.jsf">Login</a>
 		</li>
 	</ol>
 </body>
