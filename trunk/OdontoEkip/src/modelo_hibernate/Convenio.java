@@ -11,19 +11,15 @@ public class Convenio implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "codigo_convenio", nullable = false)
     private Integer codigoConvenio;
-    @Column(name = "nome_convenio", nullable = false, length = 50)
+    @Column(name = "nome_convenio", nullable = false, length = 50, unique=true)
     private String nomeConvenio;
 
     public Convenio() {
     }
 
-    public Convenio(String nomeConvenio) {
-        this.nomeConvenio = nomeConvenio;
-    }
-
     public Convenio(Integer codigoConvenio, String nomeConvenio) {
         this.codigoConvenio = codigoConvenio;
-        this.nomeConvenio = nomeConvenio;
+    	this.nomeConvenio = nomeConvenio;
     }
 
     public Integer getCodigoConvenio() {
