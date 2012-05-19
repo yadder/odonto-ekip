@@ -7,8 +7,8 @@
 <faces-config>
     
 <managed-bean>
-	<managed-bean-name>ManagerBean</managed-bean-name>
-	<managed-bean-class>manager.ManagerBean</managed-bean-class>
+	<managed-bean-name>ManagerBeanConvenio</managed-bean-name>
+	<managed-bean-class>manager.ManagerBeanConvenio</managed-bean-class>
 	<managed-bean-scope>request</managed-bean-scope>
 </managed-bean>
    
