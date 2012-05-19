@@ -6,13 +6,13 @@ import javax.faces.context.FacesContext;
 import modelo_hibernate.Convenio;
 import persistencia.DaoConvenio;
 
-public class ManagerBean {
+public class ManagerBeanConvenio {
 
 	private Convenio convenio;
 
 	//declaro a classe
 	
-	public ManagerBean() {
+	public ManagerBeanConvenio() {
 		convenio = new Convenio(); // crio uma instancia para trabalhar com o convenio
 		
 	}
@@ -62,5 +62,8 @@ public class ManagerBean {
 		this.convenio = convenio;
 	}
 	
+	public void sair(){
+		
+	}
 	
 }
