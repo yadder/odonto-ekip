@@ -1,9 +1,6 @@
 package persistencia;
 import java.util.ArrayList;
-import java.util.List;
-
 import modelo_hibernate.Face;
-
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;

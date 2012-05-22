@@ -79,7 +79,9 @@ public class ServletFace extends HttpServlet {
 						DaoFace daof = new DaoFace();
 						f = daof.consultar(f);
 						if (f != null){
-							request.setAttribute("msg","Encontrei:"+f.getCodigoFace()+" "+f.getNomeFace());
+							request.setAttribute("msg","Encontrei: "+f.getCodigoFace()+" "+f.getNomeFace());
+							request.setAttribute("codigoFace", (String.valueOf(f.getCodigoFace())));
+							request.setAttribute("nomeFace", (String.valueOf(f.getNomeFace())));
 							request.getRequestDispatcher("cadastroFace.jsp").forward(request,response);
 						}
 						else{
