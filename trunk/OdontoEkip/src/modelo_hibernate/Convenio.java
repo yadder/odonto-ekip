@@ -8,9 +8,9 @@ import javax.persistence.*;
 public class Convenio implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo_convenio", nullable = false)
-    private Integer codigoConvenio;
+    private int codigoConvenio;
     @Column(name = "nome_convenio", nullable = false, length = 50, unique=true)
     private String nomeConvenio;
 
