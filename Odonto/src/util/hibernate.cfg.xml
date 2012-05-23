@@ -11,7 +11,24 @@
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
    
+    <mapping class="modelo.Consulta"/>
+    <mapping class="modelo.Convenio"/>
+    <mapping class="modelo.Dentista"/>
+    <mapping class="modelo.Disponibilidade"/>
+    <mapping class="modelo.Elemento"/>
     <mapping class="modelo.Face"/>
-
+    <mapping class="modelo.Fornecedor"/>
+    <mapping class="modelo.InqueritoOdontologico"/>
+    <mapping class="modelo.Odontograma"/>
+    <mapping class="modelo.OdontogramaProcedimento"/>
+    <mapping class="modelo.Paciente"/>
+    <mapping class="modelo.Pagamento"/>
+    <mapping class="modelo.Prescricao"/>
+    <mapping class="modelo.Procedimento"/>
+    <mapping class="modelo.TelefoneFornecedor"/>
+    <mapping class="modelo.TelefonePaciente"/>
+    <mapping class="modelo.Usuario"/>
+    
+    
  </session-factory>
 </hibernate-configuration>
