@@ -131,7 +131,7 @@
                prefix="localhost_access_log." suffix=".txt" pattern="common" resolveHosts="false"/>
         -->
 
-      <Context docBase="Odonto" path="/Odonto" reloadable="true" source="org.eclipse.jst.jee.server:Odonto"/></Host>
+      <Context docBase="OdontoEkip" path="/OdontoEkip" reloadable="true" source="org.eclipse.jst.jee.server:OdontoEkip"/><Context docBase="Odonto" path="/Odonto" reloadable="true" source="org.eclipse.jst.jee.server:Odonto"/></Host>
     </Engine>
   </Service>
 </Server>

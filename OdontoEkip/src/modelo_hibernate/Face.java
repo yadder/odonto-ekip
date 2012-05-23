@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class Face implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo_face", nullable = false)
     private Integer codigoFace;
     @Column(name = "nome_face", nullable = false, length = 30)

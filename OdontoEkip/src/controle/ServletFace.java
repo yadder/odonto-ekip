@@ -59,8 +59,9 @@ public class ServletFace extends HttpServlet {
 				}
 				
 				if (botao.toString().equals("Excluir")){
+					Integer codigoFace = new Integer(request.getParameter("codigoFace"));
 					Face f = new Face();
-					f.setNomeFace(nomeFace);
+					f.setCodigoFace(codigoFace);
 					try{
 						DaoFace daoFace = new DaoFace();
 						daoFace.excluir(f);

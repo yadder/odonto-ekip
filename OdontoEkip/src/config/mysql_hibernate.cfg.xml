@@ -9,8 +9,6 @@
     <property name="hibernate.connection.password">odonto</property>
     
     <mapping class="modelo_hibernate.Face"/>
-    <mapping class="modelo_hibernate.Convenio"/>
-
-
+    
  </session-factory>
 </hibernate-configuration>
