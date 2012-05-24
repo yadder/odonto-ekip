@@ -19,7 +19,7 @@
 			</f:facet>		
 			
 			<h:outputLabel for="nomeConvenio" value="Nome convênio:" />
-			<h:inputText id="nmeConvenio" value="#{ConvenioMB.convenio.nomeConvenio}" required="true" />
+			<h:inputText id="nomeConvenio" value="#{convenioMB.convenio.nomeConvenio}" required="true" />
 			
 			<f:facet name="footer">
 				<h:panelGroup>	
