@@ -10,7 +10,7 @@ import persistencia.DaoElementoImp;
 
 public class ElementoMB {
 
-	private DaoElemento de = new DaoElementoImp();
+	private DaoElemento dao = new DaoElementoImp();
 	private Elemento elemento;
 	private ListDataModel elementos; 
 	
@@ -20,7 +20,7 @@ public class ElementoMB {
 	}
 	
 	private ListDataModel resgatarElementos(){
-		return new ListDataModel(de.pesquisarTodosElemento());
+		return new ListDataModel(dao.pesquisarTodosElemento());
 	}
 	
 	public Integer getSizeElementos(){
@@ -42,9 +42,9 @@ public class ElementoMB {
 	
 	public String salvarElemento(){
 		if(elemento.getCodigoElemento() == 0){
-			de.cadastrarElemento(elemento);
+			dao.cadastrarElemento(elemento);
 		}else{
-			de.alterarElemento(elemento);
+			dao.alterarElemento(elemento);
 		}
 		elementos = resgatarElementos();
 		this.mostraMensagem(elemento.getNomeElemento() + " foi salvo!");
@@ -54,7 +54,7 @@ public class ElementoMB {
 	
 	public String excluirElemento(){
 		this.mostraMensagem(elemento.getNomeElemento() + " foi excluído!");
-		de.excluirElemento(elemento);
+		dao.excluirElemento(elemento);
 		elemento = new Elemento();
 		elementos = resgatarElementos();
 		return null;
@@ -76,7 +76,7 @@ public class ElementoMB {
 		return elemento;
 	}
 	
-	public void setElemento(Elemento Elemento){
-		this.elemento = Elemento;
+	public void setElemento(Elemento elemento){
+		this.elemento = elemento;
 	}	
 }
