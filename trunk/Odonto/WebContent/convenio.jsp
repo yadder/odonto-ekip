@@ -23,8 +23,8 @@
 			
 			<f:facet name="footer">
 				<h:panelGroup>	
-					<h:commandButton value="Salvar" action="#{ConvenioMB.salvarConvenio}" />
-					<h:commandButton value="Cancelar" action="#{ConvenioMB.cancelarCadastroConvenio}" immediate="true" />
+					<h:commandButton value="Salvar" action="#{convenioMB.salvarConvenio}" />
+					<h:commandButton value="Cancelar" action="#{convenioMB.cancelarCadastroConvenio}" immediate="true" />
 				</h:panelGroup>
 			</f:facet>
 		</h:panelGrid>
@@ -32,7 +32,7 @@
 		<br />
 	<h:form id="formConvenioOther">
 		<!-- Tabela de convenios cadastrados --> 
-		<h:dataTable  var="vconvenio" value="#{ConvenioMB.convenios}" border="1" cellpadding="1" cellspacing="1" rendered="#{ConvenioMB.sizeConvenios > 0}">
+		<h:dataTable  var="vconvenio" value="#{convenioMB.convenios}" border="1" cellpadding="1" cellspacing="1" rendered="#{convenioMB.sizeConvenios > 0}">
 			<f:facet name="header">
 				<h:outputText value="Convenios cadastrados" />
 			</f:facet>
@@ -52,22 +52,22 @@
 				<f:facet name="header">
 					<h:outputText value="Alterar" />
 				</f:facet>
-				<h:commandLink action="#{ConvenioMB.alterarConvenio}">
+				<h:commandLink action="#{convenioMB.alterarConvenio}">
 					<h:outputText value="Alterar" />
-					<f:setPropertyActionListener value="#{vconvenio}" target="#{ConvenioMB.convenio}"/>
+					<f:setPropertyActionListener value="#{vconvenio}" target="#{convenioMB.convenio}"/>
 				</h:commandLink>
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Excluir" />
 				</f:facet>
-				<h:commandLink action="#{ConvenioMB.excluirConvenio}">
+				<h:commandLink action="#{convenioMB.excluirConvenio}">
 					<h:outputText value="Excluir" />
-					<f:setPropertyActionListener value="#{vconvenio}" target="#{ConvenioMB.convenio}"/>
+					<f:setPropertyActionListener value="#{vconvenio}" target="#{convenioMB.convenio}"/>
 				</h:commandLink>
 			</h:column>
 		<f:facet name="footer">
-			<h:outputText value="Total:  #{ConvenioMB.sizeConvenios}" />
+			<h:outputText value="Total:  #{convenioMB.sizeConvenios}" />
 		</f:facet>
 		</h:dataTable>
 	</h:form>
