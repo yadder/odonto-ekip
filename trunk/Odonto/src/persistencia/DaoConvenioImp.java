@@ -2,7 +2,7 @@ package persistencia;
 
 import java.util.ArrayList;
 import java.util.List;
-import modelo.Elemento;
+import modelo.Convenio;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -11,17 +11,17 @@ import org.hibernate.Transaction;
 
 import util.HibernateUtil;
 
-public class DaoElementoImp implements DaoElemento {
+public class DaoConvenioImp implements DaoConvenio {
 
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public boolean cadastrarElemento(Elemento elemento) {
+	public boolean cadastrarConvenio(Convenio convenio) {
 		boolean retorno = false;
 		try{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
-			session.persist(elemento);
+			session.persist(convenio);
 			transaction.commit();
 			retorno = true;
 		}catch(HibernateException e){
@@ -33,12 +33,12 @@ public class DaoElementoImp implements DaoElemento {
 		return retorno;
 	}
 
-	public boolean alterarElemento(Elemento elemento) {
+	public boolean alterarConvenio(Convenio convenio) {
 		boolean retorno = false;
 		try{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
-			session.update(elemento);
+			session.update(convenio);
 			transaction.commit();
 			retorno = true;
 		}catch(HibernateException e){
@@ -50,12 +50,12 @@ public class DaoElementoImp implements DaoElemento {
 		return retorno;
 	}
 
-	public boolean excluirElemento(Elemento elemento) {
+	public boolean excluirConvenio(Convenio convenio) {
 		boolean retorno = false;
 		try{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
-			session.delete(elemento);
+			session.delete(convenio);
 			transaction.commit();
 			retorno = true;
 		}catch(HibernateException e){
@@ -67,11 +67,11 @@ public class DaoElementoImp implements DaoElemento {
 		return retorno;
 	}
 
-	public Elemento pesquisarElemento(Elemento elemento) {
-		Elemento e = null;
+	public Convenio pesquisarConvenio(Convenio convenio) {
+		Convenio e = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			e = (Elemento)session.get(Elemento.class, elemento.getCodigoElemento());
+			e = (Convenio)session.get(Convenio.class, convenio.getCodigoConvenio());
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		}finally{
@@ -80,11 +80,11 @@ public class DaoElementoImp implements DaoElemento {
 		return e;
 	}
 
-	public List<Elemento> pesquisarTodosElemento() {
+	public List<Convenio> pesquisarTodosConvenio() {
 		ArrayList lista = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(Elemento.class);
+			Criteria cr = session.createCriteria(Convenio.class);
 			lista = (ArrayList)cr.list();
 		} catch (HibernateException e) {
 			e.printStackTrace();
