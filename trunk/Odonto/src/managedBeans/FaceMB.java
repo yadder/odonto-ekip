@@ -20,7 +20,7 @@ public class FaceMB {
 	}
 	
 	private ListDataModel resgatarFaces(){
-		return new ListDataModel(df.procurarTodosFace());
+		return new ListDataModel(df.pesquisarTodosFace());
 	}
 	
 	public Integer getSizeFaces(){
@@ -42,9 +42,9 @@ public class FaceMB {
 	
 	public String salvarFace(){
 		if(face.getCodigoFace() == 0){
-			df.insereFace(face);
+			df.cadastrarFace(face);
 		}else{
-			df.alteraFace(face);
+			df.alterarFace(face);
 		}
 		faces = resgatarFaces();
 		this.mostraMensagem(face.getNomeFace() + " foi salvo!");
@@ -54,7 +54,7 @@ public class FaceMB {
 	
 	public String excluirFace(){
 		this.mostraMensagem(face.getNomeFace() + " foi excluído!");
-		df.excluiFace(face);
+		df.excluirFace(face);
 		face = new Face();
 		faces = resgatarFaces();
 		return null;
