@@ -6,13 +6,13 @@ import modelo.Face;
 
 public interface DaoFace {
 
-	boolean insereFace(Face face);
+	boolean cadastrarFace(Face face);
 	
-	boolean alteraFace(Face face);
+	boolean alterarFace(Face face);
 	
-	boolean excluiFace(Face face);
+	boolean excluirFace(Face face);
 	
-	Face procurarFace(Face face);
+	Face pesquisarFace(Face face);
 	
-	List<Face> procurarTodosFace();
+	List<Face> pesquisarTodosFace();
 }
