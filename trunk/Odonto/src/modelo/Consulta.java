@@ -10,14 +10,11 @@ public class Consulta implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "codigo_consulta", nullable = false)
-    private Integer codigoConsulta;
-    @Basic(optional = false)
+    private long codigoConsulta;
     @Column(name = "data_consulta", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dataConsulta;
-    @Basic(optional = false)
     @Column(name = "status_consulta", nullable = false, length = 20)
     private String statusConsulta;
     @JoinColumn(name = "codigo_paciente", referencedColumnName = "codigo_paciente", nullable = false)
@@ -34,17 +31,17 @@ public class Consulta implements Serializable {
         this.codigoConsulta = codigoConsulta;
     }
 
-    public Consulta(Integer codigoConsulta, Date dataConsulta, String statusConsulta) {
+    public Consulta(long codigoConsulta, Date dataConsulta, String statusConsulta) {
         this.codigoConsulta = codigoConsulta;
         this.dataConsulta = dataConsulta;
         this.statusConsulta = statusConsulta;
     }
 
-    public Integer getCodigoConsulta() {
+    public long getCodigoConsulta() {
         return codigoConsulta;
     }
 
-    public void setCodigoConsulta(Integer codigoConsulta) {
+    public void setCodigoConsulta(long codigoConsulta) {
         this.codigoConsulta = codigoConsulta;
     }
 
@@ -78,31 +75,6 @@ public class Consulta implements Serializable {
 
     public void setCodigoDentista(Dentista codigoDentista) {
         this.codigoDentista = codigoDentista;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (codigoConsulta != null ? codigoConsulta.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Consulta)) {
-            return false;
-        }
-        Consulta other = (Consulta) object;
-        if ((this.codigoConsulta == null && other.codigoConsulta != null) || (this.codigoConsulta != null && !this.codigoConsulta.equals(other.codigoConsulta))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "odonto.Consulta[ codigoConsulta=" + codigoConsulta + " ]";
     }
     
 }

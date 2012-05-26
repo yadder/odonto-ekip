@@ -11,13 +11,10 @@ public class Procedimento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "codigo_procedimento", nullable = false)
-    private Integer codigoProcedimento;
-    @Basic(optional = false)
+    private long codigoProcedimento;
     @Column(name = "descricao_procedimento", nullable = false, length = 50)
     private String descricaoProcedimento;
-    @Basic(optional = false)
     @Column(name = "valor_procedimento", nullable = false)
     private double valorProcedimento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoProcedimento")
@@ -29,21 +26,21 @@ public class Procedimento implements Serializable {
     public Procedimento() {
     }
 
-    public Procedimento(Integer codigoProcedimento) {
+    public Procedimento(long codigoProcedimento) {
         this.codigoProcedimento = codigoProcedimento;
     }
 
-    public Procedimento(Integer codigoProcedimento, String descricaoProcedimento, double valorProcedimento) {
+    public Procedimento(long codigoProcedimento, String descricaoProcedimento, double valorProcedimento) {
         this.codigoProcedimento = codigoProcedimento;
         this.descricaoProcedimento = descricaoProcedimento;
         this.valorProcedimento = valorProcedimento;
     }
 
-    public Integer getCodigoProcedimento() {
+    public long getCodigoProcedimento() {
         return codigoProcedimento;
     }
 
-    public void setCodigoProcedimento(Integer codigoProcedimento) {
+    public void setCodigoProcedimento(long codigoProcedimento) {
         this.codigoProcedimento = codigoProcedimento;
     }
 
@@ -78,26 +75,6 @@ public class Procedimento implements Serializable {
 
     public void setCodigoConvenio(Convenio codigoConvenio) {
         this.codigoConvenio = codigoConvenio;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (codigoProcedimento != null ? codigoProcedimento.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Procedimento)) {
-            return false;
-        }
-        Procedimento other = (Procedimento) object;
-        if ((this.codigoProcedimento == null && other.codigoProcedimento != null) || (this.codigoProcedimento != null && !this.codigoProcedimento.equals(other.codigoProcedimento))) {
-            return false;
-        }
-        return true;
     }
 
     @Override

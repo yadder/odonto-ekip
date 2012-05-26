@@ -1,38 +1,40 @@
 package modelo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
-@Table(name = "tb_elemento")
+@Table(name="tb_elemento")
 public class Elemento implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
+    
+	private static final long serialVersionUID = 1L;
+    
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "codigo_elemento", nullable = false)
-    private Integer codigoElemento;
-    @Basic(optional = false)
-    @Column(name = "nome_elemento", nullable = false, length = 2)
+    @Column(name="codigo_elemento")
+    private long codigoElemento;
+    
+	@Column(name="nome_elemento", nullable=false, unique=true, length=2)
     private String nomeElemento;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoElemento")
-    private List<OdontogramaProcedimento> odontogramaProcedimentoList;
 
     public Elemento() {
     }
 
-    public Elemento(Integer codigoElemento) {
+    public Elemento(long codigoElemento) {
         this.codigoElemento = codigoElemento;
     }
 
-    public Elemento(Integer codigoElemento, String nomeElemento) {
+    public Elemento(long codigoElemento, String nomeElemento) {
         this.codigoElemento = codigoElemento;
         this.nomeElemento = nomeElemento;
     }
 
-    public Integer getCodigoElemento() {
+    public long getCodigoElemento() {
         return codigoElemento;
     }
 
@@ -48,38 +50,7 @@ public class Elemento implements Serializable {
         this.nomeElemento = nomeElemento;
     }
 
-    @XmlTransient
-    public List<OdontogramaProcedimento> getOdontogramaProcedimentoList() {
-        return odontogramaProcedimentoList;
-    }
 
-    public void setOdontogramaProcedimentoList(List<OdontogramaProcedimento> odontogramaProcedimentoList) {
-        this.odontogramaProcedimentoList = odontogramaProcedimentoList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (codigoElemento != null ? codigoElemento.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Elemento)) {
-            return false;
-        }
-        Elemento other = (Elemento) object;
-        if ((this.codigoElemento == null && other.codigoElemento != null) || (this.codigoElemento != null && !this.codigoElemento.equals(other.codigoElemento))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "odonto.Elemento[ codigoElemento=" + codigoElemento + " ]";
-    }
-    
 }
+
+

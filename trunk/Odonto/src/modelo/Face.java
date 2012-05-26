@@ -24,7 +24,6 @@ public class Face implements Serializable{
 	private String nomeFace;
 	
 	public Face() {
-		
 	}
 
 	public long getCodigoFace() {

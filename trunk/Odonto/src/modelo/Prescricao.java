@@ -9,10 +9,8 @@ public class Prescricao implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "codigo_prescricao", nullable = false)
-    private Integer codigoPrescricao;
-    @Basic(optional = false)
+    private long codigoPrescricao;
     @Column(name = "observacao", nullable = false, length = 255)
     private String observacao;
     @JoinColumn(name = "codigo_odontograma", referencedColumnName = "codigo_odontograma", nullable = false)
@@ -25,20 +23,20 @@ public class Prescricao implements Serializable {
     public Prescricao() {
     }
 
-    public Prescricao(Integer codigoPrescricao) {
+    public Prescricao(long codigoPrescricao) {
         this.codigoPrescricao = codigoPrescricao;
     }
 
-    public Prescricao(Integer codigoPrescricao, String observacao) {
+    public Prescricao(long codigoPrescricao, String observacao) {
         this.codigoPrescricao = codigoPrescricao;
         this.observacao = observacao;
     }
 
-    public Integer getCodigoPrescricao() {
+    public long getCodigoPrescricao() {
         return codigoPrescricao;
     }
 
-    public void setCodigoPrescricao(Integer codigoPrescricao) {
+    public void setCodigoPrescricao(long codigoPrescricao) {
         this.codigoPrescricao = codigoPrescricao;
     }
 
@@ -64,26 +62,6 @@ public class Prescricao implements Serializable {
 
     public void setCodigoDentista(Dentista codigoDentista) {
         this.codigoDentista = codigoDentista;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (codigoPrescricao != null ? codigoPrescricao.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Prescricao)) {
-            return false;
-        }
-        Prescricao other = (Prescricao) object;
-        if ((this.codigoPrescricao == null && other.codigoPrescricao != null) || (this.codigoPrescricao != null && !this.codigoPrescricao.equals(other.codigoPrescricao))) {
-            return false;
-        }
-        return true;
     }
 
     @Override

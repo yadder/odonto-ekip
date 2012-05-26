@@ -10,17 +10,13 @@ public class Disponibilidade implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "codigo_disponibilidade", nullable = false)
-    private Integer codigoDisponibilidade;
-    @Basic(optional = false)
+    private long codigoDisponibilidade;
     @Column(name = "dia_semana", nullable = false, length = 20)
     private String diaSemana;
-    @Basic(optional = false)
     @Column(name = "hora_inicio", nullable = false)
     @Temporal(TemporalType.TIME)
     private Date horaInicio;
-    @Basic(optional = false)
     @Column(name = "hora_fim", nullable = false)
     @Temporal(TemporalType.TIME)
     private Date horaFim;
@@ -35,18 +31,18 @@ public class Disponibilidade implements Serializable {
         this.codigoDisponibilidade = codigoDisponibilidade;
     }
 
-    public Disponibilidade(Integer codigoDisponibilidade, String diaSemana, Date horaInicio, Date horaFim) {
+    public Disponibilidade(long codigoDisponibilidade, String diaSemana, Date horaInicio, Date horaFim) {
         this.codigoDisponibilidade = codigoDisponibilidade;
         this.diaSemana = diaSemana;
         this.horaInicio = horaInicio;
         this.horaFim = horaFim;
     }
 
-    public Integer getCodigoDisponibilidade() {
+    public long getCodigoDisponibilidade() {
         return codigoDisponibilidade;
     }
 
-    public void setCodigoDisponibilidade(Integer codigoDisponibilidade) {
+    public void setCodigoDisponibilidade(long codigoDisponibilidade) {
         this.codigoDisponibilidade = codigoDisponibilidade;
     }
 
@@ -80,26 +76,6 @@ public class Disponibilidade implements Serializable {
 
     public void setCodigoDentista(Dentista codigoDentista) {
         this.codigoDentista = codigoDentista;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (codigoDisponibilidade != null ? codigoDisponibilidade.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Disponibilidade)) {
-            return false;
-        }
-        Disponibilidade other = (Disponibilidade) object;
-        if ((this.codigoDisponibilidade == null && other.codigoDisponibilidade != null) || (this.codigoDisponibilidade != null && !this.codigoDisponibilidade.equals(other.codigoDisponibilidade))) {
-            return false;
-        }
-        return true;
     }
 
     @Override
