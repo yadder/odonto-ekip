@@ -21,7 +21,7 @@
 			</f:facet>
 			
 			<h:outputLabel for="dataConsulta" value="Data consulta:" />
-			<h:inputText id="dataConsulta" value="#{consultaMB.consulta.dataCconsulta}" required="true" />
+			<h:inputText id="dataConsulta" value="#{consultaMB.consulta.dataConsulta}" required="true" />
 			
 			<f:facet name="footer">
 				<h:panelGroup>	
@@ -35,42 +35,42 @@
 	<h:form id="formConsultaOther">
 		<!-- Tabela de consultas cadastradas --> 
 		<h:dataTable  var="vconsulta" value="#{consultaMB.consultas}" border="1" cellpadding="1" cellspacing="1" rendered="#{consultaMB.sizeConsultas > 0}">
-			<f:consultat name="header">
+			<f:facet name="header">
 				<h:outputText value="Consultas cadastradas" />
-			</f:consultat>
+			</f:facet>
 			<h:column>
-				<f:consultat name="header">
+				<f:facet name="header">
 					<h:outputText value="Codigo" />
-				</f:consultat>
+				</f:facet>
 				<h:outputText value="#{vconsulta.codigoConsulta}" />
 			</h:column>
 			<h:column>
-				<f:consultat name="header">
+				<f:facet name="header">
 					<h:outputText value="Nome" />
-				</f:consultat>
+				</f:facet>
 				<h:outputText value="#{vconsulta.nomeConsulta}" />
 			</h:column>
 			<h:column>
-				<f:consultat name="header">
+				<f:facet name="header">
 					<h:outputText value="Alterar" />
-				</f:consultat>
+				</f:facet>
 				<h:commandLink action="#{consultaMB.alterarConsulta}">
 					<h:outputText value="Alterar" />
 					<f:setPropertyActionListener value="#{vconsulta}" target="#{consultaMB.consulta}"/>
 				</h:commandLink>
 			</h:column>
 			<h:column>
-				<f:consultat name="header">
+				<f:facet name="header">
 					<h:outputText value="Excluir" />
-				</f:consultat>
+				</f:facet>
 				<h:commandLink action="#{consultaMB.excluirConsulta}">
 					<h:outputText value="Excluir" />
 					<f:setPropertyActionListener value="#{vconsulta}" target="#{consultaMB.consulta}"/>
 				</h:commandLink>
 			</h:column>
-		<f:consultat name="footer">
+		<f:facet name="footer">
 			<h:outputText value="Total:  #{consultaMB.sizeConsultas}" />
-		</f:consultat>
+		</f:facet>
 		</h:dataTable>
 	</h:form>
 </rich:panel>
