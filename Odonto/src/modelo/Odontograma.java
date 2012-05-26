@@ -12,17 +12,13 @@ public class Odontograma implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "codigo_odontograma", nullable = false)
-    private Integer codigoOdontograma;
-    @Basic(optional = false)
+    private long codigoOdontograma;
     @Column(name = "valor_odontograma", nullable = false)
     private double valorOdontograma;
-    @Basic(optional = false)
     @Column(name = "data_odontograma", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dataOdontograma;
-    @Basic(optional = false)
     @Column(name = "status_odontograma", nullable = false, length = 20)
     private String statusOdontograma;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoOdontograma")
@@ -41,22 +37,22 @@ public class Odontograma implements Serializable {
     public Odontograma() {
     }
 
-    public Odontograma(Integer codigoOdontograma) {
+    public Odontograma(long codigoOdontograma) {
         this.codigoOdontograma = codigoOdontograma;
     }
 
-    public Odontograma(Integer codigoOdontograma, double valorOdontograma, Date dataOdontograma, String statusOdontograma) {
+    public Odontograma(long codigoOdontograma, double valorOdontograma, Date dataOdontograma, String statusOdontograma) {
         this.codigoOdontograma = codigoOdontograma;
         this.valorOdontograma = valorOdontograma;
         this.dataOdontograma = dataOdontograma;
         this.statusOdontograma = statusOdontograma;
     }
 
-    public Integer getCodigoOdontograma() {
+    public long getCodigoOdontograma() {
         return codigoOdontograma;
     }
 
-    public void setCodigoOdontograma(Integer codigoOdontograma) {
+    public void setCodigoOdontograma(long codigoOdontograma) {
         this.codigoOdontograma = codigoOdontograma;
     }
 
@@ -125,26 +121,6 @@ public class Odontograma implements Serializable {
 
     public void setCodigoPaciente(Paciente codigoPaciente) {
         this.codigoPaciente = codigoPaciente;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (codigoOdontograma != null ? codigoOdontograma.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Odontograma)) {
-            return false;
-        }
-        Odontograma other = (Odontograma) object;
-        if ((this.codigoOdontograma == null && other.codigoOdontograma != null) || (this.codigoOdontograma != null && !this.codigoOdontograma.equals(other.codigoOdontograma))) {
-            return false;
-        }
-        return true;
     }
 
     @Override

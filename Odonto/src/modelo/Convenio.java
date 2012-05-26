@@ -10,23 +10,23 @@ public class Convenio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo_convenio", nullable = false)
-    private int codigoConvenio;
+    private long codigoConvenio;
     @Column(name = "nome_convenio", nullable = false, length = 50, unique=true)
     private String nomeConvenio;
 
-    public Convenio() {
+    public Convenio(){
+    	
     }
-
-    public Convenio(Integer codigoConvenio, String nomeConvenio) {
+    public Convenio(long codigoConvenio, String nomeConvenio) {
         this.codigoConvenio = codigoConvenio;
     	this.nomeConvenio = nomeConvenio;
     }
 
-    public Integer getCodigoConvenio() {
+    public long getCodigoConvenio() {
         return codigoConvenio;
     }
 
-    public void setCodigoConvenio(Integer codigoConvenio) {
+    public void setCodigoConvenio(long codigoConvenio) {
         this.codigoConvenio = codigoConvenio;
     }
 

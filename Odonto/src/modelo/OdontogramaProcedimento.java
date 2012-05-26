@@ -10,10 +10,8 @@ public class OdontogramaProcedimento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "codigo_odontograma_procedimeto", nullable = false)
-    private Integer codigoOdontogramaProcedimeto;
-    @Basic(optional = false)
+    private long codigoOdontogramaProcedimeto;
     @Column(name = "status_pagamento", nullable = false, length = 20)
     private String statusPagamento;
     @Column(name = "data_pagamento")
@@ -35,20 +33,20 @@ public class OdontogramaProcedimento implements Serializable {
     public OdontogramaProcedimento() {
     }
 
-    public OdontogramaProcedimento(Integer codigoOdontogramaProcedimeto) {
+    public OdontogramaProcedimento(long codigoOdontogramaProcedimeto) {
         this.codigoOdontogramaProcedimeto = codigoOdontogramaProcedimeto;
     }
 
-    public OdontogramaProcedimento(Integer codigoOdontogramaProcedimeto, String statusPagamento) {
+    public OdontogramaProcedimento(long codigoOdontogramaProcedimeto, String statusPagamento) {
         this.codigoOdontogramaProcedimeto = codigoOdontogramaProcedimeto;
         this.statusPagamento = statusPagamento;
     }
 
-    public Integer getCodigoOdontogramaProcedimeto() {
+    public long getCodigoOdontogramaProcedimeto() {
         return codigoOdontogramaProcedimeto;
     }
 
-    public void setCodigoOdontogramaProcedimeto(Integer codigoOdontogramaProcedimeto) {
+    public void setCodigoOdontogramaProcedimeto(long codigoOdontogramaProcedimeto) {
         this.codigoOdontogramaProcedimeto = codigoOdontogramaProcedimeto;
     }
 
@@ -98,26 +96,6 @@ public class OdontogramaProcedimento implements Serializable {
 
     public void setCodigoOdontograma(Odontograma codigoOdontograma) {
         this.codigoOdontograma = codigoOdontograma;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (codigoOdontogramaProcedimeto != null ? codigoOdontogramaProcedimeto.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof OdontogramaProcedimento)) {
-            return false;
-        }
-        OdontogramaProcedimento other = (OdontogramaProcedimento) object;
-        if ((this.codigoOdontogramaProcedimeto == null && other.codigoOdontogramaProcedimeto != null) || (this.codigoOdontogramaProcedimeto != null && !this.codigoOdontogramaProcedimeto.equals(other.codigoOdontogramaProcedimeto))) {
-            return false;
-        }
-        return true;
     }
 
     @Override

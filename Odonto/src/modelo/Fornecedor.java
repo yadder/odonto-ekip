@@ -11,21 +11,16 @@ public class Fornecedor implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "codigo_fornecedor", nullable = false)
-    private Integer codigoFornecedor;
+    private long codigoFornecedor;
     @Column(name = "site_fornecedor", length = 50)
     private String siteFornecedor;
-    @Basic(optional = false)
     @Column(name = "cnpj_fornecedor", nullable = false, length = 18)
     private String cnpjFornecedor;
-    @Basic(optional = false)
     @Column(name = "nome_fornecedor", nullable = false, length = 50)
     private String nomeFornecedor;
-    @Basic(optional = false)
     @Column(name = "nome_vendedor", nullable = false, length = 50)
     private String nomeVendedor;
-    @Basic(optional = false)
     @Column(name = "email_vendedor", nullable = false, length = 50)
     private String emailVendedor;
     @Column(name = "logradouro_fornecedor", length = 100)
@@ -48,11 +43,11 @@ public class Fornecedor implements Serializable {
     public Fornecedor() {
     }
 
-    public Fornecedor(Integer codigoFornecedor) {
+    public Fornecedor(long codigoFornecedor) {
         this.codigoFornecedor = codigoFornecedor;
     }
 
-    public Fornecedor(Integer codigoFornecedor, String cnpjFornecedor, String nomeFornecedor, String nomeVendedor, String emailVendedor) {
+    public Fornecedor(long codigoFornecedor, String cnpjFornecedor, String nomeFornecedor, String nomeVendedor, String emailVendedor) {
         this.codigoFornecedor = codigoFornecedor;
         this.cnpjFornecedor = cnpjFornecedor;
         this.nomeFornecedor = nomeFornecedor;
@@ -60,7 +55,7 @@ public class Fornecedor implements Serializable {
         this.emailVendedor = emailVendedor;
     }
 
-    public Integer getCodigoFornecedor() {
+    public long getCodigoFornecedor() {
         return codigoFornecedor;
     }
 
@@ -173,29 +168,5 @@ public class Fornecedor implements Serializable {
         this.telefoneFornecedorList = telefoneFornecedorList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (codigoFornecedor != null ? codigoFornecedor.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Fornecedor)) {
-            return false;
-        }
-        Fornecedor other = (Fornecedor) object;
-        if ((this.codigoFornecedor == null && other.codigoFornecedor != null) || (this.codigoFornecedor != null && !this.codigoFornecedor.equals(other.codigoFornecedor))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "odonto.Fornecedor[ codigoFornecedor=" + codigoFornecedor + " ]";
-    }
-    
+   
 }

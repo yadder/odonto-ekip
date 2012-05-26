@@ -11,30 +11,23 @@ public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "codigo_usuario", nullable = false)
-    private Integer codigoUsuario;
-    @Basic(optional = false)
+    private long codigoUsuario;
     @Column(name = "nome_usuario", nullable = false, length = 50)
     private String nomeUsuario;
-    @Basic(optional = false)
     @Column(name = "login_usuario", nullable = false, length = 20)
     private String loginUsuario;
-    @Basic(optional = false)
     @Column(name = "senha_usuario", nullable = false, length = 20)
     private String senhaUsuario;
-    @Basic(optional = false)
     @Column(name = "perfil_usuario", nullable = false, length = 20)
     private String perfilUsuario;
     @Column(name = "rg_usuario", length = 20)
     private String rgUsuario;
-    @Basic(optional = false)
     @Column(name = "cpf_usuario", nullable = false, length = 14)
     private String cpfUsuario;
     @Column(name = "data_nascimento_usuario")
     @Temporal(TemporalType.DATE)
     private Date dataNascimentoUsuario;
-    @Basic(optional = false)
     @Column(name = "sexo_usuario", nullable = false, length = 1)
     private String sexoUsuario;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario")
@@ -45,11 +38,11 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(Integer codigoUsuario) {
+    public Usuario(long codigoUsuario) {
         this.codigoUsuario = codigoUsuario;
     }
 
-    public Usuario(Integer codigoUsuario, String nomeUsuario, String loginUsuario, String senhaUsuario, String perfilUsuario, String cpfUsuario, String sexoUsuario) {
+    public Usuario(long codigoUsuario, String nomeUsuario, String loginUsuario, String senhaUsuario, String perfilUsuario, String cpfUsuario, String sexoUsuario) {
         this.codigoUsuario = codigoUsuario;
         this.nomeUsuario = nomeUsuario;
         this.loginUsuario = loginUsuario;
@@ -59,11 +52,11 @@ public class Usuario implements Serializable {
         this.sexoUsuario = sexoUsuario;
     }
 
-    public Integer getCodigoUsuario() {
+    public long getCodigoUsuario() {
         return codigoUsuario;
     }
 
-    public void setCodigoUsuario(Integer codigoUsuario) {
+    public void setCodigoUsuario(long codigoUsuario) {
         this.codigoUsuario = codigoUsuario;
     }
 
@@ -145,26 +138,6 @@ public class Usuario implements Serializable {
 
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (codigoUsuario != null ? codigoUsuario.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
-            return false;
-        }
-        Usuario other = (Usuario) object;
-        if ((this.codigoUsuario == null && other.codigoUsuario != null) || (this.codigoUsuario != null && !this.codigoUsuario.equals(other.codigoUsuario))) {
-            return false;
-        }
-        return true;
     }
 
     @Override

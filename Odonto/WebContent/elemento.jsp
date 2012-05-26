@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="f"  uri="http://java.sun.com/jsf/core"%>
 <%@ taglib prefix="h"  uri="http://java.sun.com/jsf/html"%>
-<%@ taglib prefix="func" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="rich" uri="http://richfaces.org/rich"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,6 +11,7 @@
 </head>
 <body>
 <f:view>
+<rich:panel>
 	<h:form id="formElementoCad" styleClass="">
 		<h:messages />
 		<h:panelGrid border="1" columns="2">
@@ -19,7 +20,7 @@
 			</f:facet>		
 			
 			<h:outputLabel for="nomeElemento" value="Nome elemento:" />
-			<h:inputText id="nomeElemento" value="#{elementoMB.elemento.nomeElemento}" required="true" />
+			<h:inputText id="nomeElemento" value="#{elementoMB.elemento.nomeElemento}" required="true" maxlength="2"/>
 			
 			<f:facet name="footer">
 				<h:panelGroup>	
@@ -71,6 +72,7 @@
 		</f:facet>
 		</h:dataTable>
 	</h:form>
+</rich:panel>
 </f:view>
 </body>
 </html>

@@ -10,100 +10,69 @@ public class InqueritoOdontologico implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "codigo_inquerito_odontologico", nullable = false)
-    private Integer codigoInqueritoOdontologico;
-    @Basic(optional = false)
+    private long codigoInqueritoOdontologico;
     @Column(name = "tratamento_medico", nullable = false, length = 1)
     private String tratamentoMedico;
-    @Basic(optional = false)
     @Column(name = "usando_medicacao", nullable = false, length = 1)
     private String usandoMedicacao;
-    @Basic(optional = false)
     @Column(name = "alergia", nullable = false, length = 1)
     private String alergia;
-    @Basic(optional = false)
     @Column(name = "anemia", nullable = false, length = 1)
     private String anemia;
-    @Basic(optional = false)
     @Column(name = "fumante", nullable = false, length = 1)
     private String fumante;
-    @Basic(optional = false)
     @Column(name = "hepatite", nullable = false, length = 1)
     private String hepatite;
-    @Basic(optional = false)
     @Column(name = "alcoolista", nullable = false, length = 1)
     private String alcoolista;
-    @Basic(optional = false)
     @Column(name = "sifilis", nullable = false, length = 1)
     private String sifilis;
-    @Basic(optional = false)
     @Column(name = "herpes_afta", nullable = false, length = 1)
     private String herpesAfta;
-    @Basic(optional = false)
     @Column(name = "hiv", nullable = false, length = 1)
     private String hiv;
-    @Basic(optional = false)
     @Column(name = "gravidez", nullable = false, length = 1)
     private String gravidez;
-    @Basic(optional = false)
     @Column(name = "tuberculose", nullable = false, length = 1)
     private String tuberculose;
-    @Basic(optional = false)
     @Column(name = "diabetes", nullable = false, length = 1)
     private String diabetes;
-    @Basic(optional = false)
     @Column(name = "asma", nullable = false, length = 1)
     private String asma;
-    @Basic(optional = false)
     @Column(name = "cardiaco", nullable = false, length = 1)
     private String cardiaco;
-    @Basic(optional = false)
     @Column(name = "data_ultimo_atendimento", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dataUltimoAtendimento;
-    @Basic(optional = false)
     @Column(name = "concluiu_tratamento", nullable = false, length = 1)
     private String concluiuTratamento;
-    @Basic(optional = false)
     @Column(name = "experiencia_negativa_tratamento", nullable = false, length = 1)
     private String experienciaNegativaTratamento;
-    @Basic(optional = false)
     @Column(name = "roer_unhas", nullable = false, length = 1)
     private String roerUnhas;
-    @Basic(optional = false)
     @Column(name = "respirar_pela_boca", nullable = false, length = 1)
     private String respirarPelaBoca;
-    @Basic(optional = false)
     @Column(name = "morder_objetos", nullable = false, length = 1)
     private String morderObjetos;
-    @Basic(optional = false)
     @Column(name = "ranger_os_dentes", nullable = false, length = 1)
     private String rangerOsDentes;
-    @Basic(optional = false)
     @Column(name = "chupar_dedo_chupeta", nullable = false, length = 1)
     private String chuparDedoChupeta;
     @Column(name = "outros", length = 255)
     private String outros;
-    @Basic(optional = false)
     @Column(name = "fio_fita_dental", nullable = false, length = 1)
     private String fioFitaDental;
-    @Basic(optional = false)
     @Column(name = "palito", nullable = false, length = 1)
     private String palito;
-    @Basic(optional = false)
     @Column(name = "unitufo_bitufo", nullable = false, length = 7)
     private String unitufoBitufo;
-    @Basic(optional = false)
     @Column(name = "tipo_escova", nullable = false, length = 5)
     private String tipoEscova;
-    @Basic(optional = false)
     @Column(name = "interdental", nullable = false, length = 1)
     private String interdental;
-    @Basic(optional = false)
     @Column(name = "creme_dental", nullable = false, length = 1)
     private String cremeDental;
-    @Basic(optional = false)
     @Column(name = "ingere_alimentos_entre_refeicoes", nullable = false, length = 1)
     private String ingereAlimentosEntreRefeicoes;
     @JoinColumn(name = "codigo_paciente", referencedColumnName = "codigo_paciente", nullable = false)
@@ -113,11 +82,11 @@ public class InqueritoOdontologico implements Serializable {
     public InqueritoOdontologico() {
     }
 
-    public InqueritoOdontologico(Integer codigoInqueritoOdontologico) {
+    public InqueritoOdontologico(long codigoInqueritoOdontologico) {
         this.codigoInqueritoOdontologico = codigoInqueritoOdontologico;
     }
 
-    public InqueritoOdontologico(Integer codigoInqueritoOdontologico, String tratamentoMedico, String usandoMedicacao, String alergia, String anemia, String fumante, String hepatite, String alcoolista, String sifilis, String herpesAfta, String hiv, String gravidez, String tuberculose, String diabetes, String asma, String cardiaco, Date dataUltimoAtendimento, String concluiuTratamento, String experienciaNegativaTratamento, String roerUnhas, String respirarPelaBoca, String morderObjetos, String rangerOsDentes, String chuparDedoChupeta, String fioFitaDental, String palito, String unitufoBitufo, String tipoEscova, String interdental, String cremeDental, String ingereAlimentosEntreRefeicoes) {
+    public InqueritoOdontologico(long codigoInqueritoOdontologico, String tratamentoMedico, String usandoMedicacao, String alergia, String anemia, String fumante, String hepatite, String alcoolista, String sifilis, String herpesAfta, String hiv, String gravidez, String tuberculose, String diabetes, String asma, String cardiaco, Date dataUltimoAtendimento, String concluiuTratamento, String experienciaNegativaTratamento, String roerUnhas, String respirarPelaBoca, String morderObjetos, String rangerOsDentes, String chuparDedoChupeta, String fioFitaDental, String palito, String unitufoBitufo, String tipoEscova, String interdental, String cremeDental, String ingereAlimentosEntreRefeicoes) {
         this.codigoInqueritoOdontologico = codigoInqueritoOdontologico;
         this.tratamentoMedico = tratamentoMedico;
         this.usandoMedicacao = usandoMedicacao;
@@ -151,11 +120,11 @@ public class InqueritoOdontologico implements Serializable {
         this.ingereAlimentosEntreRefeicoes = ingereAlimentosEntreRefeicoes;
     }
 
-    public Integer getCodigoInqueritoOdontologico() {
+    public long getCodigoInqueritoOdontologico() {
         return codigoInqueritoOdontologico;
     }
 
-    public void setCodigoInqueritoOdontologico(Integer codigoInqueritoOdontologico) {
+    public void setCodigoInqueritoOdontologico(long codigoInqueritoOdontologico) {
         this.codigoInqueritoOdontologico = codigoInqueritoOdontologico;
     }
 
@@ -413,26 +382,6 @@ public class InqueritoOdontologico implements Serializable {
 
     public void setCodigoPaciente(Paciente codigoPaciente) {
         this.codigoPaciente = codigoPaciente;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (codigoInqueritoOdontologico != null ? codigoInqueritoOdontologico.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof InqueritoOdontologico)) {
-            return false;
-        }
-        InqueritoOdontologico other = (InqueritoOdontologico) object;
-        if ((this.codigoInqueritoOdontologico == null && other.codigoInqueritoOdontologico != null) || (this.codigoInqueritoOdontologico != null && !this.codigoInqueritoOdontologico.equals(other.codigoInqueritoOdontologico))) {
-            return false;
-        }
-        return true;
     }
 
     @Override

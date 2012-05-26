@@ -10,7 +10,7 @@ import persistencia.DaoFaceImp;
 
 public class FaceMB {
 
-	private DaoFace df = new DaoFaceImp();
+	private DaoFace dao = new DaoFaceImp();
 	private Face face;
 	private ListDataModel faces; 
 	
@@ -20,7 +20,7 @@ public class FaceMB {
 	}
 	
 	private ListDataModel resgatarFaces(){
-		return new ListDataModel(df.pesquisarTodosFace());
+		return new ListDataModel(dao.pesquisarTodosFace());
 	}
 	
 	public Integer getSizeFaces(){
@@ -42,9 +42,9 @@ public class FaceMB {
 	
 	public String salvarFace(){
 		if(face.getCodigoFace() == 0){
-			df.cadastrarFace(face);
+			dao.cadastrarFace(face);
 		}else{
-			df.alterarFace(face);
+			dao.alterarFace(face);
 		}
 		faces = resgatarFaces();
 		this.mostraMensagem(face.getNomeFace() + " foi salvo!");
@@ -54,7 +54,7 @@ public class FaceMB {
 	
 	public String excluirFace(){
 		this.mostraMensagem(face.getNomeFace() + " foi excluído!");
-		df.excluirFace(face);
+		dao.excluirFace(face);
 		face = new Face();
 		faces = resgatarFaces();
 		return null;

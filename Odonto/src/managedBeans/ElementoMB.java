@@ -3,7 +3,6 @@ package managedBeans;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.ListDataModel;
-
 import modelo.Elemento;
 import persistencia.DaoElemento;
 import persistencia.DaoElementoImp;
