@@ -21,7 +21,9 @@
 			</f:facet>
 			
 			<h:outputLabel for="dataConsulta" value="Data consulta:" />
+			<h:outputLabel for="statusConsulta" value="Status consulta:" />
 			<h:inputText id="dataConsulta" value="#{consultaMB.consulta.dataConsulta}" required="true" />
+			<h:inputText id="statusConsulta" value="#{consultaMB.consulta.statusConsulta}" required="true" />
 			
 			<f:facet name="footer">
 				<h:panelGroup>	
