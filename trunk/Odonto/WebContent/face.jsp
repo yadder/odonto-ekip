@@ -20,7 +20,7 @@
 			</f:facet>
 			
 			<h:outputLabel for="nomeFace" value="Nome face:" />
-			<h:inputText id="nomeFace" value="#{faceMB.face.nomeFace}" required="true" />
+			<h:inputText id="nomeFace" value="#{faceMB.face.nomeFace}" required="true" maxlength="30" />
 			
 			<f:facet name="footer">
 				<h:panelGroup>	
