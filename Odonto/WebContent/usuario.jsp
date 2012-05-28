@@ -18,23 +18,31 @@
 				<h:outputText value="Cadastro de Usuario" /> 
 			</f:facet>
 			
-			<h:outputLabel for="nomeUsuario" value="Nome Usuario:" />
+			<h:outputLabel for="nomeUsuario" value="Nome:" />
 			<h:inputText id="nomeUsuario" value="#{UsuarioMB.Usuario.nomeUsuario}" required="true" />
-			<h:outputLabel for="loginUsuario" value="Login Usuario:" />
+			<h:outputLabel for="loginUsuario" value="Login:" />
 			<h:inputText id="loginUsuario" value="#{UsuarioMB.Usuario.loginUsuario}" required="true" />
-			<h:outputLabel for="senhaUsuario" value="Senha Usuario:" />
+			<h:outputLabel for="senhaUsuario" value="Senha:" />
 			<h:inputText id="senhaUsuario" value="#{UsuarioMB.Usuario.senhaUsuario}" required="true" />
-			<h:outputLabel for="perfilUsuario" value="Perfil Usuario:" />
-			<h:inputText id="perfilUsuario" value="#{UsuarioMB.Usuario.perfilUsuario}" required="true" />
-			<h:outputLabel for="rgUsuario" value="Rg Usuario:" />
+			<h:outputLabel for="perfilUsuario" value="Perfil:" />			
+			<h:selectOneMenu value="#{UsuarioMB.Usuario.perfilUsuario}">
+				<f:selectItem itemValue="ADMINISTRADOR"/>
+				<f:selectItem itemValue="DENTISTA"/>
+				<f:selectItem itemValue="PACIENTE"/>
+				<f:selectItem itemValue="RECEPCIONISTA"/>			
+			</h:selectOneMenu>			
+			<h:outputLabel for="rgUsuario" value="RG:" />
 			<h:inputText id="rgUsuario" value="#{UsuarioMB.Usuario.rgUsuario}" required="true" />
-			<h:outputLabel for="cpfUsuario" value="Cpf Usuario:" />
+			<h:outputLabel for="cpfUsuario" value="CPF:" />
 			<h:inputText id="cpfUsuario" value="#{UsuarioMB.Usuario.cpfUsuario}" required="true" />
-			<h:outputLabel for="dataNascimentoUsuario" value="Data Nascimento Usuario:" />
+			<h:outputLabel for="dataNascimentoUsuario" value="Data Nascimento:" />
 			<h:inputText id="dataNascimentoUsuario" value="#{UsuarioMB.Usuario.dataNascimentoUsuario}" required="true" />
-			<h:outputLabel for="sexoUsuario" value="Sexo Usuario:" />
-			<h:inputText id="sexoUsuario" value="#{UsuarioMB.Usuario.sexoUsuario}" required="true" />
-								
+			<h:outputLabel for="sexoUsuario" value="Sexo:" />
+			<h:selectOneMenu value="#{UsuarioMB.Usuario.sexoUsuario}">
+				<f:selectItem itemValue="MASCULINO"/>
+				<f:selectItem itemValue="FEMININO"/>			
+			</h:selectOneMenu>
+											
 			<f:facet name="footer">
 				<h:panelGroup>	
 					<h:commandButton value="Salvar" action="#{UsuarioMB.salvarUsuario}" />

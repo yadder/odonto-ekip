@@ -18,8 +18,8 @@
 				<h:outputText value="Cadastro de Dentista" />
 			</f:facet>		
 			
-			<h:outputLabel for="croDentista" value="Cro dentista:" />
-			<h:inputText id="croDentista" value="#{dentistaMB.dentista.croDentista}" required="true" />
+			<h:outputLabel for="croDentista" value="CRO:" />
+			<h:inputText id="croDentista" value="#{dentistaMB.dentista.croDentista}" required="true" maxlength="30"/>
 			
 			<f:facet name="footer">
 				<h:panelGroup>	
