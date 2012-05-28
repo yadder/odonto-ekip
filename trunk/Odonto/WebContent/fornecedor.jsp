@@ -71,7 +71,7 @@
 			<h:inputText id="cidadeFornecedor" value="#{fornecedorMB.fornecedor.cidadeFornecedor}" required="true" maxlength="30"/>			
 			
 			<h:outputLabel for="cepFornecedor" value="Cep:" />
-			<h:inputText id="cepFornecedor" value="#{fornecedorMB.fornecedor.cepFornecedor}" required="true" maxlength="9" o/>
+			<h:inputText id="cepFornecedor" value="#{fornecedorMB.fornecedor.cepFornecedor}" required="true" maxlength="9"/>
 			
 			<h:outputLabel for="nomeVendedor" value="Nome Vendedor:" />
 			<h:inputText id="nomeVendedor" value="#{fornecedorMB.fornecedor.nomeVendedor}" required="true" maxlength="50"/>
