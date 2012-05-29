@@ -21,6 +21,9 @@
 			</f:facet>
 			
 			<h:outputLabel for="dataConsulta" value="Data consulta:" />
+<<<<<<< .mine
+			<h:inputText id="dataConsulta" value="#{consultaMB.consulta.dataConsulta}" required="true" />			
+=======
 			<h:outputLabel for="statusConsulta" value="Status consulta:" />
 			
 			<h:outputText value="Data" />
@@ -28,7 +31,16 @@
 			
 			<h:inputText id="dataConsulta" value="#{consultaMB.consulta.dataConsulta}" required="true" />
 			<h:inputText id="statusConsulta" value="#{consultaMB.consulta.statusConsulta}" required="true" />
+>>>>>>> .r183
 			
+			<h:outputLabel for="statusConsulta" value="Status consulta:" />			
+			<h:selectOneMenu value="#{consultaMB.consulta.statusConsulta}">
+				<f:selectItem itemValue="AGENDADA"/>
+				<f:selectItem itemValue="REALIZADA"/>
+				<f:selectItem itemValue="REMARCADA"/>							
+				<f:selectItem itemValue="CANCELADA"/>
+			</h:selectOneMenu>
+						
 			<f:facet name="footer">
 				<h:panelGroup>	
 					<h:commandButton value="Salvar" action="#{consultaMB.salvarConsulta}" />
