@@ -19,11 +19,11 @@
 			</f:facet>
 			
 			<h:outputLabel for="diaSemanaDisponibilidade" value="Dia da Semana Disponibilidade:" />
-			<h:inputText id="diaSemanaDisponibilidade" value="#{disponibilidadeMB.disponibilidade.diaSemanaDisponibilidade}" required="true" />
+			<h:inputText id="diaSemanaDisponibilidade" value="#{disponibilidadeMB.disponibilidade.diaSemana}" required="true" />
 			<h:outputLabel for="horaInicioDisponibilidade" value="Hora Inicio Disponibilidade:" />
-			<h:inputText id="horaInicioDisponibilidade" value="#{disponibilidadeMB.disponibilidade.horaInicioDisponibilidade}" required="true" />
+			<h:inputText id="horaInicioDisponibilidade" value="#{disponibilidadeMB.disponibilidade.horaInicio}" required="true" />
 			<h:outputLabel for="horaFimDisponibilidade" value="Hora Fim Disponibilidade:" />
-			<h:inputText id="horaFimDisponibilidade" value="#{disponibilidadeMB.disponibilidade.horaFimDisponibilidade}" required="true" />
+			<h:inputText id="horaFimDisponibilidade" value="#{disponibilidadeMB.disponibilidade.horaFim}" required="true" />
 					
 			<f:facet name="footer">
 				<h:panelGroup>	
@@ -56,7 +56,7 @@
 				<f:facet name="header">
 					<h:outputText value="Alterar" />
 				</f:facet>
-				<h:commandLink action="#{disponibilidadeMB.alterardisponibilidade}">
+				<h:commandLink action="#{disponibilidadeMB.alterarDisponibilidade}">
 					<h:outputText value="Alterar" />
 					<f:setPropertyActionListener value="#{vdisponibilidade}" target="#{disponibilidadeMB.disponibilidade}"/>
 				</h:commandLink>
@@ -65,7 +65,7 @@
 				<f:facet name="header">
 					<h:outputText value="Excluir" />
 				</f:facet>
-				<h:commandLink action="#{disponibilidadeMB.excluirdisponibilidade}">
+				<h:commandLink action="#{disponibilidadeMB.excluirDisponibilidade}">
 					<h:outputText value="Excluir" />
 					<f:setPropertyActionListener value="#{vdisponibilidade}" target="#{disponibilidadeMB.disponibilidade}"/>
 				</h:commandLink>

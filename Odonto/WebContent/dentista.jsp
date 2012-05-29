@@ -32,7 +32,7 @@
 		<br />
 	<h:form id="formConvenioOther">
 		<!-- Tabela de dentistas cadastrados --> 
-		<h:dataTable  var="vdentista" value="#{dentistaMB.dentistaa}" border="1" cellpadding="1" cellspacing="1" rendered="#{dentistaMB.sizeDentistas > 0}">
+		<h:dataTable  var="vdentista" value="#{dentistaMB.dentista}" border="1" cellpadding="1" cellspacing="1" rendered="#{dentistaMB.sizeDentistas > 0}">
 			<f:facet name="header">
 				<h:outputText value="Dentistas cadastrados" />
 			</f:facet>
@@ -54,7 +54,7 @@
 				</f:facet>
 				<h:commandLink action="#{dentistaMB.alterarDentista}">
 					<h:outputText value="Alterar" />
-					<f:setPropertyActionListener value="#{vdentista}" target="#{denistaMB.dentista}"/>
+					<f:setPropertyActionListener value="#{vdentista}" target="#{dentistaMB.dentista}"/>
 				</h:commandLink>
 			</h:column>
 			<h:column>
@@ -63,11 +63,11 @@
 				</f:facet>
 				<h:commandLink action="#{dentistaMB.excluirDentista}">
 					<h:outputText value="Excluir" />
-					<f:setPropertyActionListener value="#{vdentista}" target="#{deintistaMB.dentista}"/>
+					<f:setPropertyActionListener value="#{vdentista}" target="#{dentistaMB.dentista}"/>
 				</h:commandLink>
 			</h:column>
 		<f:facet name="footer">
-			<h:outputText value="Total:  #{dentistaMB.sizeDentista}" />
+			<h:outputText value="Total:  #{dentistaMB.sizeDentistas}" />
 		</f:facet>
 		</h:dataTable>
 	</h:form>
