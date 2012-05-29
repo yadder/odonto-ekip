@@ -71,7 +71,7 @@
 				</h:commandLink>
 			</h:column>
 		<f:facet name="footer">
-			<h:outputText value="Total:  #{disponibilidadeMB.sizedisponibilidade}" />
+			<h:outputText value="Total:  #{disponibilidadeMB.sizeDisponibilidades}" />
 		</f:facet>
 		</h:dataTable>
 	</h:form>
