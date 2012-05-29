@@ -41,19 +41,19 @@ public class PacienteMB {
 	}
 	
 	public String salvarPaciente(){
-		if(paciente.getCodigoPaciente() == 0){
+		if(paciente.getCodigoUsuario() == 0){
 			dao.cadastrarPaciente(paciente);
 		}else{
 			dao.alterarPaciente(paciente);
 		}
 		pacientes = resgatarPacientes();
-		this.mostraMensagem(paciente.getCodigoPaciente() + " foi salvo!");
+		this.mostraMensagem(paciente.getCodigoUsuario() + " foi salvo!");
 		paciente = new Paciente();
 		return null;
 	}
 	
 	public String excluirPaciente(){
-		this.mostraMensagem(paciente.getCodigoPaciente() + " foi excluído!");
+		this.mostraMensagem(paciente.getCodigoUsuario() + " foi excluído!");
 		dao.excluirPaciente(paciente);
 		paciente = new Paciente();
 		pacientes = resgatarPacientes();

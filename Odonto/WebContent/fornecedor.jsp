@@ -9,7 +9,7 @@
 <title>Cadastro de Fornecedor</title>
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 </head>
-<body>nomeVendedor
+<body>
 <f:view>
 <rich:panel>
 	<h:form id="formFornecedorCad" styleClass="">
@@ -22,7 +22,7 @@
 			<h:outputLabel for="nomeFornecedor" value="Nome:" />
 			<h:inputText id="nomeFornecedor" value="#{fornecedorMB.fornecedor.nomeFornecedor}" required="true" maxlength="50"/>			
 			
-			<h:outputLabel for="cnpjFornecedor" value="CNPJ:" />
+			<h:outputLabel for="cnpjFornecedor" value="CNPJ:"/>
 			<h:inputText id="cnpjFornecedor" value="#{fornecedorMB.fornecedor.cnpjFornecedor}" required="true" maxlength="18"/>
 			
 			<h:outputLabel for="logradouroFornecedor" value="Logradouro Fornecedor:" />

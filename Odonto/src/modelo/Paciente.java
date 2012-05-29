@@ -26,8 +26,6 @@ public class Paciente extends Usuario implements Serializable {
     private String estadoPaciente;
     @Column(name = "cep_paciente", length = 10)
     private String cepPaciente;
-    @Column(name = "codigo_paciente", nullable = false)
-    private Integer codigoPaciente;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoPaciente")
     private List<TelefonePaciente> telefonePacienteList;
     @JoinColumn(name = "codigo_paciente", referencedColumnName = "codigo_usuario", nullable = false, insertable = false, updatable = false)
@@ -44,10 +42,6 @@ public class Paciente extends Usuario implements Serializable {
     private List<Consulta> consultaList;
 
     public Paciente() {
-    }
-
-    public Paciente(Integer codigoPaciente) {
-        this.codigoPaciente = codigoPaciente;
     }
 
     public String getResponsavelPaciente() {
@@ -114,14 +108,6 @@ public class Paciente extends Usuario implements Serializable {
         this.cepPaciente = cepPaciente;
     }
 
-    public Integer getCodigoPaciente() {
-        return codigoPaciente;
-    }
-
-    public void setCodigoPaciente(Integer codigoPaciente) {
-        this.codigoPaciente = codigoPaciente;
-    }
-
     @XmlTransient
     public List<TelefonePaciente> getTelefonePacienteList() {
         return telefonePacienteList;
@@ -172,31 +158,6 @@ public class Paciente extends Usuario implements Serializable {
 
     public void setConsultaList(List<Consulta> consultaList) {
         this.consultaList = consultaList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (codigoPaciente != null ? codigoPaciente.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Paciente)) {
-            return false;
-        }
-        Paciente other = (Paciente) object;
-        if ((this.codigoPaciente == null && other.codigoPaciente != null) || (this.codigoPaciente != null && !this.codigoPaciente.equals(other.codigoPaciente))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "odonto.Paciente[ codigoPaciente=" + codigoPaciente + " ]";
     }
     
 }
