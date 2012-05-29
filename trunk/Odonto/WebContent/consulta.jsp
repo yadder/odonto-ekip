@@ -21,18 +21,8 @@
 			</f:facet>
 			
 			<h:outputLabel for="dataConsulta" value="Data consulta:" />
-<<<<<<< .mine
 			<h:inputText id="dataConsulta" value="#{consultaMB.consulta.dataConsulta}" required="true" />			
-=======
-			<h:outputLabel for="statusConsulta" value="Status consulta:" />
-			
-			<h:outputText value="Data" />
-			<rich:calendar id="datacadastro" value="#{ManagerBean.pessoa.dataCadastro}" datePattern="dd/MM/yyy"/>
-			
-			<h:inputText id="dataConsulta" value="#{consultaMB.consulta.dataConsulta}" required="true" />
-			<h:inputText id="statusConsulta" value="#{consultaMB.consulta.statusConsulta}" required="true" />
->>>>>>> .r183
-			
+						
 			<h:outputLabel for="statusConsulta" value="Status consulta:" />			
 			<h:selectOneMenu value="#{consultaMB.consulta.statusConsulta}">
 				<f:selectItem itemValue="AGENDADA"/>
