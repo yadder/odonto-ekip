@@ -2,17 +2,17 @@ package persistencia;
 
 import java.util.List;
 
-import modelo.Consulta;
+import modelo.Procedimento;
 
 public interface DaoProcedimento {
 
-	boolean cadastrarConsulta(Consulta consulta);
+	boolean cadastrarProcedimento(Procedimento procedimento);
 	
-	boolean alterarConsulta(Consulta consulta);
+	boolean alterarProcedimento(Procedimento procedimento);
 	
-	boolean excluirConsulta(Consulta consulta);
+	boolean excluirProcedimento(Procedimento procedimento);
 	
-	Consulta pesquisarConsulta(Consulta consulta);
+	Procedimento pesquisarProcedimento(Procedimento procedimento);
 	
-	List<Consulta> pesquisarTodosConsulta();
+	List<Procedimento> pesquisarTodosProcedimento();
 }
