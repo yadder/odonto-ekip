@@ -47,7 +47,7 @@ public class OdontogramaMB {
 			dao.alterarOdontograma(odontograma);
 		}
 		odontogramas = resgatarOdontogramas();
-		this.mostraMensagem(odontograma.getCodigoDentista() + " foi salvo!");
+		this.mostraMensagem(odontograma.getCodigoOdontograma() + " foi salvo!");
 		odontograma = new Odontograma();
 		return null;
 	}

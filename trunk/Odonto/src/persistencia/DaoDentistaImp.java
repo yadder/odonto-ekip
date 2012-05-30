@@ -71,7 +71,7 @@ public class DaoDentistaImp implements DaoDentista {
 		Dentista e = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			e = (Dentista)session.get(Dentista.class, dentista.getCodigoDentista());
+			e = (Dentista)session.get(Dentista.class, dentista.getCodigoUsuario());
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		}finally{

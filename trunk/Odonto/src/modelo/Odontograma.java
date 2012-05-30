@@ -2,9 +2,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "tb_odontograma")
@@ -21,19 +19,13 @@ public class Odontograma implements Serializable {
     private Date dataOdontograma;
     @Column(name = "status_odontograma", nullable = false, length = 20)
     private String statusOdontograma;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoOdontograma")
-    private List<OdontogramaProcedimento> odontogramaProcedimentoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoOdontograma")
-    private List<Prescricao> prescricaoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoOdontograma")
-    private List<Pagamento> pagamentoList;
-    @JoinColumn(name = "codigo_dentista", referencedColumnName = "codigo_dentista", nullable = false)
-    @ManyToOne(optional = false)
-    private Dentista codigoDentista;
-    @JoinColumn(name = "codigo_paciente", referencedColumnName = "codigo_paciente", nullable = false)
-    @ManyToOne(optional = false)
-    private Paciente codigoPaciente;
 
+    @ManyToOne(fetch=FetchType.EAGER)
+	private Dentista dentista;
+    
+    @ManyToOne(fetch=FetchType.EAGER)
+	private Paciente paciente;
+    
     public Odontograma() {
     }
 
@@ -80,50 +72,27 @@ public class Odontograma implements Serializable {
         this.statusOdontograma = statusOdontograma;
     }
 
-    @XmlTransient
-    public List<OdontogramaProcedimento> getOdontogramaProcedimentoList() {
-        return odontogramaProcedimentoList;
-    }
+    public Dentista getDentista() {
+		return dentista;
+	}
 
-    public void setOdontogramaProcedimentoList(List<OdontogramaProcedimento> odontogramaProcedimentoList) {
-        this.odontogramaProcedimentoList = odontogramaProcedimentoList;
-    }
+	public void setDentista(Dentista dentista) {
+		this.dentista = dentista;
+	}
 
-    @XmlTransient
-    public List<Prescricao> getPrescricaoList() {
-        return prescricaoList;
-    }
+	public Paciente getPaciente() {
+		return paciente;
+	}
 
-    public void setPrescricaoList(List<Prescricao> prescricaoList) {
-        this.prescricaoList = prescricaoList;
-    }
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
 
-    @XmlTransient
-    public List<Pagamento> getPagamentoList() {
-        return pagamentoList;
-    }
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
-    public void setPagamentoList(List<Pagamento> pagamentoList) {
-        this.pagamentoList = pagamentoList;
-    }
-
-    public Dentista getCodigoDentista() {
-        return codigoDentista;
-    }
-
-    public void setCodigoDentista(Dentista codigoDentista) {
-        this.codigoDentista = codigoDentista;
-    }
-
-    public Paciente getCodigoPaciente() {
-        return codigoPaciente;
-    }
-
-    public void setCodigoPaciente(Paciente codigoPaciente) {
-        this.codigoPaciente = codigoPaciente;
-    }
-
-    @Override
+	@Override
     public String toString() {
         return "odonto.Odontograma[ codigoOdontograma=" + codigoOdontograma + " ]";
     }

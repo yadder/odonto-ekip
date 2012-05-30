@@ -15,10 +15,11 @@ public class TelefonePaciente implements Serializable {
     private String dddTelefonePaciente;
     @Column(name = "telefone_paciente", nullable = false, length = 9)
     private String telefonePaciente;
-    @JoinColumn(name = "codigo_paciente", referencedColumnName = "codigo_paciente", nullable = false)
-    @ManyToOne(optional = false)
-    private Paciente codigoPaciente;
-
+    
+    @ManyToOne(fetch=FetchType.EAGER)
+	private Paciente paciente;
+    
+    
     public TelefonePaciente() {
     }
 
@@ -56,15 +57,20 @@ public class TelefonePaciente implements Serializable {
         this.telefonePaciente = telefonePaciente;
     }
 
-    public Paciente getCodigoPaciente() {
-        return codigoPaciente;
-    }
+    
+    public Paciente getPaciente() {
+		return paciente;
+	}
 
-    public void setCodigoPaciente(Paciente codigoPaciente) {
-        this.codigoPaciente = codigoPaciente;
-    }
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
 
-    @Override
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	@Override
     public String toString() {
         return "odonto.TelefonePaciente[ codigoTelefone=" + codigoTelefone + " ]";
     }

@@ -41,7 +41,7 @@ public class DentistaMB {
 	}
 	
 	public String salvarDentista(){
-		if(dentista.getCodigoDentista() == 0){
+		if(dentista.getCodigoUsuario() == 0){
 			dao.cadastrarDentista(dentista);
 		}else{
 			dao.alterarDentista(dentista);

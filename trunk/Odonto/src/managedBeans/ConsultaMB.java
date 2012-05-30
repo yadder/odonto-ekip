@@ -47,7 +47,7 @@ public class ConsultaMB {
 			dao.alterarConsulta(consulta);
 		}
 		consultas = resgatarConsultas();
-		this.mostraMensagem(consulta.getCodigoDentista() + " foi salvo!");
+		this.mostraMensagem(consulta.getCodigoConsulta() + " foi salvo!");
 		consulta = new Consulta();
 		return null;
 	}
