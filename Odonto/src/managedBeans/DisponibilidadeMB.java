@@ -47,7 +47,7 @@ public class DisponibilidadeMB {
 			dao.alterarDisponibilidade(disponibilidade);
 		}
 		disponibilidades = resgatarDisponibilidades();
-		this.mostraMensagem(disponibilidade.getCodigoDentista() + " foi salvo!");
+		this.mostraMensagem(disponibilidade.getCodigoDisponibilidade() + " foi salvo!");
 		disponibilidade = new Disponibilidade();
 		return null;
 	}

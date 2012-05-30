@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro de Prescricao</title>
+<title>Cadastro de Prescrição</title>
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 </head>
 <body>
@@ -18,8 +18,8 @@
 				<h:outputText value="Cadastro de Prescricao" />
 			</f:facet>		
 			
-			<h:outputLabel for="observacaoPrescricao" value="Observação Prescricao:" />
-			<h:inputText id="observacaoPrescricao" value="#{prescricaoMB.prescricao.observacaoPrescricao}" required="true" />
+			<h:outputLabel for="observacaoPrescricao" value="Prescrição:" />
+			<h:inputText id="observacaoPrescricao" value="#{prescricaoMB.prescricao.observacao}" required="true" />
 			
 			<f:facet name="footer">
 				<h:panelGroup>	
@@ -32,7 +32,7 @@
 		<br />
 	<h:form id="formConvenioOther">
 		<!-- Tabela de prescricaos cadastrados --> 
-		<h:dataTable  var="vprescricao" value="#{prescricaoMB.prescricaoa}" border="1" cellpadding="1" cellspacing="1" rendered="#{prescricaoMB.sizePrescricaos > 0}">
+		<h:dataTable  var="vprescricao" value="#{prescricaoMB.prescricoes}" border="1" cellpadding="1" cellspacing="1" rendered="#{prescricaoMB.sizePrescricoes > 0}">
 			<f:facet name="header">
 				<h:outputText value="Prescricaos cadastrados" />
 			</f:facet>
@@ -67,7 +67,7 @@
 				</h:commandLink>
 			</h:column>
 		<f:facet name="footer">
-			<h:outputText value="Total:  #{prescricaoMB.sizePrescricao}" />
+			<h:outputText value="Total:  #{prescricaoMB.sizePrescricoes}" />
 		</f:facet>
 		</h:dataTable>
 	</h:form>

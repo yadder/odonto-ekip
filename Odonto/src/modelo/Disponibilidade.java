@@ -20,9 +20,9 @@ public class Disponibilidade implements Serializable {
     @Column(name = "hora_fim", nullable = false)
     @Temporal(TemporalType.TIME)
     private Date horaFim;
-    @JoinColumn(name = "codigo_dentista", referencedColumnName = "codigo_dentista", nullable = false)
-    @ManyToOne(optional = false)
-    private Dentista codigoDentista;
+   
+    @ManyToOne(fetch=FetchType.EAGER)
+	private Dentista dentista;
 
     public Disponibilidade() {
     }
@@ -69,18 +69,22 @@ public class Disponibilidade implements Serializable {
     public void setHoraFim(Date horaFim) {
         this.horaFim = horaFim;
     }
+    
+    public Dentista getDentista() {
+		return dentista;
+	}
 
-    public Dentista getCodigoDentista() {
-        return codigoDentista;
-    }
+	public void setDentista(Dentista dentista) {
+		this.dentista = dentista;
+	}
 
-    public void setCodigoDentista(Dentista codigoDentista) {
-        this.codigoDentista = codigoDentista;
-    }
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
-    @Override
+	@Override
     public String toString() {
-        return "odonto.Disponibilidade[ codigoDisponibilidade=" + codigoDisponibilidade + " ]";
+        return getCodigoDisponibilidade()+getDiaSemana();
     }
     
 }

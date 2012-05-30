@@ -17,12 +17,13 @@ public class Consulta implements Serializable {
     private Date dataConsulta;
     @Column(name = "status_consulta", nullable = false, length = 20)
     private String statusConsulta;
-    @JoinColumn(name = "codigo_paciente", referencedColumnName = "codigo_paciente", nullable = false)
-    @ManyToOne(optional = false)
-    private Paciente codigoPaciente;
-    @JoinColumn(name = "codigo_dentista", referencedColumnName = "codigo_dentista", nullable = false)
-    @ManyToOne(optional = false)
-    private Dentista codigoDentista;
+    
+    @ManyToOne(fetch=FetchType.EAGER)
+	private Paciente paciente;
+
+    @ManyToOne(fetch=FetchType.EAGER)
+	private Dentista dentista;
+    
 
     public Consulta() {
     }
@@ -61,20 +62,25 @@ public class Consulta implements Serializable {
         this.statusConsulta = statusConsulta;
     }
 
-    public Paciente getCodigoPaciente() {
-        return codigoPaciente;
-    }
+	public Paciente getPaciente() {
+		return paciente;
+	}
 
-    public void setCodigoPaciente(Paciente codigoPaciente) {
-        this.codigoPaciente = codigoPaciente;
-    }
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
 
-    public Dentista getCodigoDentista() {
-        return codigoDentista;
-    }
+	public Dentista getDentista() {
+		return dentista;
+	}
 
-    public void setCodigoDentista(Dentista codigoDentista) {
-        this.codigoDentista = codigoDentista;
-    }
+	public void setDentista(Dentista dentista) {
+		this.dentista = dentista;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
     
 }

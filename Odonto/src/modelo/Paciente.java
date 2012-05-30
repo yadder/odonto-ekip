@@ -1,9 +1,8 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlTransient;
+
 
 @Entity
 @Table(name = "tb_paciente")
@@ -26,25 +25,26 @@ public class Paciente extends Usuario implements Serializable {
     private String estadoPaciente;
     @Column(name = "cep_paciente", length = 10)
     private String cepPaciente;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoPaciente")
-    private List<TelefonePaciente> telefonePacienteList;
-    @JoinColumn(name = "codigo_paciente", referencedColumnName = "codigo_usuario", nullable = false, insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Usuario usuario;
-    @JoinColumn(name = "codigo_convenio", referencedColumnName = "codigo_convenio", nullable = false)
-    @ManyToOne(optional = false)
-    private Convenio codigoConvenio;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoPaciente")
-    private List<Odontograma> odontogramaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoPaciente")
-    private List<InqueritoOdontologico> inqueritoOdontologicoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoPaciente")
-    private List<Consulta> consultaList;
-
+    
+    @ManyToOne(fetch=FetchType.EAGER)
+	private Convenio convenio;
+    
     public Paciente() {
     }
+    
+    public Convenio getConvenio() {
+		return convenio;
+	}
 
-    public String getResponsavelPaciente() {
+	public void setConvenio(Convenio convenio) {
+		this.convenio = convenio;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public String getResponsavelPaciente() {
         return responsavelPaciente;
     }
 
@@ -107,57 +107,5 @@ public class Paciente extends Usuario implements Serializable {
     public void setCepPaciente(String cepPaciente) {
         this.cepPaciente = cepPaciente;
     }
-
-    @XmlTransient
-    public List<TelefonePaciente> getTelefonePacienteList() {
-        return telefonePacienteList;
-    }
-
-    public void setTelefonePacienteList(List<TelefonePaciente> telefonePacienteList) {
-        this.telefonePacienteList = telefonePacienteList;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Convenio getCodigoConvenio() {
-        return codigoConvenio;
-    }
-
-    public void setCodigoConvenio(Convenio codigoConvenio) {
-        this.codigoConvenio = codigoConvenio;
-    }
-
-    @XmlTransient
-    public List<Odontograma> getOdontogramaList() {
-        return odontogramaList;
-    }
-
-    public void setOdontogramaList(List<Odontograma> odontogramaList) {
-        this.odontogramaList = odontogramaList;
-    }
-
-    @XmlTransient
-    public List<InqueritoOdontologico> getInqueritoOdontologicoList() {
-        return inqueritoOdontologicoList;
-    }
-
-    public void setInqueritoOdontologicoList(List<InqueritoOdontologico> inqueritoOdontologicoList) {
-        this.inqueritoOdontologicoList = inqueritoOdontologicoList;
-    }
-
-    @XmlTransient
-    public List<Consulta> getConsultaList() {
-        return consultaList;
-    }
-
-    public void setConsultaList(List<Consulta> consultaList) {
-        this.consultaList = consultaList;
-    }
-    
+   
 }

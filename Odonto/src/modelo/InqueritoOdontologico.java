@@ -75,10 +75,10 @@ public class InqueritoOdontologico implements Serializable {
     private String cremeDental;
     @Column(name = "ingere_alimentos_entre_refeicoes", nullable = false, length = 1)
     private String ingereAlimentosEntreRefeicoes;
-    @JoinColumn(name = "codigo_paciente", referencedColumnName = "codigo_paciente", nullable = false)
-    @ManyToOne(optional = false)
-    private Paciente codigoPaciente;
-
+    
+    @ManyToOne(fetch=FetchType.EAGER)
+	private Paciente paciente;
+    
     public InqueritoOdontologico() {
     }
 
@@ -376,15 +376,19 @@ public class InqueritoOdontologico implements Serializable {
         this.ingereAlimentosEntreRefeicoes = ingereAlimentosEntreRefeicoes;
     }
 
-    public Paciente getCodigoPaciente() {
-        return codigoPaciente;
-    }
+    public Paciente getPaciente() {
+		return paciente;
+	}
 
-    public void setCodigoPaciente(Paciente codigoPaciente) {
-        this.codigoPaciente = codigoPaciente;
-    }
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
 
-    @Override
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	@Override
     public String toString() {
         return "odonto.InqueritoOdontologico[ codigoInqueritoOdontologico=" + codigoInqueritoOdontologico + " ]";
     }

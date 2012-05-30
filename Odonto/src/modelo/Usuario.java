@@ -30,10 +30,6 @@ public class Usuario implements Serializable {
     private Date dataNascimentoUsuario;
     @Column(name = "sexo_usuario", nullable = false, length = 1)
     private String sexoUsuario;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private Dentista dentista;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private Paciente paciente;
 
     public Usuario() {
     }
@@ -124,25 +120,9 @@ public class Usuario implements Serializable {
         this.sexoUsuario = sexoUsuario;
     }
 
-    public Dentista getDentista() {
-        return dentista;
-    }
-
-    public void setDentista(Dentista dentista) {
-        this.dentista = dentista;
-    }
-
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-
     @Override
     public String toString() {
-        return "odonto.Usuario[ codigoUsuario=" + codigoUsuario + " ]";
+        return getNomeUsuario();
     }
     
 }

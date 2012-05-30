@@ -7,23 +7,46 @@ import javax.persistence.*;
 @Table(name = "tb_prescricao")
 public class Prescricao implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo_prescricao", nullable = false)
     private long codigoPrescricao;
+    
     @Column(name = "observacao", nullable = false, length = 255)
     private String observacao;
-    @JoinColumn(name = "codigo_odontograma", referencedColumnName = "codigo_odontograma", nullable = false)
-    @ManyToOne(optional = false)
-    private Odontograma codigoOdontograma;
-    @JoinColumn(name = "codigo_dentista", referencedColumnName = "codigo_dentista", nullable = false)
-    @ManyToOne(optional = false)
-    private Dentista codigoDentista;
 
+    @ManyToOne(fetch=FetchType.EAGER)
+	private Odontograma odontograma;
+    
+	@ManyToOne(fetch=FetchType.EAGER)
+    private Dentista dentista;    
+    
     public Prescricao() {
+    	
     }
+    
+    public Odontograma getOdontograma() {
+		return odontograma;
+	}
 
-    public Prescricao(long codigoPrescricao) {
+	public void setOdontograma(Odontograma odontograma) {
+		this.odontograma = odontograma;
+	}
+
+	public Dentista getDentista() {
+		return dentista;
+	}
+
+	public void setDentista(Dentista dentista) {
+		this.dentista = dentista;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Prescricao(long codigoPrescricao) {
         this.codigoPrescricao = codigoPrescricao;
     }
 
@@ -48,25 +71,9 @@ public class Prescricao implements Serializable {
         this.observacao = observacao;
     }
 
-    public Odontograma getCodigoOdontograma() {
-        return codigoOdontograma;
-    }
-
-    public void setCodigoOdontograma(Odontograma codigoOdontograma) {
-        this.codigoOdontograma = codigoOdontograma;
-    }
-
-    public Dentista getCodigoDentista() {
-        return codigoDentista;
-    }
-
-    public void setCodigoDentista(Dentista codigoDentista) {
-        this.codigoDentista = codigoDentista;
-    }
-
     @Override
     public String toString() {
         return "odonto.Prescricao[ codigoPrescricao=" + codigoPrescricao + " ]";
     }
-    
+   
 }

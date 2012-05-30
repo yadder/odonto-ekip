@@ -4,6 +4,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.ListDataModel;
 
+import modelo.Dentista;
+import modelo.Odontograma;
 import modelo.Prescricao;
 import persistencia.DaoPrescricao;
 import persistencia.DaoPrescricaoImp;
@@ -12,23 +14,27 @@ public class PrescricaoMB {
 
 	private DaoPrescricao dao = new DaoPrescricaoImp();
 	private Prescricao prescricao;
-	private ListDataModel prescricaos; 
+	private ListDataModel prescricoes; 
+	private Dentista dentista;
+	private Odontograma odontograma;
 	
 	public PrescricaoMB(){
 		prescricao = new Prescricao();
-		prescricaos = resgatarPrescricaos();
+		prescricoes = resgatarPrescricoes();
+		dentista = new Dentista();
+		odontograma = new Odontograma();
 	}
 	
-	private ListDataModel resgatarPrescricaos(){
+	private ListDataModel resgatarPrescricoes(){
 		return new ListDataModel(dao.pesquisarTodosPrescricao());
 	}
 	
-	public Integer getSizePrescricaos(){
-		return this.prescricaos.getRowCount();
+	public Integer getSizePrescricoes(){
+		return this.prescricoes.getRowCount();
 	}
 	
-	public ListDataModel getPrescricaos(){
-		return this.prescricaos;
+	public ListDataModel getPrescricoes(){
+		return this.prescricoes;
 	}
 	
 	public String adicionarPrescricao(){
@@ -46,8 +52,8 @@ public class PrescricaoMB {
 		}else{
 			dao.alterarPrescricao(prescricao);
 		}
-		prescricaos = resgatarPrescricaos();
-		this.mostraMensagem(prescricao.getCodigoDentista() + " foi salvo!");
+		prescricoes = resgatarPrescricoes();
+		this.mostraMensagem(prescricao.getCodigoPrescricao() + " foi salvo!");
 		prescricao = new Prescricao();
 		return null;
 	}
@@ -56,7 +62,7 @@ public class PrescricaoMB {
 		this.mostraMensagem(prescricao.getCodigoPrescricao() + " foi excluído!");
 		dao.excluirPrescricao(prescricao);
 		prescricao = new Prescricao();
-		prescricaos = resgatarPrescricaos();
+		prescricoes = resgatarPrescricoes();
 		return null;
 	}
 	
