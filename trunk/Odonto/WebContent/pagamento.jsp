@@ -19,60 +19,68 @@
 				<h:outputText value="Cadastro de Odontograma" />
 			</f:facet>		
 			
-			<h:outputLabel for="codigoDentista" value="Códio do dentista:" />
-			<h:inputText id="codigoDentista" value="#{odontogramaMB.odontograma.codigoDentista}" required="true" />
-			<h:outputLabel for="codigoPaciente" value="Código do Paciente:" />
-			<h:inputText id="codigoPaciente" value="#{odontogramaMB.odontograma.codigoPaciente}" required="true" />
-			<h:outputLabel for="valorOdontograma" value="Valor do Odontograma" />
-			<h:inputText id="valorOdontograma" value="#{odontogramaMB.odontograma.valorOdontograma}" required="true" />
+			<h:outputLabel for="codigoPagamento" value="Código pagamento:" />
+			<h:inputText id="codigoPagamento" value="#{pagamentoMB.pagamento.codigoPagamento}" required="true" />
+			
+			<h:outputLabel for="numeroParcela" value="Némero parcela:" />
+			<h:inputText id="numeroParcela" value="#{pagamentoMB.pagamento.numeroParcela}" required="true" />
+			
+			<h:outputLabel for="valorParcela" value="Valor parcela:" />
+			<h:inputText id="valorParcela" value="#{pagamentoMB.pagamento.valorParcela}" required="true" />
+			
+			<h:outputLabel for="statusPagmento" value="Status pagamento:" />			
+			<h:selectOneMenu value="#{pagamentoMB.pagamento.statusPagamento}">
+				<f:selectItem itemValue="EXECUTADO"/>
+				<f:selectItem itemValue="EM ABERTO"/>							
+			</h:selectOneMenu>
 					
 			<f:facet name="footer">
 				<h:panelGroup>	
-					<h:commandButton value="Salvar" action="#{odontogramaMB.salvarOdontograma}" />
-					<h:commandButton value="Cancelar" action="#{odontogramaMB.cancelarCadastroOdontograma}" immediate="true" />
+					<h:commandButton value="Salvar" action="#{pagamentoMB.salvarPagamento}" />
+					<h:commandButton value="Cancelar" action="#{pagamentoMB.cancelarCadastroPagamento}" immediate="true" />
 				</h:panelGroup>
 			</f:facet>
 		</h:panelGrid>
 	</h:form>
 		<br />
-	<h:form id="formOdontogramaOther">
+	<h:form id="formPagamentoOther">
 		<!-- Tabela de odontogramas cadastrados --> 
-		<h:dataTable  var="vodontograma" value="#{odontogramaMB.odontogramas}" border="1" cellpadding="1" cellspacing="1" rendered="#{odontogramaMB.sizeOdontogramas > 0}">
+		<h:dataTable  var="vpagamento" value="#{pagamentoMB.pagamentos}" border="1" cellpadding="1" cellspacing="1" rendered="#{pagamentoMB.sizePagamentos > 0}">
 			<f:facet name="header">
-				<h:outputText value="Odontogramas Cadastrados" />
+				<h:outputText value="Pagamentos Cadastrados" />
 			</f:facet>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Codigo" />
 				</f:facet>
-				<h:outputText value="#{vodontograma.codigoOdontograma}" />
+				<h:outputText value="#{vpagamento.c}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Nome" />
 				</f:facet>
-				<h:outputText value="#{vodontograma.nomeOdontograma}" />
+				<h:outputText value="#{vpagamento.nomeOdontograma}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Alterar" />
 				</f:facet>
-				<h:commandLink action="#{odontogramaMB.alterarOdontograma}">
+				<h:commandLink action="#{pagamentoMB.alterarPagamento}">
 					<h:outputText value="Alterar" />
-					<f:setPropertyActionListener value="#{vodontograma}" target="#{odontogramaMB.odontograma}"/>
+					<f:setPropertyActionListener value="#{vpagamento}" target="#{pagamentoMB.pagamento}"/>
 				</h:commandLink>
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Excluir" />
 				</f:facet>
-				<h:commandLink action="#{odontogramaMB.excluirOdontograma}">
+				<h:commandLink action="#{pagamentoMB.excluirPagamento}">
 					<h:outputText value="Excluir" />
-					<f:setPropertyActionListener value="#{vodontograma}" target="#{odontogramaMB.odontograma}"/>
+					<f:setPropertyActionListener value="#{vpagamento}" target="#{pagamentoMB.pagamento}"/>
 				</h:commandLink>
 			</h:column>
 		<f:facet name="footer">
-			<h:outputText value="Total:  #{odontogramaMB.sizeOdontogramas}" />
+			<h:outputText value="Total:  #{pagamentoMB.sizePagamentos}" />
 		</f:facet>
 		</h:dataTable>
 	</h:form>

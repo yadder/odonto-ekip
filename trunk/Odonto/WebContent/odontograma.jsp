@@ -21,15 +21,22 @@
 			
 			<h:outputLabel for="codigoDentista" value="Código Dentista:" />
 			<h:inputText id="codigoDentista" value="#{odontogramaMB.odontograma.codigoDentista}" required="true" />
+			
 			<h:outputLabel for="codigoPaciente" value="Código Paciente:" />
 			<h:inputText id="codigoPaciente" value="#{odontogramaMB.odontograma.codigoPaciente}" required="true" />
-			<h:outputLabel for="valorOdontograma" value="Valor Odontograma:" />
-			<h:inputText id="valorOdontograma" value="#{odontogramaMB.odontograma.valorOdontograma}" required="true" />
+			
 			<h:outputLabel for="dataOdontograma" value="Data Odontograma:" />
 			<h:inputText id="dataOdontograma" value="#{odontogramaMB.odontograma.dataOdontograma}" required="true" />
-			<h:outputLabel for="statusOdontograma" value="Status Odontograma:" />
-			<h:inputText id="statusOdontograma" value="#{odontogramaMB.odontograma.statusOdontograma}" required="true" />
-													
+			
+			<h:outputLabel for="valorOdontograma" value="Valor Odontograma:" />
+			<h:inputText id="valorOdontograma" value="#{odontogramaMB.odontograma.valorOdontograma}" required="true" />
+						
+			<h:outputLabel for="statusOdontograma" value="Status odontograma:" />			
+			<h:selectOneMenu value="#{odontogramaMB.odontograma.statusOdontograma}">
+				<f:selectItem itemValue="EXECUTADO"/>
+				<f:selectItem itemValue="EM ABERTO"/>							
+			</h:selectOneMenu>
+																			
 			<f:facet name="footer">
 				<h:panelGroup>	
 					<h:commandButton value="Salvar" action="#{odontogramaMB.salvarOdontograma}" />
