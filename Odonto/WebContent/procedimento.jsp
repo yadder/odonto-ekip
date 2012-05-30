@@ -19,9 +19,10 @@
 				<h:outputText value="Cadastro de Procedimento" />
 			</f:facet>		
 			
-			<h:outputLabel for="descricaoProcedimento" value="Descricao Procedimento:" />
-			<h:outputLabel for="valorProcedimento" value="Valor Procedimento:" />
+			<h:outputLabel for="descricaoProcedimento" value="Procedimento:" />
 			<h:inputText id="descricaoProcedimento" value="#{procedimentoMB.procedimento.descricaoProcedimento}" required="true" />
+			
+			<h:outputLabel for="valorProcedimento" value="Valor:" />			
 			<h:inputText id="valorProcedimento" value="#{procedimentoMB.procedimento.valorProcedimento}" required="true" />
 			
 			<f:facet name="footer">
