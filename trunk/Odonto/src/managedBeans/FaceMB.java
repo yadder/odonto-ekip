@@ -41,7 +41,12 @@ public class FaceMB {
 	}
 	
 	public String salvarFace(){
-		if(face.getCodigoFace() == 0){
+		if ((face.getNomeFace().equals(""))||(face.getNomeFace()==null)){
+			this.mostraMensagem("Erro: O nome da face não pode ficar em branco");
+			face = new Face();
+			return null;
+		}
+		else if(face.getCodigoFace() == 0){
 			dao.cadastrarFace(face);
 		}else{
 			dao.alterarFace(face);

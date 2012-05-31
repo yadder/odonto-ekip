@@ -41,7 +41,7 @@
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
-		<managed-bean-name>inqueritoOdontologico</managed-bean-name>
+		<managed-bean-name>inqueritoOdontologicoMB</managed-bean-name>
 		<managed-bean-class>managedBeans.InqueritoOdontologicoMB</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
@@ -90,5 +90,53 @@
 		<managed-bean-class>managedBeans.UsuarioMB</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<navigation-rule>
+		<display-name>principal</display-name>
+		<from-view-id>/principal.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoFornecedor</from-outcome>
+			<to-view-id>/fornecedor.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>fornecedor</display-name>
+		<from-view-id>/fornecedor.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoPrincipal</from-outcome>
+			<to-view-id>/principal.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>inqueritoOdontologico</display-name>
+		<from-view-id>/inqueritoOdontologico.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoPrincipal</from-outcome>
+			<to-view-id>/principal.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>principal</display-name>
+		<from-view-id>/principal.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoInqueritoOdontologico</from-outcome>
+			<to-view-id>/inqueritoOdontologico.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>face</display-name>
+		<from-view-id>/face.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoPrincipal</from-outcome>
+			<to-view-id>/principal.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>principal</display-name>
+		<from-view-id>/principal.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoFace</from-outcome>
+			<to-view-id>/face.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 
 </faces-config>

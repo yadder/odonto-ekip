@@ -86,6 +86,7 @@
 				<h:panelGroup>	
 					<h:commandButton value="Salvar" action="#{fornecedorMB.salvarFornecedor}" />
 					<h:commandButton value="Cancelar" action="#{fornecedorMB.cancelarCadastroFornecedor}" immediate="true" />
+					<h:commandButton value="Sair" action="gotoPrincipal"></h:commandButton>
 				</h:panelGroup>
 			</f:facet>
 		</h:panelGrid>
