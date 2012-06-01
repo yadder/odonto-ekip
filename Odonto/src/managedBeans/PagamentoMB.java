@@ -23,6 +23,10 @@ public class PagamentoMB {
 		return new ListDataModel(dao.pesquisarTodosPagamento());
 	}
 	
+	private ListDataModel resgatarPagamentosPaciente(Paciente paciente){
+		return new ListDataModel(dao.pesquisar)
+	}
+	
 	public Integer getSizePagamentos(){
 		return this.pagamentos.getRowCount();
 	}
@@ -78,5 +82,7 @@ public class PagamentoMB {
 	
 	public void setPagamento(Pagamento pagamento){
 		this.pagamento = pagamento;
-	}	
+	}
+	
+	public 
 }

@@ -170,5 +170,21 @@
 			<to-view-id>/convenio.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<display-name>pagamento</display-name>
+		<from-view-id>/pagamento.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoPrincipal</from-outcome>
+			<to-view-id>/principal.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>principal</display-name>
+		<from-view-id>/principal.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoPagamento</from-outcome>
+			<to-view-id>/pagamento.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 
 </faces-config>

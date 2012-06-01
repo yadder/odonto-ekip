@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13376556236170" configfile="/Odonto/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="principal" x="444" y="152" id="pf13384218900500" referenceLink="//@navigationRule.5/@fromViewId|" outlinks="pf13384218900501 pf13384270108196 pf13384307139937 pf13385177059320 pf13385184888473" inlinks="pf13384223376283 pf13384269529074 pf13384307139938 pf13385177059321 pf13385184888474" path="/principal.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="principal" x="444" y="152" id="pf13384218900500" referenceLink="//@navigationRule.9/@fromViewId|" outlinks="pf13384218900501 pf13384270108196 pf13384307139937 pf13385177059320 pf13385184888473 pf13385543574100" inlinks="pf13384223376283 pf13384269529074 pf13384307139938 pf13385177059321 pf13385184888474 pf13385543574101" path="/principal.jsp"/>
   <nodes xsi:type="pageflow:PFPage" name="fornecedor" x="60" y="204" id="pf13384218900512" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf13384223376283" inlinks="pf13384218900501" path="/fornecedor.jsp"/>
   <nodes xsi:type="pageflow:PFPage" name="inqueritoOdontologico" x="432" y="324" id="pf13384269529085" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" outlinks="pf13384269529074" inlinks="pf13384270108196" path="/inqueritoOdontologico.jsp"/>
   <nodes xsi:type="pageflow:PFPage" name="face" x="324" y="324" id="pf13384307139949" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" outlinks="pf13384307139938" inlinks="pf13384307139937" path="/face.jsp"/>
-  <nodes xsi:type="pageflow:PFPage" name="elemento" x="144" y="300" id="pf13385177059322" outlinks="pf13385177059321" inlinks="pf13385177059320" path="/elemento.jsp"/>
-  <nodes xsi:type="pageflow:PFPage" name="convenio" x="624" y="324" id="pf13385184888475" outlinks="pf13385184888474" inlinks="pf13385184888473" path="/convenio.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="elemento" x="144" y="300" id="pf13385177059322" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" outlinks="pf13385177059321" inlinks="pf13385177059320" path="/elemento.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="convenio" x="624" y="324" id="pf13385184888475" referenceLink="//@navigationRule.9/@navigationCase.0/@toViewId|" outlinks="pf13385184888474" inlinks="pf13385184888473" path="/convenio.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="pagamento" x="58" y="87" id="pf13385543574262" outlinks="pf13385543574101" inlinks="pf13385543574100" path="/pagamento.jsp"/>
   <links id="pf13384218900501" target="pf13384218900512" source="pf13384218900500" outcome="gotoFornecedor">
     <bendPoints d1Width="-210" d1Height="14" d2Width="193" d2Height="22"/>
   </links>
@@ -33,5 +34,11 @@
   </links>
   <links id="pf13385184888473" target="pf13385184888475" source="pf13384218900500" outcome="gotoConvenio">
     <bendPoints d1Width="86" d1Height="52" d2Width="-58" d2Height="-84"/>
+  </links>
+  <links id="pf13385543574101" target="pf13384218900500" source="pf13385543574262" outcome="gotoPrincipal">
+    <bendPoints d1Width="190" d1Height="44" d2Width="-190" d2Height="-21"/>
+  </links>
+  <links id="pf13385543574100" target="pf13385543574262" source="pf13384218900500" outcome="gotoPagamento">
+    <bendPoints d1Width="-175" d1Height="-58" d2Width="205" d2Height="7"/>
   </links>
 </pageflow:Pageflow>

@@ -12,32 +12,33 @@
 <body>
 <f:view>
 <rich:panel>
-	<h:form id="formOdontogramaCad" styleClass="">
+	<h:form id="formPagamento" styleClass="">
 		<h:messages />
 		<h:panelGrid border="1" columns="3">
 			<f:facet name="header">
-				<h:outputText value="Cadastro de Odontograma" />
+				<h:outputText value="Controle de pagamento" />
 			</f:facet>		
 			
 			<h:outputLabel for="codigoPagamento" value="Código pagamento:" />
-			<h:inputText id="codigoPagamento" value="#{pagamentoMB.pagamento.codigoPagamento}" required="true" />
+			<h:inputText id="codigoPagamento" value="#{pagamentoMB.pagamento.codigoPagamento}" />
 			
-			<h:outputLabel for="numeroParcela" value="Némero parcela:" />
-			<h:inputText id="numeroParcela" value="#{pagamentoMB.pagamento.numeroParcela}" required="true" />
+			<h:outputLabel for="numeroParcela" value="Número parcela:" />
+			<h:inputText id="numeroParcela" value="#{pagamentoMB.pagamento.numeroParcela}" />
 			
 			<h:outputLabel for="valorParcela" value="Valor parcela:" />
-			<h:inputText id="valorParcela" value="#{pagamentoMB.pagamento.valorParcela}" required="true" />
+			<h:inputText id="valorParcela" value="#{pagamentoMB.pagamento.valorParcela}" />
 			
 			<h:outputLabel for="statusPagmento" value="Status pagamento:" />			
 			<h:selectOneMenu value="#{pagamentoMB.pagamento.statusPagamento}">
-				<f:selectItem itemValue="EXECUTADO"/>
-				<f:selectItem itemValue="EM ABERTO"/>							
+				<f:selectItem itemValue="PAGO"/>
+				<f:selectItem itemValue="PENDENTE"/>							
 			</h:selectOneMenu>
 					
 			<f:facet name="footer">
 				<h:panelGroup>	
 					<h:commandButton value="Salvar" action="#{pagamentoMB.salvarPagamento}" />
-					<h:commandButton value="Cancelar" action="#{pagamentoMB.cancelarCadastroPagamento}" immediate="true" />
+					<h:commandButton value="Cancelar" action="#{pagamentoMB.cancelarCadastroPagamento}" />
+					<h:commandButton value="Sair" action="gotoPrincipal" />
 				</h:panelGroup>
 			</f:facet>
 		</h:panelGrid>

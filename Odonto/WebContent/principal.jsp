@@ -10,12 +10,15 @@
 <body>
 <f:view>
 	<h:form>
-	<h:commandLink value="Cadastro de Fornecedor" action="gotoFornecedor" /> <br/><br/>
-	<h:commandLink value="Inquérito Odontológico" action="gotoInqueritoOdontologico" /><br/><br/>
-	<h:commandLink value="Cadastro de Face" action="gotoFace" /><br/><br/>
-	<h:commandLink value="Cadastro de Elemento" action="gotoElemento" /><br/><br/>
-	<h:commandLink value="Cadastro de Convenio" action="gotoConvenio" /><br/><br/>
+	<h:commandLink value="Cadastro de fornecedor" action="gotoFornecedor" /> <br/><br/>
+	<h:commandLink value="Inquérito odontológico" action="gotoInqueritoOdontologico" /><br/><br/>
 	
+	<hr/>
+	testadas e validadas <br/>
+	<h:commandLink value="Cadastro de face" action="gotoFace" /><br/><br/>
+	<h:commandLink value="Cadastro de elemento" action="gotoElemento" /><br/><br/>
+	<h:commandLink value="Cadastro de convenio" action="gotoConvenio" /><br/><br/>
+	<h:commandLink value="Realizar pagamento" action="gotoPagamento" /><br/><br/>
 	
 	</h:form>
 </f:view>
