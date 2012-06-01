@@ -12,7 +12,9 @@
 	<h:form>
 	<h:commandLink value="Cadastro de Fornecedor" action="gotoFornecedor" /> <br/><br/>
 	<h:commandLink value="Inquérito Odontológico" action="gotoInqueritoOdontologico" /><br/><br/>
-	<h:commandLink value="Cadastro de Face" action="gotoFace" />
+	<h:commandLink value="Cadastro de Face" action="gotoFace" /><br/><br/>
+	<h:commandLink value="Cadastro de Elemento" action="gotoElemento" /><br/><br/>
+	<h:commandLink value="Cadastro de Convenio" action="gotoConvenio" /><br/><br/>
 	
 	
 	</h:form>

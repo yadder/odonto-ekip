@@ -20,12 +20,13 @@
 			</f:facet>		
 			
 			<h:outputLabel for="nomeElemento" value="Nome elemento:" />
-			<h:inputText id="nomeElemento" value="#{elementoMB.elemento.nomeElemento}" required="true" maxlength="2"/>
+			<h:inputText id="nomeElemento" value="#{elementoMB.elemento.nomeElemento}" maxlength="2"/>
 			
 			<f:facet name="footer">
 				<h:panelGroup>	
 					<h:commandButton value="Salvar" action="#{elementoMB.salvarElemento}" />
-					<h:commandButton value="Cancelar" action="#{elementoMB.cancelarCadastroElemento}" immediate="true" />
+					<h:commandButton value="Cancelar" action="#{elementoMB.cancelarCadastroElemento}" />
+					<h:commandButton value="Sair" action="gotoPrincipal" />
 				</h:panelGroup>
 			</f:facet>
 		</h:panelGrid>

@@ -19,12 +19,13 @@
 			</f:facet>		
 			
 			<h:outputLabel for="nomeConvenio" value="Nome convênio:" />
-			<h:inputText id="nomeConvenio" value="#{convenioMB.convenio.nomeConvenio}" required="true" maxlength="50" />
+			<h:inputText id="nomeConvenio" value="#{convenioMB.convenio.nomeConvenio}" maxlength="50" />
 			
 			<f:facet name="footer">
 				<h:panelGroup>	
 					<h:commandButton value="Salvar" action="#{convenioMB.salvarConvenio}" />
-					<h:commandButton value="Cancelar" action="#{convenioMB.cancelarCadastroConvenio}" immediate="true" />
+					<h:commandButton value="Cancelar" action="#{convenioMB.cancelarCadastroConvenio}" />
+					<h:commandButton value="Sair" action="gotoPrincipal" />
 				</h:panelGroup>
 			</f:facet>
 		</h:panelGrid>
