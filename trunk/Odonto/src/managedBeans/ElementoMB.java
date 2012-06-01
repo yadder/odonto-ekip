@@ -40,6 +40,10 @@ public class ElementoMB {
 	}
 	
 	public String salvarElemento(){
+		if ((elemento.getNomeElemento().equals("")) || (elemento.getNomeElemento()==null)||(elemento.getNomeElemento().length()!=2)){
+			this.mostraMensagem("Erro: Nome de elemento inválido");
+			return null;
+		}
 		if(elemento.getCodigoElemento() == 0){
 			dao.cadastrarElemento(elemento);
 		}else{

@@ -27,6 +27,7 @@
 					<h:commandButton value="Salvar" action="#{faceMB.salvarFace}" />
 					<h:commandButton value="Cancelar" action="#{faceMB.cancelarCadastroFace}" />
 					<h:commandButton value="Sair" action="gotoPrincipal"></h:commandButton>
+					
 				</h:panelGroup>
 			</f:facet>
 		</h:panelGrid>

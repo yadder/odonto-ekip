@@ -5,6 +5,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.ListDataModel;
 
 import modelo.Convenio;
+import modelo.Face;
 import persistencia.DaoConvenio;
 import persistencia.DaoConvenioImp;
 
@@ -41,7 +42,11 @@ public class ConvenioMB {
 	}
 	
 	public String salvarConvenio(){
-		if(convenio.getCodigoConvenio() == 0){
+		if ((convenio.getNomeConvenio().equals(""))||(convenio.getNomeConvenio()==null)||(convenio.getNomeConvenio().length()<3)){
+			this.mostraMensagem("Erro: Nome de convênio inválido");
+			return null;
+		}
+		else if(convenio.getCodigoConvenio() == 0){
 			dao.cadastrarConvenio(convenio);
 		}else{
 			dao.alterarConvenio(convenio);

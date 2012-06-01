@@ -41,9 +41,8 @@ public class FaceMB {
 	}
 	
 	public String salvarFace(){
-		if ((face.getNomeFace().equals(""))||(face.getNomeFace()==null)){
-			this.mostraMensagem("Erro: O nome da face não pode ficar em branco");
-			face = new Face();
+		if ((face.getNomeFace().equals(""))||(face.getNomeFace()==null)||(face.getNomeFace().length()<3)){
+			this.mostraMensagem("Erro: Nome de face inválido");
 			return null;
 		}
 		else if(face.getCodigoFace() == 0){
