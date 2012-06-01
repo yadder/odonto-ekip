@@ -17,9 +17,8 @@ public class Pagamento implements Serializable {
     private double valorParcela;
     @Column(name = "status_pagamento", nullable = false, length = 20)
     private String statusPagamento;
-    @JoinColumn(name = "codigo_odontograma", referencedColumnName = "codigo_odontograma", nullable = false)
-    @ManyToOne(optional = false)
-    private Odontograma codigoOdontograma;
+    @ManyToOne(fetch=FetchType.EAGER)
+	private Odontograma odontograma;
 
     public Pagamento() {
     }
@@ -67,15 +66,19 @@ public class Pagamento implements Serializable {
         this.statusPagamento = statusPagamento;
     }
 
-    public Odontograma getCodigoOdontograma() {
-        return codigoOdontograma;
-    }
+    public Odontograma getOdontograma() {
+		return odontograma;
+	}
 
-    public void setCodigoOdontograma(Odontograma codigoOdontograma) {
-        this.codigoOdontograma = codigoOdontograma;
-    }
+	public void setOdontograma(Odontograma odontograma) {
+		this.odontograma = odontograma;
+	}
 
-    @Override
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	@Override
     public String toString() {
         return "odonto.Pagamento[ codigoPagamento=" + codigoPagamento + " ]";
     }

@@ -2,12 +2,13 @@ package persistencia;
 
 import java.util.ArrayList;
 import java.util.List;
+import modelo.Paciente;
 import modelo.Pagamento;
-
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import util.HibernateUtil;
 
@@ -67,19 +68,18 @@ public class DaoPagamentoImp implements DaoPagamento {
 		return retorno;
 	}
 
-	public Pagamento pesquisarPagamento(Pagamento pagamento) {
-		Pagamento e = null;
-		try {
+	public ArrayList<Pagamento> pesquisarPagamentoPaciente(Paciente paciente) {
+		ArrayList lista = null;
+		try{
 			session = HibernateUtil.getSessionFactory().openSession();
-			e = (Pagamento)session.get(Pagamento.class, pagamento.getCodigoPagamento());
-		} catch (HibernateException ex) {
-			ex.printStackTrace();
-		}finally{
+			Criteria cr = session.createCriteria(Pagamento.class).createCriteria("paciente").add(Restrictions.eq("codigo_pagamento",paciente.getCodigoUsuario()));
+			lista = (ArrayList)cr.list();
+		}catch(HibernateException e){
 			session.close();
 		}
-		return e;
+		return lista;
 	}
-
+	
 	public List<Pagamento> pesquisarTodosPagamento() {
 		ArrayList lista = null;
 		try {

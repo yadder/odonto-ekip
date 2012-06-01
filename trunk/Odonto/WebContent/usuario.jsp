@@ -36,7 +36,7 @@
 			<h:outputLabel for="cpfUsuario" value="CPF:" />
 			<h:inputText id="cpfUsuario" value="#{UsuarioMB.Usuario.cpfUsuario}" required="true" />
 			<h:outputLabel for="dataNascimentoUsuario" value="Data Nascimento:" />
-			<h:inputText id="dataNascimentoUsuario" value="#{UsuarioMB.Usuario.dataNascimentoUsuario}" required="true" />
+			<rich:calendar id="datacadastro" value="#{usuarioMB.usuario.dataNascimentoUsuario}" datePattern="dd/MM/yyy"/>
 			<h:outputLabel for="sexoUsuario" value="Sexo:" />
 			<h:selectOneMenu value="#{UsuarioMB.Usuario.sexoUsuario}">
 				<f:selectItem itemValue="MASCULINO"/>

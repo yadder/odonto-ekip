@@ -4,10 +4,13 @@ import java.util.List;
 
 import modelo.Elemento;
 import modelo.Face;
+import modelo.Pagamento;
 import persistencia.DaoElemento;
 import persistencia.DaoElementoImp;
 import persistencia.DaoFace;
 import persistencia.DaoFaceImp;
+import persistencia.DaoPagamento;
+import persistencia.DaoPagamentoImp;
 
 public class Teste {
 
@@ -48,7 +51,28 @@ public class Teste {
 			}
 		}
 		System.out.println("1------------------------------Testando a classe elemento:FIM");
-			
+		
+		System.out.println("1------------------------------Testando a classe pagamento:INICIO");
+		DaoPagamento daoPagamento = new DaoPagamentoImp();
+		Pagamento pagamento = new Pagamento();
+		pagamento.setNumeroParcela(10);
+		pagamento.setValorParcela(100);
+		pagamento.setStatusPagamento("PENDENTE");
+		
+		
+		if(daoPagamento.cadastrarPagamento(pagamento)){
+			System.out.println("Pagamento cadastrado");
+		}else{
+			System.out.println("Cadastro de pagamento falhou");
+		}
+		List<Pagamento> pagamentos = daoPagamento.pesquisarTodosPagamento();
+		if (pagamentos != null){
+			for(Pagamento pag:pagamentos){
+				System.out.println("Listagem de pagamento: Codigo: "+ pag.getCodigoPagamento() + " N. pacelas: "+ pag.getNumeroParcela()
+						+ " Valor parcelas: " + pag.getValorParcela() + " Status: " + pag.getStatusPagamento());
+			}
+		}
+		System.out.println("1------------------------------Testando a classe pagamento:FIM");
 			
 	
 		

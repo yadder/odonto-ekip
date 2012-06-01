@@ -29,4 +29,54 @@
   <listener>
     <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
   </listener>
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- Filtro para o uso de Ajax -->
+	<filter>
+		<display-name>Ajax4jsf Filter</display-name>
+		<filter-name>ajax4jsf</filter-name>
+		<filter-class>org.ajax4jsf.Filter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>ajax4jsf</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+	</filter-mapping>
+
+  <!-- Filtro para o uso de RichFace -->
+  <context-param>
+		<param-name>org.richfaces.SKIN</param-name>
+		<param-value>classic</param-value>
+	</context-param>
+
+	<filter>
+		<display-name>RichFaces Filter</display-name>
+		<filter-name>richfaces</filter-name>
+		<filter-class>org.ajax4jsf.Filter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>richfaces</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+	</listener>
+  
+  
+  
+    
 </web-app>
