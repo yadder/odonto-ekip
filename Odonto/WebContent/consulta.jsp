@@ -20,15 +20,15 @@
 				<h:outputText value="Cadastro de Consulta" />
 			</f:facet>
 			
-			<h:outputLabel for="dataConsulta" value="Data consulta:" />
-			<h:inputText id="dataConsulta" value="#{consultaMB.consulta.dataConsulta}" required="true" />			
+			<h:outputLabel for="dataConsulta" value="Data consulta:" />			
+			<rich:calendar id="dataConsulta" value="#{consultaMB.consulta.dataConsulta}" datePattern="dd/MM/yyyy" />		
 						
-			<h:outputLabel for="statusConsulta" value="Status consulta:" />			
-			<h:selectOneMenu value="#{consultaMB.consulta.statusConsulta}">
+			<h:outputLabel for="statusConsulta" value="Status Consulta:" />							
+			<h:selectOneMenu value="#{consultaMB.consulta.statusConsulta}" >
 				<f:selectItem itemValue="AGENDADA"/>
 				<f:selectItem itemValue="REALIZADA"/>
 				<f:selectItem itemValue="REMARCADA"/>							
-				<f:selectItem itemValue="CANCELADA"/>
+				<f:selectItem itemValue="CANCELADA"/>			
 			</h:selectOneMenu>
 						
 			<f:facet name="footer">
@@ -39,7 +39,7 @@
 			</f:facet>
 		</h:panelGrid>
 	</h:form>
-		<br />>
+		<br />
 	<h:form id="formConsultaOther">
 		<!-- Tabela de consultas cadastradas --> 
 		<h:dataTable  var="vconsulta" value="#{consultaMB.consultas}" border="1" cellpadding="1" cellspacing="1" rendered="#{consultaMB.sizeConsultas > 0}">
@@ -54,10 +54,17 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="Nome" />
+					<h:outputText value="Data" />
 				</f:facet>
-				<h:outputText value="#{vconsulta.nomeConsulta}" />
+				<h:outputText value="#{vconsulta.dataConsulta}" />
 			</h:column>
+				<h:column>
+				<f:facet name="header">
+					<h:outputText value="Status" />
+				</f:facet>
+				<h:outputText value="#{vconsulta.statusConsulta}" />
+			</h:column>
+			
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Alterar" />

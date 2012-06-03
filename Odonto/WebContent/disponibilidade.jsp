@@ -19,11 +19,11 @@
 			</f:facet>
 			
 			<h:outputLabel for="diaSemanaDisponibilidade" value="Dia da Semana Disponibilidade:" />
-			<h:inputText id="diaSemanaDisponibilidade" value="#{disponibilidadeMB.disponibilidade.diaSemana}" required="true" />
+			<h:inputText id="diaSemanaDisponibilidade" value="#{disponibilidadeMB.disponibilidade.diaSemana}"  />
 			<h:outputLabel for="horaInicioDisponibilidade" value="Hora Inicio Disponibilidade:" />
-			<h:inputText id="horaInicioDisponibilidade" value="#{disponibilidadeMB.disponibilidade.horaInicio}" required="true" />
+			<h:inputText id="horaInicioDisponibilidade" value="#{disponibilidadeMB.disponibilidade.horaInicio}" />
 			<h:outputLabel for="horaFimDisponibilidade" value="Hora Fim Disponibilidade:" />
-			<h:inputText id="horaFimDisponibilidade" value="#{disponibilidadeMB.disponibilidade.horaFim}" required="true" />
+			<h:inputText id="horaFimDisponibilidade" value="#{disponibilidadeMB.disponibilidade.horaFim}"  />
 					
 			<f:facet name="footer">
 				<h:panelGroup>	

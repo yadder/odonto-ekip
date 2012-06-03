@@ -23,7 +23,16 @@
 			<h:selectOneRadio id="tratamentoMedico" value="#{inqueritoOdontologicoMB.inqueritoOdontologico.tratamentoMedico}">
 		    	<f:selectItem itemValue="Sim" itemLabel="Sim" />	    
 			    <f:selectItem itemValue="Não" itemLabel="Não" />
-			</h:selectOneRadio>	
+			</h:selectOneRadio>
+			
+			<h:selectOneRadio id="myRadio" value="#{myBackingBean.myRadioValue}">
+			   <f:selectItem itemValue="0" itemLabel="#{myBackingBean.myRadioPossibleLabel1}"/>   
+			   <f:selectItem itemValue="1" itemLabel="#{myBackingBean.myRadioPossibleLabel2}"/>   
+			   <f:selectItem itemValue="2" itemLabel="#{myBackingBean.myRadioPossibleLabel3}"/>   
+			</h:selectOneRadio>
+			
+			
+			
 			
 		   	<h:outputLabel for="usandoMedicacao" value="Usando medicação?" />
 			<h:selectOneRadio id="usandoMedicacao" value="#{inqueritoOdontologicoMB.inqueritoOdontologico.usandoMedicacao}">
@@ -109,8 +118,8 @@
 			    <f:selectItem itemValue="Não" itemLabel="Não" />
 			</h:selectOneRadio>
 						
-			<h:outputLabel for="dataUltimoAtendimento" value="Data Ultimo Atendimento :" />
-			<h:inputText id="dataUltimoAtendimento" value="#{inqueritoOdontologicoMB.inqueritoOdontologico.dataUltimoAtendimento}" required="true" />			
+			<h:outputLabel for="dataUltimoAtendimento" value="Data Ultimo Atendimento :" />			
+			<rich:calendar id="dataUltimoAtendimento" value="#{inqueritoOdontologicoMB.inqueritoOdontologico.dataUltimoAtendimento}" datePattern="dd/MM/yyyy" />			
 			
 			<h:outputLabel for="concluiTratamento" value="Concluiu tratamento?" />
 			<h:selectOneRadio id="concluiTratamento" value="#{inqueritoOdontologicoMB.inqueritoOdontologico.concluiuTratamento}">
@@ -119,7 +128,7 @@
 			</h:selectOneRadio>			
 			
 			<h:outputLabel for="experienciaNegativaTratamento" value="Experiencia Negativa Tratamento ?:" />
-			<h:inputText id="experienciaNegativaTratamento" value="#{inqueritoOdontologicoMB.inqueritoOdontologico.experienciaNegativaTratamento}" required="true" />			
+			<h:inputText id="experienciaNegativaTratamento" value="#{inqueritoOdontologicoMB.inqueritoOdontologico.experienciaNegativaTratamento}"  />			
 			
 			<h:outputLabel for="roerUnhas" value="Roer unhas?" />
 			<h:selectOneRadio id="roerUnhas" value="#{inqueritoOdontologicoMB.inqueritoOdontologico.roerUnhas}">
@@ -152,7 +161,7 @@
 			</h:selectOneRadio>			
 			
 			<h:outputLabel for="outros" value="Outros :" />
-			<h:inputText id="outros" value="#{inqueritoOdontologicoMB.inqueritoOdontologico.outros}" required="true" />			
+			<h:inputText id="outros" value="#{inqueritoOdontologicoMB.inqueritoOdontologico.outros}"  />			
 			
 			<h:outputLabel for="fioFitaDental" value="Fio ou fita dental?" />
 			<h:selectOneRadio id="fioFitaDental" value="#{inqueritoOdontologicoMB.inqueritoOdontologico.fioFitaDental}">

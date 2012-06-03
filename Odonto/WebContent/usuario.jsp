@@ -48,14 +48,12 @@
 			<h:selectOneMenu value="#{UsuarioMB.Usuario.sexoUsuario}">
 				<f:selectItem itemValue="MASCULINO"/>
 				<f:selectItem itemValue="FEMININO"/>			
-			</h:selectOneMenu>
+			</h:selectOneMenu>	
 			
-			<h:outputLabel for="convenioPaciente" value="Convênio:" />			
-			<h:selectOneMenu value="#{convenioMB.convenios}">
-				<f:selectItem itemValue=""/>
-				<f:selectItem itemValue=""/>
-				<f:selectItem itemValue=""/>					
-			</h:selectOneMenu>			
+			
+					
+			<rich:comboBox suggestionValues="#{convenioMB.convenios}" defaultLabel="Escolha o convênio" />		
+			
 			
 			<h:outputLabel for="responsavelPaciente" value="Responsavel Paciente:" />
 			<h:inputText id="responsavelPaciene" value="#{pacienteMB.paciente.responsavelPaciente}"  maxlength="50"/>
