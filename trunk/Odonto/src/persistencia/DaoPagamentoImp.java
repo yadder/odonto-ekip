@@ -69,15 +69,15 @@ public class DaoPagamentoImp implements DaoPagamento {
 	}
 
 	public ArrayList<Pagamento> pesquisarPagamentoPaciente(Paciente paciente) {
-		ArrayList lista = null;
+		List lista = null;
 		try{
 			session = HibernateUtil.getSessionFactory().openSession();
 			Criteria cr = session.createCriteria(Pagamento.class).createCriteria("paciente").add(Restrictions.eq("codigo_pagamento",paciente.getCodigoUsuario()));
-			lista = (ArrayList)cr.list();
+			lista = (List)cr.list();
 		}catch(HibernateException e){
 			session.close();
 		}
-		return lista;
+		return (ArrayList)lista;
 	}
 	
 	public List<Pagamento> pesquisarTodosPagamento() {

@@ -4,6 +4,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.ListDataModel;
 
+import modelo.Paciente;
 import modelo.Pagamento;
 import persistencia.DaoPagamento;
 import persistencia.DaoPagamentoImp;
@@ -24,7 +25,7 @@ public class PagamentoMB {
 	}
 	
 	private ListDataModel resgatarPagamentosPaciente(Paciente paciente){
-		return new ListDataModel(dao.pesquisar)
+		return new ListDataModel(dao.pesquisarPagamentoPaciente(paciente));
 	}
 	
 	public Integer getSizePagamentos(){
@@ -84,5 +85,4 @@ public class PagamentoMB {
 		this.pagamento = pagamento;
 	}
 	
-	public 
 }
