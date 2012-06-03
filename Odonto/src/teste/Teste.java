@@ -5,17 +5,33 @@ import java.util.List;
 import modelo.Elemento;
 import modelo.Face;
 import modelo.Pagamento;
+import modelo.Usuario;
 import persistencia.DaoElemento;
 import persistencia.DaoElementoImp;
 import persistencia.DaoFace;
 import persistencia.DaoFaceImp;
 import persistencia.DaoPagamento;
 import persistencia.DaoPagamentoImp;
+import persistencia.DaoUsuario;
+import persistencia.DaoUsuarioImp;
 
 public class Teste {
 
 	public static void main(String[] args) {
+		
 
+		System.out.println("1------------------------------Testando a classe usuario:FIM");
+		DaoUsuario daoUsuario = new DaoUsuarioImp();
+		Usuario usuario = new Usuario();
+		usuario.setNomeUsuario("Bianca");
+		
+		
+		
+		
+		
+		System.out.println("1------------------------------Testando a classe usuario:INICIO");
+		//////////////////////////////////////////////
+		
 		System.out.println("1------------------------------Testando a classe face:INICIO");
 		DaoFace df = new DaoFaceImp();
 		Face face = new Face();
