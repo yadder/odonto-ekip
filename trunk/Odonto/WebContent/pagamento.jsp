@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro de Odontograma</title>
+<title>Cadastro de Pagamento</title>
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 </head>
 <body>

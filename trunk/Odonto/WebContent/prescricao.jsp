@@ -19,7 +19,7 @@
 			</f:facet>		
 			
 			<h:outputLabel for="observacaoPrescricao" value="Prescrição:" />
-			<h:inputText id="observacaoPrescricao" value="#{prescricaoMB.prescricao.observacao}" required="true" />
+			<h:inputText id="observacaoPrescricao" value="#{prescricaoMB.prescricao.observacao}"  />
 			
 			<f:facet name="footer">
 				<h:panelGroup>	

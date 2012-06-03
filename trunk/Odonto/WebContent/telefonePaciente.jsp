@@ -19,9 +19,11 @@
 			</f:facet>
 			
 			<h:outputLabel for="dddTelefonePaciente" value="Ddd telefonePaciente:" />
+			<h:inputText id="dddTelefonePaciente" value="#{telefonePacienteMB.telefonePaciente.dddTelefonePaciente}"  />
+			
 			<h:outputLabel for="telefoneTelefonePaciente" value="Telefone telefonePaciente:" />
-			<h:inputText id="dddTelefonePaciente" value="#{telefonePacienteMB.telefonePaciente.dddTelefonePaciente}" required="true" />
-			<h:inputText id="telefoneTelefonePaciente" value="#{telefonePacienteMB.telefonePaciente.telefoneTelefonePaciente}" required="true" />
+			<h:inputText id="telefoneTelefonePaciente" value="#{telefonePacienteMB.telefonePaciente.telefoneTelefonePaciente}"  />
+			
 			<f:facet name="footer">
 				<h:panelGroup>	
 					<h:commandButton value="Salvar" action="#{telefonePacienteMB.salvarTelefonePaciente}" />

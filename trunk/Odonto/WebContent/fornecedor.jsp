@@ -20,22 +20,22 @@
 			</f:facet>		
 			
 			<h:outputLabel for="nomeFornecedor" value="Nome:" />
-			<h:inputText id="nomeFornecedor" value="#{fornecedorMB.fornecedor.nomeFornecedor}" required="true" maxlength="50"/>			
+			<h:inputText id="nomeFornecedor" value="#{fornecedorMB.fornecedor.nomeFornecedor}"  maxlength="50"/>			
 			
 			<h:outputLabel for="cnpjFornecedor" value="CNPJ:"/>
-			<h:inputText id="cnpjFornecedor" value="#{fornecedorMB.fornecedor.cnpjFornecedor}" required="true" maxlength="18"/>
+			<h:inputText id="cnpjFornecedor" value="#{fornecedorMB.fornecedor.cnpjFornecedor}"  maxlength="18"/>
 			
 			<h:outputLabel for="logradouroFornecedor" value="Logradouro Fornecedor:" />
-			<h:inputText id="logradouroFornecedor" value="#{fornecedorMB.fornecedor.logradouroFornecedor}" required="true" maxlength="100"/>
+			<h:inputText id="logradouroFornecedor" value="#{fornecedorMB.fornecedor.logradouroFornecedor}"  maxlength="100"/>
 			
 			<h:outputLabel for="numeroLogradouroFornecedor" value="Numero Logradouro:" />
-			<h:inputText id="numeroLogradouroFornecedor" value="#{fornecedorMB.fornecedor.numeroLogradouroFornecedor}" required="true" maxlength="4"/>
+			<h:inputText id="numeroLogradouroFornecedor" value="#{fornecedorMB.fornecedor.numeroLogradouroFornecedor}"  maxlength="4"/>
 			
 			<h:outputLabel for="complementoLogradouroFornecedor" value="Complemento Logradouro:" />
-			<h:inputText id="complementoLogradouroFornecedor" value="#{fornecedorMB.fornecedor.complementoLogradouroFornecedor}" required="true" maxlength="50"/>
+			<h:inputText id="complementoLogradouroFornecedor" value="#{fornecedorMB.fornecedor.complementoLogradouroFornecedor}"  maxlength="50"/>
 			
 			<h:outputLabel for="bairroFornecedor" value="Bairro:" />
-			<h:inputText id="bairroFornecedor" value="#{fornecedorMB.fornecedor.bairroFornecedor}" required="true" maxlength="30"/>
+			<h:inputText id="bairroFornecedor" value="#{fornecedorMB.fornecedor.bairroFornecedor}"  maxlength="30"/>
 			
 			<h:outputLabel for="estadoFornecedor" value="Estado:" />			
 			<h:selectOneMenu value="#{fornecedorMB.fornecedor.estadoFornecedor}">
@@ -68,19 +68,19 @@
 			</h:selectOneMenu>			
 			
 			<h:outputLabel for="cidadeFornecedor" value="Cidade:" />
-			<h:inputText id="cidadeFornecedor" value="#{fornecedorMB.fornecedor.cidadeFornecedor}" required="true" maxlength="30"/>			
+			<h:inputText id="cidadeFornecedor" value="#{fornecedorMB.fornecedor.cidadeFornecedor}"  maxlength="30"/>			
 			
 			<h:outputLabel for="cepFornecedor" value="Cep:" />
-			<h:inputText id="cepFornecedor" value="#{fornecedorMB.fornecedor.cepFornecedor}" required="true" maxlength="9"/>
+			<h:inputText id="cepFornecedor" value="#{fornecedorMB.fornecedor.cepFornecedor}"  maxlength="9"/>
 			
 			<h:outputLabel for="nomeVendedor" value="Nome Vendedor:" />
-			<h:inputText id="nomeVendedor" value="#{fornecedorMB.fornecedor.nomeVendedor}" required="true" maxlength="50"/>
+			<h:inputText id="nomeVendedor" value="#{fornecedorMB.fornecedor.nomeVendedor}"  maxlength="50"/>
 			
 			<h:outputLabel for="emailVendedor" value="Email Vendedor:" />
-			<h:inputText id="emailVendedor" value="#{fornecedorMB.fornecedor.emailVendedor}" required="true" maxlength="50"/>
+			<h:inputText id="emailVendedor" value="#{fornecedorMB.fornecedor.emailVendedor}"  maxlength="50"/>
 			
 			<h:outputLabel for="siteFornecedor" value="Site:" />
-			<h:inputText id="siteFornecedor" value="#{fornecedorMB.fornecedor.siteFornecedor}" required="true" maxlength="50"/>
+			<h:inputText id="siteFornecedor" value="#{fornecedorMB.fornecedor.siteFornecedor}"  maxlength="50"/>
 			
 			<f:facet name="footer">
 				<h:panelGroup>	

@@ -20,16 +20,16 @@
 			</f:facet>
 			
 			<h:outputLabel for="codigoDentista" value="Código Dentista:" />
-			<h:inputText id="codigoDentista" value="#{odontogramaMB.odontograma.codigoDentista}" required="true" />
+			<h:inputText id="codigoDentista" value="#{odontogramaMB.odontograma.codigoDentista}"  />
 			
 			<h:outputLabel for="codigoPaciente" value="Código Paciente:" />
-			<h:inputText id="codigoPaciente" value="#{odontogramaMB.odontograma.codigoPaciente}" required="true" />
+			<h:inputText id="codigoPaciente" value="#{odontogramaMB.odontograma.codigoPaciente}"  />
 			
 			<h:outputLabel for="dataOdontograma" value="Data Odontograma:" />
-			<h:inputText id="dataOdontograma" value="#{odontogramaMB.odontograma.dataOdontograma}" required="true" />
+			<h:inputText id="dataOdontograma" value="#{odontogramaMB.odontograma.dataOdontograma}"  />
 			
 			<h:outputLabel for="valorOdontograma" value="Valor Odontograma:" />
-			<h:inputText id="valorOdontograma" value="#{odontogramaMB.odontograma.valorOdontograma}" required="true" />
+			<h:inputText id="valorOdontograma" value="#{odontogramaMB.odontograma.valorOdontograma}"  />
 						
 			<h:outputLabel for="statusOdontograma" value="Status odontograma:" />			
 			<h:selectOneMenu value="#{odontogramaMB.odontograma.statusOdontograma}">

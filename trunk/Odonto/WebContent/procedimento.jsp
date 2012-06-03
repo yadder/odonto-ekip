@@ -20,10 +20,10 @@
 			</f:facet>		
 			
 			<h:outputLabel for="descricaoProcedimento" value="Procedimento:" />
-			<h:inputText id="descricaoProcedimento" value="#{procedimentoMB.procedimento.descricaoProcedimento}" required="true" />
+			<h:inputText id="descricaoProcedimento" value="#{procedimentoMB.procedimento.descricaoProcedimento}"  />
 			
 			<h:outputLabel for="valorProcedimento" value="Valor:" />			
-			<h:inputText id="valorProcedimento" value="#{procedimentoMB.procedimento.valorProcedimento}" required="true" />
+			<h:inputText id="valorProcedimento" value="#{procedimentoMB.procedimento.valorProcedimento}"  />
 			
 			<f:facet name="footer">
 				<h:panelGroup>	

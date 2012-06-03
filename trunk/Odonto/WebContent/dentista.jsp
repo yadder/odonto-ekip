@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro de Convênio</title>
+<title>Cadastro de Dentista</title>
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 </head>
 <body>
@@ -19,7 +19,7 @@
 			</f:facet>		
 			
 			<h:outputLabel for="croDentista" value="CRO:" />
-			<h:inputText id="croDentista" value="#{dentistaMB.dentista.croDentista}" required="true" maxlength="30"/>
+			<h:inputText id="croDentista" value="#{dentistaMB.dentista.croDentista}"  maxlength="30"/>
 			
 			<f:facet name="footer">
 				<h:panelGroup>	
@@ -30,7 +30,7 @@
 		</h:panelGrid>
 	</h:form>
 		<br />
-	<h:form id="formConvenioOther">
+	<h:form id="formDentistaOther">
 		<!-- Tabela de dentistas cadastrados --> 
 		<h:dataTable  var="vdentista" value="#{dentistaMB.dentista}" border="1" cellpadding="1" cellspacing="1" rendered="#{dentistaMB.sizeDentistas > 0}">
 			<f:facet name="header">

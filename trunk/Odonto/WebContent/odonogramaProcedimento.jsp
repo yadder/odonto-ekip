@@ -20,7 +20,7 @@
 			</f:facet>
 			
 			<h:outputLabel for="codigoProcedimento" value="Código Procedimento:" />
-			<h:inputText id="codigoProcedimento" value="#{odontogramaProcedimentoMB.odontogramaProcedimento.codigoOdontogramaProcedimeto}" required="true" />
+			<h:inputText id="codigoProcedimento" value="#{odontogramaProcedimentoMB.odontogramaProcedimento.codigoOdontogramaProcedimeto}"  />
 								
 			<h:outputLabel for="statusPagamento" value="Status Pagamento:" />			
 			<h:selectOneMenu value="#{odontogramaProcedimentoMB.odontogramaProcedimento.statusPagamento}">
@@ -29,7 +29,7 @@
 			</h:selectOneMenu>			
 			
 			<h:outputLabel for="dataPagamento" value="Data Pagamento Odontograma:" />
-			<h:inputText id="dataPagamento" value="#{odontogramaProcedimentoMB.odontogramaProcedimento.dataPagamento}" required="true" />
+			<h:inputText id="dataPagamento" value="#{odontogramaProcedimentoMB.odontogramaProcedimento.dataPagamento}"  />
 			
 			<h:outputLabel for="statusAutorizacao" value="Status Autorização:" />		
 			<h:selectOneMenu value="#{odontogramaProcedimentoMB.odontogramaProcedimento.statusAutorizacao}">

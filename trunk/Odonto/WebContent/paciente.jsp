@@ -30,19 +30,19 @@
 			<h:inputText id="responsavelPaciene" value="#{pacienteMB.paciente.responsavelPaciente}"  maxlength="50"/>
 			
 			<h:outputLabel for="logradouroPaciente" value="Logradouro: " />
-			<h:inputText id="logradouroPaciente" value="#{pacienteMB.paciente.logradouroPaciente}" required="true" maxlength="100"/>
+			<h:inputText id="logradouroPaciente" value="#{pacienteMB.paciente.logradouroPaciente}"  maxlength="100"/>
 			
 			<h:outputLabel for="numeroLogradouroPaciente" value="Numero Logradouro:" />
-			<h:inputText id="numeroLogradouroPaciente" value="#{pacienteMB.paciente.numeroLogradouroPaciente}" required="true" maxlength="5"/>
+			<h:inputText id="numeroLogradouroPaciente" value="#{pacienteMB.paciente.numeroLogradouroPaciente}" maxlength="5"/>
 			
 			<h:outputLabel for="complementoLogradouroPaciente" value="Complemento:" />
-			<h:inputText id="complementoLogradouroPaciente" value="#{pacienteMB.paciente.complementoLogradouroPaciente}" required="true" maxlength="50"/>
+			<h:inputText id="complementoLogradouroPaciente" value="#{pacienteMB.paciente.complementoLogradouroPaciente}"  maxlength="50"/>
 			
 			<h:outputLabel for="bairroPaciente" value="Bairro:" />
-			<h:inputText id="bairroPaciente" value="#{pacienteMB.paciente.bairroPaciente}" required="true" maxlength="30"/>
+			<h:inputText id="bairroPaciente" value="#{pacienteMB.paciente.bairroPaciente}"  maxlength="30"/>
 			
 			<h:outputLabel for="cidadePaciente" value="Cidade:" />
-			<h:inputText id="cidadePaciente" value="#{pacienteMB.paciente.cidadePaciente}" required="true" maxlength="30"/>
+			<h:inputText id="cidadePaciente" value="#{pacienteMB.paciente.cidadePaciente}"  maxlength="30"/>
 			
 			<h:outputLabel for="estadoPaciente" value="Estado:" />			
 			<h:selectOneMenu value="#{pacienteMB.paciente.estadoPaciente}">
