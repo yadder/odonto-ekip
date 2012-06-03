@@ -23,7 +23,7 @@ public class Teste {
 		System.out.println("1------------------------------Testando a classe usuario:FIM");
 		DaoUsuario daoUsuario = new DaoUsuarioImp();
 		Usuario usuario = new Usuario();
-		usuario.setNomeUsuario("Bianca");
+		usuario.setNomeUsuario("Maria");
 		
 		
 		

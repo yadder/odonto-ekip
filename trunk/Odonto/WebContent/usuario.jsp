@@ -11,7 +11,7 @@
 </head>
 <body>
 <f:view>
-	<h:form id="formUsuarioCad" styleClass="">
+	<h:form id="formUsuarioCad">
 		<h:messages />
 		<h:panelGrid border="1" columns="2">
 			<f:facet name="header">
@@ -19,100 +19,89 @@
 			</f:facet>
 			
 			<h:outputLabel for="nomeUsuario" value="Nome:" />
-			<h:inputText id="nomeUsuario" value="#{UsuarioMB.Usuario.nomeUsuario}"  />
+			<h:inputText id="nomeUsuario" value="#{usuarioMB.usuario.nomeUsuario}"  />
 			
 			<h:outputLabel for="loginUsuario" value="Login:" />
-			<h:inputText id="loginUsuario" value="#{UsuarioMB.Usuario.loginUsuario}"  />
+			<h:inputText id="loginUsuario" value="#{usuarioMB.usuario.loginUsuario}"  />
 			
 			<h:outputLabel for="senhaUsuario" value="Senha:" />
-			<h:inputText id="senhaUsuario" value="#{UsuarioMB.Usuario.senhaUsuario}"  />
+			<h:inputText id="senhaUsuario" value="#{usuarioMB.usuario.senhaUsuario}"  />
 			
-			<h:outputLabel for="perfilUsuario" value="Perfil:" />			
-			<h:selectOneMenu value="#{UsuarioMB.Usuario.perfilUsuario}" onselect="">
-				<f:selectItem itemValue="ADMINISTRADOR"/>
-				<f:selectItem itemValue="DENTISTA"/>
-				<f:selectItem itemValue="PACIENTE"/>
-				<f:selectItem itemValue="RECEPCIONISTA"/>			
-			</h:selectOneMenu>
-							
 			<h:outputLabel for="rgUsuario" value="RG:" />
-			<h:inputText id="rgUsuario" value="#{UsuarioMB.Usuario.rgUsuario}"  />
+			<h:inputText id="rgUsuario" value="#{usuarioMB.usuario.rgUsuario}"  />
 			
 			<h:outputLabel for="cpfUsuario" value="CPF:" />
-			<h:inputText id="cpfUsuario" value="#{UsuarioMB.Usuario.cpfUsuario}"  />
+			<h:inputText id="cpfUsuario" value="#{usuarioMB.usuario.cpfUsuario}"  />
 			
 			<h:outputLabel for="dataNascimentoUsuario" value="Data Nascimento:" />
-			<rich:calendar id="dataNascimentoUsuario" value="#{UsuarioMB.Usuario.dataNascimentoUsuario}" datePattern="dd/MM/yyyy" />			
+			<rich:calendar id="dataNascimentoUsuario" value="#{usuarioMB.usuario.dataNascimentoUsuario}" datePattern="dd/MM/yyyy" />			
 
 			<h:outputLabel for="sexoUsuario" value="Sexo:" />
-			<h:selectOneMenu value="#{UsuarioMB.Usuario.sexoUsuario}">
+			<h:selectOneMenu value="#{usuarioMB.usuario.sexoUsuario}">
 				<f:selectItem itemValue="MASCULINO"/>
 				<f:selectItem itemValue="FEMININO"/>			
 			</h:selectOneMenu>	
 			
+			<h:selectoneradio id="tipoDePessoa" value="${myBean.tipoDePessoa}">  
+    <f:selectitem itemvalue="PESSOA_FISICA" itemlabel="Pessoa Física"></f:selectitem>  
+    <f:selectitem itemvalue="PESSOA_JURIDICA" itemlabel="Pessoa Jurídica"></f:selectitem>  
+    <a4j:support ajaxsingle="true" rerender="blocoDeInformacoesExtras"></a4j:support>  
+</h:selectoneradio>  
 			
-					
-			<rich:comboBox suggestionValues="#{convenioMB.convenios}" defaultLabel="Escolha o convênio" />		
-			
-			
-			<h:outputLabel for="responsavelPaciente" value="Responsavel Paciente:" />
-			<h:inputText id="responsavelPaciene" value="#{pacienteMB.paciente.responsavelPaciente}"  maxlength="50"/>
-			
-			<h:outputLabel for="logradouroPaciente" value="Logradouro: " />
-			<h:inputText id="logradouroPaciente" value="#{pacienteMB.paciente.logradouroPaciente}"  maxlength="100"/>
-			
-			<h:outputLabel for="numeroLogradouroPaciente" value="Numero Logradouro:" />
-			<h:inputText id="numeroLogradouroPaciente" value="#{pacienteMB.paciente.numeroLogradouroPaciente}"  maxlength="5"/>
-			
-			<h:outputLabel for="complementoLogradouroPaciente" value="Complemento:" />
-			<h:inputText id="complementoLogradouroPaciente" value="#{pacienteMB.paciente.complementoLogradouroPaciente}"  maxlength="50"/>
-			
-			<h:outputLabel for="bairroPaciente" value="Bairro:" />
-			<h:inputText id="bairroPaciente" value="#{pacienteMB.paciente.bairroPaciente}"  maxlength="30"/>
-			
-			<h:outputLabel for="cidadePaciente" value="Cidade:" />
-			<h:inputText id="cidadePaciente" value="#{pacienteMB.paciente.cidadePaciente}"  maxlength="30"/>
-			
-			<h:outputLabel for="estadoPaciente" value="Estado:" />			
-			<h:selectOneMenu value="#{pacienteMB.paciente.estadoPaciente}">
-				<f:selectItem itemValue="AC"/>
-				<f:selectItem itemValue="AL"/>
-				<f:selectItem itemValue="AM"/>
-				<f:selectItem itemValue="AP"/>
-				<f:selectItem itemValue="BA"/>
-				<f:selectItem itemValue="DF"/>
-				<f:selectItem itemValue="ES"/>
-				<f:selectItem itemValue="GO"/>
-				<f:selectItem itemValue="MA"/>
-				<f:selectItem itemValue="MG"/>
-				<f:selectItem itemValue="MS"/>
-				<f:selectItem itemValue="MT"/>
-				<f:selectItem itemValue="PA"/>
-				<f:selectItem itemValue="PB"/>
-				<f:selectItem itemValue="PE"/>
-				<f:selectItem itemValue="PI"/>
-				<f:selectItem itemValue="PR"/>
-				<f:selectItem itemValue="RJ"/>
-				<f:selectItem itemValue="RN"/>
-				<f:selectItem itemValue="RO"/>
-				<f:selectItem itemValue="RR"/>
-				<f:selectItem itemValue="RS"/>
-				<f:selectItem itemValue="SC"/>
-				<f:selectItem itemValue="SE"/>
-				<f:selectItem itemValue="SP"/>
-				<f:selectItem itemValue="TO"/>			
+			<h:outputLabel for="perfilUsuario" value="Perfil:" />			
+			<h:selectOneMenu value="#{usuarioMB.usuario.perfilUsuario}" onselect="">
+				<f:selectItem itemValue="ADMINISTRADOR"/>
+				<f:selectItem itemValue="DENTISTA"/>
+				<f:selectItem itemValue="PACIENTE"/>
+				<f:selectItem itemValue="RECEPCIONISTA"/>	
+				<a4j:support event="onselect" rerender="sePerfilDentista" />  		
 			</h:selectOneMenu>
 			
-			<h:outputLabel for="cepPaciente" value="Cep:" />
-			<h:inputText id="cepPaciente" value="#{pacienteMB.paciente.cepPaciente}"  maxlength="9"/>
-			
+			<!-- Se o cadastro for de DENTISTA -->
+			 
 			<h:outputLabel for="croDentista" value="CRO:" />
-			<h:inputText id="croDentista" value="#{dentistaMB.dentista.croDentista}"  maxlength="30"/>
+			<h:inputText id="sePerfilDentista" value="#{usuarioMB.dentista.croDentista}"  maxlength="30" />
+			
+							
+			<!-- Se o cadastro for de PACIENTE -->							
+			<h:outputLabel for="responsavelPaciente" value="Responsavel Paciente:" rendered="#{usuarioMB.usuario.perfilUsuario eq 'PACIENTE' }"/>
+			<h:inputText id="responsavelPaciene" value="#{usuarioMB.paciente.responsavelPaciente}"  maxlength="50" rendered="#{usuarioMB.usuario.perfilUsuario eq 'PACIENTE' }"/>
+			
+			<h:outputLabel for="logradouroPaciente" value="Logradouro: " rendered="#{usuarioMB.usuario.perfilUsuario eq 'PACIENTE' }" />
+			<h:inputText id="logradouroPaciente" value="#{usuarioMB.paciente.logradouroPaciente}"  maxlength="100" rendered="#{usuarioMB.usuario.perfilUsuario eq 'PACIENTE' }"/>
+			
+			<h:outputLabel for="numeroLogradouroPaciente" value="Numero Logradouro:" rendered="#{usuarioMB.usuario.perfilUsuario eq 'PACIENTE' }" />
+			<h:inputText id="numeroLogradouroPaciente" value="#{usuarioMB.paciente.numeroLogradouroPaciente}"  maxlength="5" rendered="#{usuarioMB.usuario.perfilUsuario eq 'PACIENTE' }"/>
+			
+			<h:outputLabel for="complementoLogradouroPaciente" value="Complemento:" rendered="#{usuarioMB.usuario.perfilUsuario eq 'PACIENTE' }" />
+			<h:inputText id="complementoLogradouroPaciente" value="#{usuarioMB.paciente.complementoLogradouroPaciente}"  maxlength="50" rendered="#{usuarioMB.usuario.perfilUsuario eq 'PACIENTE' }"/>
+			
+			<h:outputLabel for="bairroPaciente" value="Bairro:" rendered="#{usuarioMB.usuario.perfilUsuario eq 'PACIENTE' }" />
+			<h:inputText id="bairroPaciente" value="#{usuarioMB.paciente.bairroPaciente}"  maxlength="30" rendered="#{usuarioMB.usuario.perfilUsuario eq 'PACIENTE' }"/>
+			
+			<h:outputLabel for="cidadePaciente" value="Cidade:" rendered="#{usuarioMB.usuario.perfilUsuario eq 'PACIENTE' }" />
+			<h:inputText id="cidadePaciente" value="#{usuarioMB.paciente.cidadePaciente}"  maxlength="30" rendered="#{usuarioMB.usuario.perfilUsuario eq 'PACIENTE' }"/>
+			
+			<h:outputLabel for="estadoPaciente" value="Estado:" rendered="#{usuarioMB.usuario.perfilUsuario eq 'PACIENTE' }" />			
+			<h:selectOneMenu value="#{usuarioMB.paciente.estadoPaciente}" rendered="#{usuarioMB.usuario.perfilUsuario eq 'PACIENTE' }">
+				<f:selectItem itemValue="AC"/>				<f:selectItem itemValue="AL"/>				<f:selectItem itemValue="AM"/>
+				<f:selectItem itemValue="AP"/>				<f:selectItem itemValue="BA"/>				<f:selectItem itemValue="DF"/>
+				<f:selectItem itemValue="ES"/>				<f:selectItem itemValue="GO"/>				<f:selectItem itemValue="MA"/>
+				<f:selectItem itemValue="MG"/>				<f:selectItem itemValue="MS"/>				<f:selectItem itemValue="MT"/>
+				<f:selectItem itemValue="PA"/>				<f:selectItem itemValue="PB"/>				<f:selectItem itemValue="PE"/>
+				<f:selectItem itemValue="PI"/>				<f:selectItem itemValue="PR"/>				<f:selectItem itemValue="RJ"/>
+				<f:selectItem itemValue="RN"/>				<f:selectItem itemValue="RO"/>				<f:selectItem itemValue="RR"/>
+				<f:selectItem itemValue="RS"/>				<f:selectItem itemValue="SC"/>				<f:selectItem itemValue="SE"/>
+				<f:selectItem itemValue="SP"/>				<f:selectItem itemValue="TO"/>			
+			</h:selectOneMenu>
+			
+			<h:outputLabel for="cepPaciente" value="Cep:" rendered="#{usuarioMB.usuario.perfilUsuario eq 'PACIENTE' }" />
+			<h:inputText id="cepPaciente" value="#{usuarioMB.paciente.codigoUsuario}"  maxlength="9" rendered="#{usuarioMB.usuario.perfilUsuario eq 'PACIENTE' }"/>
 											
 			<f:facet name="footer">
 				<h:panelGroup>	
-					<h:commandButton value="Salvar" action="#{UsuarioMB.salvarUsuario}" />
-					<h:commandButton value="Cancelar" action="#{UsuarioMB.cancelarCadastroUsuario}" immediate="true" />
+					<h:commandButton value="Salvar" action="#{usuarioMB.salvarUsuario}" />
+					<h:commandButton value="Cancelar" action="#{usuarioMB.cancelarCadastroUsuario}" />
 				</h:panelGroup>
 			</f:facet>
 		</h:panelGrid>
@@ -120,42 +109,42 @@
 		<br />
 	<h:form id="formUsuarioOther">
 		<!-- Tabela de Usuario cadastrados --> 
-		<h:dataTable  var="vUsuario" value="#{UsuarioMB.Usuarioes}" border="1" cellpadding="1" cellspacing="1" rendered="#{UsuarioesMB.sizeUsuarios > 0}">
+		<h:dataTable  var="vusuario" value="#{usuarioMB.usuarios}" border="1" cellpadding="1" cellspacing="1" rendered="#{usuarioMB.sizeUsuarios > 0}">
 			<f:facet name="header">
-				<h:outputText value="Usuarios cadastrados" />
+				<h:outputText value="Usuários cadastrados" />
 			</f:facet>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="Codigo" />
+					<h:outputText value="Código" />
 				</f:facet>
-				<h:outputText value="#{vUsuario.telefoneUsuario}" />
+				<h:outputText value="#{vusuario.codigoUsuario }" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Nome" />
 				</f:facet>
-				<h:outputText value="#{vUsuario.Usuario}" />
+				<h:outputText value="#{vusuario.nomeUsuario}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Alterar" />
 				</f:facet>
-				<h:commandLink action="#{UsuarioMB.alterarUsuario}">
+				<h:commandLink action="#{usuarioMB.alterarUsuario}">
 					<h:outputText value="Alterar" />
-					<f:setPropertyActionListener value="#{vUsuario}" target="#{UsuarioMB.Usuario}"/>
+					<f:setPropertyActionListener value="#{vusuario}" target="#{usuarioMB.usuario}"/>
 				</h:commandLink>
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Excluir" />
 				</f:facet>
-				<h:commandLink action="#{UsuarioMB.excluirUsuario}">
+				<h:commandLink action="#{usuarioMB.excluirUsuario}">
 					<h:outputText value="Excluir" />
-					<f:setPropertyActionListener value="#{vUsuario}" target="#{UsuarioMB.Usuario}"/>
+					<f:setPropertyActionListener value="#{vusuario}" target="#{usuarioMB.usuario}"/>
 				</h:commandLink>
 			</h:column>
 		<f:facet name="footer">
-			<h:outputText value="Total:  #{UsuarioMB.sizeUsuario}" />
+			<h:outputText value="Total:  #{usuarioMB.sizeUsuarios}" />
 		</f:facet>
 		</h:dataTable>
 	</h:form>
