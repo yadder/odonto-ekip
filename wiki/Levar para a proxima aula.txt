@@ -1,0 +1,7 @@
+trazer na proxima aula:
+- projeto logico e fisico do banco de dados
+
+
+diagrama de sequencia:
+- representar para todas as transacoes, relatorios e 1 manter.
+
