@@ -23,6 +23,8 @@
 			<h:outputLabel for="dataConsulta" value="Data consulta:" />			
 			<rich:calendar id="dataConsulta" value="#{consultaMB.consulta.dataConsulta}" datePattern="dd/MM/yyyy" />		
 						
+						
+			
 			<h:outputLabel for="statusConsulta" value="Status Consulta:" />							
 			<h:selectOneMenu value="#{consultaMB.consulta.statusConsulta}" >
 				<f:selectItem itemValue="AGENDADA"/>
@@ -30,6 +32,9 @@
 				<f:selectItem itemValue="REMARCADA"/>							
 				<f:selectItem itemValue="CANCELADA"/>			
 			</h:selectOneMenu>
+			
+			
+			
 						
 			<f:facet name="footer">
 				<h:panelGroup>	
