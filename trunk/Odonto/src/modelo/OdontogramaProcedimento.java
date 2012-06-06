@@ -1,7 +1,6 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.*;
 
 @Entity
@@ -12,11 +11,8 @@ public class OdontogramaProcedimento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo_odontograma_procedimeto", nullable = false)
     private long codigoOdontogramaProcedimeto;
-    @Column(name = "status_pagamento", nullable = false, length = 20)
-    private String statusPagamento;
-    @Column(name = "data_pagamento")
-    @Temporal(TemporalType.DATE)
-    private Date dataPagamento;
+    @Column(name = "status_procedimento", nullable = false, length = 20)
+    private String statusProcedimento;
     @JoinColumn(name = "codigo_elemento", referencedColumnName = "codigo_elemento", nullable = false)
     @ManyToOne(optional = false)
     private Elemento codigoElemento;
@@ -37,33 +33,12 @@ public class OdontogramaProcedimento implements Serializable {
         this.codigoOdontogramaProcedimeto = codigoOdontogramaProcedimeto;
     }
 
-    public OdontogramaProcedimento(long codigoOdontogramaProcedimeto, String statusPagamento) {
-        this.codigoOdontogramaProcedimeto = codigoOdontogramaProcedimeto;
-        this.statusPagamento = statusPagamento;
-    }
-
     public long getCodigoOdontogramaProcedimeto() {
         return codigoOdontogramaProcedimeto;
     }
 
     public void setCodigoOdontogramaProcedimeto(long codigoOdontogramaProcedimeto) {
         this.codigoOdontogramaProcedimeto = codigoOdontogramaProcedimeto;
-    }
-
-    public String getStatusPagamento() {
-        return statusPagamento;
-    }
-
-    public void setStatusPagamento(String statusPagamento) {
-        this.statusPagamento = statusPagamento;
-    }
-
-    public Date getDataPagamento() {
-        return dataPagamento;
-    }
-
-    public void setDataPagamento(Date dataPagamento) {
-        this.dataPagamento = dataPagamento;
     }
 
     public Elemento getCodigoElemento() {
@@ -97,8 +72,21 @@ public class OdontogramaProcedimento implements Serializable {
     public void setCodigoOdontograma(Odontograma codigoOdontograma) {
         this.codigoOdontograma = codigoOdontograma;
     }
+    
+    
+    public String getStatusProcedimento() {
+		return statusProcedimento;
+	}
 
-    @Override
+	public void setStatusProcedimento(String statusProcedimento) {
+		this.statusProcedimento = statusProcedimento;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	@Override
     public String toString() {
         return "odonto.OdontogramaProcedimento[ codigoOdontogramaProcedimeto=" + codigoOdontogramaProcedimeto + " ]";
     }

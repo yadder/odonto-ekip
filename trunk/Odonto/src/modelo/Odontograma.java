@@ -14,9 +14,14 @@ public class Odontograma implements Serializable {
     private long codigoOdontograma;
     @Column(name = "valor_odontograma", nullable = false)
     private double valorOdontograma;
-    @Column(name = "data_odontograma", nullable = false)
+    @Column(name = "data_inicio_odontograma", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date dataOdontograma;
+    private Date dataInicioOdontograma;
+    
+    @Column(name = "data_fim_odontograma", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date dataFimOdontograma;
+    
     @Column(name = "status_odontograma", nullable = false, length = 20)
     private String statusOdontograma;
 
@@ -33,14 +38,23 @@ public class Odontograma implements Serializable {
         this.codigoOdontograma = codigoOdontograma;
     }
 
-    public Odontograma(long codigoOdontograma, double valorOdontograma, Date dataOdontograma, String statusOdontograma) {
-        this.codigoOdontograma = codigoOdontograma;
-        this.valorOdontograma = valorOdontograma;
-        this.dataOdontograma = dataOdontograma;
-        this.statusOdontograma = statusOdontograma;
-    }
+    public Date getDataInicioOdontograma() {
+		return dataInicioOdontograma;
+	}
 
-    public long getCodigoOdontograma() {
+	public void setDataInicioOdontograma(Date dataInicioOdontograma) {
+		this.dataInicioOdontograma = dataInicioOdontograma;
+	}
+
+	public Date getDataFimOdontograma() {
+		return dataFimOdontograma;
+	}
+
+	public void setDataFimOdontograma(Date dataFimOdontograma) {
+		this.dataFimOdontograma = dataFimOdontograma;
+	}
+
+	public long getCodigoOdontograma() {
         return codigoOdontograma;
     }
 
@@ -54,14 +68,6 @@ public class Odontograma implements Serializable {
 
     public void setValorOdontograma(double valorOdontograma) {
         this.valorOdontograma = valorOdontograma;
-    }
-
-    public Date getDataOdontograma() {
-        return dataOdontograma;
-    }
-
-    public void setDataOdontograma(Date dataOdontograma) {
-        this.dataOdontograma = dataOdontograma;
     }
 
     public String getStatusOdontograma() {
