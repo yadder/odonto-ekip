@@ -50,7 +50,6 @@
 			
 			<h:outputLabel for="perfilUsuario" value="Perfil:" />			
 			<h:selectOneMenu value="#{usuarioMB.usuario.perfilUsuario}" onselect="">
-				<f:selectItem itemValue="ADMINISTRADOR"/>
 				<f:selectItem itemValue="DENTISTA"/>
 				<f:selectItem itemValue="PACIENTE"/>
 				<f:selectItem itemValue="RECEPCIONISTA"/>	
