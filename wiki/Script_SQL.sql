@@ -14,7 +14,11 @@ create table tb_disponibilidade(
 );
 
 -- criando a tabela pagamento...
-create table tb_pagamento(
+create table tb_pagamedelimiter $$
+
+CREATE DATABASE `odonto` /*!40100 DEFAULT CHARACTER SET utf8 */$$
+
+nto(
 	codigo_pagamento int primary key auto_increment,
 	numero_parcela int not null,
 	valor_parcela double not null,
@@ -196,4 +200,4 @@ create table tb_consulta(
     foreign key codigo_paciente references tb_usuario(codigo_usuario),
     codigo_dentista int not null,
     foreign key codigo_dentista references tb_usuario(codigo_usuario)
-) TYPE=INNODB;
+) TYPE=INNODB;codigoUsuario
