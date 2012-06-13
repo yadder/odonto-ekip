@@ -2,3 +2,8 @@
 diagrama de sequencia:
 - representar para todas as transacoes, relatorios e 1 manter.
 
+
+POR EMAIL
+Acertar os nomes dos casos de uso, diagramas e descricoes
+diagrama de sequencia para o manter para todas as operacoes
+
