@@ -1,0 +1,64 @@
+trazer na proxima aula:
+- projeto logico e fisico do banco de dados
+
+
+
+tb_fornecedor (codigo_fornecedor, nome_fornecedor, nome_vendedor, email_vendedor, telefone_fornecedor1, telefone_fornecedor2, 
+				site_fornecedor, cnpj_fornecedor, logradouro_fornecedor, numero_logradouro_fornecedor, 
+				complemento_logradouro_fornecedor, bairro_fornecedor, cidade_fornecedor, estado_fornecedor, cep_fornecedor);
+	chave primária: codigo_fornecedor
+		
+tb_inquerito_odontologico (codigo_inquerito_odontologico, tratamento_medico, usando_medicacao, alergia, anemia, fumante, hepatite,
+				alcoolista, sifilis, herpes_afita, hiv, gravidez, tuberculose, diabetes, asma, cardiaco, data_ultimo_atendimento,
+				concluiu_tratamento, experiencia_negativa_tratamento, roer_unhas, respirar_pela_boca, morder_objetos, ranger_os_dentes,
+				chupar_dedo_ou_chupeta, outros, fio_fita_dental, palito, unitufo_bitufo, tipo_escova, interdental, creme_dental,
+				ingere_alimentos_entre_refeicoes);
+	chave primária: codigo_inquerito_odontologico
+	
+tb_convenio (codigo_convenio, nome_convenio);
+	chave primária: codigo_convenio
+	
+tb_face (codigo_face, nome_face);
+	chave primária: codigo_face
+
+tb_procedimento (codigo_procedimento, descricao_procedimento, valor_procedimento);
+	chave primária: codigo_procedimento
+	
+tb_odontograma (codigo_odontograma, codigo_dentista, codigo_paciente, valor_odontograma, data_inicio_odontograma, data_fim_odontograma,
+				status_odontograma);
+	chave primária: codigo_odontograma
+	
+tb_elemento (codigo_elemento, nome_elemento);
+	chave primária: codigo_elemento
+	
+tb_odontograma_procedimento (codigo_odontograma, codigo_procedimento, status_procedimento, data_pagamento, status_autorizacao);
+	chave primária: codigo_odontograma, codigo_procedimento
+	
+tb_pagamento (codigo_pagamento, numero_parcela, valor_parcela, status_pagamento);
+	chave primária: codigo_pagamento
+	
+tb_prescricao (codigo_prescricao, observacao);
+	chave primária: codigo_prescricao
+
+tb_disponibilidade (codigo_disponibilidade, dia_semana, hora_inicio, hora_fim);
+	chave primária: codigo_disponibilidade
+	
+tb_consulta (codigo_consulta, data_consulta, status_consulta);
+	chave primária: codigo_consulta
+	
+tb_acesso (codigo_acesso, descricao_acesso);
+	chave primária: codigo_acesso
+	
+tb_usuario_acesso (codigo_usuario, codigo_acesso);
+	chave primária: codigo_usuario, codigo_acesso
+	
+tb_usuario (codigo_usuario, nome_usuario, login_usuario, senha_usuario, perfil_usuario, rg_usuario, cpf_usuario, 
+			data_nascimento_usuario, sexo_usuario);
+	chave primária: codigo_usuario
+
+tb_dentista (cro_dentista);
+	chave primária: codigo_usuario
+	
+tb_paciente (responsavel_paciente, logradouro_paciente, numero_logradouro_paciente, bairro_paciente, cidade_paciente,
+			 estado_paciente, cep_paciente, telefone_paciente1, telefone_paciente2);
+	chave primária: codigo_usuario
