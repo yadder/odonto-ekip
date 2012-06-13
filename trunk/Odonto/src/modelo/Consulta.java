@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -17,10 +18,12 @@ public class Consulta implements Serializable {
     private Date dataConsulta;
     @Column(name = "status_consulta", nullable = false, length = 20)
     private String statusConsulta;
-    
+    @Column(name = "hora_inicio", nullable = false)
+    private Time horaInicio;
+    @Column(name = "hora_fim", nullable = false)
+    private Time horaFim;
     @ManyToOne(fetch=FetchType.EAGER)
 	private Paciente paciente;
-
     @ManyToOne(fetch=FetchType.EAGER)
 	private Dentista dentista;
     
@@ -82,5 +85,20 @@ public class Consulta implements Serializable {
 		return serialVersionUID;
 	}
 
+	public Time getHoraInicio() {
+		return horaInicio;
+	}
+
+	public void setHoraInicio(Time horaInicio) {
+		this.horaInicio = horaInicio;
+	}
+
+	public Time getHoraFim() {
+		return horaFim;
+	}
+
+	public void setHoraFim(Time horaFim) {
+		this.horaFim = horaFim;
+	}
     
 }
