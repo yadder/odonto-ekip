@@ -1,5 +1,6 @@
 package persistencia;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Usuario;
@@ -8,6 +9,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import util.HibernateUtil;
 
@@ -78,6 +80,22 @@ public class DaoUsuarioImp implements DaoUsuario {
 			session.close();
 		}
 		return e;
+	}
+	
+	
+	public Usuario pesquisarUsuarioPorLogin(String login){
+		Usuario usuario = null;
+		try{
+			session = HibernateUtil.getSessionFactory().openSession();
+			Criteria cr = session.createCriteria(Usuario.class).add(Restrictions.eq("loginUsuario", login));
+			usuario = (Usuario)cr.uniqueResult();
+		}catch (HibernateException e) {
+			e.printStackTrace();
+		}finally {
+			session.flush();
+			session.close();
+		}
+		return usuario;
 	}
 
 	public List<Usuario> pesquisarTodosUsuario() {

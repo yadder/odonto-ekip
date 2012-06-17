@@ -20,16 +20,50 @@ public class Teste {
 	public static void main(String[] args) {
 		
 
-		System.out.println("1------------------------------Testando a classe usuario:FIM");
+		System.out.println("1------------------------------Testando a classe face (pesquisa por nome: INICIO");
+		//busca por nome
+		Face face= new Face("distal");
+		DaoFace daoFace = new DaoFaceImp();
+		face = daoFace.pesquisarFacePorNome("face1");
+		if (face != null){
+			System.out.println("Face encontrada: codigo: "+ face.getCodigoFace() + " Nome: "+ face.getNomeFace());
+		}else{
+			System.out.println("ERRO: Face veio NULL da consulta");
+		}
+		//alteracao
+		face.setNomeFace("face12345");
+		boolean result = daoFace.alterarFace(face);
+		if (result){
+			System.out.println("Alterado com sucesso");
+		}else{
+			System.out.println("ERRO: Não alterado");
+		}
+/*		//exclusao
+		boolean result = daoFace.excluirFace(face);
+		if (result){
+			System.out.println("Excluído com sucesso");
+		}else{
+			System.out.println("ERRO: Não excluído");
+		}
+		//////////////////////////////////////////////
+		
+		/*
+		System.out.println("1------------------------------Testando a classe usuario: INICIO");
+		Usuario usuario = new Usuario("josue", "josue");
 		DaoUsuario daoUsuario = new DaoUsuarioImp();
-		Usuario usuario = new Usuario();
-		usuario.setNomeUsuario("Maria");
+		usuario = daoUsuario.pesquisarUsuarioPorLogin("josue");
+		if (usuario != null){
+			System.out.println("Usuario encontrado: Login: "+ usuario.getLoginUsuario() + " Senha: "+ usuario.getSenhaUsuario());
+		}else{
+			System.out.println("Usuario veio NULL da consulta");
+		}
 		
 		
+		//////////////////////////////////////////////
+		
+/*		
 		
 		
-		
-		System.out.println("1------------------------------Testando a classe usuario:INICIO");
 		//////////////////////////////////////////////
 		
 		System.out.println("1------------------------------Testando a classe face:INICIO");
@@ -91,7 +125,7 @@ public class Teste {
 		System.out.println("1------------------------------Testando a classe pagamento:FIM");
 			
 	
-		
+*/		
 	}
 
 }

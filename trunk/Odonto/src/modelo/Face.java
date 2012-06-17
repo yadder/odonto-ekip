@@ -25,6 +25,15 @@ public class Face implements Serializable{
 	
 	public Face() {
 	}
+	
+	public Face(int codigo, String nome){
+		this.codigoFace = codigo;
+		this.nomeFace = nome;
+	}
+	
+	public Face(String nome){
+		this.nomeFace = nome;
+	}
 
 	public long getCodigoFace() {
 		return codigoFace;
@@ -44,5 +53,10 @@ public class Face implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+	@Override
+	public String toString() {
+		return "Código: "+ codigoFace + " Nome: " +nomeFace;
 	}
 }

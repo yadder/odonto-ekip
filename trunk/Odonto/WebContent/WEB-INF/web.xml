@@ -14,9 +14,8 @@
     <url-pattern>*.jsf</url-pattern>
   </servlet-mapping>
   <session-config>
-  	<session-timeout>30</session-timeout>
+    <session-timeout>30</session-timeout>
   </session-config>
-
   <context-param>
     <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
     <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
@@ -29,54 +28,65 @@
   <listener>
     <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
   </listener>
-  
-  
-  
-  
-  
-  
-  
-  
-  <!-- Filtro para o uso de Ajax -->
-	<filter>
-		<display-name>Ajax4jsf Filter</display-name>
-		<filter-name>ajax4jsf</filter-name>
-		<filter-class>org.ajax4jsf.Filter</filter-class>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>ajax4jsf</filter-name>
-		<servlet-name>Faces Servlet</servlet-name>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-		<dispatcher>INCLUDE</dispatcher>
-	</filter-mapping>
-
-  <!-- Filtro para o uso de RichFace -->
+  <filter>
+    <display-name>Ajax4jsf Filter</display-name>
+    <filter-name>ajax4jsf</filter-name>
+    <filter-class>org.ajax4jsf.Filter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>ajax4jsf</filter-name>
+    <servlet-name>Faces Servlet</servlet-name>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+  </filter-mapping>
   <context-param>
-		<param-name>org.richfaces.SKIN</param-name>
-		<param-value>blueSky</param-value>
-	</context-param>
-
-	<filter>
-		<display-name>RichFaces Filter</display-name>
-		<filter-name>richfaces</filter-name>
-		<filter-class>org.ajax4jsf.Filter</filter-class>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>richfaces</filter-name>
-		<servlet-name>Faces Servlet</servlet-name>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-		<dispatcher>INCLUDE</dispatcher>
-	</filter-mapping>
-
-	<listener>
-		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
-	</listener>
-  
-  
-  
-    
+    <param-name>org.richfaces.SKIN</param-name>
+    <param-value>blueSky</param-value>
+  </context-param>
+  <filter>
+    <display-name>RichFaces Filter</display-name>
+    <filter-name>richfaces</filter-name>
+    <filter-class>org.ajax4jsf.Filter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>richfaces</filter-name>
+    <servlet-name>Faces Servlet</servlet-name>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+  </filter-mapping>
+  <listener>
+    <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+  </listener>
+  <servlet>
+    <description></description>
+    <display-name>ServletLogin</display-name>
+    <servlet-name>ServletLogin</servlet-name>
+    <servlet-class>controle.ServletLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletLogin</servlet-name>
+    <url-pattern>/ServletLogin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletFace</display-name>
+    <servlet-name>ServletFace</servlet-name>
+    <servlet-class>controle.ServletFace</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletFace</servlet-name>
+    <url-pattern>/ServletFace</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletPrincipal</display-name>
+    <servlet-name>ServletPrincipal</servlet-name>
+    <servlet-class>controle.ServletPrincipal</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletPrincipal</servlet-name>
+    <url-pattern>/ServletPrincipal</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -8,6 +8,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import util.HibernateUtil;
 
@@ -75,6 +76,21 @@ public class DaoFaceImp implements DaoFace {
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}finally{
+			session.close();
+		}
+		return f;
+	}
+	
+	public Face pesquisarFacePorNome(String nome){
+		Face f = null;
+		try{
+			session = HibernateUtil.getSessionFactory().openSession();
+			Criteria cr = session.createCriteria(Face.class).add(Restrictions.eq("nomeFace", nome));
+			f = (Face) cr.uniqueResult();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}finally{
+			session.flush();
 			session.close();
 		}
 		return f;
