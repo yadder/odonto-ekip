@@ -14,5 +14,8 @@ public interface DaoFace {
 	
 	Face pesquisarFace(Face face);
 	
+	Face pesquisarFacePorNome(String nome);
+	
 	List<Face> pesquisarTodosFace();
 }
+

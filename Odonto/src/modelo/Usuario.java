@@ -34,18 +34,9 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(long codigoUsuario) {
-        this.codigoUsuario = codigoUsuario;
-    }
-
-    public Usuario(long codigoUsuario, String nomeUsuario, String loginUsuario, String senhaUsuario, String perfilUsuario, String cpfUsuario, String sexoUsuario) {
-        this.codigoUsuario = codigoUsuario;
-        this.nomeUsuario = nomeUsuario;
-        this.loginUsuario = loginUsuario;
-        this.senhaUsuario = senhaUsuario;
-        this.perfilUsuario = perfilUsuario;
-        this.cpfUsuario = cpfUsuario;
-        this.sexoUsuario = sexoUsuario;
+    public Usuario(String login, String senha) {
+        this.loginUsuario = login;
+        this.senhaUsuario = senha;
     }
 
     public long getCodigoUsuario() {
@@ -122,7 +113,10 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return getNomeUsuario();
+        return 
+        		" Nome: " +getNomeUsuario()+
+        		" Login: " +getLoginUsuario()+
+        		" Senha: " +getSenhaUsuario();
     }
     
 }

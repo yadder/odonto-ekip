@@ -14,7 +14,6 @@
     <mapping class="modelo.Consulta"/>
     <mapping class="modelo.Convenio"/>
     <mapping class="modelo.Dentista"/>
-    <mapping class="modelo.Disponibilidade"/>
     <mapping class="modelo.Elemento"/>
     <mapping class="modelo.Face"/>
     <mapping class="modelo.Fornecedor"/>
