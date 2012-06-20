@@ -11,7 +11,7 @@
 <form name="formFace" method="post" action="ServletFace">
 	<table>
 		<tr>
-			<td>Nome da face:</td>
+			<td align="right">Nome da face:</td>
 			<td><input type="text" name="nomeFace" value="${face.nomeFace}" size="20" /></td>
 		</tr>
 		<tr>

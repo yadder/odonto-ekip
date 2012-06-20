@@ -22,7 +22,7 @@
 	testadas e validadas <br/>
 	<a href="face.jsp">Cadastro de face</a><br/>
 	<a href="elemento.jsp">Cadastro de elemento</a><br/>
-	
+	<a href="usuario.jsp">Cadastro de usuário</a><br/>
 
 </body>
 </html>
