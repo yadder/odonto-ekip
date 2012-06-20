@@ -11,7 +11,7 @@
 <form name="formElemento" method="post" action="ServletElemento">
 	<table>
 		<tr>
-			<td>Nome do elemento:</td>
+			<td align="right">Nome do elemento:</td>
 			<td><input type="text" name="nomeElemento" value="${elemento.nomeElemento}" size="20" /></td>
 		</tr>
 		<tr>
