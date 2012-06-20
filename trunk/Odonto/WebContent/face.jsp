@@ -11,10 +11,6 @@
 <form name="formFace" method="post" action="ServletFace">
 	<table>
 		<tr>
-			<td>Código da face:</td>
-			<td><input type="text" name="codigoFace" value="${face.codigoFace}" disabled size="20" /></td>
-		</tr>
-		<tr>
 			<td>Nome da face:</td>
 			<td><input type="text" name="nomeFace" value="${face.nomeFace}" size="20" /><input type="submit" name="btn" value="Pesquisar" /></td>
 		</tr>

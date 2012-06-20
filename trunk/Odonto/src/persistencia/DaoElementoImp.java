@@ -3,11 +3,13 @@ package persistencia;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Elemento;
+import modelo.Face;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import util.HibernateUtil;
 
@@ -75,6 +77,21 @@ public class DaoElementoImp implements DaoElemento {
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		}finally{
+			session.close();
+		}
+		return e;
+	}
+	
+	public Elemento pesquisarElementoPorNome(String nome){
+		Elemento e = null;
+		try{
+			session = HibernateUtil.getSessionFactory().openSession();
+			Criteria cr = session.createCriteria(Elemento.class).add(Restrictions.eq("nomeElemento", nome));
+			e = (Elemento) cr.uniqueResult();
+		}catch (HibernateException ex){
+			ex.printStackTrace();
+		}finally{
+			session.flush();
 			session.close();
 		}
 		return e;

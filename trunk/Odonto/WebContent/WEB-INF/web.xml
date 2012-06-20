@@ -89,4 +89,14 @@
     <servlet-name>ServletPrincipal</servlet-name>
     <url-pattern>/ServletPrincipal</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletElemento</display-name>
+    <servlet-name>ServletElemento</servlet-name>
+    <servlet-class>controle.ServletElemento</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletElemento</servlet-name>
+    <url-pattern>/ServletElemento</url-pattern>
+  </servlet-mapping>
 </web-app>
