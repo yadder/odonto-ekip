@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro de elemento</title>
+<title>Alteração de elemento</title>
 </head>
 <body>
 <div class="header">
@@ -12,12 +12,12 @@
 	<table>
 		<tr>
 			<td>Nome do elemento:</td>
-			<td><input type="text" name="nomeElemento" value="${elemento.nomeElemento}" size="20" /><input type="submit" name="btn" value="Pesquisar" /></td>
+			<td><input type="text" name="nomeElemento" value="${elemento.nomeElemento}" size="20" /></td>
 		</tr>
 		<tr>
 			<td colspan=2 align="center">
-				
-				<input type="submit" name="btn" value="Cadastrar" />
+				<input type="submit" name="btn" value="Excluir" />
+				<input type="submit" name="btn" value="Alterar" />
 				<input type="submit" name="btn" value="Voltar" />
 			</td>
 		</tr>

@@ -14,13 +14,14 @@
 </div>
 	<a href="fornecedor.jsp">Cadastro de fornecedor</a> <br/><br/>
 	<a href="inqueritoOdontologico.jsp">Inquérito odontológico</a><br/><br/>
-	<a href="elemento.jsp">Cadastro de elemento</a><br/><br/>
+	
 	<a href="convenio.jsp">Cadastro de convênio</a><br/><br/>
 	<a href="pagamento.jsp">Efetuar pagamento</a><br/><br/>
 	
 	<hr/>
 	testadas e validadas <br/>
-	<a href="face.jsp">Cadastro de face</a><br/><br/>
+	<a href="face.jsp">Cadastro de face</a><br/>
+	<a href="elemento.jsp">Cadastro de elemento</a><br/>
 	
 
 </body>

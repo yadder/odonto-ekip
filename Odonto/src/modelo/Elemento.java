@@ -24,7 +24,10 @@ public class Elemento implements Serializable {
 
     public Elemento() {
     }
-
+    
+    public Elemento (String nomeElemento){
+    	this.nomeElemento = nomeElemento;
+    }
     public Elemento(long codigoElemento) {
         this.codigoElemento = codigoElemento;
     }

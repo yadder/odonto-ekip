@@ -14,5 +14,7 @@ public interface DaoElemento {
 	
 	Elemento pesquisarElemento(Elemento elemento);
 	
+	Elemento pesquisarElementoPorNome(String nome);
+	
 	List<Elemento> pesquisarTodosElemento();
 }
