@@ -20,12 +20,13 @@ public class ServletFace extends HttpServlet {
     public ServletFace() {
         super();
     }
+    String mensagem = null;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String mensagem = null;
+		
 		String btn = (String)request.getParameter("btn");
 		HttpSession objetoSessao = request.getSession();
 
@@ -35,16 +36,20 @@ public class ServletFace extends HttpServlet {
 			disp.forward(request, response);
 			
 		}else if (btn.equals("Cadastrar")){
-			
 			String nome = (String) request.getParameter("nomeFace");
-			Face face = new Face(nome);
-			DaoFace dao = new DaoFaceImp();
-			dao.cadastrarFace(face);
-			mensagem = "Face cadastrada com sucesso!";
-			request.setAttribute("msg", mensagem);
-			RequestDispatcher disp = request.getRequestDispatcher("face.jsp");
-			disp.forward(request, response);
-			
+			if (validaCampos(nome)){				
+				Face face = new Face(nome);
+				DaoFace dao = new DaoFaceImp();
+				dao.cadastrarFace(face);
+				mensagem = "Face cadastrada com sucesso!";
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("face.jsp");
+				disp.forward(request, response);
+			}else{
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("face.jsp");
+				disp.forward(request, response);
+			}
 		}else if (btn.equals("Pesquisar")){
 			
 			String nome = (String) request.getParameter("nomeFace");
@@ -60,7 +65,7 @@ public class ServletFace extends HttpServlet {
 			}else{
 				mensagem = "Face não encontrada.";
 				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("face.jsp");
+				RequestDispatcher disp = request.getRequestDispatcher("face_alterar.jsp");
 				disp.forward(request, response);
 			}
 		}else if(btn.equals("Excluir")){
@@ -82,6 +87,8 @@ public class ServletFace extends HttpServlet {
 					disp.forward(request, response);
 				}
 		}else if(btn.equals("Alterar")){
+			String nome = (String) request.getParameter("nomeFace");
+			if (validaCampos(nome)){	
 				Face face = new Face();
 				face = (Face)objetoSessao.getAttribute("face");
 				face.setNomeFace((String)request.getParameter("nomeFace"));								
@@ -99,10 +106,23 @@ public class ServletFace extends HttpServlet {
 					RequestDispatcher disp = request.getRequestDispatcher("face.jsp");
 					disp.forward(request, response);
 				}
+			}else{
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("face_alterar.jsp");
+				disp.forward(request, response);
+			}
 		}
-			
-				
-		
+	
+	}
+	
+	public boolean validaCampos(String nome){
+		boolean result = false;
+		if ((nome == null) || (nome.length()<3)){
+			mensagem = "Preencha o nome da face corretamente.";
+		}else{
+			result = true;
+		}
+		return result;
 	}
 
 }

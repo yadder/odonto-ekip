@@ -15,7 +15,7 @@ import persistencia.DaoElementoImp;
 
 public class ServletElemento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	String mensagem = null;  
     public ServletElemento() {
         super();
     }
@@ -24,7 +24,7 @@ public class ServletElemento extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String mensagem = null;
+		
 		String btn = (String)request.getParameter("btn");
 		HttpSession objetoSessao = request.getSession();
 
@@ -34,16 +34,20 @@ public class ServletElemento extends HttpServlet {
 			disp.forward(request, response);
 			
 		}else if (btn.equals("Cadastrar")){
-			
 			String nome = (String) request.getParameter("nomeElemento");
-			Elemento elemento = new Elemento(nome);
-			DaoElemento dao = new DaoElementoImp();
-			dao.cadastrarElemento(elemento);
-			mensagem = "Elemento cadastrado com sucesso!";
-			request.setAttribute("msg", mensagem);
-			RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
-			disp.forward(request, response);
-			
+			if (validaCampos(nome)){
+				Elemento elemento = new Elemento(nome);
+				DaoElemento dao = new DaoElementoImp();
+				dao.cadastrarElemento(elemento);
+				mensagem = "Elemento cadastrado com sucesso!";
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
+				disp.forward(request, response);
+			}else{
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
+				disp.forward(request, response);
+			}
 		}else if (btn.equals("Pesquisar")){
 			
 			String nome = (String) request.getParameter("nomeElemento");
@@ -81,6 +85,8 @@ public class ServletElemento extends HttpServlet {
 					disp.forward(request, response);
 				}
 		}else if(btn.equals("Alterar")){
+			String nome = (String) request.getParameter("nomeElemento");
+			if (validaCampos(nome)){
 				Elemento elemento = new Elemento();
 				elemento = (Elemento)objetoSessao.getAttribute("elemento");
 				elemento.setNomeElemento((String)request.getParameter("nomeElemento"));								
@@ -98,10 +104,22 @@ public class ServletElemento extends HttpServlet {
 					RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
 					disp.forward(request, response);
 				}
+			}else{
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("elemento_alterar.jsp");
+				disp.forward(request, response);
+			}
 		}
-			
-				
-		
+	}
+	
+	public boolean validaCampos(String nome){
+		boolean result = false;
+		if ((nome == null) || (nome.length() !=2)){
+			mensagem = "Preencha o nome do elemento corretamente.";
+		}else{
+			result = true;
+		}
+		return result;
 	}
 
 }

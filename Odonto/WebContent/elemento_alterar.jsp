@@ -12,7 +12,7 @@
 	<table>
 		<tr>
 			<td align="right">Nome do elemento:</td>
-			<td><input type="text" name="nomeElemento" value="${elemento.nomeElemento}" size="20" /></td>
+			<td><input type="text" name="nomeElemento" value="${elemento.nomeElemento}" size="20" maxlength="2" /></td>
 		</tr>
 		<tr>
 			<td colspan=2 align="center">
