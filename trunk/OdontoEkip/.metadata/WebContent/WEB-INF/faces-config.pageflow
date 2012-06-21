@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13373962999470" configfile="/OdontoEkip/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="principal" x="250" y="168" id="pf13374020727670" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13374020727671" path="/principal.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="cadastroConvenio" x="552" y="240" id="pf13374020727672" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf13374020727671" path="/cadastroConvenio.jsp"/>
+  <links id="pf13374020727671" target="pf13374020727670" source="pf13374020727672" outcome="gotoPrincipal"/>
+</pageflow:Pageflow>
