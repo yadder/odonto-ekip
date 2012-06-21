@@ -1,7 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import javax.persistence.*;
 
 @Entity
@@ -39,7 +39,25 @@ public class Usuario implements Serializable {
         this.senhaUsuario = senha;
     }
 
-    public long getCodigoUsuario() {
+    public Usuario(String nomeUsuario, String loginUsuario,
+			String senhaUsuario, String perfilUsuario, String rgUsuario,
+			String cpfUsuario, Date dataNascimentoUsuario, String sexoUsuario) {
+		this.nomeUsuario = nomeUsuario;
+		this.loginUsuario = loginUsuario;
+		this.senhaUsuario = senhaUsuario;
+		this.perfilUsuario = perfilUsuario;
+		this.rgUsuario = rgUsuario;
+		this.cpfUsuario = cpfUsuario;
+		this.dataNascimentoUsuario = dataNascimentoUsuario;
+		this.sexoUsuario = sexoUsuario;
+	}
+    
+    
+	public Usuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
+	}
+
+	public long getCodigoUsuario() {
         return codigoUsuario;
     }
 

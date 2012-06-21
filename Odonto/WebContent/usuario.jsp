@@ -8,35 +8,35 @@
 <div class="header">
 	<h3>${msg}</h3>
 </div>
-<form name="formFace" method="post" action="ServletUsuario">
+<form name="formUsuario" method="post" action="ServletUsuario">
 	<table>
 		<tr>
 			<td align="right">Nome:</td>
-			<td><input type="text" name="nomeFace" value="${usuario.nomeUsuario}" size="20" /></td>
+			<td><input type="text" name="nomeUsuario" value="${usuario.nomeUsuario}" size="20" /></td>
 		</tr>
 		<tr>
 			<td align="right">Login:</td>
-			<td><input type="text" name="nomeFace" value="${usuario.loginUsuario}" size="20" /></td>
+			<td><input type="text" name="loginUsuario" value="${usuario.loginUsuario}" size="20" /></td>
 		</tr>
 		<tr>
 			<td align="right">Senha:</td>
-			<td><input type="text" name="nomeFace" value="${usuario.senhaUsuario}" size="20" /></td>
+			<td><input type="text" name="senhaUsuario" value="${usuario.senhaUsuario}" size="20" /></td>
 		</tr>
 		<tr>
 			<td align="right">RG:</td>
-			<td><input type="text" name="nomeFace" value="${usuario.rgUsuario}" size="20" /></td>
+			<td><input type="text" name="rgUsuario" value="${usuario.rgUsuario}" size="20" /></td>
 		</tr>
 		<tr>
 			<td align="right">CPF:</td>
-			<td><input type="text" name="nomeFace" value="${usuario.cpfUsuario}" size="20" /></td>
+			<td><input type="text" name="cpfUsuario" value="${usuario.cpfUsuario}" size="20" /></td>
 		</tr>
 		<tr>
 			<td align="right">Data nasc.:</td>
-			<td><input type="text" name="nomeFace" value="${usuario.dataNascimentoUsuario}" size="20" /></td>
+			<td><input type="text" name="dtNascUsuario" value="${usuario.dataNascimentoUsuario}" size="20" /></td>
 		</tr>
 		<tr>
 			<td align="right">Sexo:</td>
-			<td><input type="text" name="nomeFace" value="${usuario.sexoUsuario}" size="20" /></td>
+			<td><input type="text" name="sexoUsuario" value="${usuario.sexoUsuario}" size="20" /></td>
 		</tr>
 		<tr>
 			<td align="right">Perfil:</td>

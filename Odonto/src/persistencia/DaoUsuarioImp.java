@@ -3,6 +3,8 @@ package persistencia;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import modelo.Face;
 import modelo.Usuario;
 
 import org.hibernate.Criteria;
@@ -70,18 +72,32 @@ public class DaoUsuarioImp implements DaoUsuario {
 	}
 
 	public Usuario pesquisarUsuario(Usuario usuario) {
-		Usuario e = null;
+		Usuario u = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			e = (Usuario)session.get(Usuario.class, usuario.getCodigoUsuario());
+			u = (Usuario)session.get(Usuario.class, usuario.getCodigoUsuario());
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		}finally{
 			session.close();
 		}
-		return e;
+		return u;
 	}
 	
+	public Usuario pesquisarUsuarioPorNome(String nome){
+		Usuario u = null;
+		try{
+			session = HibernateUtil.getSessionFactory().openSession();
+			Criteria cr = session.createCriteria(Usuario.class).add(Restrictions.eq("nomeUsuario", nome));
+			u = (Usuario) cr.uniqueResult();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}finally{
+			session.flush();
+			session.close();
+		}
+		return u;
+	}
 	
 	public Usuario pesquisarUsuarioPorLogin(String login){
 		Usuario usuario = null;
