@@ -19,7 +19,7 @@ public class Teste {
 
 	public static void main(String[] args) {
 		
-
+/*
 		System.out.println("1------------------------------Testando a classe face (pesquisa por nome: INICIO");
 		//busca por nome
 		Face face= new Face("distal");
@@ -47,11 +47,21 @@ public class Teste {
 		}
 		//////////////////////////////////////////////
 		
-		/*
+		*/
 		System.out.println("1------------------------------Testando a classe usuario: INICIO");
-		Usuario usuario = new Usuario("josue", "josue");
+		Usuario usuario = new Usuario();
+		usuario.setNomeUsuario("JOSUE");
+		usuario.setLoginUsuario("JOSUE");
+		usuario.setSenhaUsuario("JOSUE");
+		usuario.setPerfilUsuario("PACIENTE");
+		usuario.setRgUsuario("123456");
+		usuario.setCpfUsuario("05434065719");
+		usuario.setDataNascimentoUsuario(08-10-1982);
+		usuario.setSexoUsuario("M");
 		DaoUsuario daoUsuario = new DaoUsuarioImp();
-		usuario = daoUsuario.pesquisarUsuarioPorLogin("josue");
+		daoUsuario.cadastrarUsuario(usuario);
+		
+		/*usuario = daoUsuario.pesquisarUsuarioPorLogin("josue");
 		if (usuario != null){
 			System.out.println("Usuario encontrado: Login: "+ usuario.getLoginUsuario() + " Senha: "+ usuario.getSenhaUsuario());
 		}else{
