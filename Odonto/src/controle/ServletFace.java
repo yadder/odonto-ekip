@@ -65,7 +65,7 @@ public class ServletFace extends HttpServlet {
 			}else{
 				mensagem = "Face não encontrada.";
 				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("face_alterar.jsp");
+				RequestDispatcher disp = request.getRequestDispatcher("face.jsp");
 				disp.forward(request, response);
 			}
 		}else if(btn.equals("Excluir")){

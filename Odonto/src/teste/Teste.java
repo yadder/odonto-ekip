@@ -1,18 +1,10 @@
 package teste;
 
-import java.sql.Date;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import modelo.Elemento;
-import modelo.Face;
-import modelo.Pagamento;
 import modelo.Usuario;
-import persistencia.DaoElemento;
-import persistencia.DaoElementoImp;
-import persistencia.DaoFace;
-import persistencia.DaoFaceImp;
-import persistencia.DaoPagamento;
-import persistencia.DaoPagamentoImp;
 import persistencia.DaoUsuario;
 import persistencia.DaoUsuarioImp;
 
@@ -49,6 +41,7 @@ public class Teste {
 		//////////////////////////////////////////////
 		
 		*/
+		
 		try{
 			System.out.println("--- CADASTRO DE USUARIO ---");
 			Usuario usuario = new Usuario();
@@ -56,14 +49,32 @@ public class Teste {
 			usuario.setSenhaUsuario("JOSUE");
 			usuario.setPerfilUsuario("PACIENTE");
 			usuario.setRgUsuario("123456");
-			usuario.setCpfUsuario("05434065719");
-			usuario.setDataNascimentoUsuario(new Date(1982-12-19));
+			usuario.setCpfUsuario("JOSUE");
+			
+			// PARA GRAVAR NO BANCO
+			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");  
+	        java.util.Date dataUtil = df.parse("19/12/1982");  
+	        // converter de java.util.Date para java.sql.Date  
+	        java.sql.Date dataJDBC = new java.sql.Date(dataUtil.getTime());  
+			usuario.setDataNascimentoUsuario(dataJDBC);
 			usuario.setSexoUsuario("M");
+			//////////////////////////////
 			DaoUsuario daoUsuario = new DaoUsuarioImp();
 			daoUsuario.cadastrarUsuario(usuario);
 			System.out.println("USUARIO CADASTRADO COM SUCESSO");
+			
+			usuario = null;
+			usuario = daoUsuario.pesquisarUsuarioPorCpf("JOSUE");
+			if (usuario != null){
+				System.out.println("DATA NASC USUARIO: "+usuario.getDataNascimentoUsuario());
+				//trazendo do banco
+				SimpleDateFormat iso = new SimpleDateFormat("dd/MM/yyyy");  
+		        String dataISO = iso.format(usuario.getDataNascimentoUsuario());  
+				System.out.println("DATA FORMATADA: "+dataISO);
+		        /////////////////////
+			}
 		}catch(Exception ex_cad_usuario){
-			ex_cad_usuario.getMessage();
+			ex_cad_usuario.printStackTrace();
 		}
 		//////////////////////////////////////////////
 		
