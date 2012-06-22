@@ -1,5 +1,6 @@
 package teste;
 
+import java.sql.Date;
 import java.util.List;
 
 import modelo.Elemento;
@@ -48,18 +49,24 @@ public class Teste {
 		//////////////////////////////////////////////
 		
 		*/
-		System.out.println("1------------------------------Testando a classe usuario: INICIO");
-		Usuario usuario = new Usuario();
-		usuario.setNomeUsuario("JOSUE");
-		usuario.setLoginUsuario("JOSUE");
-		usuario.setSenhaUsuario("JOSUE");
-		usuario.setPerfilUsuario("PACIENTE");
-		usuario.setRgUsuario("123456");
-		usuario.setCpfUsuario("05434065719");
-		usuario.setDataNascimentoUsuario(08-10-1982);
-		usuario.setSexoUsuario("M");
-		DaoUsuario daoUsuario = new DaoUsuarioImp();
-		daoUsuario.cadastrarUsuario(usuario);
+		try{
+			System.out.println("--- CADASTRO DE USUARIO ---");
+			Usuario usuario = new Usuario();
+			usuario.setNomeUsuario("JOSUE");
+			usuario.setSenhaUsuario("JOSUE");
+			usuario.setPerfilUsuario("PACIENTE");
+			usuario.setRgUsuario("123456");
+			usuario.setCpfUsuario("05434065719");
+			usuario.setDataNascimentoUsuario(new Date(1982-12-19));
+			usuario.setSexoUsuario("M");
+			DaoUsuario daoUsuario = new DaoUsuarioImp();
+			daoUsuario.cadastrarUsuario(usuario);
+			System.out.println("USUARIO CADASTRADO COM SUCESSO");
+		}catch(Exception ex_cad_usuario){
+			ex_cad_usuario.getMessage();
+		}
+		//////////////////////////////////////////////
+		
 		
 		/*usuario = daoUsuario.pesquisarUsuarioPorLogin("josue");
 		if (usuario != null){

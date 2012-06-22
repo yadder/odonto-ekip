@@ -1,8 +1,6 @@
 package controle;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -38,33 +36,30 @@ public class ServletUsuario extends HttpServlet {
 			disp.forward(request, response);
 			
 		}else if (btn.equals("Cadastrar")){
-			try{
-			String nome = (String) request.getParameter("nomeUsuario");
-			String login = (String) request.getParameter("loginUsuario");
-			String senha = (String) request.getParameter("senhaUsuario");
-			String rg = (String) request.getParameter("rgUsuario");
-			String cpf = (String) request.getParameter("cpfUsuario");
-			DateFormat formatter = new SimpleDateFormat("MM/dd/yy");  
-			Date dtnasc = (Date)formatter.parse(request.getParameter("dtNascUsuario"));
-			String sexo = (String) request.getParameter("sexoUsuario");
-			String perfil = (String) request.getParameter("perfilUsuario");
-			
-			if (validaCampos(nome, login, senha, rg, cpf, dtnasc, sexo, perfil)){
-				Usuario usuario = new Usuario(nome, login, senha, perfil, rg, cpf, dtnasc, sexo);
-				DaoUsuario dao = new DaoUsuarioImp();
-				dao.cadastrarUsuario(usuario);
-				mensagem = "Usuário cadastrado com sucesso!";
-				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("usuario.jsp");
-				disp.forward(request, response);
-			}else{
-				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("usuario.jsp");
-				disp.forward(request, response);
-			}
-			}catch(Exception e){
-				e.printStackTrace();
-			}
+		
+				String nome = (String) request.getParameter("nomeUsuario");
+				String rg = (String) request.getParameter("rgUsuario");
+				String cpf = (String) request.getParameter("cpfUsuario");
+				//@SuppressWarnings("deprecation")
+				//Date dtnasc = new Date(Date.parse(request.getParameter("dtNascUsuario")));
+				String sexo = (String) request.getParameter("sexoUsuario");
+				String perfil = (String) request.getParameter("perfilUsuario");
+				String senha = null;
+				if (validaCampos(nome, rg, cpf, sexo, perfil)){
+					// gerar uma string com 6 caracteres para colocar na senha
+					senha = cpf;
+					Usuario usuario = new Usuario(nome, senha, perfil, rg, cpf, sexo);
+					DaoUsuario dao = new DaoUsuarioImp();
+					dao.cadastrarUsuario(usuario);
+					mensagem = "Usuário cadastrado com sucesso!";
+					request.setAttribute("msg", mensagem);
+					RequestDispatcher disp = request.getRequestDispatcher("usuario.jsp");
+					disp.forward(request, response);
+				}else{
+					request.setAttribute("msg", mensagem);
+					RequestDispatcher disp = request.getRequestDispatcher("usuario.jsp");
+					disp.forward(request, response);
+				}
 		}else if (btn.equals("Pesquisar")){
 			String nome = (String) request.getParameter("nomeUsuario");
 			Usuario usuario = new Usuario(nome);
@@ -100,17 +95,14 @@ public class ServletUsuario extends HttpServlet {
 					disp.forward(request, response);
 				}
 		}else if(btn.equals("Alterar")){
-			try{
 			String nome = (String) request.getParameter("nomeUsuario");
-			String login = (String) request.getParameter("loginUsuario");
-			String senha = (String) request.getParameter("senhaUsuario");
 			String rg = (String) request.getParameter("rgUsuario");
 			String cpf = (String) request.getParameter("cpfUsuario");
-			DateFormat formatter = new SimpleDateFormat("MM/dd/yy");  
-			Date dtnasc = (Date)formatter.parse(request.getParameter("dtNascUsuario"));
+			@SuppressWarnings("deprecation")
+			Date dtnasc = new Date(request.getParameter("dtNascUsuario"));
 			String sexo = (String) request.getParameter("sexoUsuario");
 			String perfil = (String) request.getParameter("perfilUsuario");
-			if (validaCampos(nome, login, senha, rg, cpf, dtnasc, sexo, perfil)){
+			if (validaCampos(nome, rg, cpf, sexo, perfil)){
 				Usuario usuario = new Usuario();
 				usuario = (Usuario)objetoSessao.getAttribute("usuario");
 				usuario.setNomeUsuario((String)request.getParameter("nomeUsuario"));								
@@ -133,18 +125,23 @@ public class ServletUsuario extends HttpServlet {
 				RequestDispatcher disp = request.getRequestDispatcher("usuario_alterar.jsp");
 				disp.forward(request, response);
 			}
-			}catch(Exception e){
-				e.printStackTrace();
-			}
+			
 		}
 	}
 
-	public boolean validaCampos(String nome, String login, String senha,
-			String rg, String cpf, Date dtnasc, String sexo, String perfil) {
+	public boolean validaCampos(String nome, String rg, String cpf, String sexo, String perfil) {
 		boolean result = false;
 		if ((nome == null) || (nome.length() < 5)) {
 			mensagem = "Preencha o nome do usuário corretamente.";
-		} else {
+		}else if ((rg == null) || (rg.length() < 5)) {
+			mensagem = "Preencha o rg do usuário corretamente.";
+		}else if ((cpf == null) || (cpf.length() < 11)) {
+			mensagem = "Preencha o cpf do usuário corretamente.";
+		}else if (sexo == null) {
+			mensagem = "Preencha o sexo do usuário corretamente.";
+		}else if (perfil == null) {
+			mensagem = "Preencha o perfil do usuário corretamente.";
+		}else {
 			result = true;
 		}
 		return result;

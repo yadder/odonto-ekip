@@ -1,7 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import javax.persistence.*;
 
 @Entity
@@ -15,8 +15,6 @@ public class Usuario implements Serializable {
     private long codigoUsuario;
     @Column(name = "nome_usuario", nullable = false, length = 50)
     private String nomeUsuario;
-    @Column(name = "login_usuario", nullable = false, length = 20)
-    private String loginUsuario;
     @Column(name = "senha_usuario", nullable = false, length = 20)
     private String senhaUsuario;
     @Column(name = "perfil_usuario", nullable = false, length = 20)
@@ -34,21 +32,18 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(String login, String senha) {
-        this.loginUsuario = login;
+    public Usuario(String cpf, String senha) {
+        this.cpfUsuario = cpf;
         this.senhaUsuario = senha;
     }
 
-    public Usuario(String nomeUsuario, String loginUsuario,
-			String senhaUsuario, String perfilUsuario, String rgUsuario,
-			String cpfUsuario, Date dataNascimentoUsuario, String sexoUsuario) {
+    public Usuario(String nomeUsuario, String senhaUsuario, String perfilUsuario, String rgUsuario,
+			String cpfUsuario, String sexoUsuario) {
 		this.nomeUsuario = nomeUsuario;
-		this.loginUsuario = loginUsuario;
 		this.senhaUsuario = senhaUsuario;
 		this.perfilUsuario = perfilUsuario;
 		this.rgUsuario = rgUsuario;
 		this.cpfUsuario = cpfUsuario;
-		this.dataNascimentoUsuario = dataNascimentoUsuario;
 		this.sexoUsuario = sexoUsuario;
 	}
     
@@ -71,14 +66,6 @@ public class Usuario implements Serializable {
 
     public void setNomeUsuario(String nomeUsuario) {
         this.nomeUsuario = nomeUsuario;
-    }
-
-    public String getLoginUsuario() {
-        return loginUsuario;
-    }
-
-    public void setLoginUsuario(String loginUsuario) {
-        this.loginUsuario = loginUsuario;
     }
 
     public String getSenhaUsuario() {
@@ -129,12 +116,4 @@ public class Usuario implements Serializable {
         this.sexoUsuario = sexoUsuario;
     }
 
-    @Override
-    public String toString() {
-        return 
-        		" Nome: " +getNomeUsuario()+
-        		" Login: " +getLoginUsuario()+
-        		" Senha: " +getSenhaUsuario();
-    }
-    
 }

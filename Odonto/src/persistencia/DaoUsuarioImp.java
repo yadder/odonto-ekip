@@ -84,11 +84,11 @@ public class DaoUsuarioImp implements DaoUsuario {
 		return u;
 	}
 	
-	public Usuario pesquisarUsuarioPorNome(String nome){
+	public Usuario pesquisarUsuarioPorCpf(String cpf){
 		Usuario u = null;
 		try{
 			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(Usuario.class).add(Restrictions.eq("nomeUsuario", nome));
+			Criteria cr = session.createCriteria(Usuario.class).add(Restrictions.eq("cpfUsuario", cpf));
 			u = (Usuario) cr.uniqueResult();
 		}catch (HibernateException e){
 			e.printStackTrace();
@@ -99,11 +99,11 @@ public class DaoUsuarioImp implements DaoUsuario {
 		return u;
 	}
 	
-	public Usuario pesquisarUsuarioPorLogin(String login){
+	public Usuario pesquisarUsuarioPorNome(String nome){
 		Usuario usuario = null;
 		try{
 			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(Usuario.class).add(Restrictions.eq("loginUsuario", login));
+			Criteria cr = session.createCriteria(Usuario.class).add(Restrictions.eq("nomeUsuario", nome));
 			usuario = (Usuario)cr.uniqueResult();
 		}catch (HibernateException e) {
 			e.printStackTrace();

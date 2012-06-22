@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="header">
-	<font size="2">${msg} Usuário: ${usuarioLogado.loginUsuario}
+	<font size="2">${msg} Usuário: ${usuarioLogado.nomeUsuario}
 	</font>
 	<form name="logout" action="ServletPrincipal" method="post">
 		<input type="submit" value="Logout" />

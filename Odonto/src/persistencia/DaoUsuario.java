@@ -16,7 +16,7 @@ public interface DaoUsuario {
 	
 	Usuario pesquisarUsuarioPorNome(String nome);
 	
-	Usuario pesquisarUsuarioPorLogin(String login);
+	Usuario pesquisarUsuarioPorCpf(String cpf);
 	
 	List<Usuario> pesquisarTodosUsuario();
 }
