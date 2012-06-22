@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cadastro de face</title>
+<script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body>
 <div class="header">
