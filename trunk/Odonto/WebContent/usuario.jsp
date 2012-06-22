@@ -15,20 +15,12 @@
 			<td><input type="text" name="nomeUsuario" value="${usuario.nomeUsuario}" size="20" /></td>
 		</tr>
 		<tr>
-			<td align="right">Login:</td>
-			<td><input type="text" name="loginUsuario" value="${usuario.loginUsuario}" size="20" /></td>
-		</tr>
-		<tr>
-			<td align="right">Senha:</td>
-			<td><input type="text" name="senhaUsuario" value="${usuario.senhaUsuario}" size="20" /></td>
-		</tr>
-		<tr>
-			<td align="right">RG:</td>
+			<td align="right">Rg:</td>
 			<td><input type="text" name="rgUsuario" value="${usuario.rgUsuario}" size="20" /></td>
 		</tr>
 		<tr>
-			<td align="right">CPF:</td>
-			<td><input type="text" name="cpfUsuario" value="${usuario.cpfUsuario}" size="20" /></td>
+			<td align="right">Cpf:</td>
+			<td><input type="text" name="cpfUsuario" value="${usuario.cpfUsuario}" size="20" maxlength="11" /></td>
 		</tr>
 		<tr>
 			<td align="right">Data nasc.:</td>
@@ -36,7 +28,11 @@
 		</tr>
 		<tr>
 			<td align="right">Sexo:</td>
-			<td><input type="text" name="sexoUsuario" value="${usuario.sexoUsuario}" size="20" /></td>
+			<td><select name="sexoUsuario">
+					<option value="${usuario.sexoUsuario}">MASCULINO</option>
+					<option value="${usuario.sexoUsuario}">FEMININO</option>
+				</select>
+			</td>
 		</tr>
 		<tr>
 			<td align="right">Perfil:</td>

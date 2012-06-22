@@ -25,14 +25,14 @@ public class ServletLogin extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String login = (String)request.getParameter("login");
+		String cpf = (String)request.getParameter("login");
 		String senha = (String)request.getParameter("senha");
 		String mensagem = null;
 		HttpSession objetoSessao;
 		
-		Usuario usuarioLogado = new Usuario(login, senha);
+		Usuario usuarioLogado = new Usuario(cpf, senha);
 		DaoUsuario dao = new DaoUsuarioImp();
-		usuarioLogado = dao.pesquisarUsuarioPorLogin(login);
+		usuarioLogado = dao.pesquisarUsuarioPorCpf(cpf);
 		
 		if ((usuarioLogado != null) && (usuarioLogado.getSenhaUsuario().equals(senha))){
 	        // resgata a sessao
@@ -42,7 +42,7 @@ public class ServletLogin extends HttpServlet {
 		    { // se nao existe, cria um novo objeto session
 		        objetoSessao = request.getSession(true);
 		    }  
-			// seta o usuario na sessao
+			// seta o usuarioLogado na sessao
 			objetoSessao.setAttribute("usuarioLogado", usuarioLogado);
 			mensagem = "Seja bem vindo! ";
 			request.setAttribute("msg", mensagem);
