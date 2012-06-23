@@ -71,7 +71,7 @@ public class DaoPrescricaoImp implements DaoPrescricao {
 		Prescricao e = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			e = (Prescricao)session.get(Prescricao.class, prescricao.getCodigoPrescricao());
+			e = (Prescricao)session.get(Prescricao.class, prescricao.getIdPrescricao());
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		}finally{

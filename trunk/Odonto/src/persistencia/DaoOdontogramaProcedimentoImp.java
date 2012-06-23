@@ -71,7 +71,7 @@ public class DaoOdontogramaProcedimentoImp implements DaoOdontogramaProcedimento
 		OdontogramaProcedimento e = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			e = (OdontogramaProcedimento)session.get(OdontogramaProcedimento.class, odontogramaProcedimento.getCodigoOdontogramaProcedimeto());
+			e = (OdontogramaProcedimento)session.get(OdontogramaProcedimento.class, odontogramaProcedimento.getIdOdontogramaProcedimeto());
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		}finally{

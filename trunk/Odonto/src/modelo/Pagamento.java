@@ -9,8 +9,8 @@ public class Pagamento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_pagamento", nullable = false)
-    private long codigoPagamento;
+    @Column(name = "id_pagamento", nullable = false)
+    private long idPagamento;
     @Column(name = "numero_parcela", nullable = false)
     private int numeroParcela;
     @Column(name = "valor_parcela", nullable = false)
@@ -23,23 +23,23 @@ public class Pagamento implements Serializable {
     public Pagamento() {
     }
 
-    public Pagamento(long codigoPagamento) {
-        this.codigoPagamento = codigoPagamento;
+    public Pagamento(long idPagamento) {
+        this.idPagamento = idPagamento;
     }
 
-    public Pagamento(long codigoPagamento, int numeroParcela, double valorParcela, String statusPagamento) {
-        this.codigoPagamento = codigoPagamento;
+    public Pagamento(long idPagamento, int numeroParcela, double valorParcela, String statusPagamento) {
+        this.idPagamento = idPagamento;
         this.numeroParcela = numeroParcela;
         this.valorParcela = valorParcela;
         this.statusPagamento = statusPagamento;
     }
 
-    public long getCodigoPagamento() {
-        return codigoPagamento;
+    public long getIdPagamento() {
+        return idPagamento;
     }
 
-    public void setCodigoPagamento(long codigoPagamento) {
-        this.codigoPagamento = codigoPagamento;
+    public void setIdPagamento(long idPagamento) {
+        this.idPagamento = idPagamento;
     }
 
     public int getNumeroParcela() {
@@ -80,7 +80,7 @@ public class Pagamento implements Serializable {
 
 	@Override
     public String toString() {
-        return "odonto.Pagamento[ codigoPagamento=" + codigoPagamento + " ]";
+        return "odonto.Pagamento[ idPagamento=" + idPagamento + " ]";
     }
     
 }

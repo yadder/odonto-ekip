@@ -12,8 +12,6 @@ public interface DaoFace {
 	
 	boolean excluirFace(Face face);
 	
-	Face pesquisarFace(Face face);
-	
 	Face pesquisarFacePorNome(String nome);
 	
 	List<Face> pesquisarTodosFace();

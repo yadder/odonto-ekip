@@ -9,35 +9,35 @@ public class TelefoneFornecedor implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_telefone", nullable = false)
-    private long codigoTelefone;
+    @Column(name = "id_telefone", nullable = false)
+    private long idTelefone;
     @Column(name = "ddd_telefone_fornecedor", nullable = false, length = 2)
     private String dddTelefoneFornecedor;
     @Column(name = "telefone_fornecedor", nullable = false, length = 9)
     private String telefoneFornecedor;
-    @JoinColumn(name = "codigo_fornecedor", referencedColumnName = "codigo_fornecedor", nullable = false)
+    @JoinColumn(name = "id_fornecedor", referencedColumnName = "id_fornecedor", nullable = false)
     @ManyToOne(optional = false)
-    private Fornecedor codigoFornecedor;
+    private Fornecedor idFornecedor;
 
     public TelefoneFornecedor() {
     }
 
-    public TelefoneFornecedor(long codigoTelefone) {
-        this.codigoTelefone = codigoTelefone;
+    public TelefoneFornecedor(long idTelefone) {
+        this.idTelefone = idTelefone;
     }
 
-    public TelefoneFornecedor(long codigoTelefone, String dddTelefoneFornecedor, String telefoneFornecedor) {
-        this.codigoTelefone = codigoTelefone;
+    public TelefoneFornecedor(long idTelefone, String dddTelefoneFornecedor, String telefoneFornecedor) {
+        this.idTelefone = idTelefone;
         this.dddTelefoneFornecedor = dddTelefoneFornecedor;
         this.telefoneFornecedor = telefoneFornecedor;
     }
 
-    public long getCodigoTelefone() {
-        return codigoTelefone;
+    public long getIdTelefone() {
+        return idTelefone;
     }
 
-    public void setCodigoTelefone(long codigoTelefone) {
-        this.codigoTelefone = codigoTelefone;
+    public void setIdTelefone(long idTelefone) {
+        this.idTelefone = idTelefone;
     }
 
     public String getDddTelefoneFornecedor() {
@@ -56,17 +56,17 @@ public class TelefoneFornecedor implements Serializable {
         this.telefoneFornecedor = telefoneFornecedor;
     }
 
-    public Fornecedor getCodigoFornecedor() {
-        return codigoFornecedor;
+    public Fornecedor getIdFornecedor() {
+        return idFornecedor;
     }
 
-    public void setCodigoFornecedor(Fornecedor codigoFornecedor) {
-        this.codigoFornecedor = codigoFornecedor;
+    public void setIdFornecedor(Fornecedor idFornecedor) {
+        this.idFornecedor = idFornecedor;
     }
 
     @Override
     public String toString() {
-        return "odonto.TelefoneFornecedor[ codigoTelefone=" + codigoTelefone + " ]";
+        return "odonto.TelefoneFornecedor[ idTelefone=" + idTelefone + " ]";
     }
     
 }

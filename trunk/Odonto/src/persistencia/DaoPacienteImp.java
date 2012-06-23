@@ -67,19 +67,6 @@ public class DaoPacienteImp implements DaoPaciente {
 		return retorno;
 	}
 
-	public Paciente pesquisarPaciente(Paciente paciente) {
-		Paciente e = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			e = (Paciente)session.get(Paciente.class, paciente.getCodigoUsuario());
-		} catch (HibernateException ex) {
-			ex.printStackTrace();
-		}finally{
-			session.close();
-		}
-		return e;
-	}
-
 	public List<Paciente> pesquisarTodosPaciente() {
 		ArrayList lista = null;
 		try {

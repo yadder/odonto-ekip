@@ -12,8 +12,6 @@ public interface DaoUsuario {
 	
 	boolean excluirUsuario(Usuario usuario);
 	
-	Usuario pesquisarUsuario(Usuario usuario);
-	
 	Usuario pesquisarUsuarioPorNome(String nome);
 	
 	Usuario pesquisarUsuarioPorCpf(String cpf);

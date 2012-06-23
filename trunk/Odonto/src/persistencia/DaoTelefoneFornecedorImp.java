@@ -71,7 +71,7 @@ public class DaoTelefoneFornecedorImp implements DaoTelefoneFornecedor {
 		TelefoneFornecedor e = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			e = (TelefoneFornecedor)session.get(TelefoneFornecedor.class, telefoneFornecedor.getCodigoTelefone());
+			e = (TelefoneFornecedor)session.get(TelefoneFornecedor.class, telefoneFornecedor.getIdTelefone());
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		}finally{

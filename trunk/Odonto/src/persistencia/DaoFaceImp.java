@@ -68,19 +68,6 @@ public class DaoFaceImp implements DaoFace {
 		return retorno;
 	}
 
-	public Face pesquisarFace(Face face) {
-		Face f = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			f = (Face)session.get(Face.class, face.getCodigoFace());
-		} catch (HibernateException e) {
-			e.printStackTrace();
-		}finally{
-			session.close();
-		}
-		return f;
-	}
-	
 	public Face pesquisarFacePorNome(String nome){
 		Face f = null;
 		try{

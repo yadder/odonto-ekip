@@ -9,25 +9,25 @@ public class Convenio implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_convenio", nullable = false)
-    private long codigoConvenio;
+    @Column(name = "id_convenio", nullable = false)
+    private long idConvenio;
     @Column(name = "nome_convenio", nullable = false, length = 50, unique=true)
     private String nomeConvenio;
 
     public Convenio(){
     	
     }
-    public Convenio(long codigoConvenio, String nomeConvenio) {
-        this.codigoConvenio = codigoConvenio;
+    public Convenio(long idConvenio, String nomeConvenio) {
+        this.idConvenio = idConvenio;
     	this.nomeConvenio = nomeConvenio;
     }
 
-    public long getCodigoConvenio() {
-        return codigoConvenio;
+    public long getIdConvenio() {
+        return idConvenio;
     }
 
-    public void setCodigoConvenio(long codigoConvenio) {
-        this.codigoConvenio = codigoConvenio;
+    public void setIdConvenio(long idConvenio) {
+        this.idConvenio = idConvenio;
     }
 
     public String getNomeConvenio() {

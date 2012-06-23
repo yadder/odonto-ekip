@@ -72,7 +72,7 @@ public class DaoPagamentoImp implements DaoPagamento {
 		List lista = null;
 		try{
 			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(Pagamento.class).createCriteria("paciente").add(Restrictions.eq("codigo_pagamento",paciente.getCodigoUsuario()));
+			Criteria cr = session.createCriteria(Pagamento.class).createCriteria("paciente").add(Restrictions.eq("codigo_pagamento",paciente.getIdUsuario()));
 			lista = (List)cr.list();
 		}catch(HibernateException e){
 			session.close();

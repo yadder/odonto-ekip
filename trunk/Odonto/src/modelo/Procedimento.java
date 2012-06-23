@@ -11,37 +11,37 @@ public class Procedimento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_procedimento", nullable = false)
-    private long codigoProcedimento;
+    @Column(name = "id_procedimento", nullable = false)
+    private long idProcedimento;
     @Column(name = "descricao_procedimento", nullable = false, length = 50)
     private String descricaoProcedimento;
     @Column(name = "valor_procedimento", nullable = false)
     private double valorProcedimento;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoProcedimento")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProcedimento")
     private List<OdontogramaProcedimento> odontogramaProcedimentoList;
-    @JoinColumn(name = "codigo_convenio", referencedColumnName = "codigo_convenio", nullable = false)
+    @JoinColumn(name = "id_convenio", referencedColumnName = "id_convenio", nullable = false)
     @ManyToOne(optional = false)
-    private Convenio codigoConvenio;
+    private Convenio idConvenio;
 
     public Procedimento() {
     }
 
-    public Procedimento(long codigoProcedimento) {
-        this.codigoProcedimento = codigoProcedimento;
+    public Procedimento(long idProcedimento) {
+        this.idProcedimento = idProcedimento;
     }
 
-    public Procedimento(long codigoProcedimento, String descricaoProcedimento, double valorProcedimento) {
-        this.codigoProcedimento = codigoProcedimento;
+    public Procedimento(long idProcedimento, String descricaoProcedimento, double valorProcedimento) {
+        this.idProcedimento = idProcedimento;
         this.descricaoProcedimento = descricaoProcedimento;
         this.valorProcedimento = valorProcedimento;
     }
 
-    public long getCodigoProcedimento() {
-        return codigoProcedimento;
+    public long getIdProcedimento() {
+        return idProcedimento;
     }
 
-    public void setCodigoProcedimento(long codigoProcedimento) {
-        this.codigoProcedimento = codigoProcedimento;
+    public void setIdProcedimento(long idProcedimento) {
+        this.idProcedimento = idProcedimento;
     }
 
     public String getDescricaoProcedimento() {
@@ -69,17 +69,17 @@ public class Procedimento implements Serializable {
         this.odontogramaProcedimentoList = odontogramaProcedimentoList;
     }
 
-    public Convenio getCodigoConvenio() {
-        return codigoConvenio;
+    public Convenio getIdConvenio() {
+        return idConvenio;
     }
 
-    public void setCodigoConvenio(Convenio codigoConvenio) {
-        this.codigoConvenio = codigoConvenio;
+    public void setIdConvenio(Convenio idConvenio) {
+        this.idConvenio = idConvenio;
     }
 
     @Override
     public String toString() {
-        return "odonto.Procedimento[ codigoProcedimento=" + codigoProcedimento + " ]";
+        return "odonto.Procedimento[ idProcedimento=" + idProcedimento + " ]";
     }
     
 }

@@ -9,8 +9,8 @@ public class TelefonePaciente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_telefone", nullable = false)
-    private long codigoTelefone;
+    @Column(name = "id_telefone", nullable = false)
+    private long idTelefone;
     @Column(name = "ddd_telefone_paciente", nullable = false, length = 2)
     private String dddTelefonePaciente;
     @Column(name = "telefone_paciente", nullable = false, length = 9)
@@ -23,22 +23,22 @@ public class TelefonePaciente implements Serializable {
     public TelefonePaciente() {
     }
 
-    public TelefonePaciente(long codigoTelefone) {
-        this.codigoTelefone = codigoTelefone;
+    public TelefonePaciente(long idTelefone) {
+        this.idTelefone = idTelefone;
     }
 
-    public TelefonePaciente(long codigoTelefone, String dddTelefonePaciente, String telefonePaciente) {
-        this.codigoTelefone = codigoTelefone;
+    public TelefonePaciente(long idTelefone, String dddTelefonePaciente, String telefonePaciente) {
+        this.idTelefone = idTelefone;
         this.dddTelefonePaciente = dddTelefonePaciente;
         this.telefonePaciente = telefonePaciente;
     }
 
-    public long getCodigoTelefone() {
-        return codigoTelefone;
+    public long getIdTelefone() {
+        return idTelefone;
     }
 
-    public void setCodigoTelefone(long codigoTelefone) {
-        this.codigoTelefone = codigoTelefone;
+    public void setIdTelefone(long idTelefone) {
+        this.idTelefone = idTelefone;
     }
 
     public String getDddTelefonePaciente() {
@@ -72,7 +72,7 @@ public class TelefonePaciente implements Serializable {
 
 	@Override
     public String toString() {
-        return "odonto.TelefonePaciente[ codigoTelefone=" + codigoTelefone + " ]";
+        return "odonto.TelefonePaciente[ idTelefone=" + idTelefone + " ]";
     }
     
 }

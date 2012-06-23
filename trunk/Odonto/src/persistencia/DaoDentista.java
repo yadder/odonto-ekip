@@ -12,7 +12,5 @@ public interface DaoDentista {
 	
 	boolean excluirDentista(Dentista dentista);
 	
-	Dentista pesquisarDentista(Dentista dentista);
-	
 	List<Dentista> pesquisarTodosDentista();
 }

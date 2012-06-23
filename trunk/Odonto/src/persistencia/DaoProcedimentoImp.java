@@ -71,7 +71,7 @@ public class DaoProcedimentoImp implements DaoProcedimento {
 		Procedimento e = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			e = (Procedimento)session.get(Procedimento.class, procedimento.getCodigoProcedimento());
+			e = (Procedimento)session.get(Procedimento.class, procedimento.getIdProcedimento());
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		}finally{

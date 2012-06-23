@@ -27,11 +27,12 @@ public class GerarTabelas {
 			conf.addAnnotatedClass(TelefonePaciente.class);
 			conf.addAnnotatedClass(Usuario.class);
 			
-			SchemaExport sE = new SchemaExport(conf);
-			sE.create(true, true);
+			SchemaExport se = new SchemaExport(conf);
+			se.create(true, true);
 			System.out.println("Tabelas criadas com êxito.");
 		}catch(Exception e){
 			System.out.println("Erro ao criar as tabelas: "+ e.getMessage());
+			System.out.println("Causa: "+ e.getCause());
 		}
 		
 	}

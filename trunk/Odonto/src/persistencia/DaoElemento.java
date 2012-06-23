@@ -12,8 +12,6 @@ public interface DaoElemento {
 	
 	boolean excluirElemento(Elemento elemento);
 	
-	Elemento pesquisarElemento(Elemento elemento);
-	
 	Elemento pesquisarElementoPorNome(String nome);
 	
 	List<Elemento> pesquisarTodosElemento();

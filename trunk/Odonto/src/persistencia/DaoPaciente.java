@@ -12,7 +12,5 @@ public interface DaoPaciente {
 	
 	boolean excluirPaciente(Paciente paciente);
 	
-	Paciente pesquisarPaciente(Paciente paciente);
-	
 	List<Paciente> pesquisarTodosPaciente();
 }

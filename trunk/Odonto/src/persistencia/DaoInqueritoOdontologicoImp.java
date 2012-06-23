@@ -71,7 +71,7 @@ public class DaoInqueritoOdontologicoImp implements DaoInqueritoOdontologico {
 		InqueritoOdontologico e = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			e = (InqueritoOdontologico)session.get(InqueritoOdontologico.class, inqueritoOdontologico.getCodigoInqueritoOdontologico());
+			e = (InqueritoOdontologico)session.get(InqueritoOdontologico.class, inqueritoOdontologico.getIdInqueritoOdontologico());
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		}finally{

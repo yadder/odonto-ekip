@@ -10,8 +10,8 @@ public class Prescricao implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_prescricao", nullable = false)
-    private long codigoPrescricao;
+    @Column(name = "id_prescricao", nullable = false)
+    private long idPrescricao;
     
     @Column(name = "observacao", nullable = false, length = 255)
     private String observacao;
@@ -46,21 +46,21 @@ public class Prescricao implements Serializable {
 		return serialVersionUID;
 	}
 
-	public Prescricao(long codigoPrescricao) {
-        this.codigoPrescricao = codigoPrescricao;
+	public Prescricao(long idPrescricao) {
+        this.idPrescricao = idPrescricao;
     }
 
-    public Prescricao(long codigoPrescricao, String observacao) {
-        this.codigoPrescricao = codigoPrescricao;
+    public Prescricao(long idPrescricao, String observacao) {
+        this.idPrescricao = idPrescricao;
         this.observacao = observacao;
     }
 
-    public long getCodigoPrescricao() {
-        return codigoPrescricao;
+    public long getIdPrescricao() {
+        return idPrescricao;
     }
 
-    public void setCodigoPrescricao(long codigoPrescricao) {
-        this.codigoPrescricao = codigoPrescricao;
+    public void setIdPrescricao(long idPrescricao) {
+        this.idPrescricao = idPrescricao;
     }
 
     public String getObservacao() {
@@ -73,7 +73,7 @@ public class Prescricao implements Serializable {
 
     @Override
     public String toString() {
-        return "odonto.Prescricao[ codigoPrescricao=" + codigoPrescricao + " ]";
+        return "odonto.Prescricao[ idPrescricao=" + idPrescricao + " ]";
     }
    
 }

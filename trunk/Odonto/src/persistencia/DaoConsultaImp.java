@@ -71,7 +71,7 @@ public class DaoConsultaImp implements DaoConsulta {
 		Consulta e = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			e = (Consulta)session.get(Consulta.class, consulta.getCodigoConsulta());
+			e = (Consulta)session.get(Consulta.class, consulta.getIdConsulta());
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		}finally{

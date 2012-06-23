@@ -11,8 +11,8 @@ public class Fornecedor implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_fornecedor", nullable = false)
-    private long codigoFornecedor;
+    @Column(name = "id_fornecedor", nullable = false)
+    private long idFornecedor;
     @Column(name = "site_fornecedor", length = 50)
     private String siteFornecedor;
     @Column(name = "cnpj_fornecedor", nullable = false, length = 18)
@@ -37,30 +37,30 @@ public class Fornecedor implements Serializable {
     private String estadoFornecedor;
     @Column(name = "cep_fornecedor", length = 10)
     private String cepFornecedor;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoFornecedor")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFornecedor")
     private List<TelefoneFornecedor> telefoneFornecedorList;
 
     public Fornecedor() {
     }
 
-    public Fornecedor(long codigoFornecedor) {
-        this.codigoFornecedor = codigoFornecedor;
+    public Fornecedor(long idFornecedor) {
+        this.idFornecedor = idFornecedor;
     }
 
-    public Fornecedor(long codigoFornecedor, String cnpjFornecedor, String nomeFornecedor, String nomeVendedor, String emailVendedor) {
-        this.codigoFornecedor = codigoFornecedor;
+    public Fornecedor(long idFornecedor, String cnpjFornecedor, String nomeFornecedor, String nomeVendedor, String emailVendedor) {
+        this.idFornecedor = idFornecedor;
         this.cnpjFornecedor = cnpjFornecedor;
         this.nomeFornecedor = nomeFornecedor;
         this.nomeVendedor = nomeVendedor;
         this.emailVendedor = emailVendedor;
     }
 
-    public long getCodigoFornecedor() {
-        return codigoFornecedor;
+    public long getIdFornecedor() {
+        return idFornecedor;
     }
 
-    public void setCodigoFornecedor(Integer codigoFornecedor) {
-        this.codigoFornecedor = codigoFornecedor;
+    public void setIdFornecedor(Integer idFornecedor) {
+        this.idFornecedor = idFornecedor;
     }
 
     public String getSiteFornecedor() {

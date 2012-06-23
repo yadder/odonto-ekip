@@ -2,8 +2,8 @@ package persistencia;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import modelo.Elemento;
-import modelo.Face;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -69,19 +69,6 @@ public class DaoElementoImp implements DaoElemento {
 		return retorno;
 	}
 
-	public Elemento pesquisarElemento(Elemento elemento) {
-		Elemento e = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			e = (Elemento)session.get(Elemento.class, elemento.getCodigoElemento());
-		} catch (HibernateException ex) {
-			ex.printStackTrace();
-		}finally{
-			session.close();
-		}
-		return e;
-	}
-	
 	public Elemento pesquisarElementoPorNome(String nome){
 		Elemento e = null;
 		try{
