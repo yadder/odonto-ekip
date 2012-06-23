@@ -4,7 +4,7 @@ function aviso(){
 
 function confirmarExclusao(){
 	if (confirm("Deseja realmente excluir?")){
-		document.formulario.submit();
+		getElementById("form").submit();
 	}
 }
 

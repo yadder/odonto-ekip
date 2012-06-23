@@ -10,8 +10,8 @@ public class Odontograma implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_odontograma", nullable = false)
-    private long codigoOdontograma;
+    @Column(name = "id_odontograma", nullable = false)
+    private long idOdontograma;
     @Column(name = "valor_odontograma", nullable = false)
     private double valorOdontograma;
     @Column(name = "data_inicio_odontograma", nullable = false)
@@ -34,8 +34,8 @@ public class Odontograma implements Serializable {
     public Odontograma() {
     }
 
-    public Odontograma(long codigoOdontograma) {
-        this.codigoOdontograma = codigoOdontograma;
+    public Odontograma(long idOdontograma) {
+        this.idOdontograma = idOdontograma;
     }
 
     public Date getDataInicioOdontograma() {
@@ -54,12 +54,12 @@ public class Odontograma implements Serializable {
 		this.dataFimOdontograma = dataFimOdontograma;
 	}
 
-	public long getCodigoOdontograma() {
-        return codigoOdontograma;
+	public long getIdOdontograma() {
+        return idOdontograma;
     }
 
-    public void setCodigoOdontograma(long codigoOdontograma) {
-        this.codigoOdontograma = codigoOdontograma;
+    public void setIdOdontograma(long idOdontograma) {
+        this.idOdontograma = idOdontograma;
     }
 
     public double getValorOdontograma() {
@@ -100,7 +100,7 @@ public class Odontograma implements Serializable {
 
 	@Override
     public String toString() {
-        return "odonto.Odontograma[ codigoOdontograma=" + codigoOdontograma + " ]";
+        return "odonto.Odontograma[ idOdontograma=" + idOdontograma + " ]";
     }
     
 }

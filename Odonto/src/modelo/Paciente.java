@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "tb_paciente")
-@PrimaryKeyJoinColumn(name="codigoUsuario")
+@PrimaryKeyJoinColumn(name="idUsuario")
 public class Paciente extends Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Column(name = "responsavel_paciente", length = 50)

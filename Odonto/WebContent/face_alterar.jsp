@@ -9,7 +9,7 @@
 <div class="header">
 	<h3>${msg}</h3>
 </div>
-<form name="formulario" id="formulario" method="post" action="ServletFace">
+<form name="form" id="form" method="post" action="ServletFace?method=doPost">
 	<table>
 		<tr>
 			<td align="right">Nome da face:</td>
@@ -17,7 +17,7 @@
 		</tr>
 		<tr>
 			<td colspan=2 align="center">
-				<input type="submit" name="btn" value="Excluir" onclick="return confirmarExclusao()" />
+				<input type="button" name="btn" value="Excluir" onclick="confirmarExclusao()" />
 				<input type="submit" name="btn" value="Alterar" />
 				<input type="submit" name="btn" value="Voltar" />
 			</td>

@@ -11,8 +11,8 @@ public class Consulta implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_consulta", nullable = false)
-    private long codigoConsulta;
+    @Column(name = "id_consulta", nullable = false)
+    private long idConsulta;
     @Column(name = "data_consulta", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dataConsulta;
@@ -31,22 +31,22 @@ public class Consulta implements Serializable {
     public Consulta() {
     }
 
-    public Consulta(Integer codigoConsulta) {
-        this.codigoConsulta = codigoConsulta;
+    public Consulta(Integer idConsulta) {
+        this.idConsulta = idConsulta;
     }
 
-    public Consulta(long codigoConsulta, Date dataConsulta, String statusConsulta) {
-        this.codigoConsulta = codigoConsulta;
+    public Consulta(long idConsulta, Date dataConsulta, String statusConsulta) {
+        this.idConsulta = idConsulta;
         this.dataConsulta = dataConsulta;
         this.statusConsulta = statusConsulta;
     }
 
-    public long getCodigoConsulta() {
-        return codigoConsulta;
+    public long getIdConsulta() {
+        return idConsulta;
     }
 
-    public void setCodigoConsulta(long codigoConsulta) {
-        this.codigoConsulta = codigoConsulta;
+    public void setIdConsulta(long idConsulta) {
+        this.idConsulta = idConsulta;
     }
 
     public Date getDataConsulta() {

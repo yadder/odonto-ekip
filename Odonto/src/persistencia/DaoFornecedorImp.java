@@ -71,7 +71,7 @@ public class DaoFornecedorImp implements DaoFornecedor {
 		Fornecedor e = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			e = (Fornecedor)session.get(Fornecedor.class, fornecedor.getCodigoFornecedor());
+			e = (Fornecedor)session.get(Fornecedor.class, fornecedor.getIdFornecedor());
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		}finally{

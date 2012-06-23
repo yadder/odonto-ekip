@@ -17,8 +17,8 @@ public class Face implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="codigo_face")
-	private long codigoFace;
+	@Column(name="id_face")
+	private long idFace;
 	
 	@Column(name="nome_face", nullable=false, unique=true, length=30)
 	private String nomeFace;
@@ -27,7 +27,7 @@ public class Face implements Serializable{
 	}
 	
 	public Face(int codigo, String nome){
-		this.codigoFace = codigo;
+		this.idFace = codigo;
 		this.nomeFace = nome;
 	}
 	
@@ -35,12 +35,12 @@ public class Face implements Serializable{
 		this.nomeFace = nome;
 	}
 
-	public long getCodigoFace() {
-		return codigoFace;
+	public long getIdFace() {
+		return idFace;
 	}
 
-	public void setCodigoFace(long codigoFace) {
-		this.codigoFace = codigoFace;
+	public void setIdFace(long idFace) {
+		this.idFace = idFace;
 	}
 
 	public String getNomeFace() {
@@ -57,6 +57,6 @@ public class Face implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Código: "+ codigoFace + " Nome: " +nomeFace;
+		return "ID: "+ idFace + " Nome: " +nomeFace;
 	}
 }

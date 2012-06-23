@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_dentista")
-@PrimaryKeyJoinColumn(name="codigoUsuario") 
+@PrimaryKeyJoinColumn(name="idUsuario") 
 public class Dentista extends Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
 

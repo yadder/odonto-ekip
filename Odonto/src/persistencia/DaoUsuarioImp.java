@@ -71,19 +71,6 @@ public class DaoUsuarioImp implements DaoUsuario {
 		return retorno;
 	}
 
-	public Usuario pesquisarUsuario(Usuario usuario) {
-		Usuario u = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			u = (Usuario)session.get(Usuario.class, usuario.getCodigoUsuario());
-		} catch (HibernateException ex) {
-			ex.printStackTrace();
-		}finally{
-			session.close();
-		}
-		return u;
-	}
-	
 	public Usuario pesquisarUsuarioPorCpf(String cpf){
 		Usuario u = null;
 		try{

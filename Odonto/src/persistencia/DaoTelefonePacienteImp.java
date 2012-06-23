@@ -71,7 +71,7 @@ public class DaoTelefonePacienteImp implements DaoTelefonePaciente {
 		TelefonePaciente e = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			e = (TelefonePaciente)session.get(TelefonePaciente.class, telefonePaciente.getCodigoTelefone());
+			e = (TelefonePaciente)session.get(TelefonePaciente.class, telefonePaciente.getIdTelefone());
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		}finally{

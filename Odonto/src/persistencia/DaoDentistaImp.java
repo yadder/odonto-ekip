@@ -67,18 +67,6 @@ public class DaoDentistaImp implements DaoDentista {
 		return retorno;
 	}
 
-	public Dentista pesquisarDentista(Dentista dentista) {
-		Dentista e = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			e = (Dentista)session.get(Dentista.class, dentista.getCodigoUsuario());
-		} catch (HibernateException ex) {
-			ex.printStackTrace();
-		}finally{
-			session.close();
-		}
-		return e;
-	}
 
 	public List<Dentista> pesquisarTodosDentista() {
 		ArrayList lista = null;

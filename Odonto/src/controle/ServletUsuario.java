@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import modelo.Usuario;
 import persistencia.DaoUsuario;
 import persistencia.DaoUsuarioImp;
+import util.ConfiguraAtributo;
 
 public class ServletUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -40,15 +41,15 @@ public class ServletUsuario extends HttpServlet {
 				String nome = (String) request.getParameter("nomeUsuario");
 				String rg = (String) request.getParameter("rgUsuario");
 				String cpf = (String) request.getParameter("cpfUsuario");
-				//@SuppressWarnings("deprecation")
-				//Date dtnasc = new Date(Date.parse(request.getParameter("dtNascUsuario")));
+				String dtnasc = (String) request.getParameter("dtNascUsuario");
 				String sexo = (String) request.getParameter("sexoUsuario");
 				String perfil = (String) request.getParameter("perfilUsuario");
 				String senha = null;
-				if (validaCampos(nome, rg, cpf, sexo, perfil)){
+				if (validaCampos(nome, rg, cpf, dtnasc, sexo, perfil)){
 					// gerar uma string com 6 caracteres para colocar na senha
 					senha = cpf;
-					Usuario usuario = new Usuario(nome, senha, perfil, rg, cpf, sexo);
+					ConfiguraAtributo ca = new ConfiguraAtributo();
+					Usuario usuario = new Usuario(nome, senha, perfil, rg, cpf, sexo, ca.dataStringParaDataSql(dtnasc));
 					DaoUsuario dao = new DaoUsuarioImp();
 					dao.cadastrarUsuario(usuario);
 					mensagem = "Usuário cadastrado com sucesso!";
@@ -98,11 +99,10 @@ public class ServletUsuario extends HttpServlet {
 			String nome = (String) request.getParameter("nomeUsuario");
 			String rg = (String) request.getParameter("rgUsuario");
 			String cpf = (String) request.getParameter("cpfUsuario");
-			@SuppressWarnings("deprecation")
-			Date dtnasc = new Date(request.getParameter("dtNascUsuario"));
+			String dtnasc = request.getParameter("dtNascUsuario");
 			String sexo = (String) request.getParameter("sexoUsuario");
 			String perfil = (String) request.getParameter("perfilUsuario");
-			if (validaCampos(nome, rg, cpf, sexo, perfil)){
+			if (validaCampos(nome, rg, cpf, dtnasc, sexo, perfil)){
 				Usuario usuario = new Usuario();
 				usuario = (Usuario)objetoSessao.getAttribute("usuario");
 				usuario.setNomeUsuario((String)request.getParameter("nomeUsuario"));								
@@ -129,7 +129,7 @@ public class ServletUsuario extends HttpServlet {
 		}
 	}
 
-	public boolean validaCampos(String nome, String rg, String cpf, String sexo, String perfil) {
+	public boolean validaCampos(String nome, String rg, String cpf, String dtnasc, String sexo, String perfil) {
 		boolean result = false;
 		if ((nome == null) || (nome.length() < 5)) {
 			mensagem = "Preencha o nome do usuário corretamente.";
@@ -137,6 +137,8 @@ public class ServletUsuario extends HttpServlet {
 			mensagem = "Preencha o rg do usuário corretamente.";
 		}else if ((cpf == null) || (cpf.length() < 11)) {
 			mensagem = "Preencha o cpf do usuário corretamente.";
+		}else if (dtnasc == null) {
+			mensagem = "Preencha a data de nascimento do usuário corretamente.";
 		}else if (sexo == null) {
 			mensagem = "Preencha o sexo do usuário corretamente.";
 		}else if (perfil == null) {

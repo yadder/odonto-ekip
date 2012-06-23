@@ -21,8 +21,8 @@ public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_usuario", nullable = false)
-    private long codigoUsuario;
+    @Column(name = "id_usuario", nullable = false)
+    private long idUsuario;
     @Column(name = "nome_usuario", nullable = false, length = 50)
     private String nomeUsuario;
     @Column(name = "senha_usuario", nullable = false, length = 20)
@@ -48,13 +48,14 @@ public class Usuario implements Serializable {
     }
 
     public Usuario(String nomeUsuario, String senhaUsuario, String perfilUsuario, String rgUsuario,
-			String cpfUsuario, String sexoUsuario) {
+			String cpfUsuario, String sexoUsuario, java.sql.Date dataNascimentoUsuario) {
 		this.nomeUsuario = nomeUsuario;
 		this.senhaUsuario = senhaUsuario;
 		this.perfilUsuario = perfilUsuario;
 		this.rgUsuario = rgUsuario;
 		this.cpfUsuario = cpfUsuario;
 		this.sexoUsuario = sexoUsuario;
+		this.dataNascimentoUsuario = dataNascimentoUsuario;
 	}
     
     
@@ -62,12 +63,12 @@ public class Usuario implements Serializable {
 		this.nomeUsuario = nomeUsuario;
 	}
 
-	public long getCodigoUsuario() {
-        return codigoUsuario;
+	public long getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setCodigoUsuario(long codigoUsuario) {
-        this.codigoUsuario = codigoUsuario;
+    public void setIdUsuario(long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNomeUsuario() {

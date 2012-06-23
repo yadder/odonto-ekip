@@ -10,8 +10,8 @@ public class InqueritoOdontologico implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_inquerito_odontologico", nullable = false)
-    private long codigoInqueritoOdontologico;
+    @Column(name = "id_inquerito_odontologico", nullable = false)
+    private long idInqueritoOdontologico;
     @Column(name = "tratamento_medico", nullable = false, length = 1)
     private String tratamentoMedico;
     @Column(name = "usando_medicacao", nullable = false, length = 1)
@@ -82,12 +82,12 @@ public class InqueritoOdontologico implements Serializable {
     public InqueritoOdontologico() {
     }
 
-    public InqueritoOdontologico(long codigoInqueritoOdontologico) {
-        this.codigoInqueritoOdontologico = codigoInqueritoOdontologico;
+    public InqueritoOdontologico(long idInqueritoOdontologico) {
+        this.idInqueritoOdontologico = idInqueritoOdontologico;
     }
 
-    public InqueritoOdontologico(long codigoInqueritoOdontologico, String tratamentoMedico, String usandoMedicacao, String alergia, String anemia, String fumante, String hepatite, String alcoolista, String sifilis, String herpesAfta, String hiv, String gravidez, String tuberculose, String diabetes, String asma, String cardiaco, Date dataUltimoAtendimento, String concluiuTratamento, String experienciaNegativaTratamento, String roerUnhas, String respirarPelaBoca, String morderObjetos, String rangerOsDentes, String chuparDedoChupeta, String fioFitaDental, String palito, String unitufoBitufo, String tipoEscova, String interdental, String cremeDental, String ingereAlimentosEntreRefeicoes) {
-        this.codigoInqueritoOdontologico = codigoInqueritoOdontologico;
+    public InqueritoOdontologico(long idInqueritoOdontologico, String tratamentoMedico, String usandoMedicacao, String alergia, String anemia, String fumante, String hepatite, String alcoolista, String sifilis, String herpesAfta, String hiv, String gravidez, String tuberculose, String diabetes, String asma, String cardiaco, Date dataUltimoAtendimento, String concluiuTratamento, String experienciaNegativaTratamento, String roerUnhas, String respirarPelaBoca, String morderObjetos, String rangerOsDentes, String chuparDedoChupeta, String fioFitaDental, String palito, String unitufoBitufo, String tipoEscova, String interdental, String cremeDental, String ingereAlimentosEntreRefeicoes) {
+        this.idInqueritoOdontologico = idInqueritoOdontologico;
         this.tratamentoMedico = tratamentoMedico;
         this.usandoMedicacao = usandoMedicacao;
         this.alergia = alergia;
@@ -120,12 +120,12 @@ public class InqueritoOdontologico implements Serializable {
         this.ingereAlimentosEntreRefeicoes = ingereAlimentosEntreRefeicoes;
     }
 
-    public long getCodigoInqueritoOdontologico() {
-        return codigoInqueritoOdontologico;
+    public long getIdInqueritoOdontologico() {
+        return idInqueritoOdontologico;
     }
 
-    public void setCodigoInqueritoOdontologico(long codigoInqueritoOdontologico) {
-        this.codigoInqueritoOdontologico = codigoInqueritoOdontologico;
+    public void setIdInqueritoOdontologico(long idInqueritoOdontologico) {
+        this.idInqueritoOdontologico = idInqueritoOdontologico;
     }
 
     public String getTratamentoMedico() {
@@ -390,7 +390,7 @@ public class InqueritoOdontologico implements Serializable {
 
 	@Override
     public String toString() {
-        return "odonto.InqueritoOdontologico[ codigoInqueritoOdontologico=" + codigoInqueritoOdontologico + " ]";
+        return "odonto.InqueritoOdontologico[ idInqueritoOdontologico=" + idInqueritoOdontologico + " ]";
     }
     
 }

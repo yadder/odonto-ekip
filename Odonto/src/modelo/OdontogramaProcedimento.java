@@ -9,68 +9,68 @@ public class OdontogramaProcedimento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_odontograma_procedimeto", nullable = false)
-    private long codigoOdontogramaProcedimeto;
+    @Column(name = "id_odontograma_procedimeto", nullable = false)
+    private long idOdontogramaProcedimeto;
     @Column(name = "status_procedimento", nullable = false, length = 20)
     private String statusProcedimento;
-    @JoinColumn(name = "codigo_elemento", referencedColumnName = "codigo_elemento", nullable = false)
+    @JoinColumn(name = "id_elemento", referencedColumnName = "id_elemento", nullable = false)
     @ManyToOne(optional = false)
-    private Elemento codigoElemento;
-    @JoinColumn(name = "codigo_face", referencedColumnName = "codigo_face", nullable = false)
+    private Elemento idElemento;
+    @JoinColumn(name = "id_face", referencedColumnName = "id_face", nullable = false)
     @ManyToOne(optional = false)
-    private Face codigoFace;
-    @JoinColumn(name = "codigo_procedimento", referencedColumnName = "codigo_procedimento", nullable = false)
+    private Face idFace;
+    @JoinColumn(name = "id_procedimento", referencedColumnName = "id_procedimento", nullable = false)
     @ManyToOne(optional = false)
-    private Procedimento codigoProcedimento;
-    @JoinColumn(name = "codigo_odontograma", referencedColumnName = "codigo_odontograma", nullable = false)
+    private Procedimento idProcedimento;
+    @JoinColumn(name = "id_odontograma", referencedColumnName = "id_odontograma", nullable = false)
     @ManyToOne(optional = false)
-    private Odontograma codigoOdontograma;
+    private Odontograma idOdontograma;
 
     public OdontogramaProcedimento() {
     }
 
-    public OdontogramaProcedimento(long codigoOdontogramaProcedimeto) {
-        this.codigoOdontogramaProcedimeto = codigoOdontogramaProcedimeto;
+    public OdontogramaProcedimento(long idOdontogramaProcedimeto) {
+        this.idOdontogramaProcedimeto = idOdontogramaProcedimeto;
     }
 
-    public long getCodigoOdontogramaProcedimeto() {
-        return codigoOdontogramaProcedimeto;
+    public long getIdOdontogramaProcedimeto() {
+        return idOdontogramaProcedimeto;
     }
 
-    public void setCodigoOdontogramaProcedimeto(long codigoOdontogramaProcedimeto) {
-        this.codigoOdontogramaProcedimeto = codigoOdontogramaProcedimeto;
+    public void setIdOdontogramaProcedimeto(long idOdontogramaProcedimeto) {
+        this.idOdontogramaProcedimeto = idOdontogramaProcedimeto;
     }
 
-    public Elemento getCodigoElemento() {
-        return codigoElemento;
+    public Elemento getIdElemento() {
+        return idElemento;
     }
 
-    public void setCodigoElemento(Elemento codigoElemento) {
-        this.codigoElemento = codigoElemento;
+    public void setIdElemento(Elemento idElemento) {
+        this.idElemento = idElemento;
     }
 
-    public Face getCodigoFace() {
-        return codigoFace;
+    public Face getIdFace() {
+        return idFace;
     }
 
-    public void setCodigoFace(Face codigoFace) {
-        this.codigoFace = codigoFace;
+    public void setIdFace(Face idFace) {
+        this.idFace = idFace;
     }
 
-    public Procedimento getCodigoProcedimento() {
-        return codigoProcedimento;
+    public Procedimento getIdProcedimento() {
+        return idProcedimento;
     }
 
-    public void setCodigoProcedimento(Procedimento codigoProcedimento) {
-        this.codigoProcedimento = codigoProcedimento;
+    public void setIdProcedimento(Procedimento idProcedimento) {
+        this.idProcedimento = idProcedimento;
     }
 
-    public Odontograma getCodigoOdontograma() {
-        return codigoOdontograma;
+    public Odontograma getIdOdontograma() {
+        return idOdontograma;
     }
 
-    public void setCodigoOdontograma(Odontograma codigoOdontograma) {
-        this.codigoOdontograma = codigoOdontograma;
+    public void setIdOdontograma(Odontograma idOdontograma) {
+        this.idOdontograma = idOdontograma;
     }
     
     
@@ -88,7 +88,7 @@ public class OdontogramaProcedimento implements Serializable {
 
 	@Override
     public String toString() {
-        return "odonto.OdontogramaProcedimento[ codigoOdontogramaProcedimeto=" + codigoOdontogramaProcedimeto + " ]";
+        return "odonto.OdontogramaProcedimento[ idOdontogramaProcedimeto=" + idOdontogramaProcedimeto + " ]";
     }
     
 }

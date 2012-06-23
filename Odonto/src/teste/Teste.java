@@ -1,12 +1,9 @@
 package teste;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import modelo.Usuario;
 import persistencia.DaoUsuario;
 import persistencia.DaoUsuarioImp;
+import util.ConfiguraAtributo;
 
 public class Teste {
 
@@ -44,21 +41,17 @@ public class Teste {
 		
 		try{
 			System.out.println("--- CADASTRO DE USUARIO ---");
+			ConfiguraAtributo ca = new ConfiguraAtributo();
+			
 			Usuario usuario = new Usuario();
 			usuario.setNomeUsuario("JOSUE");
 			usuario.setSenhaUsuario("JOSUE");
 			usuario.setPerfilUsuario("PACIENTE");
 			usuario.setRgUsuario("123456");
 			usuario.setCpfUsuario("JOSUE");
-			
-			// PARA GRAVAR NO BANCO
-			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");  
-	        java.util.Date dataUtil = df.parse("19/12/1982");  
-	        // converter de java.util.Date para java.sql.Date  
-	        java.sql.Date dataJDBC = new java.sql.Date(dataUtil.getTime());  
-			usuario.setDataNascimentoUsuario(dataJDBC);
+			usuario.setDataNascimentoUsuario(ca.dataStringParaDataSql("19/12/1982"));
 			usuario.setSexoUsuario("M");
-			//////////////////////////////
+
 			DaoUsuario daoUsuario = new DaoUsuarioImp();
 			daoUsuario.cadastrarUsuario(usuario);
 			System.out.println("USUARIO CADASTRADO COM SUCESSO");
@@ -66,12 +59,7 @@ public class Teste {
 			usuario = null;
 			usuario = daoUsuario.pesquisarUsuarioPorCpf("JOSUE");
 			if (usuario != null){
-				System.out.println("DATA NASC USUARIO: "+usuario.getDataNascimentoUsuario());
-				//trazendo do banco
-				SimpleDateFormat iso = new SimpleDateFormat("dd/MM/yyyy");  
-		        String dataISO = iso.format(usuario.getDataNascimentoUsuario());  
-				System.out.println("DATA FORMATADA: "+dataISO);
-		        /////////////////////
+				System.out.println("DATA NASC USUARIO: "+ca.dataSqlParaDataString(usuario.getDataNascimentoUsuario()));
 			}
 		}catch(Exception ex_cad_usuario){
 			ex_cad_usuario.printStackTrace();

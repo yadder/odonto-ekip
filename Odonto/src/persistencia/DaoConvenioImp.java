@@ -71,7 +71,7 @@ public class DaoConvenioImp implements DaoConvenio {
 		Convenio e = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			e = (Convenio)session.get(Convenio.class, convenio.getCodigoConvenio());
+			e = (Convenio)session.get(Convenio.class, convenio.getIdConvenio());
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		}finally{

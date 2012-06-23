@@ -16,8 +16,8 @@ public class Elemento implements Serializable {
     
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="codigo_elemento")
-    private long codigoElemento;
+    @Column(name="id_elemento")
+    private long idElemento;
     
 	@Column(name="nome_elemento", nullable=false, unique=true, length=2)
     private String nomeElemento;
@@ -28,21 +28,21 @@ public class Elemento implements Serializable {
     public Elemento (String nomeElemento){
     	this.nomeElemento = nomeElemento;
     }
-    public Elemento(long codigoElemento) {
-        this.codigoElemento = codigoElemento;
+    public Elemento(long idElemento) {
+        this.idElemento = idElemento;
     }
 
-    public Elemento(long codigoElemento, String nomeElemento) {
-        this.codigoElemento = codigoElemento;
+    public Elemento(long idElemento, String nomeElemento) {
+        this.idElemento = idElemento;
         this.nomeElemento = nomeElemento;
     }
 
-    public long getCodigoElemento() {
-        return codigoElemento;
+    public long getIdElemento() {
+        return idElemento;
     }
 
-    public void setCodigoElemento(Integer codigoElemento) {
-        this.codigoElemento = codigoElemento;
+    public void setIdElemento(Integer idElemento) {
+        this.idElemento = idElemento;
     }
 
     public String getNomeElemento() {
@@ -52,8 +52,6 @@ public class Elemento implements Serializable {
     public void setNomeElemento(String nomeElemento) {
         this.nomeElemento = nomeElemento;
     }
-
-
 }
 
 
