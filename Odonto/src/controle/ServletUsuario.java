@@ -1,7 +1,6 @@
 package controle;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,27 +36,34 @@ public class ServletUsuario extends HttpServlet {
 			disp.forward(request, response);
 			
 		}else if (btn.equals("Cadastrar")){
-		
+				ConfiguraAtributo ca = new ConfiguraAtributo();
 				String nome = (String) request.getParameter("nomeUsuario");
 				String rg = (String) request.getParameter("rgUsuario");
 				String cpf = (String) request.getParameter("cpfUsuario");
 				String dtnasc = (String) request.getParameter("dtNascUsuario");
 				String sexo = (String) request.getParameter("sexoUsuario");
 				String perfil = (String) request.getParameter("perfilUsuario");
+				System.out.println("SEXO: "+sexo+" PERFIL: "+ perfil);
 				String senha = null;
+				Usuario usuario = new Usuario(nome, senha, perfil, rg, cpf, sexo, ca.dataStringParaDataSql(dtnasc));
+				objetoSessao.setAttribute("usuario", usuario);
 				if (validaCampos(nome, rg, cpf, dtnasc, sexo, perfil)){
 					// gerar uma string com 6 caracteres para colocar na senha
 					senha = cpf;
-					ConfiguraAtributo ca = new ConfiguraAtributo();
-					Usuario usuario = new Usuario(nome, senha, perfil, rg, cpf, sexo, ca.dataStringParaDataSql(dtnasc));
+					
+					usuario = new Usuario(nome, senha, perfil, rg, cpf, sexo, ca.dataStringParaDataSql(dtnasc));
 					DaoUsuario dao = new DaoUsuarioImp();
 					dao.cadastrarUsuario(usuario);
 					mensagem = "Usuário cadastrado com sucesso!";
+					objetoSessao.removeAttribute("usuario");
+					objetoSessao.removeAttribute("data");
 					request.setAttribute("msg", mensagem);
 					RequestDispatcher disp = request.getRequestDispatcher("usuario.jsp");
 					disp.forward(request, response);
 				}else{
 					request.setAttribute("msg", mensagem);
+					String data = ca.dataSqlParaDataString(usuario.getDataNascimentoUsuario());
+					objetoSessao.setAttribute("data", data);
 					RequestDispatcher disp = request.getRequestDispatcher("usuario.jsp");
 					disp.forward(request, response);
 				}
@@ -132,16 +138,16 @@ public class ServletUsuario extends HttpServlet {
 	public boolean validaCampos(String nome, String rg, String cpf, String dtnasc, String sexo, String perfil) {
 		boolean result = false;
 		if ((nome == null) || (nome.length() < 5)) {
-			mensagem = "Preencha o nome do usuário corretamente.";
+			mensagem = "Preencha o nome do usuário corretamente. O nome deve ter pelo menos 5 caracteres";
 		}else if ((rg == null) || (rg.length() < 5)) {
-			mensagem = "Preencha o rg do usuário corretamente.";
+			mensagem = "Preencha o RG do usuário corretamente.";
 		}else if ((cpf == null) || (cpf.length() < 11)) {
-			mensagem = "Preencha o cpf do usuário corretamente.";
-		}else if (dtnasc == null) {
+			mensagem = "Preencha o CPF do usuário corretamente.";
+		}else if ((dtnasc == null) || (dtnasc.equals(""))) {
 			mensagem = "Preencha a data de nascimento do usuário corretamente.";
-		}else if (sexo == null) {
+		}else if ((sexo == null) || (sexo.equals(""))) {
 			mensagem = "Preencha o sexo do usuário corretamente.";
-		}else if (perfil == null) {
+		}else if ((perfil == null) || (perfil.equals(""))) {
 			mensagem = "Preencha o perfil do usuário corretamente.";
 		}else {
 			result = true;
