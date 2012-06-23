@@ -1,0 +1,487 @@
+package com.cev.portal.util; 
+
+import com.cev.portal.api.IPortal;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.regex.Pattern;
+import weblogic.utils.encoders.BASE64Decoder;
+import weblogic.utils.encoders.BASE64Encoder;
+
+public abstract class ValidacaoUtil implements IPortal
+{
+	/**
+     * Verifica se eh numerico, suportado por Long.
+     */
+    public static boolean isNumeric(String string) {
+		try {
+			long number = Long.parseLong(string);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	/**
+     * Verifica se eh numerico - double, suportado por Double.
+     */
+    public static boolean isNumericDouble(String string) {
+		try {
+			double number = Double.parseDouble(string);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+    /**
+     * Verifica se eh nulo ou sem preenchimento.
+     */
+    public static boolean isNull(Object value) {
+        return !isOk(value);
+    }
+
+    /**
+     * Valor esta OK, foi preenchido.
+     */
+    public static boolean isOk(Object value) {
+        return (value == null || value.toString().trim().length() <= 0) ? false : true;
+    }
+    
+    /**
+     * Desloca a direita.
+     */
+    public static String rpad(String str, int size, char ch) {
+        String nova = str;
+        size = size - nova.length();
+
+        for (int c = 0; c < size; c++) {
+            nova += ch;
+        }
+
+        return nova;
+    }
+
+    /**
+     * Desloca a esquerda.
+     */
+    public static String lpad(String str, int size, char ch) {
+        String nova = "";
+
+        for (int c = str.length(); c < size; c++) {
+            nova += ch;
+        }
+
+        nova += str;
+
+        return nova;
+    }
+
+    /**
+     * Dimensiona
+     */
+    public static String dimensiona(String string, int size, char tipo) {
+        if (string == null) {
+            return null;
+        }
+        
+        char comp;
+        
+        if (tipo == 'C') {
+            comp = ' ';
+            if (string.length() < size)
+                return rpad(string, size, comp);
+            else
+                return string.substring(0, size);
+        } else {
+            comp = '0';
+            if (string.length() < size)
+                return lpad(string, size, comp);
+            else
+                return string.substring(string.length() - size);
+        }
+    }
+
+    /**
+     * Elimina caracteres, deixando apenas numeros de 0..9.
+     */    
+    public static String getNumericos(String string) {
+		string = string.replaceAll("[^0-9]", "");
+		return string;
+	}
+
+    /**
+     * Elimina caracteres especiais, deixando apenas a..z, A..Z e 0..9
+     */
+	public static String getAlphaNumericos(String string) {
+		string = string.replaceAll("[^a-zA-Z0-9]", "");
+		return string;
+	}
+
+    /**
+     * Elimina caracteres especiais e números, deixando apenas a..z e A..Z
+     */
+	public static String getAlpha(String string) {
+		string = string.replaceAll("[^a-zA-Z]", "");
+		return string;
+	}
+
+    /**
+     * Verifica se o email eh valido (Usar a classe ValidacaoEmail)
+	 * @deprecated
+     */
+    public static boolean isEmailValid(String email) {
+		return ValidacaoEmail.isEmailValid(email);
+    }
+
+    /**
+     * Verifica se senha eh valida
+     */
+    public static boolean isPasswordValid(String pwd) {
+		return !Util.isStringEmpty(pwd);
+    }
+
+    /**
+     * Retorna o mes
+     */
+    public static int pegaMes(String mes) {
+        int i = 0;
+        
+        while (i < ConstantesCliente.MESES.length) {
+            if (mes.equalsIgnoreCase(ConstantesCliente.MESES[i])) {
+                break;
+            }
+            i++;
+        }
+
+        return i;
+    }
+	
+	/**
+	 * Faz o decode dos valores guardados no Cookie.
+	 */
+    public static final String base64Encode(String plainString) {
+		if (isNull(plainString)) {
+			return null;
+		}
+		
+		try {
+			BASE64Encoder encoder = new BASE64Encoder();
+			return new String(encoder.encodeBuffer(plainString.getBytes()));
+		} catch (Exception e) {
+		}
+
+		return null;
+    }
+
+	/**
+	 * Faz o decode dos valores guardados no Cookie.
+	 */
+    public static final String base64Decode(String plainString) {
+        if (isNull(plainString)) {
+			return "";
+		}
+		
+		String decodedString = null;
+        BASE64Decoder decoder = new BASE64Decoder();
+
+        try {
+            byte[] decodedBytes = decoder.decodeBuffer(plainString);
+            decodedString = new String(decodedBytes);
+        } catch (IOException e) {
+        }
+
+        return decodedString;
+    }
+	
+	/**
+	 * Retorna dia do mes.
+	 */
+	public static final int getDayOfMonth(java.util.Date date) {
+		try {
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			return cal.get(Calendar.DAY_OF_MONTH);
+		} catch (Exception e) {
+		}
+		
+		return -1;
+	}
+	
+	/**
+	 * Retorna mes.
+	 */
+	public static final int getMonth(java.util.Date date) {
+		try {
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			return cal.get(Calendar.MONTH);
+		} catch (Exception e) {
+		}
+		
+		return -1;
+	}
+
+	/**
+	 * Retorna mes.
+	 */
+	public static final String getMonthValue(java.util.Date date) {
+		try {
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			
+			return ConstantesCliente.MESES[cal.get(Calendar.MONTH)];
+		} catch (Exception e) {
+		}
+		
+		return null;
+	}
+
+	/**
+	 * Retorna ano.
+	 */
+	public static final int getYear(java.util.Date date) {
+		try {
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			return cal.get(Calendar.YEAR);
+		} catch (Exception e) {
+		}
+		
+		return -1;
+	}
+	
+	/**
+	 * Retorna data de acordo com o dia, mes e ano.
+	 * MesObj: Janeiro, Fevereiro, Marco, etc...Conforme ConstantesCliente.MESES
+	 */
+	public static final Date getDate(Object diaObj, Object mesObj, Object anoObj) {
+		try {
+			int dia = new Integer(diaObj.toString()).intValue();
+			//int mes = pegaMes(mesObj.toString());
+			int mes = new Integer(mesObj.toString()).intValue() - 1; // de 0 a 11
+			int ano = new Integer(anoObj.toString()).intValue();
+
+			return new Date(ano - 1900, mes, dia);
+		} catch (Exception e) {
+		}
+		
+		return null;
+	}
+
+	/**
+	 * Retorna o valor do sexo
+	 */
+	public static final String getSexo(String val) {
+		if (ValidacaoUtil.isOk(val)) {
+			for (int i = 0; i < ConstantesCliente.GENERO.length; i++) {
+				if (ConstantesCliente.GENERO[i].toUpperCase().startsWith(val.toUpperCase())) {
+					return ConstantesCliente.GENERO[i];
+				}
+			}
+		}
+
+		return ConstantesCliente.GENERO[0];
+	}
+ 
+ 
+    /**
+    * VERIFICA O Nº DO AURA
+    **/
+    public static final boolean isAura(String aura){
+        
+        /*
+        
+        int i = 0;
+        int dv = 0;
+        String ncard = "";
+        int pos = 0;
+        double num = 0;
+        double total = 0;
+      
+        if (!isNumeric(aura)){
+            return false;
+         }
+    
+        for (i=0; i<=18; i++){
+            if (i==18){
+                dv=aura.charAt(i);
+            }
+            else {
+                ncard+=aura.charAt(i);
+            }
+        }
+      
+        String revString="";
+        for (i=ncard.length()-1; i>=0; i--)
+            revString+=ncard.charAt(i);
+      
+        for (i=0; i<=revString.length()-1; i++) {
+            pos = pos+1;
+            if (pos == 3){
+              pos = 1;
+            }
+            if (pos/2 == 1){//par
+              num = revString.charAt(i)*1;
+              num = num*0.1;
+            }
+            else{//impar
+                num = revString.charAt(i)*2;
+                num = num/10;
+            }
+        
+            String str = Double.toString(num);
+            double subtotal = 0;
+            if ((str.indexOf(".")>0)||(str.indexOf(",")>0)) {
+                subtotal = str.charAt(0) + str.charAt(2);
+            }
+            else{
+                    subtotal = num;
+            }
+            total = total+subtotal;
+        }
+      
+        long valdv = Math.round(total - (Math.floor(total/10)*10));
+      
+        if(valdv!=0){
+            valdv = 10-valdv; 
+        }
+                 
+        if (valdv == dv){
+            return true;
+        }
+        else {
+            return false;
+        }
+        
+        */
+        
+        return true;
+    }   
+        
+     /**
+    * VERIFICA O Nº DO CARTÃO - VISA
+    **/
+    public static final boolean isVisa(String cc){
+        if (((cc.length() == 16) || (cc.length() == 13)) && 
+             (cc.substring(0,1).compareTo("4") == 0))
+            return isCreditCard(cc);
+        return false;
+    }
+
+    /**
+    * VERIFICA O Nº DO CARTÃO - MASTERCARD 
+    **/
+    public static final boolean isMasterCard(String cc){
+      String firstdig = cc.substring(0,1);
+      String seconddig = cc.substring(1,2);
+      if ((cc.length() == 16) && (firstdig.compareTo("5") == 0) && 
+          ((Integer.valueOf(seconddig).intValue() >= 1) && 
+           (Integer.valueOf(seconddig).intValue() <= 5)))
+        return isCreditCard(cc);
+      return false;
+    }
+
+    /**
+    * VERIFICA O Nº DO CARTÃO - AMERICANEXPRESS
+    **/
+    public static final boolean isAmericanExpress(String cc){
+    String firstdig = cc.substring(0,1);
+    String seconddig = cc.substring(1,2);
+    if ((cc.length() == 15) && (firstdig.compareTo("3") == 0) && 
+        ((seconddig.compareTo("4") == 0) || (seconddig.compareTo("7") == 0)))
+        return isCreditCard(cc);
+    return false;
+    }
+
+    /**
+    * VERIFICA O Nº DO CARTÃO - DINERS CLUB
+    **/
+    public static final boolean isDinersClub(String cc){
+      String firstdig = cc.substring(0,1);
+      String seconddig = cc.substring(1,2);
+      if ((cc.length() == 14) && 
+        ((firstdig.compareTo("3")==0) && 
+         ((seconddig.compareTo("0") == 0) || 
+          (seconddig.compareTo("6") == 0) || 
+          (seconddig.compareTo("8") == 0))))
+        return isCreditCard(cc);
+      return false;
+    }
+
+    /**
+    * VERIFICA SE É CARTÃO DE CRÉDITO
+    **/
+    public static final boolean isCreditCard(String st){
+        if (st.length() < 1) 
+        return false;
+        
+         int sum = 0; 
+         int mul = 1; 
+         int l = st.length();
+          
+         for (int i = 0; i < l; i++) {
+            String digit = st.substring(l-i-1,l-i);
+            int tproduct = Integer.parseInt(digit ,10)*mul;
+            
+            if (tproduct >= 10)
+              sum += (tproduct % 10) + 1;
+            else
+              sum += tproduct;
+            
+            if (mul == 1)
+              mul++;
+            else
+              mul--;
+         }        
+         if ((sum % 10) == 0)
+            return (true);
+          else
+            return (false);
+    }
+    
+    /**
+     * Calcula a diferença entre duas datas no formato 'dd/mm/yyyy'
+     * @param start - data de ínicio do cálculo da diferença
+     * @param end - data de término do cálculo da diferença
+     * @return int - qtde de dias representando a diferença entre as datas
+     */
+    public static final int diffData(String start, String end)
+    {
+        try {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                java.util.Date startDate = dateFormat.parse(start);
+                java.util.Date endDate = dateFormat.parse(end);
+                GregorianCalendar calStart = new GregorianCalendar();
+                calStart.setTime(startDate);
+                GregorianCalendar calEnd = new GregorianCalendar();
+                calEnd.setTime(endDate);
+                if (calStart.get(Calendar.YEAR) == calEnd.get(Calendar.YEAR)) {
+                    return calEnd.get(Calendar.DAY_OF_YEAR) - calStart.get(Calendar.DAY_OF_YEAR);
+                }
+                else if ((calEnd.get(Calendar.YEAR) - calStart.get(Calendar.YEAR)) == 1){
+                        int daysEndYear = calEnd.get(Calendar.DAY_OF_YEAR);
+                        int daysStartYear = calStart.getActualMaximum(Calendar.DAY_OF_YEAR) - calStart.get(Calendar.DAY_OF_YEAR);
+                        return daysEndYear + daysStartYear;
+                } else {
+                    int startYear = calStart.get(Calendar.YEAR);
+                    int endYear = calEnd.get(Calendar.YEAR);
+                    GregorianCalendar cal = new GregorianCalendar();
+                    int days = 0;
+                    for (int i = startYear + 1; i < endYear; i++) {
+                        cal.set(Calendar.YEAR, i);
+                        days += cal.getActualMaximum(Calendar.DAY_OF_YEAR);
+                    }
+                    days += calEnd.get(Calendar.DAY_OF_YEAR);
+                    days += (calStart.getActualMaximum(Calendar.DAY_OF_YEAR) - calStart.get(Calendar.DAY_OF_YEAR));
+                    return days;
+                }
+        } catch (ParseException e) {
+            return 0;
+        }
+    }	
+}

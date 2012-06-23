@@ -55,12 +55,6 @@ public class Teste {
 			DaoUsuario daoUsuario = new DaoUsuarioImp();
 			daoUsuario.cadastrarUsuario(usuario);
 			System.out.println("USUARIO CADASTRADO COM SUCESSO");
-			
-			usuario = null;
-			usuario = daoUsuario.pesquisarUsuarioPorCpf("JOSUE");
-			if (usuario != null){
-				System.out.println("DATA NASC USUARIO: "+ca.dataSqlParaDataString(usuario.getDataNascimentoUsuario()));
-			}
 		}catch(Exception ex_cad_usuario){
 			ex_cad_usuario.printStackTrace();
 		}

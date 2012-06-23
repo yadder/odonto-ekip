@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cadastro de usuário</title>
+<script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body>
 <div class="header">
@@ -24,23 +25,22 @@
 		</tr>
 		<tr>
 			<td align="right">Data nasc.:</td>
-			<td><input type="text" name="dtNascUsuario" value="${usuario.dataNascimentoUsuario}" size="20" /></td>
+			<td><input type="text" name="dtNascUsuario" value="${data}" size="20" maxlength="10" OnKeyPress="formatar(this, '##/##/####')" /></td>
 		</tr>
 		<tr>
 			<td align="right">Sexo:</td>
-			<td><select name="sexoUsuario">
-					<option value="${usuario.sexoUsuario}">MASCULINO</option>
-					<option value="${usuario.sexoUsuario}">FEMININO</option>
-				</select>
+			<td><input type="radio" name="sexoUsuario" value="M" />Masculino
+				<input type="radio" name="sexoUsuario" value="F" />Feminino
 			</td>
 		</tr>
 		<tr>
 			<td align="right">Perfil:</td>
 			<td>
 				<select name="perfilUsuario">
-					<option value="${usuario.perfilUsuario }">DENTISTA</option>
-					<option value="${usuario.perfilUsuario }">PACIENTE</option>
-					<option value="${usuario.perfilUsuario }">RECEPCIONISTA</option>			
+					<option> </option>
+					<option>DENTISTA</option>
+					<option>PACIENTE</option>
+					<option>RECEPCIONISTA</option>			
 				</select>
 			</td>
 		</tr>
