@@ -87,14 +87,14 @@ select {
 	color: #e1903;
 	background: #E6E6FA;
 }
-
+/*
 h1{
 	color:#191970;
 	font-family:sans-serif;
 	text-align:center;
 	text-transform: uppercase;
 }
-
+*/
 p {
 	font-family: "Times New Roman";
 	font-size: 20px;
@@ -117,3 +117,20 @@ menuvertical{
 	border-bottom-width: 0;
 	width: 170px;	
 }
+
+
+h1{font:bold 5em Arial, Helvetica, sans-serif; text-align:center; margin:30px 0 0 0; background:#333; color:#fff; padding:10px; letter-spacing:-0.07em; text-shadow:0px 0px 5px #eaeaea; }
+.menu{list-style:none; margin:20px 0 0 350px; border:1px solid #c0c0c0; float:left; }
+.menu li{position:relative; float:left; border-right:1px solid #c0c0c0;}
+.menu li a{font-size:1.3em;  color:#333; text-decoration:none; padding:5px 10px; display:block;}
+.menu li a:hover{background:#333; color:#fff; -moz-box-shadow:0 3px 10px 0 #CCC; -webkit-box-shadow:0 3px 10px 0 #ccc; text-shadow:0px 0px 5px #fff; }
+.menu li ul{position:absolute; top:23px; left:-20px; background-color:#fff; display:none; }
+.menu li:hover ul ul{display:none;}
+.menu li:hover ul, .menu li ul li:hover ul, .menu li.over ul, .menu li ul li.over ul{display:block;}
+.menu li ul li{border:1px solid #c0c0c0; display:block; width:110px;}
+li.border0{border:0;}
+.menu li ul li ul{z-index:900; top:0; left:110px; background:#eaeaea;}
+body {behavior:url(csshover.htc); } 
+/*Fix IE. Hide from IE Mac\*/
+* html .menu {margin-left:175px; }
+/*End*/
