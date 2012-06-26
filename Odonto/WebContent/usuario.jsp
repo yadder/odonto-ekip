@@ -21,7 +21,7 @@
 		</tr>
 		<tr>
 			<td align="right">Cpf:</td>
-			<td><input type="text" name="cpfUsuario" value="${usuario.cpfUsuario}" size="20" maxlength="11" /></td>
+			<td><input type="text" name="cpfUsuario" value="${usuario.cpfUsuario}" size="20" maxlength="14" OnKeyPress="formatar(this, '###.###.###-##')" /></td>
 		</tr>
 		<tr>
 			<td align="right">Data nasc.:</td>
