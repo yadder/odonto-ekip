@@ -49,8 +49,7 @@ public class ServletUsuario extends HttpServlet {
 				objetoSessao.setAttribute("usuario", usuario);
 				if (validaCampos(nome, rg, cpf, dtnasc, sexo, perfil)){
 					// gerar uma string com 6 caracteres para colocar na senha
-					senha = cpf;
-					
+					senha = cpf;					
 					usuario = new Usuario(nome, senha, perfil, rg, cpf, sexo, ca.dataStringParaDataSql(dtnasc));
 					DaoUsuario dao = new DaoUsuarioImp();
 					dao.cadastrarUsuario(usuario);
