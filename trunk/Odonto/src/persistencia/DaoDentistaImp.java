@@ -2,12 +2,14 @@ package persistencia;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import modelo.Dentista;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import util.HibernateUtil;
 
@@ -67,6 +69,20 @@ public class DaoDentistaImp implements DaoDentista {
 		return retorno;
 	}
 
+	public Dentista pesquisarDentistaPorNome(String nome){
+		Dentista d = null;
+		try{
+			session = HibernateUtil.getSessionFactory().openSession();
+			Criteria cr = session.createCriteria(Dentista.class).add(Restrictions.eq("nomeUsuario", nome));
+			d = (Dentista)cr.uniqueResult();
+		}catch(HibernateException e){
+			e.printStackTrace();
+		}finally{
+			session.flush();
+			session.close();
+		}
+		return d;
+	}
 
 	public List<Dentista> pesquisarTodosDentista() {
 		ArrayList lista = null;

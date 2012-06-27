@@ -12,6 +12,8 @@ public interface DaoConvenio {
 	
 	boolean excluirConvenio(Convenio convenio);
 	
+	Convenio pesquisarConvenioPorNome(String nome);
+	
 	Convenio pesquisarConvenio(Convenio convenio);
 	
 	List<Convenio> pesquisarTodosConvenio();

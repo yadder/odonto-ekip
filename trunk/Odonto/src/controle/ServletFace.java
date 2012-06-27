@@ -16,11 +16,11 @@ import modelo.Face;
 
 public class ServletFace extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private String mensagem = null;   
     public ServletFace() {
         super();
     }
-    String mensagem = null;
+   
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}

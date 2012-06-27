@@ -1,6 +1,9 @@
 package teste;
 
+import modelo.Convenio;
 import modelo.Usuario;
+import persistencia.DaoConvenio;
+import persistencia.DaoConvenioImp;
 import persistencia.DaoUsuario;
 import persistencia.DaoUsuarioImp;
 import util.ConfiguraAtributo;
@@ -8,6 +11,7 @@ import util.ConfiguraAtributo;
 public class Teste {
 
 	public static void main(String[] args) {
+		
 		
 /*
 		System.out.println("1------------------------------Testando a classe face (pesquisa por nome: INICIO");
@@ -38,7 +42,7 @@ public class Teste {
 		//////////////////////////////////////////////
 		
 		*/
-		
+	/*	
 		try{
 			System.out.println("--- CADASTRO DE USUARIO ---");
 			ConfiguraAtributo ca = new ConfiguraAtributo();
