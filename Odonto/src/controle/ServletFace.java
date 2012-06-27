@@ -28,6 +28,7 @@ public class ServletFace extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String btn = (String)request.getParameter("btn");
+		System.out.println(btn);
 		HttpSession objetoSessao = request.getSession();
 
 		if (btn.equals("Voltar")){
