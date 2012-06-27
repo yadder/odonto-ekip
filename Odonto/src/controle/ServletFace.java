@@ -101,7 +101,7 @@ public class ServletFace extends HttpServlet {
 					RequestDispatcher disp = request.getRequestDispatcher("face.jsp");
 					disp.forward(request, response);
 				}else{
-					mensagem = "Ocorreu algum erro ao excluir a face.";
+					mensagem = "Ocorreu algum erro ao alterar a face.";
 					request.setAttribute("msg", mensagem);
 					RequestDispatcher disp = request.getRequestDispatcher("face.jsp");
 					disp.forward(request, response);
