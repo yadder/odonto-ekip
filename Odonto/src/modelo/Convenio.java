@@ -17,8 +17,7 @@ public class Convenio implements Serializable {
     public Convenio(){
     	
     }
-    public Convenio(long idConvenio, String nomeConvenio) {
-        this.idConvenio = idConvenio;
+    public Convenio(String nomeConvenio) {
     	this.nomeConvenio = nomeConvenio;
     }
 

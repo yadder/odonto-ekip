@@ -1,6 +1,8 @@
 package modelo;
 
 import java.io.Serializable;
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -18,6 +20,20 @@ public class Dentista extends Usuario implements Serializable {
     public Dentista() {
 
 	}
+    
+	public Dentista(String nomeUsuario) {
+		super(nomeUsuario);
+	}
+
+
+
+	public Dentista(String nomeUsuario, String senhaUsuario, String perfilUsuario, String rgUsuario,
+			String cpfUsuario, String sexoUsuario, Date dataNascimentoUsuario,
+			String croDentista) {
+		super(nomeUsuario, senhaUsuario, perfilUsuario, rgUsuario, cpfUsuario, sexoUsuario,
+				dataNascimentoUsuario);
+		this.croDentista = croDentista;
+	}
 
 	public String getCroDentista() {
 		return croDentista;
@@ -29,6 +45,11 @@ public class Dentista extends Usuario implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString()+ " Cro: "+croDentista;
 	}
     
     

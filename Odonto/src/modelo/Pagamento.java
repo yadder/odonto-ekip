@@ -1,7 +1,18 @@
 package modelo;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tb_pagamento", catalog = "odonto", schema = "")
@@ -19,11 +30,38 @@ public class Pagamento implements Serializable {
     private String statusPagamento;
     @ManyToOne(fetch=FetchType.EAGER)
 	private Odontograma odontograma;
-
+    @Column(name = "data_vencimento")
+    @Temporal(TemporalType.DATE)
+    private Date dataVencimento;
+    @Column(name = "data_pagamento")
+    @Temporal(TemporalType.DATE)
+    private Date dataPagamento;
+    
     public Pagamento() {
     }
+    
 
-    public Pagamento(long idPagamento) {
+    public Date getDataPagamento() {
+		return dataPagamento;
+	}
+
+
+	public void setDataPagamento(Date dataPagamento) {
+		this.dataPagamento = dataPagamento;
+	}
+
+
+	public Date getDataVencimento() {
+		return dataVencimento;
+	}
+
+
+	public void setDataVencimento(Date dataVencimento) {
+		this.dataVencimento = dataVencimento;
+	}
+
+
+	public Pagamento(long idPagamento) {
         this.idPagamento = idPagamento;
     }
 

@@ -2,12 +2,14 @@ package persistencia;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import modelo.Convenio;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import util.HibernateUtil;
 
@@ -79,6 +81,21 @@ public class DaoConvenioImp implements DaoConvenio {
 		}
 		return e;
 	}
+	
+	public Convenio pesquisarConvenioPorNome(String nome){
+		Convenio c = null;
+		try{
+			session = HibernateUtil.getSessionFactory().openSession();
+			Criteria cr = session.createCriteria(Convenio.class).add(Restrictions.eq("nomeConvenio", nome));
+			c = (Convenio) cr.uniqueResult();
+		}catch (HibernateException e){
+			e.printStackTrace();
+		}finally{
+			session.flush();
+			session.close();
+		}
+		return c;
+	}
 
 	public List<Convenio> pesquisarTodosConvenio() {
 		ArrayList lista = null;
@@ -95,5 +112,6 @@ public class DaoConvenioImp implements DaoConvenio {
 		}
 		
 	}
+	
 
 }

@@ -15,7 +15,7 @@ import persistencia.DaoElementoImp;
 
 public class ServletElemento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	String mensagem = null;  
+	private String mensagem = null;  
     public ServletElemento() {
     }
 

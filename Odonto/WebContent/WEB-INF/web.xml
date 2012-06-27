@@ -57,4 +57,24 @@
     <servlet-name>ServletRecepcionista</servlet-name>
     <url-pattern>/ServletRecepcionista</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletConvenio</display-name>
+    <servlet-name>ServletConvenio</servlet-name>
+    <servlet-class>controle.ServletConvenio</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletConvenio</servlet-name>
+    <url-pattern>/ServletConvenio</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletDentista</display-name>
+    <servlet-name>ServletDentista</servlet-name>
+    <servlet-class>controle.ServletDentista</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletDentista</servlet-name>
+    <url-pattern>/ServletDentista</url-pattern>
+  </servlet-mapping>
 </web-app>

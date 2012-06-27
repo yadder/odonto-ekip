@@ -16,7 +16,7 @@ import util.ConfiguraAtributo;
 
 public class ServletRecepcionista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	String mensagem = null;
+	private String mensagem = null;
 
 	public ServletRecepcionista() {
 		super();
