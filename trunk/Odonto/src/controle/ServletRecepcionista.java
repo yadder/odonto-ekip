@@ -14,11 +14,11 @@ import persistencia.DaoUsuario;
 import persistencia.DaoUsuarioImp;
 import util.ConfiguraAtributo;
 
-public class ServletUsuario extends HttpServlet {
+public class ServletRecepcionista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String mensagem = null;
 
-	public ServletUsuario() {
+	public ServletRecepcionista() {
 		super();
 	}
 
@@ -32,6 +32,7 @@ public class ServletUsuario extends HttpServlet {
 
 		if (btn.equals("Voltar")){
 			objetoSessao.removeAttribute("usuario");
+			objetoSessao.removeAttribute("data");
 			RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
 			disp.forward(request, response);
 			
@@ -42,28 +43,27 @@ public class ServletUsuario extends HttpServlet {
 				String cpf = (String) request.getParameter("cpfUsuario");
 				String dtnasc = (String) request.getParameter("dtNascUsuario");
 				String sexo = (String) request.getParameter("sexoUsuario");
-				String perfil = (String) request.getParameter("perfilUsuario");
-				System.out.println("SEXO: "+sexo+" PERFIL: "+ perfil);
+				String perfil = "RECEPCIONISTA";
 				String senha = null;
 				Usuario usuario = new Usuario(nome, senha, perfil, rg, cpf, sexo, ca.dataStringParaDataSql(dtnasc));
 				objetoSessao.setAttribute("usuario", usuario);
-				if (validaCampos(nome, rg, cpf, dtnasc, sexo, perfil)){
+				if (validaCampos(nome, rg, cpf, dtnasc, sexo)){
 					// gerar uma string com 6 caracteres para colocar na senha
-					senha = cpf;					
+					senha = "12345";					
 					usuario = new Usuario(nome, senha, perfil, rg, cpf, sexo, ca.dataStringParaDataSql(dtnasc));
 					DaoUsuario dao = new DaoUsuarioImp();
 					dao.cadastrarUsuario(usuario);
-					mensagem = "Usuário cadastrado com sucesso!";
+					mensagem = "Recepcionista cadastrada com sucesso!";
 					objetoSessao.removeAttribute("usuario");
 					objetoSessao.removeAttribute("data");
 					request.setAttribute("msg", mensagem);
-					RequestDispatcher disp = request.getRequestDispatcher("usuario.jsp");
+					RequestDispatcher disp = request.getRequestDispatcher("recepcionista.jsp");
 					disp.forward(request, response);
 				}else{
 					request.setAttribute("msg", mensagem);
 					String data = ca.dataSqlParaDataString(usuario.getDataNascimentoUsuario());
 					objetoSessao.setAttribute("data", data);
-					RequestDispatcher disp = request.getRequestDispatcher("usuario.jsp");
+					RequestDispatcher disp = request.getRequestDispatcher("recepcionista.jsp");
 					disp.forward(request, response);
 				}
 		}else if (btn.equals("Pesquisar")){
@@ -72,15 +72,18 @@ public class ServletUsuario extends HttpServlet {
 			DaoUsuario dao = new DaoUsuarioImp();
 			usuario = dao.pesquisarUsuarioPorNome(nome);
 			if (usuario != null){
-				mensagem = "Usuário encontrado.";
+				ConfiguraAtributo ca = new ConfiguraAtributo();
+				mensagem = "Recepcionista encontrada.";
 				request.setAttribute("msg", mensagem);
+				objetoSessao.setAttribute("data", ca.dataSqlParaDataString(usuario.getDataNascimentoUsuario()));
+				System.out.println(usuario);
 				objetoSessao.setAttribute("usuario", usuario);
-				RequestDispatcher disp = request.getRequestDispatcher("usuario_alterar.jsp");
+				RequestDispatcher disp = request.getRequestDispatcher("recepcionista_alterar.jsp");
 				disp.forward(request, response);
 			}else{
-				mensagem = "Usuário não encontrado.";
+				mensagem = "Recepcionista não encontrada.";
 				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("usuario.jsp");
+				RequestDispatcher disp = request.getRequestDispatcher("recepcionista.jsp");
 				disp.forward(request, response);
 			}
 		}else if(btn.equals("Excluir")){
@@ -89,65 +92,69 @@ public class ServletUsuario extends HttpServlet {
 				DaoUsuario dao = new DaoUsuarioImp();
 				boolean result = dao.excluirUsuario(usuario);
 				if (result){
-					mensagem = "Usuário excluído com sucesso.";
+					mensagem = "Recepcionista excluída com sucesso.";
 					request.setAttribute("msg", mensagem);
 					objetoSessao.removeAttribute("usuario");
-					RequestDispatcher disp = request.getRequestDispatcher("usuario.jsp");
+					objetoSessao.removeAttribute("data");
+					RequestDispatcher disp = request.getRequestDispatcher("recepcionista.jsp");
 					disp.forward(request, response);
 				}else{
-					mensagem = "Ocorreu algum erro ao excluir o usuário.";
+					mensagem = "Ocorreu algum erro ao excluir a recepcionista.";
 					request.setAttribute("msg", mensagem);
-					RequestDispatcher disp = request.getRequestDispatcher("usuario.jsp");
+					RequestDispatcher disp = request.getRequestDispatcher("recepcionista.jsp");
 					disp.forward(request, response);
 				}
 		}else if(btn.equals("Alterar")){
+			ConfiguraAtributo ca = new ConfiguraAtributo();
 			String nome = (String) request.getParameter("nomeUsuario");
 			String rg = (String) request.getParameter("rgUsuario");
 			String cpf = (String) request.getParameter("cpfUsuario");
-			String dtnasc = request.getParameter("dtNascUsuario");
+			String dtnasc = (String) request.getParameter("dtNascUsuario");
 			String sexo = (String) request.getParameter("sexoUsuario");
-			String perfil = (String) request.getParameter("perfilUsuario");
-			if (validaCampos(nome, rg, cpf, dtnasc, sexo, perfil)){
+			if (validaCampos(nome, rg, cpf, dtnasc, sexo)){
 				Usuario usuario = new Usuario();
 				usuario = (Usuario)objetoSessao.getAttribute("usuario");
-				usuario.setNomeUsuario((String)request.getParameter("nomeUsuario"));								
+				usuario.setNomeUsuario(nome);
+				usuario.setRgUsuario(rg);
+				usuario.setCpfUsuario(cpf);
+				usuario.setDataNascimentoUsuario(ca.dataStringParaDataSql(dtnasc));
+				usuario.setSexoUsuario(sexo);				
 				DaoUsuario dao = new DaoUsuarioImp();
 				boolean result = dao.alterarUsuario(usuario);
 				if (result){
-					mensagem = "Usuário alterado com sucesso.";
+					mensagem = "Recepcionista alterada com sucesso.";
 					request.setAttribute("msg", mensagem);
 					objetoSessao.removeAttribute("usuario");
-					RequestDispatcher disp = request.getRequestDispatcher("usuario.jsp");
+					objetoSessao.removeAttribute("data");
+					RequestDispatcher disp = request.getRequestDispatcher("recepcionista.jsp");
 					disp.forward(request, response);
 				}else{
-					mensagem = "Ocorreu algum erro ao excluir o usuário.";
+					mensagem = "Ocorreu algum erro ao alterar a recepcionista.";
 					request.setAttribute("msg", mensagem);
-					RequestDispatcher disp = request.getRequestDispatcher("usuario.jsp");
+					RequestDispatcher disp = request.getRequestDispatcher("recepcionista.jsp");
 					disp.forward(request, response);
 				}
 			}else{
 				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("usuario_alterar.jsp");
+				RequestDispatcher disp = request.getRequestDispatcher("recepcionista_alterar.jsp");
 				disp.forward(request, response);
 			}
 			
 		}
 	}
 
-	public boolean validaCampos(String nome, String rg, String cpf, String dtnasc, String sexo, String perfil) {
+	public boolean validaCampos(String nome, String rg, String cpf, String dtnasc, String sexo) {
 		boolean result = false;
 		if ((nome == null) || (nome.length() < 5)) {
-			mensagem = "Preencha o nome do usuário corretamente. O nome deve ter pelo menos 5 caracteres";
+			mensagem = "Preencha o nome da recepcionista corretamente. O nome deve ter pelo menos 5 caracteres";
 		}else if ((rg == null) || (rg.length() < 5)) {
-			mensagem = "Preencha o RG do usuário corretamente.";
+			mensagem = "Preencha o RG da recepcionista corretamente.";
 		}else if ((cpf == null) || (cpf.length() < 11)) {
-			mensagem = "Preencha o CPF do usuário corretamente.";
+			mensagem = "Preencha o CPF da recepcionista corretamente.";
 		}else if ((dtnasc == null) || (dtnasc.equals(""))) {
-			mensagem = "Preencha a data de nascimento do usuário corretamente.";
+			mensagem = "Preencha a data de nascimento da recepcionista corretamente.";
 		}else if ((sexo == null) || (sexo.equals(""))) {
-			mensagem = "Preencha o sexo do usuário corretamente.";
-		}else if ((perfil == null) || (perfil.equals(""))) {
-			mensagem = "Preencha o perfil do usuário corretamente.";
+			mensagem = "Preencha o sexo da recepcionista corretamente.";
 		}else {
 			result = true;
 		}

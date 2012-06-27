@@ -1,6 +1,8 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.*;
 
 @Entity
@@ -25,6 +27,9 @@ public class OdontogramaProcedimento implements Serializable {
     @JoinColumn(name = "id_odontograma", referencedColumnName = "id_odontograma", nullable = false)
     @ManyToOne(optional = false)
     private Odontograma idOdontograma;
+    @Column(name = "data_execucao_procedimento", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date dataExecucaoProcedimento;
 
     public OdontogramaProcedimento() {
     }
@@ -84,6 +89,14 @@ public class OdontogramaProcedimento implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+	public Date getDataExecucaoProcedimento() {
+		return dataExecucaoProcedimento;
+	}
+
+	public void setDataExecucaoProcedimento(Date dataExecucaoProcedimento) {
+		this.dataExecucaoProcedimento = dataExecucaoProcedimento;
 	}
 
 	@Override

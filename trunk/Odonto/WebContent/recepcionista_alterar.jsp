@@ -2,14 +2,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro de usuário</title>
+<title>Alteração de recepcionista</title>
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body>
 <div class="header">
 	<h3>${msg}</h3>
 </div>
-<form name="formUsuario" method="post" action="ServletUsuario">
+<form name="formRecepcionista" method="post" action="ServletRecepcionista">
 	<table>
 		<tr>
 			<td align="right">Nome:</td>
@@ -30,24 +30,13 @@
 		<tr>
 			<td align="right">Sexo:</td>
 			<td><input type="radio" name="sexoUsuario" value="M" />Masculino
-				<input type="radio" name="sexoUsuario" value="F" />Feminino
-			</td>
-		</tr>
-		<tr>
-			<td align="right">Perfil:</td>
-			<td>
-				<select name="perfilUsuario">
-					<option> </option>
-					<option>DENTISTA</option>
-					<option>PACIENTE</option>
-					<option>RECEPCIONISTA</option>			
-				</select>
+				<input type="radio" name="sexoUsuario" value="F" checked="checked" />Feminino
 			</td>
 		</tr>
 		<tr>
 			<td colspan=2 align="center">
-				<input type="submit" name="btn" value="Pesquisar" />
-				<input type="submit" name="btn" value="Cadastrar" />
+				<input type="submit" name="btn" value="Excluir" />
+				<input type="submit" name="btn" value="Alterar" />
 				<input type="submit" name="btn" value="Voltar" />
 			</td>
 		</tr>

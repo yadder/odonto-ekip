@@ -98,7 +98,7 @@ public class ServletElemento extends HttpServlet {
 					RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
 					disp.forward(request, response);
 				}else{
-					mensagem = "Ocorreu algum erro ao excluir o elemento.";
+					mensagem = "Ocorreu algum erro ao alterar o elemento.";
 					request.setAttribute("msg", mensagem);
 					RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
 					disp.forward(request, response);

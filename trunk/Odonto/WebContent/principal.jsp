@@ -16,27 +16,22 @@
   <li><a href="#" title="Inicial">Inicial</a></li>
   <li><a href="#" title="Sobre">Sobre</a></li>
   <li><a href="#" title="Servi&ccedil;os">Servi&ccedil;os</a>
-    
       <ul>
-            <li><a href="#" title="Web design">Web Design</a>
-            
+          <li><a href="#" title="Web design">Web Design</a>
                 <ul>
                     <li><a href="#" title="CSS">CSS</a></li>
-                    <li><a href="#" title="XHTML">XHTML</a></li>                                        </ul>
-                
-         </li>
-            
-            <li><a href="#" title="Web master">Web Master</a></li>
-            <li><a href="#" title="SEO">SEO</a></li>
-            <li><a href="#" title="Design gr&aacute;fico">Design Gr&aacute;fico</a>
-            </li> 
+                    <li><a href="#" title="XHTML">XHTML</a></li>
+     			</ul>
+       	  </li>
+          <li><a href="#" title="Web master">Web Master</a></li>
+          <li><a href="#" title="SEO">SEO</a></li>
+          <li><a href="#" title="Design gr&aacute;fico">Design Gr&aacute;fico</a>
+          </li> 
         </ul>
-        
     </li>
   <li><a href="#" title="Porftolio">Portfolio</a></li>
   <li  class="border0"><a href="#" title="Contato">Contato</a></li>
 </ul>
-
 
 </div>
 	<a href="fornecedor.jsp">Cadastro de fornecedor</a> <br/><br/>
@@ -49,7 +44,7 @@
 	testadas e validadas <br/>
 	<a href="face.jsp">Cadastro de face</a><br/>
 	<a href="elemento.jsp">Cadastro de elemento</a><br/>
-	<a href="usuario.jsp">Cadastro de usuário</a><br/>
+	<a href="recepcionista.jsp">Cadastro de recepcionista</a><br/>
 
 </body>
 </html>

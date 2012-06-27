@@ -49,12 +49,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ServletUsuario</display-name>
-    <servlet-name>ServletUsuario</servlet-name>
-    <servlet-class>controle.ServletUsuario</servlet-class>
+    <display-name>ServletRecepcionista</display-name>
+    <servlet-name>ServletRecepcionista</servlet-name>
+    <servlet-class>controle.ServletRecepcionista</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ServletUsuario</servlet-name>
-    <url-pattern>/ServletUsuario</url-pattern>
+    <servlet-name>ServletRecepcionista</servlet-name>
+    <url-pattern>/ServletRecepcionista</url-pattern>
   </servlet-mapping>
 </web-app>

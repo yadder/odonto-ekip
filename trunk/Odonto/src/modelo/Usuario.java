@@ -58,6 +58,15 @@ public class Usuario implements Serializable {
 		this.dataNascimentoUsuario = dataNascimentoUsuario;
 	}
     
+    public Usuario(String nomeUsuario, String perfilUsuario, String rgUsuario,
+			String cpfUsuario, String sexoUsuario, java.sql.Date dataNascimentoUsuario) {
+		this.nomeUsuario = nomeUsuario;
+		this.perfilUsuario = perfilUsuario;
+		this.rgUsuario = rgUsuario;
+		this.cpfUsuario = cpfUsuario;
+		this.sexoUsuario = sexoUsuario;
+		this.dataNascimentoUsuario = dataNascimentoUsuario;
+	}
     
 	public Usuario(String nomeUsuario) {
 		this.nomeUsuario = nomeUsuario;
@@ -127,4 +136,16 @@ public class Usuario implements Serializable {
         this.sexoUsuario = sexoUsuario;
     }
 
+    @Override
+    public String toString() {
+    	return " Id: "+idUsuario+
+    		   " Nome: "+ nomeUsuario+ 
+    		   " Senha: "+senhaUsuario+ 
+    		   " Perfil: "+perfilUsuario+
+    		   " RG: "+rgUsuario+ 
+    		   " CPF: "+cpfUsuario+ 
+    		   " Nasc.: "+dataNascimentoUsuario+ 
+    		   " Sexo: "+sexoUsuario;
+    }
+    
 }
