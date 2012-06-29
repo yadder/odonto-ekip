@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Sistema OdontoEkip - Principal</title>
+<script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body>
 <div class="header">
@@ -14,6 +15,9 @@
 
 </div>
 	
+	<input type="button" value="testeAjax" name="testeAjax" onclick="testeAjax()" /><br>
+	<div id="myDiv"></div>
+	<hr />
 	<a href="inqueritoOdontologico.jsp">Inquérito odontológico</a><br/><br/>
 	<a href="pagamento.jsp">Efetuar pagamento</a><br/><br/>
 	
