@@ -13,7 +13,7 @@
 	</form>
 
 </div>
-	<a href="fornecedor.jsp">Cadastro de fornecedor</a> <br/><br/>
+	
 	<a href="inqueritoOdontologico.jsp">Inquérito odontológico</a><br/><br/>
 	<a href="pagamento.jsp">Efetuar pagamento</a><br/><br/>
 	
@@ -24,6 +24,6 @@
 	<a href="recepcionista.jsp">Cadastro de recepcionista</a><br/>
 	<a href="dentista.jsp">Cadastro de dentista</a><br/>
 	<a href="convenio.jsp">Cadastro de convênio</a><br/>
-	
+	<a href="fornecedor.jsp">Cadastro de fornecedor</a> <br/>
 </body>
 </html>

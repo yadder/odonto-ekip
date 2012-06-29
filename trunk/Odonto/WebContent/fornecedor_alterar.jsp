@@ -13,7 +13,7 @@
 	<table>
 		<tr>
 			<td align="right">Nome do fornecedor:</td>
-			<td><input type="text" name="nomeFornecedor" value="${fornecedor.nomeFornecedor}" size="20" /><input type="submit" name="btn" value="Pesquisar" /></td>
+			<td><input type="text" name="nomeFornecedor" value="${fornecedor.nomeFornecedor}" size="20" /></td>
 		</tr>
 		<tr>
 			<td align="right">Nome do vendedor:</td>
@@ -107,8 +107,8 @@
 		
 		<tr>
 			<td colspan=2 align="center">
-				
-				<input type="submit" name="btn" value="Cadastrar" />
+				<input type="submit" name="btn" value="Excluir" />
+				<input type="submit" name="btn" value="Alterar" />
 				<input type="submit" name="btn" value="Voltar" />
 			</td>
 		</tr>
