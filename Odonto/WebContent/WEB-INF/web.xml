@@ -77,4 +77,14 @@
     <servlet-name>ServletDentista</servlet-name>
     <url-pattern>/ServletDentista</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletFornecedor</display-name>
+    <servlet-name>ServletFornecedor</servlet-name>
+    <servlet-class>controle.ServletFornecedor</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletFornecedor</servlet-name>
+    <url-pattern>/ServletFornecedor</url-pattern>
+  </servlet-mapping>
 </web-app>

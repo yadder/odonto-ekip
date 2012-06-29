@@ -1,9 +1,13 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlTransient;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_fornecedor")
@@ -26,7 +30,7 @@ public class Fornecedor implements Serializable {
     @Column(name = "logradouro_fornecedor", length = 100)
     private String logradouroFornecedor;
     @Column(name = "numero_logradouro_fornecedor")
-    private Integer numeroLogradouroFornecedor;
+    private String numeroLogradouroFornecedor;
     @Column(name = "complemento_logradouro_fornecedor", length = 50)
     private String complementoLogradouroFornecedor;
     @Column(name = "bairro_fornecedor", length = 30)
@@ -37,25 +41,51 @@ public class Fornecedor implements Serializable {
     private String estadoFornecedor;
     @Column(name = "cep_fornecedor", length = 10)
     private String cepFornecedor;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFornecedor")
+    @Column(name = "ddd1_fornecedor", length = 2)
+    private String ddd1Fornecedor;
+    @Column(name = "telefone1_fornecedor", length = 9)
+    private String telefone1Fornecedor;
+    @Column(name = "ddd2_fornecedor", length = 2)
+    private String ddd2Fornecedor;
+    @Column(name = "telefone2_fornecedor", length = 9)
+    private String telefone2Fornecedor;
+    /*@OneToMany(cascade = CascadeType.ALL, mappedBy = "idFornecedor")
     private List<TelefoneFornecedor> telefoneFornecedorList;
-
+*/
     public Fornecedor() {
     }
 
-    public Fornecedor(long idFornecedor) {
-        this.idFornecedor = idFornecedor;
-    }
-
-    public Fornecedor(long idFornecedor, String cnpjFornecedor, String nomeFornecedor, String nomeVendedor, String emailVendedor) {
-        this.idFornecedor = idFornecedor;
-        this.cnpjFornecedor = cnpjFornecedor;
+    public Fornecedor(String nomeFornecedor) {
         this.nomeFornecedor = nomeFornecedor;
-        this.nomeVendedor = nomeVendedor;
-        this.emailVendedor = emailVendedor;
     }
 
-    public long getIdFornecedor() {
+    public Fornecedor(String nomeFornecedor, String nomeVendedor,
+			String emailVendedor, String siteFornecedor, String cnpjFornecedor,
+			String logradouroFornecedor, String numeroLogradouroFornecedor,
+			String complementoLogradouroFornecedor, String bairroFornecedor,
+			String cidadeFornecedor, String estadoFornecedor,
+			String cepFornecedor, String ddd1Fornecedor,
+			String telefone1Fornecedor, String ddd2Fornecedor,
+			String telefone2Fornecedor) {
+		this.nomeFornecedor = nomeFornecedor;
+		this.nomeVendedor = nomeVendedor;
+		this.emailVendedor = emailVendedor;
+		this.siteFornecedor = siteFornecedor;
+		this.cnpjFornecedor = cnpjFornecedor;
+		this.logradouroFornecedor = logradouroFornecedor;
+		this.numeroLogradouroFornecedor = numeroLogradouroFornecedor;
+		this.complementoLogradouroFornecedor = complementoLogradouroFornecedor;
+		this.bairroFornecedor = bairroFornecedor;
+		this.cidadeFornecedor = cidadeFornecedor;
+		this.estadoFornecedor = estadoFornecedor;
+		this.cepFornecedor = cepFornecedor;
+		this.ddd1Fornecedor = ddd1Fornecedor;
+		this.telefone1Fornecedor = telefone1Fornecedor;
+		this.ddd2Fornecedor = ddd2Fornecedor;
+		this.telefone2Fornecedor = telefone2Fornecedor;
+	}
+
+	public long getIdFornecedor() {
         return idFornecedor;
     }
 
@@ -111,11 +141,11 @@ public class Fornecedor implements Serializable {
         this.logradouroFornecedor = logradouroFornecedor;
     }
 
-    public Integer getNumeroLogradouroFornecedor() {
+    public String getNumeroLogradouroFornecedor() {
         return numeroLogradouroFornecedor;
     }
 
-    public void setNumeroLogradouroFornecedor(Integer numeroLogradouroFornecedor) {
+    public void setNumeroLogradouroFornecedor(String numeroLogradouroFornecedor) {
         this.numeroLogradouroFornecedor = numeroLogradouroFornecedor;
     }
 
@@ -159,7 +189,7 @@ public class Fornecedor implements Serializable {
         this.cepFornecedor = cepFornecedor;
     }
 
-    @XmlTransient
+ /*   @XmlTransient
     public List<TelefoneFornecedor> getTelefoneFornecedorList() {
         return telefoneFornecedorList;
     }
@@ -167,6 +197,66 @@ public class Fornecedor implements Serializable {
     public void setTelefoneFornecedorList(List<TelefoneFornecedor> telefoneFornecedorList) {
         this.telefoneFornecedorList = telefoneFornecedorList;
     }
+*/
+	public String getDdd1Fornecedor() {
+		return ddd1Fornecedor;
+	}
 
+	public void setDdd1Fornecedor(String ddd1Fornecedor) {
+		this.ddd1Fornecedor = ddd1Fornecedor;
+	}
+
+	public String getTelefone1Fornecedor() {
+		return telefone1Fornecedor;
+	}
+
+	public void setTelefone1Fornecedor(String telefone1Fornecedor) {
+		this.telefone1Fornecedor = telefone1Fornecedor;
+	}
+
+	public String getDdd2Fornecedor() {
+		return ddd2Fornecedor;
+	}
+
+	public void setDdd2Fornecedor(String ddd2Fornecedor) {
+		this.ddd2Fornecedor = ddd2Fornecedor;
+	}
+
+	public String getTelefone2Fornecedor() {
+		return telefone2Fornecedor;
+	}
+
+	public void setTelefone2Fornecedor(String telefone2Fornecedor) {
+		this.telefone2Fornecedor = telefone2Fornecedor;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public void setIdFornecedor(long idFornecedor) {
+		this.idFornecedor = idFornecedor;
+	}
+
+	@Override
+	public String toString() {
+		return "Fornecedor [idFornecedor=" + idFornecedor + ", siteFornecedor="
+				+ siteFornecedor + ", cnpjFornecedor=" + cnpjFornecedor
+				+ ", nomeFornecedor=" + nomeFornecedor + ", nomeVendedor="
+				+ nomeVendedor + ", emailVendedor=" + emailVendedor
+				+ ", logradouroFornecedor=" + logradouroFornecedor
+				+ ", numeroLogradouroFornecedor=" + numeroLogradouroFornecedor
+				+ ", complementoLogradouroFornecedor="
+				+ complementoLogradouroFornecedor + ", bairroFornecedor="
+				+ bairroFornecedor + ", cidadeFornecedor=" + cidadeFornecedor
+				+ ", estadoFornecedor=" + estadoFornecedor + ", cepFornecedor="
+				+ cepFornecedor + ", ddd1Fornecedor=" + ddd1Fornecedor
+				+ ", telefone1Fornecedor=" + telefone1Fornecedor
+				+ ", ddd2Fornecedor=" + ddd2Fornecedor
+				+ ", telefone2Fornecedor=" + telefone2Fornecedor + "]";
+	}
+    
+	
+    
    
 }

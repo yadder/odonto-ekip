@@ -8,6 +8,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import util.HibernateUtil;
 
@@ -78,6 +79,21 @@ public class DaoFornecedorImp implements DaoFornecedor {
 			session.close();
 		}
 		return e;
+	}
+	
+	public Fornecedor pesquisarFornecedorPorNome(String nomeFornecedor){
+		Fornecedor f = null;
+		try{
+			session = HibernateUtil.getSessionFactory().openSession();
+			Criteria cr = session.createCriteria(Fornecedor.class).add(Restrictions.eq("nomeFornecedor", nomeFornecedor));
+			f = (Fornecedor)cr.uniqueResult();
+		}catch(HibernateException h){
+			h.printStackTrace();
+		}finally{
+			session.flush();
+			session.close();
+		}
+		return f;
 	}
 
 	public List<Fornecedor> pesquisarTodosFornecedor() {
