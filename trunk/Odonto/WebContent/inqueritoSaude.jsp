@@ -9,8 +9,13 @@
 <div class="header">
 	<h3>${msg}</h3>
 </div>
-<form name="formInqueritoSaude" method="post" action="ServletDentista">
-	<table>		
+<form name="formInqueritoSaude" method="post" action="ServletInqueritoSaude">
+	<table>
+	
+		<tr>				
+			<td align="center">INQUÉRITO DE SAÚDE:</td>						
+		</tr>
+				
 		<tr>
 			<td align="right">Em tratamento médico?</td>
 			<td><input type="radio" name="tratamento" value="NÃO" />Não
@@ -21,7 +26,7 @@
 		<tr>
 			<td align="right">Está usando medicação?</td>
 			<td><input type="radio" name="medicacao" value="NÃO" />Não
-			<input type="radio" name="medicacao" value="SIM" />Sim				
+				<input type="radio" name="medicacao" value="SIM" />Sim				
 				<input type="text" name="medicacao" size="30" maxlength="30" />
 			</td>
 		</tr>
