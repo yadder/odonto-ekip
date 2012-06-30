@@ -127,24 +127,12 @@
 				<input type="radio" name="cardiaco" value="NÃO" />Não								
 				<input type="radio" name="cardiaco" value="NÃO SEI" />Não sei 
 			</td>
+		</tr>		
+		<tr>
+			<td colspan=2 align="center">				
+				<input type="submit" name="btn" value="Próximo" />				
+			</td>
 		</tr>
-		
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-			<td colspan=2 align="center">
-				
-				<input type="submit" name="btn" value="Próxima" />
-				
-				
-			</td>		
 	</table>
 </form>	
 </body>
