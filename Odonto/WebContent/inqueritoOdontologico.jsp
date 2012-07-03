@@ -42,10 +42,14 @@
 			</td>
 		</tr>
 		
+		
+		
+		<tr>
+			<td align="center">HÁBITOS</td>
+		</tr>
 				
 		<tr>
-			<td align="center">HÁBITOS<br><br>
-				<input type="checkbox" name="checkbox" value="roerUnhas"> Roer unhas
+			<td><input type="checkbox" name="checkbox" value="roerUnhas"> Roer unhas
 				<input type="checkbox" name="checkbox" value="morderObjetos"> Morder objetos
 				<input type="checkbox" name="checkbox" value="outros"> Outros
 				<input type="checkbox" name="checkbox" value="respirarPelaBoca"> Respirar pela boca
@@ -54,9 +58,13 @@
 			</td>			
 		</tr>
 				
+				
 		<tr>
-			<td align="center">HIGIENE BUCAL(utiliza)<br><br>
-				<input type="checkbox" name="checkbox" value="fioFitaDental"> Fio/Fita dental
+			<td align="center">HIGIENE BUCAL(utiliza)</td>
+		</tr>	
+		
+		<tr>	
+			<td><input type="checkbox" name="checkbox" value="fioFitaDental"> Fio/Fita dental
 				<input type="checkbox" name="checkbox" value="unitufoBitufo"> Unitufo/Bitufo
 				<input type="checkbox" name="checkbox" value="interdental"> Interdental
 				<input type="checkbox" name="checkbox" value="palito"> Palito
@@ -65,13 +73,19 @@
 			</td>			
 		</tr>		
 		
+		
+		
 		<tr>
-			<td align="center">DIETA<br><br>								
-				<td align="right"> Ingere alimentos/bebidas entre as refeições?
-					<input type="radio" name="ingereAlimentosBebidasRefeicoes" value="NÃO" />Não
-					<input type="radio" name="ingereAlimentosBebidasRefeicoes" value="SIM" />Sim				
-					<input type="text" name="ingereAlimentosBebidasRefeicoes" size="30" maxlength="30" /><br>																
-			</td>														
+			<td align="center">DIETA</td>
+		</tr>
+		
+		<tr>											
+			<td align="left"> Ingere alimentos/bebidas entre as refeições?
+				<input type="radio" name="ingereAlimentosBebidasRefeicoes" value="NÃO" />Não
+				<input type="radio" name="ingereAlimentosBebidasRefeicoes" value="SIM" />Sim				
+				<input type="text" name="ingereAlimentosBebidasRefeicoes" size="30" maxlength="30" /><br>
+			</td>							
+																				
 		</tr>
 		
 		<tr>						

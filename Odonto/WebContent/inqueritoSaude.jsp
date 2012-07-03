@@ -9,12 +9,13 @@
 <div class="header">
 	<h3>${msg}</h3>
 </div>
-<form name="formInqueritoSaude" method="post" action="ServletInqueritoSaude">
+<form name="formInqueritoSaude" method="post" action="ServletInqueritoSaude">	
+	
 	<table>
 	
 		<tr>				
 			<td align="center">INQUÉRITO DE SAÚDE:</td>						
-		</tr>
+		</tr>		
 				
 		<tr>
 			<td align="right">Em tratamento médico?</td>
