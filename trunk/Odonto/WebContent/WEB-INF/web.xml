@@ -87,4 +87,14 @@
     <servlet-name>ServletFornecedor</servlet-name>
     <url-pattern>/ServletFornecedor</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletPaciente</display-name>
+    <servlet-name>ServletPaciente</servlet-name>
+    <servlet-class>controle.ServletPaciente</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletPaciente</servlet-name>
+    <url-pattern>/ServletPaciente</url-pattern>
+  </servlet-mapping>
 </web-app>
