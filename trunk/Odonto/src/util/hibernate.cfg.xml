@@ -11,6 +11,7 @@
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
    
+    <mapping class="modelo.Usuario"/>
     <mapping class="modelo.Consulta"/>
     <mapping class="modelo.Convenio"/>
     <mapping class="modelo.Dentista"/>
@@ -26,8 +27,6 @@
     <mapping class="modelo.Procedimento"/>
     <mapping class="modelo.TelefoneFornecedor"/>
     <mapping class="modelo.TelefonePaciente"/>
-    <mapping class="modelo.Usuario"/>
-    
     
  </session-factory>
 </hibernate-configuration>

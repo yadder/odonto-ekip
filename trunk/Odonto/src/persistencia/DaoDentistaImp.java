@@ -30,6 +30,7 @@ public class DaoDentistaImp implements DaoDentista {
 			transaction.rollback();
 			e.printStackTrace();
 		}finally{
+			session.flush();
 			session.close();
 		}
 		return retorno;
@@ -47,6 +48,7 @@ public class DaoDentistaImp implements DaoDentista {
 			transaction.rollback();
 			e.printStackTrace();
 		}finally{
+			session.flush();
 			session.close();
 		}
 		return retorno;
@@ -64,6 +66,7 @@ public class DaoDentistaImp implements DaoDentista {
 			transaction.rollback();
 			e.printStackTrace();
 		}finally{
+			session.flush();
 			session.close();
 		}
 		return retorno;
@@ -94,10 +97,10 @@ public class DaoDentistaImp implements DaoDentista {
 			e.printStackTrace();
 			
 		}finally{
+			session.flush();
 			session.close();
-			return lista;
 		}
-		
+		return lista;
 	}
 
 }
