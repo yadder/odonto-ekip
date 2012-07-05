@@ -8,6 +8,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import util.HibernateUtil;
 
@@ -30,6 +31,7 @@ public class DaoPacienteImp implements DaoPaciente {
 		}finally{
 			session.close();
 		}
+		System.out.println("Paciente cadastrado com sucesso!");
 		return retorno;
 	}
 
@@ -47,6 +49,7 @@ public class DaoPacienteImp implements DaoPaciente {
 		}finally{
 			session.close();
 		}
+		System.out.println("Paciente alterado com sucesso!");
 		return retorno;
 	}
 
@@ -64,11 +67,28 @@ public class DaoPacienteImp implements DaoPaciente {
 		}finally{
 			session.close();
 		}
+		System.out.println("Paciente excluído com sucesso!");
 		return retorno;
+	}
+	
+	public Paciente pesquisarPacientePorNome(String nome){
+		Paciente p = null;
+		try{
+			session = HibernateUtil.getSessionFactory().openSession();
+			Criteria cr = session.createCriteria(Paciente.class).add(Restrictions.eq("nomeUsuario", nome));
+			p = (Paciente)cr.uniqueResult();
+		}catch(HibernateException e){
+			e.printStackTrace();
+		}finally{
+			session.flush();
+			session.close();
+		}
+		System.out.println("Pesquisa por nome paciente encontrado!");
+		return p;
 	}
 
 	public List<Paciente> pesquisarTodosPaciente() {
-		ArrayList lista = null;
+		ArrayList<Paciente> lista = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			Criteria cr = session.createCriteria(Paciente.class);
@@ -77,10 +97,9 @@ public class DaoPacienteImp implements DaoPaciente {
 			e.printStackTrace();
 			
 		}finally{
+			session.flush();
 			session.close();
-			return lista;
 		}
-		
+		return lista;
 	}
-
 }

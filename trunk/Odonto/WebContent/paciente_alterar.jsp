@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro de paciente</title>
+<title>Alteração de paciente</title>
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body>
@@ -13,7 +13,7 @@
 	<table>
 		<tr>
 			<td align="right">Nome:</td>
-			<td><input type="text" name="nomePaciente" value="${paciente.nomeUsuario}" size="20" /><input type="submit" name="btn" value="Pesquisar" /></td>
+			<td><input type="text" name="nomePaciente" value="${paciente.nomeUsuario}" size="20" /></td>
 		</tr>
 		<tr>
 			<td align="right">Rg:</td>
@@ -122,8 +122,8 @@
 		</tr>
 		<tr>
 			<td colspan=2 align="center">
-				
-				<input type="submit" name="btn" value="Cadastrar" />
+				<input type="submit" name="btn" value="Excluir" />
+				<input type="submit" name="btn" value="Alterar" />
 				<input type="submit" name="btn" value="Voltar" />
 			</td>
 		</tr>

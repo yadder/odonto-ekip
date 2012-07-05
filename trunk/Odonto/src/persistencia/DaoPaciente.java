@@ -12,5 +12,7 @@ public interface DaoPaciente {
 	
 	boolean excluirPaciente(Paciente paciente);
 	
+	Paciente pesquisarPacientePorNome(String nome);
+	
 	List<Paciente> pesquisarTodosPaciente();
 }

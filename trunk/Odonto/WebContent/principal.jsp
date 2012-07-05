@@ -27,6 +27,7 @@
 	<a href="elemento.jsp">Cadastro de elemento</a><br/>
 	<a href="recepcionista.jsp">Cadastro de recepcionista</a><br/>
 	<a href="dentista.jsp">Cadastro de dentista</a><br/>
+	<a href="paciente.jsp">Cadastro de paciente</a><br/>
 	<a href="convenio.jsp">Cadastro de convênio</a><br/>
 	<a href="fornecedor.jsp">Cadastro de fornecedor</a> <br/>
 </body>

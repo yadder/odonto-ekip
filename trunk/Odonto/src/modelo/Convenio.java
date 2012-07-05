@@ -36,5 +36,10 @@ public class Convenio implements Serializable {
     public void setNomeConvenio(String nomeConvenio) {
         this.nomeConvenio = nomeConvenio;
     }
+    
+    @Override
+    public String toString() {
+       	return nomeConvenio;
+    }
   
 }
