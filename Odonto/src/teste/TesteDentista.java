@@ -12,12 +12,12 @@ public class TesteDentista {
 		Dentista dentista = null;
 		DaoDentista daoDentista = new DaoDentistaImp();
 		ConfiguraAtributo ca = new ConfiguraAtributo();
-		/*		
+				
 		System.out.println("1------------------------------Testando a classe dentista (Cadastro)");
-		dentista = new Dentista("Michelle Silva", "12345", "DENTISTA", "12345", "939.939.939-19","M",ca.dataStringParaDataSql("15-03-1970"),"222999");
+		dentista = new Dentista("JOSUE", "12345", "DENTISTA", "12345", "939.939.939-19","M",ca.dataStringParaDataSql("15/03/1970"),"222999");
 		daoDentista.cadastrarDentista(dentista);
 		System.out.println("Dentista "+dentista.getNomeUsuario()+" cadastrado!");
-*/		
+/*		
 		System.out.println("1------------------------------Testando a classe dentista (Pesquisa)");
 		dentista = new Dentista("Michelle Silva");
 		dentista = daoDentista.pesquisarDentistaPorNome("Michelle Silva");
@@ -43,6 +43,6 @@ public class TesteDentista {
 		}else{
 			System.out.println("Erro na exclusão");
 		}
-
+*/
 	}
 }
