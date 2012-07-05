@@ -1,0 +1,17 @@
+APRENSENTAÇÃO (entre 25/07 e 01/08)
+
+Ordem de apresentação:
+Diagrama de caso de uso
+Diagrama de classe
+Tem que mostrar pelo menos 1 diagrama de cada
+Focar os diagramas com base na mesma transacao
+Nos diagramas de atividade colocar o SIM e o NAO entre colchetes
+No diagrama de sequencia, colocar a ultima camada como DAO e não como BD
+Formatação dos campos (valor, texto)
+Colocar validação ao excluir
+Tem que mostrar na tela todos os registros inseridos na hora do cadastro
+
+
+
+
+
