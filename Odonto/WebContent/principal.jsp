@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -12,8 +13,8 @@
 	<form name="logout" action="ServletPrincipal" method="post">
 		<input type="submit" value="Logout" />
 	</form>
-
 </div>
+
 	
 	<input type="button" value="testeAjax" name="testeAjax" onclick="testeAjax()" /><br>
 	<div id="myDiv"></div>

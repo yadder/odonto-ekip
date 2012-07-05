@@ -10,6 +10,7 @@ public class GerarTabelas {
 	public static void main(String[] args) {
 		try{
 			AnnotationConfiguration conf = new AnnotationConfiguration().configure("util/hibernate.cfg.xml");
+			conf.addAnnotatedClass(Usuario.class);
 			conf.addAnnotatedClass(Consulta.class);
 			conf.addAnnotatedClass(Convenio.class);
 			conf.addAnnotatedClass(Dentista.class);
@@ -25,14 +26,12 @@ public class GerarTabelas {
 			conf.addAnnotatedClass(Procedimento.class);
 			conf.addAnnotatedClass(TelefoneFornecedor.class);
 			conf.addAnnotatedClass(TelefonePaciente.class);
-			conf.addAnnotatedClass(Usuario.class);
 			
 			SchemaExport se = new SchemaExport(conf);
 			se.create(true, true);
 			System.out.println("Tabelas criadas com êxito.");
 		}catch(Exception e){
 			System.out.println("Erro ao criar as tabelas: "+ e.getMessage());
-			System.out.println("Causa: "+ e.getCause());
 		}
 		
 	}

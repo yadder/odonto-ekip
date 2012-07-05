@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
+<%@ page import="modelo.*" %>
+<%@ page import="persistencia.*" %>
+<%@ page import="java.util.*" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -112,11 +115,16 @@
 		</tr>
 		<tr>
 			<td align="right">Convênio:</td>
-			<td><input type="text" name="convenio" value="${paciente.convenio}"/>
-			
-				<select name="convenio">
-					<option value="${paciente.convenio}">AC</option>
+			<td><select name="convenio">
+				<%
+					DaoConvenio daoConvenio = new DaoConvenioImp();
+					List<Convenio> convenios = daoConvenio.pesquisarTodosConvenio();
+					for(Convenio convenio : convenios){
+				%>
+				<option value="<%=convenio.getNomeConvenio() %>"><%=convenio.getNomeConvenio() %></option>
+				<%} %>
 				</select>
+				
 				  
 			</td>
 		</tr>

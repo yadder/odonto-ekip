@@ -1,10 +1,8 @@
 package persistencia;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import modelo.Face;
 import modelo.Usuario;
 
 import org.hibernate.Criteria;

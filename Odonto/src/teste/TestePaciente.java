@@ -1,6 +1,9 @@
 package teste;
 
+import modelo.Convenio;
 import modelo.Paciente;
+import persistencia.DaoConvenio;
+import persistencia.DaoConvenioImp;
 import persistencia.DaoPaciente;
 import persistencia.DaoPacienteImp;
 import util.ConfiguraAtributo;
@@ -15,11 +18,20 @@ public class TestePaciente {
 		Paciente paciente = null;
 		DaoPaciente daoPaciente = new DaoPacienteImp();
 		ConfiguraAtributo ca = new ConfiguraAtributo();
-				
-		System.out.println("1------------------------------Testando a classe paciente (Cadastro)");
-		paciente = new Paciente("JOSUE", "12345", "DENTISTA", "12345", "939.939.939-19","M",ca.dataStringParaDataSql("15/03/1970"),"222999", "logradouro","10","lt 1 qd 2","bairro","rio de janeiro","RJ","20.000-000","21","2222-2222","22","3333-3333",);
-		daoPaciente.cadastrarPaciente(paciente);
-		System.out.println("Paciente "+paciente.getNomeUsuario()+" cadastrado!");
+		
+		Convenio convenio = new Convenio("AMIL");
+		DaoConvenio daoConvenio = new DaoConvenioImp();
+		convenio = daoConvenio.pesquisarConvenioPorNome(convenio.getNomeConvenio());
+		
+		if (convenio != null){
+			System.out.println("1------------------------------Testando a classe paciente (Cadastro)");
+			paciente = new Paciente("JOSUE", "12345", "DENTISTA", "12345", "939.939.939-19", "M", ca.dataStringParaDataSql("15/03/1970"), 
+					"responsavel paciente", "logradouro","10", "lt 1 qd 2", "bairro", "Rio de Janeiro", "RJ", "20.000-000", "21", "2222-2222", 
+					"22", "3333-3333", convenio);
+			
+			daoPaciente.cadastrarPaciente(paciente);
+			System.out.println("Paciente "+paciente.getNomeUsuario()+" cadastrado!");
+		}
 /*		
 		System.out.println("1------------------------------Testando a classe paciente (Pesquisa)");
 		paciente = new Paciente("Michelle Silva");

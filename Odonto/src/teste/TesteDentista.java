@@ -14,7 +14,7 @@ public class TesteDentista {
 		ConfiguraAtributo ca = new ConfiguraAtributo();
 				
 		System.out.println("1------------------------------Testando a classe dentista (Cadastro)");
-		dentista = new Dentista("JOSUE", "12345", "DENTISTA", "12345", "939.939.939-19","M",ca.dataStringParaDataSql("15/03/1970"),"222999");
+		dentista = new Dentista("JOSUE", "12345", "DENTISTA", "12345", "123.451.234-51","M",ca.dataStringParaDataSql("15/03/1970"),"12345");
 		daoDentista.cadastrarDentista(dentista);
 		System.out.println("Dentista "+dentista.getNomeUsuario()+" cadastrado!");
 /*		

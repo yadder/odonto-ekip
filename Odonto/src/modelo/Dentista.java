@@ -25,8 +25,6 @@ public class Dentista extends Usuario implements Serializable {
 		super(nomeUsuario);
 	}
 
-
-
 	public Dentista(String nomeUsuario, String senhaUsuario, String perfilUsuario, String rgUsuario,
 			String cpfUsuario, String sexoUsuario, Date dataNascimentoUsuario,
 			String croDentista) {
