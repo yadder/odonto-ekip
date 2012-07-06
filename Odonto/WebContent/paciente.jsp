@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
-<%@ page import="modelo.*" %>
-<%@ page import="persistencia.*" %>
+<%@ page import="modelo.Convenio" %>
+<%@ page import="persistencia.DaoConvenio,persistencia.DaoConvenioImp" %>
 <%@ page import="java.util.*" %>
 <html>
 <head>
@@ -16,11 +16,11 @@
 	<table>
 		<tr>
 			<td align="right">Nome:</td>
-			<td><input type="text" name="nomePaciente" value="${paciente.nomeUsuario}" size="20" /><input type="submit" name="btn" value="Pesquisar" /></td>
+			<td><input class="maiuscula" type="text" name="nomePaciente" value="${paciente.nomeUsuario}" size="20" /><input type="submit" name="btn" value="Pesquisar" /></td>
 		</tr>
 		<tr>
 			<td align="right">Rg:</td>
-			<td><input type="text" name="rgPaciente" value="${paciente.rgUsuario}" size="20" /></td>
+			<td><input class="maiuscula" type="text" name="rgPaciente" value="${paciente.rgUsuario}" size="20" /></td>
 		</tr>
 		<tr>
 			<td align="right">Cpf:</td>
@@ -99,19 +99,19 @@
 		</tr>
 		<tr>
 			<td align="right">DDD:</td>
-			<td><input type="text" name="ddd1Paciente" value="${paciente.ddd1Paciente}" size="20" maxlength="2"/></td>
+			<td><input type="text" name="ddd1Paciente" value="${paciente.ddd1Paciente}" size="3" maxlength="2"/></td>
 		</tr>
 		<tr>
 			<td align="right">Telefone1:</td>
-			<td><input type="text" name="telefone1Paciente" value="${paciente.telefone1Paciente}" size="20" maxlength="9" OnKeyPress="formatar(this, '####-####')" /></td>
+			<td><input type="text" name="telefone1Paciente" value="${paciente.telefone1Paciente}" size="10" maxlength="9" OnKeyPress="formatar(this, '####-####')" /></td>
 		</tr>
 		<tr>
 			<td align="right">DDD:</td>
-			<td><input type="text" name="ddd2Paciente" value="${paciente.ddd2Paciente}" size="20" maxlength="2"/></td>
+			<td><input type="text" name="ddd2Paciente" value="${paciente.ddd2Paciente}" size="3" maxlength="2"/></td>
 		</tr>
 		<tr>
 			<td align="right">Telefone2:</td>
-			<td><input type="text" name="telefone2Paciente" value="${paciente.telefone2Paciente}" size="20" maxlength="9" OnKeyPress="formatar(this, '####-####')"/></td>
+			<td><input type="text" name="telefone2Paciente" value="${paciente.telefone2Paciente}" size="10" maxlength="9" OnKeyPress="formatar(this, '####-####')"/></td>
 		</tr>
 		<tr>
 			<td align="right">Convênio:</td>
@@ -124,8 +124,6 @@
 				<option value="<%=convenio.getNomeConvenio() %>"><%=convenio.getNomeConvenio() %></option>
 				<%} %>
 				</select>
-				
-				  
 			</td>
 		</tr>
 		<tr>

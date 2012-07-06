@@ -76,55 +76,37 @@ public class Paciente extends Usuario implements Serializable {
 		this.convenio = convenio;
 	}
 
-
-
 	public String getDdd1Paciente() {
 		return ddd1Paciente;
 	}
-
-
 
 	public void setDdd1Paciente(String ddd1Paciente) {
 		this.ddd1Paciente = ddd1Paciente;
 	}
 
-
-
 	public String getTelefone1Paciente() {
 		return telefone1Paciente;
 	}
-
-
 
 	public void setTelefone1Paciente(String telefone1Paciente) {
 		this.telefone1Paciente = telefone1Paciente;
 	}
 
-
-
 	public String getDdd2Paciente() {
 		return ddd2Paciente;
 	}
-
-
 
 	public void setDdd2Paciente(String ddd2Paciente) {
 		this.ddd2Paciente = ddd2Paciente;
 	}
 
-
-
 	public String getTelefone2Paciente() {
 		return telefone2Paciente;
 	}
 
-
-
 	public void setTelefone2Paciente(String telefone2Paciente) {
 		this.telefone2Paciente = telefone2Paciente;
 	}
-
-
 
 	public Convenio getConvenio() {
 		return convenio;

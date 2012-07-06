@@ -83,7 +83,6 @@ public class DaoPacienteImp implements DaoPaciente {
 			session.flush();
 			session.close();
 		}
-		System.out.println("Pesquisa por nome paciente encontrado!");
 		return p;
 	}
 

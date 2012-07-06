@@ -87,7 +87,7 @@ public class ServletPaciente extends HttpServlet {
 					disp.forward(request, response);
 				}
 		}else if (btn.equals("Pesquisar")){
-			String nomeUsuario = (String) request.getParameter("nomeUsuario");
+			String nomeUsuario = (String) request.getParameter("nomePaciente");
 			Paciente paciente = new Paciente(nomeUsuario);
 			DaoPaciente daoPaciente = new DaoPacienteImp();
 			paciente = daoPaciente.pesquisarPacientePorNome(nomeUsuario);
@@ -149,7 +149,7 @@ public class ServletPaciente extends HttpServlet {
 			convenio = daoConvenio.pesquisarConvenioPorNome(stringConvenio);
 			
 			
-			if (validaCampos(nomeUsuario, rgUsuario, cpfUsuario, dtNascUsuario, sexoUsuario, convenio.toString())){
+			if (validaCampos(nomeUsuario, rgUsuario, cpfUsuario, dtNascUsuario, sexoUsuario, stringConvenio)){
 				Paciente paciente = new Paciente();
 				paciente = (Paciente)objetoSessao.getAttribute("paciente");
 				paciente.setNomeUsuario(nomeUsuario);
