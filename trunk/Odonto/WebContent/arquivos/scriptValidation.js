@@ -10,27 +10,11 @@ function confirmarExclusao(){
 	}
 }
 
-function confirmOperacao(){
-	
-}
-
-function testeAjax(){
-	var xmlhttp;
-	if (window.XMLHttpRequest)
-	  {// code for IE7+, Firefox, Chrome, Opera, Safari
-	  xmlhttp=new XMLHttpRequest();
-	  }
-	else
-	  {// code for IE6, IE5
-	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	  }
-	xmlhttp.onreadystatechange=function()
-	  {
-	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-	    {
-	    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-	    }
-	  }
-	xmlhttp.open("GET","ServletPrincipal.java",true);
-	xmlhttp.send();
+function formatar(src, mask){
+	var i = src.value.length;
+	var saida = mask.substring(0,1);
+	var texto = mask.substring(i);
+	if (texto.substring(0,1) != saida){
+	    src.value += texto.substring(0,1);
+	}
 }

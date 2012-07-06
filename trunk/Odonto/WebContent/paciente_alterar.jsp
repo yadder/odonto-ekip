@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="modelo.Convenio" %>
+<%@ page import="persistencia.DaoConvenio,persistencia.DaoConvenioImp" %>
+<%@ page import="java.util.*" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -29,7 +33,11 @@
 		</tr>
 		<tr>
 			<td align="right">Sexo:</td>
-			<td><input type="radio" name="sexoPaciente" value="M" />Masculino
+			<td>
+			<% String sex = (String) ${paciente.sexoUsuario}; %>
+			<%	if (sex.equals("M")){ %>
+				<input type="radio" name="sexoPaciente" value="M" />Masculino
+			<%} %>
 				<input type="radio" name="sexoPaciente" value="F" checked="checked" />Feminino
 			</td>
 		</tr>
@@ -112,12 +120,15 @@
 		</tr>
 		<tr>
 			<td align="right">Convênio:</td>
-			<td><input type="text" name="convenio" value="${paciente.convenio}"/>
-			
-				<select name="convenio">
-					<option value="${paciente.convenio}">AC</option>
+			<td><select name="convenio">
+				<%
+					DaoConvenio daoConvenio = new DaoConvenioImp();
+					List<Convenio> convenios = daoConvenio.pesquisarTodosConvenio();
+					for(Convenio convenio : convenios){
+				%>
+				<option value="<%=convenio.getNomeConvenio() %>"><%=convenio.getNomeConvenio() %></option>
+				<%} %>
 				</select>
-				  
 			</td>
 		</tr>
 		<tr>
