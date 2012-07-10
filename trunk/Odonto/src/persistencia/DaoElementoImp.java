@@ -88,7 +88,7 @@ public class DaoElementoImp implements DaoElemento {
 	}
 
 	public List<Elemento> pesquisarTodosElemento() {
-		ArrayList lista = null;
+		List<Elemento> lista = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			Criteria cr = session.createCriteria(Elemento.class);

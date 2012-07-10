@@ -45,7 +45,7 @@ public class ServletLogin extends HttpServlet {
 			// seta o usuarioLogado na sessao
 			objetoSessao.setAttribute("usuarioLogado", usuarioLogado);
 			mensagem = "Seja bem vindo ";
-			request.setAttribute("msg", mensagem);
+			request.setAttribute("msgCabecalho", mensagem);
 			RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
 			disp.forward(request, response);
 		}else{

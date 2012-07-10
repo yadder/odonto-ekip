@@ -34,10 +34,6 @@ public class OdontogramaProcedimento implements Serializable {
     public OdontogramaProcedimento() {
     }
 
-    public OdontogramaProcedimento(long idOdontogramaProcedimeto) {
-        this.idOdontogramaProcedimeto = idOdontogramaProcedimeto;
-    }
-
     public long getIdOdontogramaProcedimeto() {
         return idOdontogramaProcedimeto;
     }
