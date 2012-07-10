@@ -27,6 +27,7 @@
     <mapping class="modelo.Procedimento"/>
     <mapping class="modelo.TelefoneFornecedor"/>
     <mapping class="modelo.TelefonePaciente"/>
+    <mapping class="modelo.Acesso"/>
     
  </session-factory>
 </hibernate-configuration>
