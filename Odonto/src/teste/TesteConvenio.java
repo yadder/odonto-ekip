@@ -13,9 +13,9 @@ public class TesteConvenio {
 		
 		System.out.println("1------------------------------Testando a classe convenio (Cadastro)");
 		convenio = new Convenio("Amil");
-		daoConvenio.cadastrarConvenio(convenio);
+		result = daoConvenio.cadastrarConvenio(convenio);
 		System.out.println("Convenio "+convenio.getNomeConvenio()+" cadastrado!");
-		
+	/*	
 		System.out.println("1------------------------------Testando a classe convenio (Pesquisa)");
 		convenio = new Convenio("Amil");
 		convenio = daoConvenio.pesquisarConvenioPorNome("Amil");
@@ -41,6 +41,7 @@ public class TesteConvenio {
 		}else{
 			System.out.println("Erro na exclusão");
 		}
+*/
 	}
 
 }

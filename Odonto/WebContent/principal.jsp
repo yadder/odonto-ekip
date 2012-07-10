@@ -10,12 +10,12 @@
 <c:import url="cabecalho.jsp" />
 <div id="pricipal" style="background-color: #FFFFFF;">
 	
-	<h2><font color="red">I N C O M P L E T A S <br/> </font></h2>
+	<h4><font color="red">I N C O M P L E T A S <br/> </font></h4>
 	<a href="inqueritoOdontologico.jsp">Inquérito odontológico</a><br/>
 	<a href="pagamento.jsp">Efetuar pagamento</a><br/>
 	<a href="agendar_consuta.jsp">Agendar consulta</a><br/>
 	<hr/>
-	<h2><font color="blue">C R U D _ F U N C I O N A N D O<br/></font></h2>
+	<h2><font color="blue">C R U D _ F U N C I O N A N D O <br/></font></h2>
 	<a href="face.jsp">Cadastro de face</a><br/>
 	<a href="elemento.jsp">Cadastro de elemento</a><br/>
 	<a href="recepcionista.jsp">Cadastro de recepcionista</a><br/>

@@ -7,7 +7,7 @@
 </head>
 <body bgcolor="#3366FF">
 
-	<font size="2">${msg} ${usuarioLogado.nomeUsuario}</font>
+	<font size="2">${msgCabecalho} ${usuarioLogado.nomeUsuario}</font>
 	
 	<b><a href="<%=request.getContextPath()%>/Logout">Logout</a></b>
 </body>
