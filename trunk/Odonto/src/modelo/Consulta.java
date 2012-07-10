@@ -27,18 +27,7 @@ public class Consulta implements Serializable {
     @ManyToOne(fetch=FetchType.EAGER)
 	private Dentista dentista;
     
-
     public Consulta() {
-    }
-
-    public Consulta(Integer idConsulta) {
-        this.idConsulta = idConsulta;
-    }
-
-    public Consulta(long idConsulta, Date dataConsulta, String statusConsulta) {
-        this.idConsulta = idConsulta;
-        this.dataConsulta = dataConsulta;
-        this.statusConsulta = statusConsulta;
     }
 
     public long getIdConsulta() {
