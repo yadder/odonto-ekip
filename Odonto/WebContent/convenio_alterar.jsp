@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -6,9 +7,6 @@
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body>
-<div class="header">
-	<h3>${msg}</h3>
-</div>
 <form name="formConvenio" method="post" action="ServletConvenio">
 	<table>
 		<tr>

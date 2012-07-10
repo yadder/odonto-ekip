@@ -12,7 +12,7 @@ public interface DaoProcedimento {
 	
 	boolean excluirProcedimento(Procedimento procedimento);
 	
-	Procedimento pesquisarProcedimento(Procedimento procedimento);
+	Procedimento pesquisarProcedimentoPorDescricao(String nome);
 	
 	List<Procedimento> pesquisarTodosProcedimento();
 }

@@ -31,7 +31,7 @@ public class Usuario implements Serializable {
     private String perfilUsuario;
     @Column(name = "rg_usuario", length = 20)
     private String rgUsuario;
-    @Column(name = "cpf_usuario", nullable = false, length = 14)
+    @Column(name = "cpf_usuario", nullable = false, length = 14, unique = true)
     private String cpfUsuario;
     @Column(name = "data_nascimento_usuario")
     @Temporal(TemporalType.DATE)

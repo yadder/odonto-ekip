@@ -3,12 +3,11 @@ package persistencia;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Procedimento;
-
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
+import org.hibernate.criterion.Restrictions;
 import util.HibernateUtil;
 
 public class DaoProcedimentoImp implements DaoProcedimento {
@@ -28,6 +27,7 @@ public class DaoProcedimentoImp implements DaoProcedimento {
 			transaction.rollback();
 			e.printStackTrace();
 		}finally{
+			session.flush();
 			session.close();
 		}
 		return retorno;
@@ -45,11 +45,12 @@ public class DaoProcedimentoImp implements DaoProcedimento {
 			transaction.rollback();
 			e.printStackTrace();
 		}finally{
+			session.flush();
 			session.close();
 		}
 		return retorno;
 	}
-
+	
 	public boolean excluirProcedimento(Procedimento procedimento) {
 		boolean retorno = false;
 		try{
@@ -62,22 +63,25 @@ public class DaoProcedimentoImp implements DaoProcedimento {
 			transaction.rollback();
 			e.printStackTrace();
 		}finally{
+			session.flush();
 			session.close();
 		}
 		return retorno;
 	}
 
-	public Procedimento pesquisarProcedimento(Procedimento procedimento) {
-		Procedimento e = null;
+	public Procedimento pesquisarProcedimentoPorDescricao(String nome) {
+		Procedimento p = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			e = (Procedimento)session.get(Procedimento.class, procedimento.getIdProcedimento());
+			Criteria cr = session.createCriteria(Procedimento.class).add(Restrictions.eq("descricaoProcedimento",nome));
+			p = (Procedimento)cr.uniqueResult();
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		}finally{
+			session.flush();
 			session.close();
 		}
-		return e;
+		return p;
 	}
 
 	public List<Procedimento> pesquisarTodosProcedimento() {
@@ -90,10 +94,10 @@ public class DaoProcedimentoImp implements DaoProcedimento {
 			e.printStackTrace();
 			
 		}finally{
+			session.flush();
 			session.close();
-			return lista;
 		}
-		
+		return lista;
 	}
 
 }

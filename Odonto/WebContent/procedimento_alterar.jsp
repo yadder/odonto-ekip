@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro de procedimento</title>
+<title>Alteração de procedimento</title>
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body>
@@ -29,7 +29,7 @@
 		</tr>
 		<tr>
 			<td align="right">Procedimento:</td>
-			<td><input type="text" name="descricaoProcedimento" value="${procedimento.descricaoProcedimento}" size="20" maxlength="20" /><input type="submit" name="btn" value="Pesquisar" />
+			<td><input type="text" name="descricaoProcedimento" value="${procedimento.descricaoProcedimento}" size="20" maxlength="20" />
 		</tr>
 		<tr>
 			<td align="right">Valor:</td>
@@ -38,7 +38,8 @@
 		<tr>
 			<td colspan=2 align="center">
 				
-				<input type="submit" name="btn" value="Cadastrar" />
+				<input type="submit" name="btn" value="Excluir" />
+				<input type="submit" name="btn" value="Alterar" />
 				<input type="submit" name="btn" value="Voltar" />
 			</td>
 		</tr>

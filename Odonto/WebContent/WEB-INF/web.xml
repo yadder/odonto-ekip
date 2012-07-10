@@ -97,4 +97,34 @@
     <servlet-name>ServletPaciente</servlet-name>
     <url-pattern>/ServletPaciente</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletConsulta</display-name>
+    <servlet-name>ServletConsulta</servlet-name>
+    <servlet-class>controle.ServletConsulta</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletConsulta</servlet-name>
+    <url-pattern>/ServletConsulta</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Logout</description>
+    <display-name>Logout</display-name>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>controle.ServletPrincipal</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletProcedimento</display-name>
+    <servlet-name>ServletProcedimento</servlet-name>
+    <servlet-class>controle.ServletProcedimento</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletProcedimento</servlet-name>
+    <url-pattern>/ServletProcedimento</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -30,6 +30,7 @@ public class DaoConvenioImp implements DaoConvenio {
 			transaction.rollback();
 			e.printStackTrace();
 		}finally{
+			session.flush();
 			session.close();
 		}
 		return retorno;
@@ -47,6 +48,7 @@ public class DaoConvenioImp implements DaoConvenio {
 			transaction.rollback();
 			e.printStackTrace();
 		}finally{
+			session.flush();
 			session.close();
 		}
 		return retorno;
@@ -64,6 +66,7 @@ public class DaoConvenioImp implements DaoConvenio {
 			transaction.rollback();
 			e.printStackTrace();
 		}finally{
+			session.flush();
 			session.close();
 		}
 		return retorno;
@@ -77,6 +80,7 @@ public class DaoConvenioImp implements DaoConvenio {
 		} catch (HibernateException ex) {
 			ex.printStackTrace();
 		}finally{
+			session.flush();
 			session.close();
 		}
 		return e;
@@ -107,10 +111,10 @@ public class DaoConvenioImp implements DaoConvenio {
 			e.printStackTrace();
 			
 		}finally{
+			session.flush();
 			session.close();
-			return lista;
 		}
-		
+		return lista;
 	}
 	
 
