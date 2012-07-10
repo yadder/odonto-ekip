@@ -3,6 +3,7 @@ package persistencia;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.Acesso;
 import modelo.Elemento;
 
 import org.hibernate.Criteria;
@@ -13,17 +14,18 @@ import org.hibernate.criterion.Restrictions;
 
 import util.HibernateUtil;
 
-public class DaoElementoImp implements DaoElemento {
+public class DaoAcessoImp implements DaoAcesso {
 
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public boolean cadastrarElemento(Elemento elemento) {
+	@Override
+	public boolean cadastrarAcesso(Acesso acesso) {
 		boolean retorno = false;
 		try{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
-			session.persist(elemento);
+			session.persist(acesso);
 			transaction.commit();
 			retorno = true;
 		}catch(HibernateException e){
@@ -36,12 +38,13 @@ public class DaoElementoImp implements DaoElemento {
 		return retorno;
 	}
 
-	public boolean alterarElemento(Elemento elemento) {
+	@Override
+	public boolean alterarAcesso(Acesso acesso) {
 		boolean retorno = false;
 		try{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
-			session.update(elemento);
+			session.update(acesso);
 			transaction.commit();
 			retorno = true;
 		}catch(HibernateException e){
@@ -54,12 +57,13 @@ public class DaoElementoImp implements DaoElemento {
 		return retorno;
 	}
 
-	public boolean excluirElemento(Elemento elemento) {
+	@Override
+	public boolean excluirAcesso(Acesso acesso) {
 		boolean retorno = false;
 		try{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
-			session.delete(elemento);
+			session.delete(acesso);
 			transaction.commit();
 			retorno = true;
 		}catch(HibernateException e){
@@ -72,26 +76,28 @@ public class DaoElementoImp implements DaoElemento {
 		return retorno;
 	}
 
-	public Elemento pesquisarElementoPorNome(String nome){
-		Elemento e = null;
+	@Override
+	public Acesso pesquisarAcessoPorNome(String nome) {
+		Acesso a = null;
 		try{
 			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(Elemento.class).add(Restrictions.eq("nomeElemento", nome));
-			e = (Elemento) cr.uniqueResult();
+			Criteria cr = session.createCriteria(Acesso.class).add(Restrictions.eq("descricaoAcesso", nome));
+			a = (Acesso) cr.uniqueResult();
 		}catch (HibernateException ex){
 			ex.printStackTrace();
 		}finally{
 			session.flush();
 			session.close();
 		}
-		return e;
+		return a;
 	}
 
-	public List<Elemento> pesquisarTodosElemento() {
-		ArrayList lista = null;
+	@Override
+	public List<Acesso> pesquisarTodosAcesso() {
+		List<Acesso> lista = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(Elemento.class);
+			Criteria cr = session.createCriteria(Acesso.class);
 			lista = (ArrayList)cr.list();
 		} catch (HibernateException e) {
 			e.printStackTrace();

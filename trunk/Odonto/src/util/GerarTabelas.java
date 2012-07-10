@@ -26,6 +26,7 @@ public class GerarTabelas {
 			conf.addAnnotatedClass(Procedimento.class);
 			conf.addAnnotatedClass(TelefoneFornecedor.class);
 			conf.addAnnotatedClass(TelefonePaciente.class);
+			conf.addAnnotatedClass(Acesso.class);
 			
 			SchemaExport se = new SchemaExport(conf);
 			se.create(true, true);

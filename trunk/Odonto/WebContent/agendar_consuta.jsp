@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="modelo.Dentista" %>
 <%@ page import="persistencia.DaoDentista,persistencia.DaoDentistaImp" %>
 <%@ page import="java.util.*" %>
@@ -31,20 +30,18 @@
 			</td>
 		</tr>
 		<tr>
-			<td>
-				
-			</td>
+			<td align="right">Selecione a data da consulta:</td>
+			<td><input type="text" value="dataConsulta" /></td>
 		</tr>
-		
-		
+		<tr>
+			<td align="right">Selecione a hora da consulta:</td>
+			<td>Fazer um for trazendo os horarios livres daquela data escolhida</td>
 		<tr>
 			<td colspan=2 align="center">
-				
 				<input type="submit" name="btn" value="Cadastrar" />
 				<input type="submit" name="btn" value="Voltar" />
 			</td>
 		</tr>
-	
 	</table>
 </form>
 

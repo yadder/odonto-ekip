@@ -127,4 +127,14 @@
     <servlet-name>ServletProcedimento</servlet-name>
     <url-pattern>/ServletProcedimento</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletAcesso</display-name>
+    <servlet-name>ServletAcesso</servlet-name>
+    <servlet-class>controle.ServletAcesso</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletAcesso</servlet-name>
+    <url-pattern>/ServletAcesso</url-pattern>
+  </servlet-mapping>
 </web-app>
