@@ -21,19 +21,19 @@ public class Procedimento implements Serializable {
     private List<OdontogramaProcedimento> odontogramaProcedimentoList;
     @JoinColumn(name = "id_convenio", referencedColumnName = "id_convenio", nullable = false)
     @ManyToOne(optional = false)
-    private Convenio idConvenio;
+    private Convenio convenio;
 
     public Procedimento() {
     }
-
-    public Procedimento(long idProcedimento) {
-        this.idProcedimento = idProcedimento;
+    
+    public Procedimento (String descricaoProcedimento){
+    	this.descricaoProcedimento = descricaoProcedimento;
     }
 
-    public Procedimento(long idProcedimento, String descricaoProcedimento, double valorProcedimento) {
-        this.idProcedimento = idProcedimento;
+    public Procedimento(String descricaoProcedimento, double valorProcedimento, Convenio convenio) {
         this.descricaoProcedimento = descricaoProcedimento;
         this.valorProcedimento = valorProcedimento;
+        this.convenio = convenio;
     }
 
     public long getIdProcedimento() {
@@ -69,17 +69,17 @@ public class Procedimento implements Serializable {
         this.odontogramaProcedimentoList = odontogramaProcedimentoList;
     }
 
-    public Convenio getIdConvenio() {
-        return idConvenio;
+    public Convenio getConvenio() {
+        return convenio;
     }
 
-    public void setIdConvenio(Convenio idConvenio) {
-        this.idConvenio = idConvenio;
+    public void setConvenio(Convenio convenio) {
+        this.convenio = convenio;
     }
 
     @Override
     public String toString() {
-        return "odonto.Procedimento[ idProcedimento=" + idProcedimento + " ]";
+        return descricaoProcedimento;
     }
     
 }

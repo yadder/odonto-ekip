@@ -9,26 +9,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class ServletPrincipal extends HttpServlet {
+public class ServletConsulta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private String mensagem = null;   
-    public ServletPrincipal() {
-        super();
+	private String mensagem = null;
+
+	public ServletConsulta() {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+		String btn = (String)request.getParameter("btn");
 		HttpSession objetoSessao = request.getSession();
-		objetoSessao.removeAttribute("usuarioLogado");
-		objetoSessao.invalidate();
-		mensagem = "A sessão foi finalizada!";
-		request.setAttribute("msg", mensagem);
-		RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
-		disp.forward(request, response);	
+
+		if (btn.equals("Voltar")){
+			objetoSessao.removeAttribute("consulta");
+			RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
+			disp.forward(request, response);
+			
+		}
 	}
 
 }

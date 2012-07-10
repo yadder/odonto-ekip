@@ -34,11 +34,8 @@
 		<tr>
 			<td align="right">Sexo:</td>
 			<td>
-			<% String sex = (String) ${paciente.sexoUsuario}; %>
-			<%	if (sex.equals("M")){ %>
 				<input type="radio" name="sexoPaciente" value="M" />Masculino
-			<%} %>
-				<input type="radio" name="sexoPaciente" value="F" checked="checked" />Feminino
+				<input type="radio" name="sexoPaciente" value="F" />Feminino
 			</td>
 		</tr>
 		<tr>

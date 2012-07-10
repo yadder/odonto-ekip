@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -7,18 +7,8 @@
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body>
-<div class="header">
-	<font size="2">${msg} Usuário: ${usuarioLogado.nomeUsuario}
-	</font>
-	<form name="logout" action="ServletPrincipal" method="post">
-		<input type="submit" value="Logout" />
-	</form>
-</div>
-
-	
-	<input type="button" value="testeAjax" name="testeAjax" onclick="testeAjax()" /><br>
-	<div id="myDiv"></div>
-	<hr />
+<c:import url="cabecalho.jsp" />
+<div id="pricipal" style="background-color: #FFFFFF;">
 	<a href="inqueritoOdontologico.jsp">Inquérito odontológico</a><br/><br/>
 	<a href="pagamento.jsp">Efetuar pagamento</a><br/><br/>
 	
@@ -31,5 +21,9 @@
 	<a href="paciente.jsp">Cadastro de paciente</a><br/>
 	<a href="convenio.jsp">Cadastro de convênio</a><br/>
 	<a href="fornecedor.jsp">Cadastro de fornecedor</a> <br/>
+	<a href="procedimento.jsp">Cadastro de procedimento</a> <br/>
+	<a href="agendar_consuta.jsp">Agendar consulta</a> <br/>
+</div>	
+<c:import url="rodape.jsp" />	
 </body>
 </html>
