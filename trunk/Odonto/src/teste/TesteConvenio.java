@@ -2,14 +2,14 @@ package teste;
 
 import modelo.Convenio;
 import persistencia.DaoConvenio;
-import persistencia.DaoConvenioImp;
+import persistencia.DaoConvenio;
 
 public class TesteConvenio {
 
 	public static void main(String[] args) {
 		boolean result = false;
 		Convenio convenio = null;
-		DaoConvenio daoConvenio = new DaoConvenioImp();
+		DaoConvenio daoConvenio = new DaoConvenio();
 		
 		System.out.println("1------------------------------Testando a classe convenio (Cadastro)");
 		convenio = new Convenio("Amil");

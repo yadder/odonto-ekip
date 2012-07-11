@@ -3,9 +3,9 @@ package teste;
 import modelo.Convenio;
 import modelo.Paciente;
 import persistencia.DaoConvenio;
-import persistencia.DaoConvenioImp;
+import persistencia.DaoConvenio;
 import persistencia.DaoPaciente;
-import persistencia.DaoPacienteImp;
+import persistencia.DaoPaciente;
 import util.ConfiguraAtributo;
 
 public class TestePaciente {
@@ -16,11 +16,11 @@ public class TestePaciente {
 	public static void main(String[] args) {
 		boolean result = false;
 		Paciente paciente = new Paciente();
-		DaoPaciente daoPaciente = new DaoPacienteImp();
+		DaoPaciente daoPaciente = new DaoPaciente();
 		ConfiguraAtributo ca = new ConfiguraAtributo();
 		
 		Convenio convenio = new Convenio("AMIL");
-		DaoConvenio daoConvenio = new DaoConvenioImp();
+		DaoConvenio daoConvenio = new DaoConvenio();
 		convenio = daoConvenio.pesquisarConvenioPorNome(convenio.getNomeConvenio());
 				
 		if (convenio != null){

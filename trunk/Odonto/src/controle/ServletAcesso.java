@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import modelo.Acesso;
 import persistencia.DaoAcesso;
-import persistencia.DaoAcessoImp;
 
 public class ServletAcesso extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -21,6 +20,7 @@ public class ServletAcesso extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,7 +37,7 @@ public class ServletAcesso extends HttpServlet {
 			String descricaoAcesso = (String) request.getParameter("descricaoAcesso");
 			if (validaCampos(descricaoAcesso)){				
 				Acesso acesso = new Acesso(descricaoAcesso);
-				DaoAcesso daoAcesso = new DaoAcessoImp();
+				DaoAcesso daoAcesso = new DaoAcesso();
 				daoAcesso.cadastrarAcesso(acesso);
 				mensagem = "Acesso cadastrado com sucesso!";
 				request.setAttribute("msg", mensagem);
@@ -52,7 +52,7 @@ public class ServletAcesso extends HttpServlet {
 			
 			String descricaoAcesso = (String) request.getParameter("descricaoAcesso");
 			Acesso acesso = new Acesso(descricaoAcesso);
-			DaoAcesso daoAcesso = new DaoAcessoImp();
+			DaoAcesso daoAcesso = new DaoAcesso();
 			acesso = daoAcesso.pesquisarAcessoPorNome(descricaoAcesso);
 			if (acesso != null){
 				mensagem = "Acesso encontrado.";
@@ -70,7 +70,7 @@ public class ServletAcesso extends HttpServlet {
 
 				Acesso acesso = new Acesso();
 				acesso = (Acesso)objetoSessao.getAttribute("acesso");
-				DaoAcesso daoAcesso = new DaoAcessoImp();
+				DaoAcesso daoAcesso = new DaoAcesso();
 				boolean result = daoAcesso.excluirAcesso(acesso);
 				if (result){
 					mensagem = "Acesso excluído com sucesso.";
@@ -90,7 +90,7 @@ public class ServletAcesso extends HttpServlet {
 				Acesso acesso = new Acesso();
 				acesso = (Acesso)objetoSessao.getAttribute("acesso");
 				acesso.setDescricaoAcesso((String)request.getParameter("descricaoAcesso"));								
-				DaoAcesso daoAcesso = new DaoAcessoImp();
+				DaoAcesso daoAcesso = new DaoAcesso();
 				boolean result = daoAcesso.alterarAcesso(acesso);
 				if (result){
 					mensagem = "Acesso alterado com sucesso.";

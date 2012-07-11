@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import modelo.Fornecedor;
 import persistencia.DaoFornecedor;
-import persistencia.DaoFornecedorImp;
 
 public class ServletFornecedor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -21,6 +20,7 @@ public class ServletFornecedor extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -59,7 +59,7 @@ public class ServletFornecedor extends HttpServlet {
 						logradouroFornecedor,numeroLogradouroFornecedor,complementoLogradouroFornecedor,bairroFornecedor,
 						cidadeFornecedor,estadoFornecedor,cepFornecedor,ddd1Fornecedor,telefone1Fornecedor,ddd2Fornecedor,
 						telefone2Fornecedor);
-				DaoFornecedor dao = new DaoFornecedorImp();
+				DaoFornecedor dao = new DaoFornecedor();
 				dao.cadastrarFornecedor(fornecedor);
 				mensagem = "Fornecedor cadastrado com sucesso!";
 				objetoSessao.removeAttribute("fornecedor");
@@ -75,7 +75,7 @@ public class ServletFornecedor extends HttpServlet {
 			
 			String nomeFornecedor = (String) request.getParameter("nomeFornecedor");
 			Fornecedor fornecedor = new Fornecedor(nomeFornecedor);
-			DaoFornecedor dao = new DaoFornecedorImp();
+			DaoFornecedor dao = new DaoFornecedor();
 			fornecedor = dao.pesquisarFornecedorPorNome(nomeFornecedor);
 			if (fornecedor != null){
 				mensagem = "Fornecedor encontrado.";
@@ -93,7 +93,7 @@ public class ServletFornecedor extends HttpServlet {
 
 				Fornecedor fornecedor = new Fornecedor();
 				fornecedor = (Fornecedor)objetoSessao.getAttribute("fornecedor");
-				DaoFornecedor dao = new DaoFornecedorImp();
+				DaoFornecedor dao = new DaoFornecedor();
 				boolean result = dao.excluirFornecedor(fornecedor);
 				if (result){
 					mensagem = "Fornecedor excluído com sucesso.";
@@ -144,7 +144,7 @@ public class ServletFornecedor extends HttpServlet {
 				fornecedor.setDdd2Fornecedor(ddd2Fornecedor);
 				fornecedor.setTelefone2Fornecedor(telefone2Fornecedor);
 				
-				DaoFornecedor dao = new DaoFornecedorImp();
+				DaoFornecedor dao = new DaoFornecedor();
 				boolean result = dao.alterarFornecedor(fornecedor);
 				if (result){
 					mensagem = "Fornecedor alterado com sucesso.";

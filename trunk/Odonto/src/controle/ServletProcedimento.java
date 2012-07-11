@@ -12,9 +12,7 @@ import javax.servlet.http.HttpSession;
 import modelo.Convenio;
 import modelo.Procedimento;
 import persistencia.DaoConvenio;
-import persistencia.DaoConvenioImp;
 import persistencia.DaoProcedimento;
-import persistencia.DaoProcedimentoImp;
 
 public class ServletProcedimento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -24,7 +22,8 @@ public class ServletProcedimento extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
+    	doPost(request,response);
+    }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -40,11 +39,11 @@ public class ServletProcedimento extends HttpServlet {
 			String valorProcedimento = (String) request.getParameter("valorProcedimento");
 			String stringConvenio = (String) request.getParameter("convenio");
 			if (validaCampos(descricaoProcedimento, valorProcedimento)){
-				DaoConvenio daoConvenio = new DaoConvenioImp();
+				DaoConvenio daoConvenio = new DaoConvenio();
 				Convenio convenio = new Convenio();
 				convenio = daoConvenio.pesquisarConvenioPorNome(stringConvenio);
 				Procedimento procedimento = new Procedimento(descricaoProcedimento, Double.parseDouble(valorProcedimento), convenio);
-				DaoProcedimento daoProcedimento = new DaoProcedimentoImp();
+				DaoProcedimento daoProcedimento = new DaoProcedimento();
 				daoProcedimento.cadastrarProcedimento(procedimento);
 				mensagem = "Procedimento cadastrado com sucesso!";
 				request.setAttribute("msg", mensagem);
@@ -59,7 +58,7 @@ public class ServletProcedimento extends HttpServlet {
 			
 			String descricaoProcedimento = (String) request.getParameter("descricaoProcedimento");
 			Procedimento procedimento = new Procedimento(descricaoProcedimento);
-			DaoProcedimento daoProcedimento = new DaoProcedimentoImp();
+			DaoProcedimento daoProcedimento = new DaoProcedimento();
 			procedimento = daoProcedimento.pesquisarProcedimentoPorDescricao(descricaoProcedimento);
 			if (procedimento != null){
 				mensagem = "Procedimento encontrado.";
@@ -77,7 +76,7 @@ public class ServletProcedimento extends HttpServlet {
 
 			Procedimento procedimento = new Procedimento();
 			procedimento = (Procedimento)objetoSessao.getAttribute("procedimento");
-			DaoProcedimento daoProcedimento = new DaoProcedimentoImp();
+			DaoProcedimento daoProcedimento = new DaoProcedimento();
 			boolean result = daoProcedimento.excluirProcedimento(procedimento);
 			if (result){
 				mensagem = "Procedimento excluído com sucesso.";
@@ -96,7 +95,7 @@ public class ServletProcedimento extends HttpServlet {
 			String valorProcedimento = (String) request.getParameter("valorProcedimento");
 			String stringConvenio = (String) request.getParameter("convenio");
 			if (validaCampos(descricaoProcedimento, valorProcedimento)){	
-				DaoConvenio daoConvenio = new DaoConvenioImp();
+				DaoConvenio daoConvenio = new DaoConvenio();
 				Convenio convenio = new Convenio();
 				convenio = daoConvenio.pesquisarConvenioPorNome(stringConvenio);
 				Procedimento procedimento = new Procedimento();
@@ -104,7 +103,7 @@ public class ServletProcedimento extends HttpServlet {
 				procedimento.setDescricaoProcedimento(descricaoProcedimento);
 				procedimento.setValorProcedimento(Double.parseDouble(valorProcedimento));
 				procedimento.setConvenio(convenio);
-				DaoProcedimento daoProcedimento = new DaoProcedimentoImp();
+				DaoProcedimento daoProcedimento = new DaoProcedimento();
 				boolean result = daoProcedimento.alterarProcedimento(procedimento);
 				if (result){
 					mensagem = "Procedimento alterado com sucesso.";

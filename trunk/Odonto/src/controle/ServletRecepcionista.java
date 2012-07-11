@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import modelo.Usuario;
 import persistencia.DaoUsuario;
-import persistencia.DaoUsuarioImp;
 import util.ConfiguraAtributo;
 
 public class ServletRecepcionista extends HttpServlet {
@@ -22,8 +21,8 @@ public class ServletRecepcionista extends HttpServlet {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		doPost(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -51,7 +50,7 @@ public class ServletRecepcionista extends HttpServlet {
 					// gerar uma string com 6 caracteres para colocar na senha
 					senha = "12345";					
 					usuario = new Usuario(nome, senha, perfil, rg, cpf, sexo, ca.dataStringParaDataSql(dtnasc));
-					DaoUsuario dao = new DaoUsuarioImp();
+					DaoUsuario dao = new DaoUsuario();
 					dao.cadastrarUsuario(usuario);
 					mensagem = "Recepcionista cadastrada com sucesso!";
 					objetoSessao.removeAttribute("usuario");
@@ -69,7 +68,7 @@ public class ServletRecepcionista extends HttpServlet {
 		}else if (btn.equals("Pesquisar")){
 			String nome = (String) request.getParameter("nomeUsuario");
 			Usuario usuario = new Usuario(nome);
-			DaoUsuario dao = new DaoUsuarioImp();
+			DaoUsuario dao = new DaoUsuario();
 			usuario = dao.pesquisarUsuarioPorNome(nome);
 			if (usuario != null){
 				ConfiguraAtributo ca = new ConfiguraAtributo();
@@ -89,7 +88,7 @@ public class ServletRecepcionista extends HttpServlet {
 		}else if(btn.equals("Excluir")){
 				Usuario usuario = new Usuario();
 				usuario = (Usuario)objetoSessao.getAttribute("usuario");
-				DaoUsuario dao = new DaoUsuarioImp();
+				DaoUsuario dao = new DaoUsuario();
 				boolean result = dao.excluirUsuario(usuario);
 				if (result){
 					mensagem = "Recepcionista excluída com sucesso.";
@@ -119,7 +118,7 @@ public class ServletRecepcionista extends HttpServlet {
 				usuario.setCpfUsuario(cpf);
 				usuario.setDataNascimentoUsuario(ca.dataStringParaDataSql(dtnasc));
 				usuario.setSexoUsuario(sexo);				
-				DaoUsuario dao = new DaoUsuarioImp();
+				DaoUsuario dao = new DaoUsuario();
 				boolean result = dao.alterarUsuario(usuario);
 				if (result){
 					mensagem = "Recepcionista alterada com sucesso.";

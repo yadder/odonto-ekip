@@ -2,7 +2,7 @@ package teste;
 
 import modelo.Dentista;
 import persistencia.DaoDentista;
-import persistencia.DaoDentistaImp;
+import persistencia.DaoDentista;
 import util.ConfiguraAtributo;
 
 public class TesteDentista {
@@ -10,7 +10,7 @@ public class TesteDentista {
 	public static void main(String[] args) {
 		boolean result = false;
 		Dentista dentista = null;
-		DaoDentista daoDentista = new DaoDentistaImp();
+		DaoDentista daoDentista = new DaoDentista();
 		ConfiguraAtributo ca = new ConfiguraAtributo();
 				
 		System.out.println("1------------------------------Testando a classe dentista (Cadastro)");

@@ -3,17 +3,17 @@ package teste;
 import modelo.Convenio;
 import modelo.Procedimento;
 import persistencia.DaoConvenio;
-import persistencia.DaoConvenioImp;
+import persistencia.DaoConvenio;
 import persistencia.DaoProcedimento;
-import persistencia.DaoProcedimentoImp;
+import persistencia.DaoProcedimento;
 
 public class TesteProcedimento {
 	public static void main(String[] args) {
 		boolean result = false;
 		Procedimento procedimento = null;
-		DaoProcedimento daoProcedimento = new DaoProcedimentoImp();
+		DaoProcedimento daoProcedimento = new DaoProcedimento();
 		Convenio convenio = new Convenio();
-		DaoConvenio daoConvenio = new DaoConvenioImp();
+		DaoConvenio daoConvenio = new DaoConvenio();
 		convenio = daoConvenio.pesquisarConvenioPorNome("BRADESCO");
 		/*
 		System.out.println("1------------------------------Testando a classe procedimento (Cadastro)");

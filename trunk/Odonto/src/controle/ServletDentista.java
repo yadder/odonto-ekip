@@ -1,6 +1,7 @@
 package controle;
 
 import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import modelo.Dentista;
 import persistencia.DaoDentista;
-import persistencia.DaoDentistaImp;
 import util.ConfiguraAtributo;
 
 public class ServletDentista extends HttpServlet {
@@ -21,6 +21,7 @@ public class ServletDentista extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,7 +50,7 @@ public class ServletDentista extends HttpServlet {
 					// gerar uma string com 6 caracteres para colocar na senha
 					senha = "12345";					
 					dentista = new Dentista(nome, senha, perfil, rg, cpf, sexo, ca.dataStringParaDataSql(dtnasc), cro);
-					DaoDentista dao = new DaoDentistaImp();
+					DaoDentista dao = new DaoDentista();
 					dao.cadastrarDentista(dentista);
 					mensagem = "Dentista cadastrada com sucesso!";
 					objetoSessao.removeAttribute("dentista");
@@ -67,7 +68,7 @@ public class ServletDentista extends HttpServlet {
 		}else if (btn.equals("Pesquisar")){
 			String nome = (String) request.getParameter("nomeDentista");
 			Dentista dentista = new Dentista(nome);
-			DaoDentista dao = new DaoDentistaImp();
+			DaoDentista dao = new DaoDentista();
 			dentista = dao.pesquisarDentistaPorNome(nome);
 			if (dentista != null){
 				ConfiguraAtributo ca = new ConfiguraAtributo();
@@ -87,7 +88,7 @@ public class ServletDentista extends HttpServlet {
 		}else if(btn.equals("Excluir")){
 				Dentista dentista = new Dentista();
 				dentista = (Dentista)objetoSessao.getAttribute("dentista");
-				DaoDentista dao = new DaoDentistaImp();
+				DaoDentista dao = new DaoDentista();
 				boolean result = dao.excluirDentista(dentista);
 				if (result){
 					mensagem = "Dentista excluída com sucesso.";
@@ -119,7 +120,7 @@ public class ServletDentista extends HttpServlet {
 				dentista.setDataNascimentoUsuario(ca.dataStringParaDataSql(dtnasc));
 				dentista.setSexoUsuario(sexo);		
 				dentista.setCroDentista(cro);
-				DaoDentista dao = new DaoDentistaImp();
+				DaoDentista dao = new DaoDentista();
 				boolean result = dao.alterarDentista(dentista);
 				if (result){
 					mensagem = "Dentista alterada com sucesso.";
