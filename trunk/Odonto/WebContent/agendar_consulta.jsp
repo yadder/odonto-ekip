@@ -13,11 +13,10 @@
 </head>
 <body>
 <c:import url="cabecalho.jsp" />
-<div id="principal" style="background-color: #FFFFFF;">
-
 <div id="msg">
 	<h3 class="information">${msg}</h3>
 </div>
+<div id="pagina" style="background-color: #FFF;">
 <form name="formAgendarConsulta" method="post" action="ServletConsulta">
 	<table>
 		<tr>

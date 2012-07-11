@@ -18,100 +18,47 @@ public class DaoFornecedor {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public boolean cadastrarFornecedor(Fornecedor fornecedor) {
-		boolean retorno = false;
-		try{
+	public void cadastrarFornecedor(Fornecedor fornecedor) throws HibernateException{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.persist(fornecedor);
 			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
+			session.flush();
 			session.close();
-		}
-		return retorno;
 	}
 
-	public boolean alterarFornecedor(Fornecedor fornecedor) {
-		boolean retorno = false;
-		try{
+	public void alterarFornecedor(Fornecedor fornecedor) throws HibernateException{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.update(fornecedor);
 			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
+			session.flush();
 			session.close();
-		}
-		return retorno;
 	}
 
-	public boolean excluirFornecedor(Fornecedor fornecedor) {
-		boolean retorno = false;
-		try{
+	public void excluirFornecedor(Fornecedor fornecedor) throws HibernateException{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.delete(fornecedor);
 			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
-			session.close();
-		}
-		return retorno;
-	}
-
-	public Fornecedor pesquisarFornecedor(Fornecedor fornecedor) {
-		Fornecedor e = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			e = (Fornecedor)session.get(Fornecedor.class, fornecedor.getIdFornecedor());
-		} catch (HibernateException ex) {
-			ex.printStackTrace();
-		}finally{
-			session.close();
-		}
-		return e;
-	}
-	
-	public Fornecedor pesquisarFornecedorPorNome(String nomeFornecedor){
-		Fornecedor f = null;
-		try{
-			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(Fornecedor.class).add(Restrictions.eq("nomeFornecedor", nomeFornecedor));
-			f = (Fornecedor)cr.uniqueResult();
-		}catch(HibernateException h){
-			h.printStackTrace();
-		}finally{
 			session.flush();
 			session.close();
-		}
+	}
+
+	public Fornecedor pesquisarFornecedorPorNome(String nomeFornecedor) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Fornecedor.class).add(Restrictions.eq("nomeFornecedor", nomeFornecedor));
+		Fornecedor f = (Fornecedor)cr.uniqueResult();
 		return f;
 	}
 
-	public List<Fornecedor> pesquisarTodosFornecedor() {
+	public List<Fornecedor> pesquisarTodosFornecedor() throws HibernateException{
 		List<Fornecedor> lista = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(Fornecedor.class);
-			lista = (ArrayList)cr.list();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			
-		}finally{
-			session.flush();
-			session.close();
-		}
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Fornecedor.class);
+		lista = (ArrayList)cr.list();
+		session.flush();
+		session.close();
 		return lista;
-		
 	}
-
 }

@@ -18,88 +18,49 @@ public class DaoAcesso {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public boolean cadastrarAcesso(Acesso acesso) {
-		boolean retorno = false;
-		try{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
-			session.persist(acesso);
-			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
-		return retorno;
+	public void cadastrarAcesso(Acesso acesso) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.persist(acesso);
+		transaction.commit();
+		session.flush();
+		session.close();
 	}
 
-	public boolean alterarAcesso(Acesso acesso) {
-		boolean retorno = false;
-		try{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
-			session.update(acesso);
-			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
-		return retorno;
+	public void alterarAcesso(Acesso acesso) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.update(acesso);
+		transaction.commit();
+		session.flush();
+		session.close();
 	}
 
-	public boolean excluirAcesso(Acesso acesso) {
-		boolean retorno = false;
-		try{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
-			session.delete(acesso);
-			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
-		return retorno;
+	public void excluirAcesso(Acesso acesso) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.delete(acesso);
+		transaction.commit();
+		session.flush();
+		session.close();
 	}
 
-	public Acesso pesquisarAcessoPorNome(String nome) {
-		Acesso a = null;
-		try{
-			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(Acesso.class).add(Restrictions.eq("descricaoAcesso", nome));
-			a = (Acesso) cr.uniqueResult();
-		}catch (HibernateException ex){
-			ex.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
+	public Acesso pesquisarAcessoPorNome(String nome) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Acesso.class).add(Restrictions.eq("descricaoAcesso", nome));
+		Acesso a = (Acesso)cr.uniqueResult();
+		session.flush();
+		session.close();
 		return a;
 	}
 
-	public List<Acesso> pesquisarTodosAcesso() {
+	public List<Acesso> pesquisarTodosAcesso() throws HibernateException{
 		List<Acesso> lista = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(Acesso.class);
-			lista = (ArrayList)cr.list();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			
-		}finally{
-			session.flush();
-			session.close();
-		}
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Acesso.class);
+		lista = (ArrayList)cr.list();
+		session.flush();
+		session.close();
 		return lista;
 	}
 

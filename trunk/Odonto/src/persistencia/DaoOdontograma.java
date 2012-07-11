@@ -16,88 +16,40 @@ public class DaoOdontograma {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public boolean cadastrarOdontograma(Odontograma odontograma) {
-		boolean retorno = false;
-		try{
+	public void cadastrarOdontograma(Odontograma odontograma) throws HibernateException{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.persist(odontograma);
 			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
 			session.flush();
 			session.close();
-		}
-		return retorno;
 	}
 
-	public boolean alterarOdontograma(Odontograma odontograma) {
-		boolean retorno = false;
-		try{
+	public void alterarOdontograma(Odontograma odontograma) throws HibernateException{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.update(odontograma);
 			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
 			session.flush();
 			session.close();
-		}
-		return retorno;
 	}
 
-	public boolean excluirOdontograma(Odontograma odontograma) {
-		boolean retorno = false;
-		try{
+	public void excluirOdontograma(Odontograma odontograma) throws HibernateException{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.delete(odontograma);
 			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
 			session.flush();
 			session.close();
-		}
-		return retorno;
 	}
 
-	public Odontograma pesquisarOdontograma(Odontograma odontograma) {
-		Odontograma e = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			e = (Odontograma)session.get(Odontograma.class, odontograma.getIdOdontograma());
-		} catch (HibernateException ex) {
-			ex.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
-		return e;
-	}
-
-	public List<Odontograma> pesquisarTodosOdontograma() {
+	public List<Odontograma> pesquisarTodosOdontograma() throws HibernateException{
 		List<Odontograma> lista = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(Odontograma.class);
-			lista = (ArrayList)cr.list();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			
-		}finally{
-			session.flush();
-			session.close();
-		}
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Odontograma.class);
+		lista = (ArrayList)cr.list();
+		session.flush();
+		session.close();
 		return lista;
 	}
-
 }

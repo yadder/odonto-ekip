@@ -18,102 +18,49 @@ public class DaoConvenio {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public boolean cadastrarConvenio(Convenio convenio) {
-		boolean retorno = false;
-		try{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
-			session.persist(convenio);
-			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
-		return retorno;
+	public void cadastrarConvenio(Convenio convenio) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.persist(convenio);
+		transaction.commit();
+		session.flush();
+		session.close();
 	}
 
-	public boolean alterarConvenio(Convenio convenio) {
-		boolean retorno = false;
-		try{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
-			session.update(convenio);
-			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
-		return retorno;
+	public void alterarConvenio(Convenio convenio) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.update(convenio);
+		transaction.commit();
+		session.flush();
+		session.close();
 	}
 
-	public boolean excluirConvenio(Convenio convenio) {
-		boolean retorno = false;
-		try{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
-			session.delete(convenio);
-			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
-		return retorno;
+	public void excluirConvenio(Convenio convenio) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.delete(convenio);
+		transaction.commit();
+		session.flush();
+		session.close();
 	}
 
-	public Convenio pesquisarConvenio(Convenio convenio) {
-		Convenio e = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			e = (Convenio)session.get(Convenio.class, convenio.getIdConvenio());
-		} catch (HibernateException ex) {
-			ex.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
-		return e;
-	}
-	
-	public Convenio pesquisarConvenioPorNome(String nome){
-		Convenio c = null;
-		try{
-			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(Convenio.class).add(Restrictions.eq("nomeConvenio", nome));
-			c = (Convenio) cr.uniqueResult();
-		}catch (HibernateException e){
-			e.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
+	public Convenio pesquisarConvenioPorNome(String nome) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Convenio.class).add(Restrictions.eq("nomeConvenio", nome));
+		Convenio c = (Convenio) cr.uniqueResult();
+		session.flush();
+		session.close();
 		return c;
 	}
 
-	public List<Convenio> pesquisarTodosConvenio() {
+	public List<Convenio> pesquisarTodosConvenio() throws HibernateException{
 		List<Convenio> lista = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(Convenio.class);
-			lista = (ArrayList)cr.list();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			
-		}finally{
-			session.flush();
-			session.close();
-		}
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Convenio.class);
+		lista = (ArrayList)cr.list();
+		session.flush();
+		session.close();
 		return lista;
 	}
 	

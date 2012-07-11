@@ -7,7 +7,9 @@
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
-<body bgcolor="#3366FF">
+<body>
+<div class="rodape">
 	<center>OdontoEkip - Todos os direitos reservados</center>
+</div>
 </body>
 </html>

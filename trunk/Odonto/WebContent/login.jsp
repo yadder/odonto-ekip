@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
-<body bgcolor="#3366FF">
+<body bgcolor="#D6E0FF">
 <div id="msg">
 	<h3 class="information">${msg}</h3>
 </div>
