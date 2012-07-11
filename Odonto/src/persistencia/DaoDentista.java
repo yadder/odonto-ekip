@@ -18,89 +18,49 @@ public class DaoDentista {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public boolean cadastrarDentista(Dentista dentista) {
-		boolean retorno = false;
-		try{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
-			session.persist(dentista);
-			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
-		return retorno;
+	public void cadastrarDentista(Dentista dentista) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.persist(dentista);
+		transaction.commit();
+		session.flush();
+		session.close();
 	}
 
-	public boolean alterarDentista(Dentista dentista) {
-		boolean retorno = false;
-		try{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
-			session.update(dentista);
-			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
-		return retorno;
+	public void alterarDentista(Dentista dentista) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.update(dentista);
+		transaction.commit();
+		session.flush();
+		session.close();
 	}
 
-	public boolean excluirDentista(Dentista dentista) {
-		boolean retorno = false;
-		try{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
-			session.delete(dentista);
-			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
-		return retorno;
+	public void excluirDentista(Dentista dentista) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.delete(dentista);
+		transaction.commit();
+		session.flush();
+		session.close();
 	}
 
-	public Dentista pesquisarDentistaPorNome(String nome){
-		Dentista d = null;
-		try{
-			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(Dentista.class).add(Restrictions.eq("nomeUsuario", nome));
-			d = (Dentista)cr.uniqueResult();
-		}catch(HibernateException e){
-			e.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
+	public Dentista pesquisarDentistaPorNome(String nome) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Dentista.class).add(Restrictions.eq("nomeUsuario", nome));
+		Dentista d = (Dentista)cr.uniqueResult();
+		session.flush();
+		session.close();
 		return d;
 	}
 
-	public List<Dentista> pesquisarTodosDentista() {
+	public List<Dentista> pesquisarTodosDentista() throws HibernateException{
 		List<Dentista> lista = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(Dentista.class);
-			lista = (ArrayList)cr.list();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			
-		}finally{
-			session.flush();
-			session.close();
-		}
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Dentista.class);
+		lista = (ArrayList)cr.list();
+		session.flush();
+		session.close();
 		return lista;
 	}
-
 }

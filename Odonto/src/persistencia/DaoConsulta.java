@@ -16,7 +16,7 @@ public class DaoConsulta {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public void cadastrarConsulta(Consulta consulta) throws HibernateException, Exception{
+	public void cadastrarConsulta(Consulta consulta) throws HibernateException{
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 		session.persist(consulta);
@@ -25,70 +25,31 @@ public class DaoConsulta {
 		session.close();
 	}
 
-	public boolean alterarConsulta(Consulta consulta) {
-		boolean retorno = false;
-		try{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
-			session.update(consulta);
-			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
-		return retorno;
+	public void alterarConsulta(Consulta consulta) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.update(consulta);
+		transaction.commit();
+		session.flush();
+		session.close();
 	}
 
-	public boolean excluirConsulta(Consulta consulta) {
-		boolean retorno = false;
-		try{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
-			session.delete(consulta);
-			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
-		return retorno;
+	public void excluirConsulta(Consulta consulta) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.delete(consulta);
+		transaction.commit();
+		session.flush();
+		session.close();
 	}
 
-	public Consulta pesquisarConsulta(Consulta consulta) {
-		Consulta e = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			e = (Consulta)session.get(Consulta.class, consulta.getIdConsulta());
-		} catch (HibernateException ex) {
-			ex.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
-		return e;
-	}
-
-	public List<Consulta> pesquisarTodosConsulta() {
+	public List<Consulta> pesquisarTodosConsulta() throws HibernateException{
 		List<Consulta> lista = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(Consulta.class);
-			lista = (ArrayList)cr.list();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			
-		}finally{
-			session.flush();
-			session.close();
-		}
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Consulta.class);
+		lista = (ArrayList)cr.list();
+		session.flush();
+		session.close();
 		return lista;
 	}
-
 }

@@ -17,87 +17,48 @@ public class DaoOdontogramaProcedimento {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public boolean cadastrarOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) {
-		boolean retorno = false;
-		try{
+	public void cadastrarOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) throws HibernateException{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.persist(odontogramaProcedimento);
 			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
 			session.flush();
 			session.close();
-		}
-		return retorno;
 	}
 
-	public boolean alterarOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) {
-		boolean retorno = false;
-		try{
+	public void alterarOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) throws HibernateException{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.update(odontogramaProcedimento);
 			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
 			session.flush();
 			session.close();
-		}
-		return retorno;
 	}
 
-	public boolean excluirOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) {
-		boolean retorno = false;
-		try{
+	public void excluirOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) throws HibernateException{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.delete(odontogramaProcedimento);
 			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
 			session.flush();
 			session.close();
-		}
-		return retorno;
 	}
 
-	public OdontogramaProcedimento pesquisarOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) {
-		OdontogramaProcedimento e = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			e = (OdontogramaProcedimento)session.get(OdontogramaProcedimento.class, odontogramaProcedimento.getIdOdontogramaProcedimeto());
-		} catch (HibernateException ex) {
-			ex.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
-		return e;
+	public OdontogramaProcedimento pesquisarOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		OdontogramaProcedimento o = (OdontogramaProcedimento)session.get(OdontogramaProcedimento.class, odontogramaProcedimento.getIdOdontogramaProcedimeto());
+		session.flush();
+		session.close();
+		return o;
 	}
 
-	public List<OdontogramaProcedimento> pesquisarTodosOdontogramaProcedimento() {
+	public List<OdontogramaProcedimento> pesquisarTodosOdontogramaProcedimento() throws HibernateException{
 		List<OdontogramaProcedimento> lista = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(OdontogramaProcedimento.class);
-			lista = (ArrayList)cr.list();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			
-		}finally{
-			session.flush();
-			session.close();
-		}
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(OdontogramaProcedimento.class);
+		lista = (ArrayList)cr.list();
+		session.flush();
+		session.close();
 		return lista;
 	}
 

@@ -6,11 +6,57 @@
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
-<body bgcolor="#D6E0FF">
-	<img src="/arquivos/imagem_form.jpg"/>
-	<div class="login">
-		<font size="2">${msgCabecalho} ${usuarioLogado.nomeUsuario}</font>
-		<a href="ServletPrincipal?acao=logout">Logout</a>
-	</div>
+<body>
+<div class="cabecalho">	
+	<font size="2">${msgCabecalho} ${usuarioLogado.nomeUsuario}</font>
+	
+<ul class="navbar">
+	<li><a href="principal.jsp"><b>Home</b></a></li>
+	<li><a href="#"><b>Cadastro</b></a>
+		<ul>
+			<li><a href="face.jsp">Face</a></li>
+			<li><a href="elemento.jsp">Elemento</a></li>
+			<li><a href="recepcionista.jsp">Recepcionista</a></li>
+			<li><a href="dentista.jsp">Dentista</a></li>
+			<li><a href="paciente.jsp">Paciente</a></li>
+			<li><a href="convenio.jsp">Convenio</a></li>
+			<li><a href="fornecedor.jsp">Fornecedor</a></li>
+			<li><a href="procedimento.jsp">Procedimento</a></li>
+			<li><a href="acesso.jsp">Acesso</a></li>
+		</ul>
+	</li>
+	<li><a href="#"><b>Consulta</b></a>
+		<ul>
+			<li><a href="#">Agendar consulta</a></li>
+			<li><a href="#">Remarcar consulta</a></li>
+			<li><a href="#">Cancelar consulta</a></li>
+			<li><a href="#">Listar consultas</a></li>
+		</ul>
+	</li>
+	<li><a href="#"><b>Pagamento</b></a>
+		<ul>
+			<li><a href="#">Efetuar pagamento</a></li>
+			<li><a href="#">Consultar pagamento</a></li>
+		</ul>
+	</li>
+	<li><a href="#"><b>Relatórios</b></a>
+		<ul>
+			<li><a href="#">Emitir atestado médico</a></li>
+			<li><a href="#">Emitir receituário</a></li>
+			<li><a href="#">Emitir relatório de consultas</a></li>
+			<li><a href="#">Emitir relatório de procedimentos</a></li>
+			<li><a href="#">Emitir relatório de pagamentos</a></li>
+			<li><a href="#">Emitir relatório de odontogramas</a></li>
+		</ul>
+	</li>
+	<li><a href="#"><b>Ajuda</b></a>
+		<ul>
+			<li><a href="#">Sobre</a></li>
+			<li><a href="#">Mapa de navegação</a></li>
+		</ul>
+	</li>
+	<li><a href="ServletPrincipal?acao=logout"><b>Logout</b></a></li>
+</ul>
+</div>
 </body>
 </html>

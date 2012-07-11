@@ -8,6 +8,7 @@
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body>
+<c:import url="cabecalho.jsp" />
 <div id="msg">
 	<h3 class="information">${msg}</h3>
 </div>
@@ -25,6 +26,7 @@
 			</td>
 		</tr>
 	</table>
-</form>	
+</form>
+<c:import url="rodape.jsp" />	
 </body>
 </html>

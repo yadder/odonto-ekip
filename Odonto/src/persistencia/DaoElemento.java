@@ -18,88 +18,49 @@ public class DaoElemento {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public boolean cadastrarElemento(Elemento elemento) {
-		boolean retorno = false;
-		try{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
-			session.persist(elemento);
-			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
-		return retorno;
+	public void cadastrarElemento(Elemento elemento) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.persist(elemento);
+		transaction.commit();
+		session.flush();
+		session.close();
 	}
 
-	public boolean alterarElemento(Elemento elemento) {
-		boolean retorno = false;
-		try{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
-			session.update(elemento);
-			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
-		return retorno;
+	public void alterarElemento(Elemento elemento) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.update(elemento);
+		transaction.commit();
+		session.flush();
+		session.close();
 	}
 
-	public boolean excluirElemento(Elemento elemento) {
-		boolean retorno = false;
-		try{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
-			session.delete(elemento);
-			transaction.commit();
-			retorno = true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
-		return retorno;
+	public void excluirElemento(Elemento elemento) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.delete(elemento);
+		transaction.commit();
+		session.flush();
+		session.close();
 	}
 
-	public Elemento pesquisarElementoPorNome(String nome){
-		Elemento e = null;
-		try{
-			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(Elemento.class).add(Restrictions.eq("nomeElemento", nome));
-			e = (Elemento) cr.uniqueResult();
-		}catch (HibernateException ex){
-			ex.printStackTrace();
-		}finally{
-			session.flush();
-			session.close();
-		}
+	public Elemento pesquisarElementoPorNome(String nome) throws HibernateException{
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Elemento.class).add(Restrictions.eq("nomeElemento", nome));
+		Elemento e = (Elemento) cr.uniqueResult();
+		session.flush();
+		session.close();
 		return e;
 	}
 
-	public List<Elemento> pesquisarTodosElemento() {
+	public List<Elemento> pesquisarTodosElemento() throws HibernateException{
 		List<Elemento> lista = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cr = session.createCriteria(Elemento.class);
-			lista = (ArrayList)cr.list();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			
-		}finally{
-			session.flush();
-			session.close();
-		}
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Elemento.class);
+		lista = (ArrayList)cr.list();
+		session.flush();
+		session.close();
 		return lista;
 	}
 
