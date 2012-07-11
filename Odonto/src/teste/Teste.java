@@ -3,9 +3,9 @@ package teste;
 import modelo.Convenio;
 import modelo.Usuario;
 import persistencia.DaoConvenio;
-import persistencia.DaoConvenioImp;
+import persistencia.DaoConvenio;
 import persistencia.DaoUsuario;
-import persistencia.DaoUsuarioImp;
+import persistencia.DaoUsuario;
 import util.ConfiguraAtributo;
 
 public class Teste {

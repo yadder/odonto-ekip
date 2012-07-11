@@ -4,7 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import modelo.Usuario;
 import persistencia.DaoUsuario;
-import persistencia.DaoUsuarioImp;
+import persistencia.DaoUsuario;
 
 public class TesteLogin {
 
@@ -13,7 +13,7 @@ public class TesteLogin {
 		String senha = "12345";
 		
 		Usuario usuarioLogado = new Usuario(cpf, senha);
-		DaoUsuario dao = new DaoUsuarioImp();
+		DaoUsuario dao = new DaoUsuario();
 		usuarioLogado = dao.pesquisarUsuarioPorCpf(cpf);
 		if (usuarioLogado!= null){
 			System.out.println("Nome: "+usuarioLogado.getNomeUsuario()+", Senha: "+usuarioLogado.getSenhaUsuario());

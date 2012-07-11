@@ -9,10 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import persistencia.DaoUsuario;
-import persistencia.DaoUsuarioImp;
-
 import modelo.Usuario;
+import persistencia.DaoUsuario;
 
 public class ServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,6 +20,7 @@ public class ServletLogin extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,7 +30,7 @@ public class ServletLogin extends HttpServlet {
 		HttpSession objetoSessao;
 		
 		Usuario usuarioLogado = new Usuario(cpf, senha);
-		DaoUsuario dao = new DaoUsuarioImp();
+		DaoUsuario dao = new DaoUsuario();
 		usuarioLogado = dao.pesquisarUsuarioPorCpf(cpf);
 		
 		if ((usuarioLogado != null) && (usuarioLogado.getSenhaUsuario().equals(senha))){

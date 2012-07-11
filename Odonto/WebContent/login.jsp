@@ -4,10 +4,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login</title>
+<link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body bgcolor="#3366FF">
-<h3>${msg}</h3>
+<div id="msg">
+	<h3 class="information">${msg}</h3>
+</div>
 <form name="formLogin" method="post" action="ServletLogin">
 	<table>
 		<tr>

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import modelo.Convenio;
 import persistencia.DaoConvenio;
-import persistencia.DaoConvenioImp;
 
 public class ServletConvenio extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -21,6 +20,7 @@ public class ServletConvenio extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,7 +37,7 @@ public class ServletConvenio extends HttpServlet {
 			String nome = (String) request.getParameter("nomeConvenio");
 			if (validaCampos(nome)){				
 				Convenio convenio = new Convenio(nome);
-				DaoConvenio dao = new DaoConvenioImp();
+				DaoConvenio dao = new DaoConvenio();
 				dao.cadastrarConvenio(convenio);
 				mensagem = "Convênio cadastrado com sucesso!";
 				request.setAttribute("msg", mensagem);
@@ -52,7 +52,7 @@ public class ServletConvenio extends HttpServlet {
 			
 			String nome = (String) request.getParameter("nomeConvenio");
 			Convenio convenio = new Convenio(nome);
-			DaoConvenio dao = new DaoConvenioImp();
+			DaoConvenio dao = new DaoConvenio();
 			convenio = dao.pesquisarConvenioPorNome(nome);
 			if (convenio != null){
 				mensagem = "Convênio encontrado.";
@@ -70,7 +70,7 @@ public class ServletConvenio extends HttpServlet {
 
 				Convenio convenio = new Convenio();
 				convenio = (Convenio)objetoSessao.getAttribute("convenio");
-				DaoConvenio dao = new DaoConvenioImp();
+				DaoConvenio dao = new DaoConvenio();
 				boolean result = dao.excluirConvenio(convenio);
 				if (result){
 					mensagem = "Convênio excluído com sucesso.";
@@ -90,7 +90,7 @@ public class ServletConvenio extends HttpServlet {
 				Convenio convenio = new Convenio();
 				convenio = (Convenio)objetoSessao.getAttribute("convenio");
 				convenio.setNomeConvenio((String)request.getParameter("nomeConvenio"));								
-				DaoConvenio dao = new DaoConvenioImp();
+				DaoConvenio dao = new DaoConvenio();
 				boolean result = dao.alterarConvenio(convenio);
 				if (result){
 					mensagem = "Convênio alterado com sucesso.";

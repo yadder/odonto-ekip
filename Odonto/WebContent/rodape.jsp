@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
+<script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body bgcolor="#3366FF">
-
 	<center>OdontoEkip - Todos os direitos reservados</center>
-	 
 </body>
 </html>

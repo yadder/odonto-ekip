@@ -5,10 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cadastro de acessos</title>
+<link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
+<script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body>
 <c:import url="cabecalho.jsp" />
 <div id="pricipal" style="background-color: #FFFFFF;">
+<div id="msg">
+	<h3 class="information">${msg}</h3>
+</div>
 <form name="formCadastroAcesso" method="post" action="ServletAcesso">
 	<table>
 		<tr>
@@ -20,9 +25,6 @@
 				<input type="submit" name="btn" value="Cadastrar" />
 				<input type="submit" name="btn" value="Voltar" />
 			</td>
-		</tr>
-		<tr>
-			<td>${msg}</td>
 		</tr>
 	</table>
 </form>

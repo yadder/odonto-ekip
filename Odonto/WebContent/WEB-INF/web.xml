@@ -108,16 +108,6 @@
     <url-pattern>/ServletConsulta</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description>Logout</description>
-    <display-name>Logout</display-name>
-    <servlet-name>Logout</servlet-name>
-    <servlet-class>controle.ServletPrincipal</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Logout</servlet-name>
-    <url-pattern>/Logout</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <description></description>
     <display-name>ServletProcedimento</display-name>
     <servlet-name>ServletProcedimento</servlet-name>

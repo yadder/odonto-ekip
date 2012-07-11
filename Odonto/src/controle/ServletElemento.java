@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import modelo.Elemento;
 import persistencia.DaoElemento;
-import persistencia.DaoElementoImp;
 
 public class ServletElemento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -20,6 +19,7 @@ public class ServletElemento extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,7 +36,7 @@ public class ServletElemento extends HttpServlet {
 			String nome = (String) request.getParameter("nomeElemento");
 			if (validaCampos(nome)){
 				Elemento elemento = new Elemento(nome);
-				DaoElemento dao = new DaoElementoImp();
+				DaoElemento dao = new DaoElemento();
 				dao.cadastrarElemento(elemento);
 				mensagem = "Elemento cadastrado com sucesso!";
 				request.setAttribute("msg", mensagem);
@@ -51,7 +51,7 @@ public class ServletElemento extends HttpServlet {
 			
 			String nome = (String) request.getParameter("nomeElemento");
 			Elemento elemento = new Elemento(nome);
-			DaoElemento dao = new DaoElementoImp();
+			DaoElemento dao = new DaoElemento();
 			elemento = dao.pesquisarElementoPorNome(nome);
 			if (elemento != null){
 				mensagem = "Elemento encontrado.";
@@ -69,7 +69,7 @@ public class ServletElemento extends HttpServlet {
 
 				Elemento elemento = new Elemento();
 				elemento = (Elemento)objetoSessao.getAttribute("elemento");
-				DaoElemento dao = new DaoElementoImp();
+				DaoElemento dao = new DaoElemento();
 				boolean result = dao.excluirElemento(elemento);
 				if (result){
 					mensagem = "Elemento excluído com sucesso.";
@@ -89,7 +89,7 @@ public class ServletElemento extends HttpServlet {
 				Elemento elemento = new Elemento();
 				elemento = (Elemento)objetoSessao.getAttribute("elemento");
 				elemento.setNomeElemento((String)request.getParameter("nomeElemento"));								
-				DaoElemento dao = new DaoElementoImp();
+				DaoElemento dao = new DaoElemento();
 				boolean result = dao.alterarElemento(elemento);
 				if (result){
 					mensagem = "Elemento alterado com sucesso.";

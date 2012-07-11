@@ -4,7 +4,7 @@ import javax.servlet.RequestDispatcher;
 
 import modelo.Fornecedor;
 import persistencia.DaoFornecedor;
-import persistencia.DaoFornecedorImp;
+import persistencia.DaoFornecedor;
 
 public class TesteFornecedor {
 
@@ -12,7 +12,7 @@ public class TesteFornecedor {
 		System.out.println("1------------------------------Testando a classe fornecedor (Pesquisa)");
 		String nomeFornecedor = "proteses ltda";
 		Fornecedor fornecedor = new Fornecedor(nomeFornecedor);
-		DaoFornecedor dao = new DaoFornecedorImp();
+		DaoFornecedor dao = new DaoFornecedor();
 		fornecedor = dao.pesquisarFornecedorPorNome(nomeFornecedor);
 		if (fornecedor != null){
 			System.out.println("Fornecedor encontrado.");

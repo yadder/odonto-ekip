@@ -1,18 +1,18 @@
 package controle;
 
 import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import modelo.Convenio;
 import modelo.Paciente;
 import persistencia.DaoConvenio;
-import persistencia.DaoConvenioImp;
 import persistencia.DaoPaciente;
-import persistencia.DaoPacienteImp;
 import util.ConfiguraAtributo;
 
 public class ServletPaciente extends HttpServlet {
@@ -24,6 +24,7 @@ public class ServletPaciente extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -61,7 +62,7 @@ public class ServletPaciente extends HttpServlet {
 				String stringConvenio = (String) request.getParameter("convenio");
 				
 				Convenio convenio = new Convenio();
-				DaoConvenio daoConvenio = new DaoConvenioImp();
+				DaoConvenio daoConvenio = new DaoConvenio();
 				convenio = daoConvenio.pesquisarConvenioPorNome(stringConvenio);
 				
 				Paciente paciente = new Paciente(nomeUsuario, senhaUsuario, perfilUsuario, rgUsuario, cpfUsuario, sexoUsuario, ca.dataStringParaDataSql(dtNascUsuario), responsavelPAciente, logradouroPaciente,numeroLogradouroPaciente, complementoLogradouroPaciente, bairroPaciente, cidadePaciente, estadoPaciente, cepPaciente, ddd1Paciente, telefone1Paciente, ddd2Paciente, telefone2Paciente, convenio);
@@ -69,7 +70,7 @@ public class ServletPaciente extends HttpServlet {
 				if (validaCampos(nomeUsuario, rgUsuario, cpfUsuario, dtNascUsuario, sexoUsuario, stringConvenio)){
 					// gerar uma string com 6 caracteres para colocar na senha
 					paciente = new Paciente(nomeUsuario, senhaUsuario, perfilUsuario, rgUsuario, cpfUsuario, sexoUsuario, ca.dataStringParaDataSql(dtNascUsuario), responsavelPAciente, logradouroPaciente,numeroLogradouroPaciente, complementoLogradouroPaciente, bairroPaciente, cidadePaciente, estadoPaciente, cepPaciente, ddd1Paciente, telefone1Paciente, ddd2Paciente, telefone2Paciente, convenio);
-					DaoPaciente daoPaciente = new DaoPacienteImp();
+					DaoPaciente daoPaciente = new DaoPaciente();
 					daoPaciente.cadastrarPaciente(paciente);
 					mensagem = "Paciente cadastrado com sucesso!";
 					objetoSessao.removeAttribute("paciente");
@@ -87,7 +88,7 @@ public class ServletPaciente extends HttpServlet {
 		}else if (btn.equals("Pesquisar")){
 			String nomeUsuario = (String) request.getParameter("nomePaciente");
 			Paciente paciente = new Paciente(nomeUsuario);
-			DaoPaciente daoPaciente = new DaoPacienteImp();
+			DaoPaciente daoPaciente = new DaoPaciente();
 			paciente = daoPaciente.pesquisarPacientePorNome(nomeUsuario);
 			if (paciente != null){
 				ConfiguraAtributo ca = new ConfiguraAtributo();
@@ -106,7 +107,7 @@ public class ServletPaciente extends HttpServlet {
 		}else if(btn.equals("Excluir")){
 				Paciente paciente = new Paciente();
 				paciente = (Paciente)objetoSessao.getAttribute("paciente");
-				DaoPaciente daoPaciente = new DaoPacienteImp();
+				DaoPaciente daoPaciente = new DaoPaciente();
 				boolean result = daoPaciente.excluirPaciente(paciente);
 				if (result){
 					mensagem = "Paciente excluído com sucesso.";
@@ -143,7 +144,7 @@ public class ServletPaciente extends HttpServlet {
 			String stringConvenio = (String) request.getParameter("convenio");
 			
 			Convenio convenio = new Convenio();
-			DaoConvenio daoConvenio = new DaoConvenioImp();
+			DaoConvenio daoConvenio = new DaoConvenio();
 			convenio = daoConvenio.pesquisarConvenioPorNome(stringConvenio);
 			
 			
@@ -168,7 +169,7 @@ public class ServletPaciente extends HttpServlet {
 				paciente.setDdd2Paciente(ddd2Paciente);
 				paciente.setTelefone2Paciente(telefone2Paciente);
 				paciente.setConvenio(convenio);
-				DaoPaciente daoPaciente = new DaoPacienteImp();
+				DaoPaciente daoPaciente = new DaoPaciente();
 				boolean result = daoPaciente.alterarPaciente(paciente);
 				if (result){
 					mensagem = "Paciente alterado com sucesso.";

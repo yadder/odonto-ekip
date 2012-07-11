@@ -4,11 +4,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Alteração de recepcionista</title>
+<link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body>
-<div class="header">
-	<h3>${msg}</h3>
+<div id="msg">
+	<h3 class="information">${msg}</h3>
 </div>
 <form name="formRecepcionista" method="post" action="ServletRecepcionista">
 	<table>
@@ -36,7 +37,7 @@
 		</tr>
 		<tr>
 			<td colspan=2 align="center">
-				<input type="submit" name="btn" value="Excluir" />
+				<input type="button" name="btn" value="Excluir" onclick="javascript:confirmarExclusao('ServletRecepcionista?btn=Excluir');"/>
 				<input type="submit" name="btn" value="Alterar" />
 				<input type="submit" name="btn" value="Voltar" />
 			</td>

@@ -9,10 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import persistencia.DaoFace;
-import persistencia.DaoFaceImp;
-
 import modelo.Face;
+import persistencia.DaoFace;
 
 public class ServletFace extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -23,6 +21,7 @@ public class ServletFace extends HttpServlet {
    
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,7 +38,7 @@ public class ServletFace extends HttpServlet {
 			String nome = (String) request.getParameter("nomeFace");
 			if (validaCampos(nome)){				
 				Face face = new Face(nome);
-				DaoFace dao = new DaoFaceImp();
+				DaoFace dao = new DaoFace();
 				dao.cadastrarFace(face);
 				mensagem = "Face cadastrada com sucesso!";
 				request.setAttribute("msg", mensagem);
@@ -54,7 +53,7 @@ public class ServletFace extends HttpServlet {
 			
 			String nome = (String) request.getParameter("nomeFace");
 			Face face = new Face(nome);
-			DaoFace dao = new DaoFaceImp();
+			DaoFace dao = new DaoFace();
 			face = dao.pesquisarFacePorNome(nome);
 			if (face != null){
 				mensagem = "Face encontrada.";
@@ -72,7 +71,7 @@ public class ServletFace extends HttpServlet {
 
 				Face face = new Face();
 				face = (Face)objetoSessao.getAttribute("face");
-				DaoFace dao = new DaoFaceImp();
+				DaoFace dao = new DaoFace();
 				boolean result = dao.excluirFace(face);
 				if (result){
 					mensagem = "Face excluída com sucesso.";
@@ -92,7 +91,7 @@ public class ServletFace extends HttpServlet {
 				Face face = new Face();
 				face = (Face)objetoSessao.getAttribute("face");
 				face.setNomeFace((String)request.getParameter("nomeFace"));								
-				DaoFace dao = new DaoFaceImp();
+				DaoFace dao = new DaoFace();
 				boolean result = dao.alterarFace(face);
 				if (result){
 					mensagem = "Face alterada com sucesso.";

@@ -2,14 +2,14 @@ package teste;
 
 import modelo.Acesso;
 import persistencia.DaoAcesso;
-import persistencia.DaoAcessoImp;
+import persistencia.DaoAcesso;
 
 public class TesteAcesso {
 
 	public static void main(String[] args) {
 		boolean result = false;
 		Acesso acesso = null;
-		DaoAcesso daoAcesso = new DaoAcessoImp();
+		DaoAcesso daoAcesso = new DaoAcesso();
 		/*
 		System.out.println("1------------------------------Testando a classe acesso (Cadastro)");
 		acesso = new Acesso("TelaElemento");

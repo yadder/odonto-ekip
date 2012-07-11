@@ -1,26 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="modelo.Convenio" %>
-<%@ page import="persistencia.DaoConvenio,persistencia.DaoConvenioImp" %>
+<%@ page import="persistencia.DaoConvenio,persistencia.DaoConvenio" %>
 <%@ page import="java.util.List" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Alteração de procedimento</title>
+<link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body>
 <c:import url="cabecalho.jsp" />
 <div id="pricipal" style="background-color: #FFFFFF;">
+<div id="msg">
+	<h3 class="information">${msg}</h3>
+</div>
 <form name="formProcedimento" method="post" action="ServletProcedimento">
 	<table>
 		<tr>
 			<td align="right">Convênio:</td>
 			<td><select name="convenio">
 				<%
-					DaoConvenio daoConvenio = new DaoConvenioImp();
-					List<Convenio> convenios = daoConvenio.pesquisarTodosConvenio();
-					for(Convenio convenio : convenios){
+					DaoConvenio daoConvenio = new DaoConvenio();
+							List<Convenio> convenios = daoConvenio.pesquisarTodosConvenio();
+							for(Convenio convenio : convenios){
 				%>
 				<option value="<%=convenio.getNomeConvenio() %>"><%=convenio.getNomeConvenio() %></option>
 				<%} %>
@@ -38,7 +42,7 @@
 		<tr>
 			<td colspan=2 align="center">
 				
-				<input type="submit" name="btn" value="Excluir" />
+				<input type="button" name="btn" value="Excluir" onclick="javascript:confirmarExclusao('ServletProcedimento?btn=Excluir');"/>
 				<input type="submit" name="btn" value="Alterar" />
 				<input type="submit" name="btn" value="Voltar" />
 			</td>

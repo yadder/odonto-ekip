@@ -2,7 +2,7 @@ package teste;
 
 import modelo.Face;
 import persistencia.DaoFace;
-import persistencia.DaoFaceImp;
+import persistencia.DaoFace;
 
 public class TesteFace {
 
@@ -10,7 +10,7 @@ public class TesteFace {
 	public static void main(String[] args) {
 		boolean result = false;
 		Face face = null;
-		DaoFace daoFace = new DaoFaceImp();
+		DaoFace daoFace = new DaoFace();
 		
 		System.out.println("1------------------------------Testando a classe face (Cadastro)");
 		face = new Face("MESIAL");
