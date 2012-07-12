@@ -8,6 +8,7 @@
 </head>
 <body>
 <div class="cabecalho">	
+	<img src="arquivos/logo_horizontal.png" width="300">
 	<font size="2">${msgCabecalho} ${usuarioLogado.nomeUsuario}</font>
 	
 <ul class="navbar">
