@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.HibernateException;
+
 import modelo.Acesso;
 import persistencia.DaoAcesso;
 
@@ -32,75 +34,85 @@ public class ServletAcesso extends HttpServlet {
 			objetoSessao.removeAttribute("acesso");
 			RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
 			disp.forward(request, response);
-			
 		}else if (btn.equals("Cadastrar")){
 			String descricaoAcesso = (String) request.getParameter("descricaoAcesso");
 			if (validaCampos(descricaoAcesso)){				
-				Acesso acesso = new Acesso(descricaoAcesso);
-				DaoAcesso daoAcesso = new DaoAcesso();
-				daoAcesso.cadastrarAcesso(acesso);
-				mensagem = "Acesso cadastrado com sucesso!";
-				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
-				disp.forward(request, response);
+				try{
+					Acesso acesso = new Acesso(descricaoAcesso);
+					DaoAcesso daoAcesso = new DaoAcesso();
+					daoAcesso.cadastrarAcesso(acesso);
+					mensagem = "Acesso cadastrado com sucesso!";
+					request.setAttribute("msg", mensagem);
+					RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
+					disp.forward(request, response);
+				}catch (HibernateException e) {
+					mensagem = "Ocorreu algum erro ao excluir o acesso.";
+					request.setAttribute("msg", mensagem);
+					e.printStackTrace();
+					RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
+					disp.forward(request, response);					
+				}
 			}else{
 				request.setAttribute("msg", mensagem);
 				RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
 				disp.forward(request, response);
 			}
 		}else if (btn.equals("Pesquisar")){
-			
 			String descricaoAcesso = (String) request.getParameter("descricaoAcesso");
-			Acesso acesso = new Acesso(descricaoAcesso);
-			DaoAcesso daoAcesso = new DaoAcesso();
-			acesso = daoAcesso.pesquisarAcessoPorNome(descricaoAcesso);
-			if (acesso != null){
-				mensagem = "Acesso encontrado.";
-				request.setAttribute("msg", mensagem);
-				objetoSessao.setAttribute("acesso", acesso);
-				RequestDispatcher disp = request.getRequestDispatcher("acesso_alterar.jsp");
-				disp.forward(request, response);
-			}else{
-				mensagem = "Acesso não encontrado.";
-				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
-				disp.forward(request, response);
-			}
-		}else if(btn.equals("Excluir")){
-
-				Acesso acesso = new Acesso();
-				acesso = (Acesso)objetoSessao.getAttribute("acesso");
+			try{
+				Acesso acesso = new Acesso(descricaoAcesso);
 				DaoAcesso daoAcesso = new DaoAcesso();
-				boolean result = daoAcesso.excluirAcesso(acesso);
-				if (result){
-					mensagem = "Acesso excluído com sucesso.";
+				acesso = daoAcesso.pesquisarAcessoPorNome(descricaoAcesso);
+				if (acesso != null){
+					mensagem = "Acesso encontrado.";
 					request.setAttribute("msg", mensagem);
-					objetoSessao.removeAttribute("acesso");
-					RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
+					objetoSessao.setAttribute("acesso", acesso);
+					RequestDispatcher disp = request.getRequestDispatcher("acesso_alterar.jsp");
 					disp.forward(request, response);
 				}else{
-					mensagem = "Ocorreu algum erro ao excluir o acesso.";
+					mensagem = "Acesso não encontrado.";
 					request.setAttribute("msg", mensagem);
 					RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
 					disp.forward(request, response);
 				}
+			}catch (HibernateException e) {
+				e.printStackTrace();
+			}
+		}else if(btn.equals("Excluir")){
+			try{
+				Acesso acesso = new Acesso();
+				acesso = (Acesso)objetoSessao.getAttribute("acesso");
+				DaoAcesso daoAcesso = new DaoAcesso();
+				daoAcesso.excluirAcesso(acesso);
+				mensagem = "Acesso excluído com sucesso.";
+				request.setAttribute("msg", mensagem);
+				objetoSessao.removeAttribute("acesso");
+				RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
+				disp.forward(request, response);
+			}catch (HibernateException e) {
+				mensagem = "Ocorreu algum erro ao excluir o acesso.";
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
+				disp.forward(request, response);
+			}
 		}else if(btn.equals("Alterar")){
 			String descricaoAcesso = (String) request.getParameter("descricaoAcesso");
 			if (validaCampos(descricaoAcesso)){	
+				try{
 				Acesso acesso = new Acesso();
 				acesso = (Acesso)objetoSessao.getAttribute("acesso");
 				acesso.setDescricaoAcesso((String)request.getParameter("descricaoAcesso"));								
 				DaoAcesso daoAcesso = new DaoAcesso();
-				boolean result = daoAcesso.alterarAcesso(acesso);
-				if (result){
-					mensagem = "Acesso alterado com sucesso.";
-					request.setAttribute("msg", mensagem);
-					objetoSessao.removeAttribute("acesso");
-					RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
-					disp.forward(request, response);
-				}else{
+				daoAcesso.alterarAcesso(acesso);
+				mensagem = "Acesso alterado com sucesso.";
+				request.setAttribute("msg", mensagem);
+				objetoSessao.removeAttribute("acesso");
+				RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
+				disp.forward(request, response);
+				}catch (Exception e) {
 					mensagem = "Ocorreu algum erro ao alterar o acesso.";
 					request.setAttribute("msg", mensagem);
+					e.printStackTrace();
 					RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
 					disp.forward(request, response);
 				}

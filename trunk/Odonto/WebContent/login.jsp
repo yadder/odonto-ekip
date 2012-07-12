@@ -7,10 +7,11 @@
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
-<body bgcolor="#D6E0FF">
+<body>
 <div id="msg">
 	<h3 class="information">${msg}</h3>
 </div>
+<div class="cabecalho">
 <form name="formLogin" method="post" action="ServletLogin">
 	<table>
 		<tr>
@@ -25,6 +26,7 @@
 			<td colspan=2 align="right"><input type="submit" value="Entrar" /></td>
 		</tr>
 	</table>
-</form>	
+</form>
+</div>
 </body>
 </html>
