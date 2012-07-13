@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import modelo.Convenio;
 import modelo.Paciente;
-import persistencia.DaoConvenio;
 import persistencia.DaoPaciente;
 import util.ConfiguraAtributo;
 
@@ -31,7 +29,9 @@ public class ServletPaciente extends HttpServlet {
 
 		String btn = (String)request.getParameter("btn");
 		HttpSession objetoSessao = request.getSession();
-
+		Paciente paciente = new Paciente();
+		ConfiguraAtributo ca = new ConfiguraAtributo();
+		
 		if (btn.equals("Voltar")){
 			objetoSessao.removeAttribute("paciente");
 			objetoSessao.removeAttribute("data");
@@ -39,147 +39,82 @@ public class ServletPaciente extends HttpServlet {
 			disp.forward(request, response);
 			
 		}else if (btn.equals("Cadastrar")){
-				ConfiguraAtributo ca = new ConfiguraAtributo();
-				String nomeUsuario = (String) request.getParameter("nomePaciente");
-				String rgUsuario = (String) request.getParameter("rgPaciente");
-				String cpfUsuario = (String) request.getParameter("cpfPaciente");
-				String dtNascUsuario = (String) request.getParameter("dtNascPaciente");
-				String sexoUsuario = (String) request.getParameter("sexoPaciente");
-				String perfilUsuario = "PACIENTE";
-				String senhaUsuario = "12345";
-				String responsavelPAciente = (String) request.getParameter("responsavelPaciente");
-				String logradouroPaciente =  (String) request.getParameter("logradouroPaciente");
-				String numeroLogradouroPaciente =  (String) request.getParameter("numeroLogradouroPaciente");
-				String complementoLogradouroPaciente =  (String) request.getParameter("complementoLogradouroPaciente");
-				String bairroPaciente =  (String) request.getParameter("bairroPaciente");
-				String cidadePaciente =  (String) request.getParameter("cidadePaciente");
-				String estadoPaciente =  (String) request.getParameter("estadoPaciente");
-				String cepPaciente =  (String) request.getParameter("cepPaciente");
-				String ddd1Paciente =  (String) request.getParameter("ddd1Paciente");
-				String telefone1Paciente =  (String) request.getParameter("telefone1Paciente");
-				String ddd2Paciente =  (String) request.getParameter("ddd2Paciente");
-				String telefone2Paciente =  (String) request.getParameter("telefone2Paciente");
-				String stringConvenio = (String) request.getParameter("convenio");
-				
-				Convenio convenio = new Convenio();
-				DaoConvenio daoConvenio = new DaoConvenio();
-				convenio = daoConvenio.pesquisarConvenioPorNome(stringConvenio);
-				
-				Paciente paciente = new Paciente(nomeUsuario, senhaUsuario, perfilUsuario, rgUsuario, cpfUsuario, sexoUsuario, ca.dataStringParaDataSql(dtNascUsuario), responsavelPAciente, logradouroPaciente,numeroLogradouroPaciente, complementoLogradouroPaciente, bairroPaciente, cidadePaciente, estadoPaciente, cepPaciente, ddd1Paciente, telefone1Paciente, ddd2Paciente, telefone2Paciente, convenio);
-				objetoSessao.setAttribute("paciente", paciente);
-				if (validaCampos(nomeUsuario, rgUsuario, cpfUsuario, dtNascUsuario, sexoUsuario, stringConvenio)){
-					// gerar uma string com 6 caracteres para colocar na senha
-					paciente = new Paciente(nomeUsuario, senhaUsuario, perfilUsuario, rgUsuario, cpfUsuario, sexoUsuario, ca.dataStringParaDataSql(dtNascUsuario), responsavelPAciente, logradouroPaciente,numeroLogradouroPaciente, complementoLogradouroPaciente, bairroPaciente, cidadePaciente, estadoPaciente, cepPaciente, ddd1Paciente, telefone1Paciente, ddd2Paciente, telefone2Paciente, convenio);
-					DaoPaciente daoPaciente = new DaoPaciente();
-					daoPaciente.cadastrarPaciente(paciente);
-					mensagem = "Paciente cadastrado com sucesso!";
+			paciente = preencheObjeto(request, response);
+			objetoSessao.setAttribute("paciente",paciente);
+			if (validaCampos(paciente)){
+				try{
+					DaoPaciente dao = new DaoPaciente();
+					dao.cadastrarPaciente(paciente);
+					mensagem = "Paciente cadastrado(a) com sucesso!";
 					objetoSessao.removeAttribute("paciente");
-					objetoSessao.removeAttribute("data");
 					request.setAttribute("msg", mensagem);
 					RequestDispatcher disp = request.getRequestDispatcher("paciente.jsp");
 					disp.forward(request, response);
-				}else{
-					request.setAttribute("msg", mensagem);
-					String data = ca.dataSqlParaDataString(paciente.getDataNascimentoUsuario());
-					objetoSessao.setAttribute("data", data);
-					RequestDispatcher disp = request.getRequestDispatcher("paciente.jsp");
-					disp.forward(request, response);
+				}catch (Exception e) {
+					e.printStackTrace();
 				}
-		}else if (btn.equals("Pesquisar")){
-			String nomeUsuario = (String) request.getParameter("nomePaciente");
-			Paciente paciente = new Paciente(nomeUsuario);
-			DaoPaciente daoPaciente = new DaoPaciente();
-			paciente = daoPaciente.pesquisarPacientePorNome(nomeUsuario);
-			if (paciente != null){
-				ConfiguraAtributo ca = new ConfiguraAtributo();
-				mensagem = "Paciente encontrado.";
-				request.setAttribute("msg", mensagem);
-				objetoSessao.setAttribute("data", ca.dataSqlParaDataString(paciente.getDataNascimentoUsuario()));
-				objetoSessao.setAttribute("paciente", paciente);
-				RequestDispatcher disp = request.getRequestDispatcher("paciente_alterar.jsp");
-				disp.forward(request, response);
 			}else{
-				mensagem = "Paciente não encontrado.";
 				request.setAttribute("msg", mensagem);
+				String data = ca.dataSqlParaDataString(paciente.getDataNascimentoUsuario());
+				objetoSessao.setAttribute("data", data);
 				RequestDispatcher disp = request.getRequestDispatcher("paciente.jsp");
 				disp.forward(request, response);
 			}
-		}else if(btn.equals("Excluir")){
-				Paciente paciente = new Paciente();
-				paciente = (Paciente)objetoSessao.getAttribute("paciente");
-				DaoPaciente daoPaciente = new DaoPaciente();
-				boolean result = daoPaciente.excluirPaciente(paciente);
-				if (result){
-					mensagem = "Paciente excluído com sucesso.";
-					request.setAttribute("msg", mensagem);
-					objetoSessao.removeAttribute("paciente");
-					objetoSessao.removeAttribute("data");
-					RequestDispatcher disp = request.getRequestDispatcher("paciente.jsp");
-					disp.forward(request, response);
-				}else{
-					mensagem = "Ocorreu algum erro ao excluir o paciente.";
-					request.setAttribute("msg", mensagem);
-					RequestDispatcher disp = request.getRequestDispatcher("paciente.jsp");
-					disp.forward(request, response);
+		}else if (btn.equals("Pesquisar")){
+			paciente = preencheObjeto(request, response);
+			if (validaCampos(paciente)){
+				try{
+					DaoPaciente daoPaciente = new DaoPaciente();
+					paciente = daoPaciente.pesquisarPacientePorNome(paciente);
+					if (paciente != null){
+						mensagem = "Paciente encontrado(a).";
+						request.setAttribute("msg", mensagem);
+						objetoSessao.setAttribute("paciente", paciente);
+						objetoSessao.setAttribute("data", ca.dataSqlParaDataString(paciente.getDataNascimentoUsuario()));
+						RequestDispatcher disp = request.getRequestDispatcher("paciente_alterar.jsp");
+						disp.forward(request, response);
+					}else{
+						mensagem = "Paciente não encontrado(a).";
+						request.setAttribute("msg", mensagem);
+						RequestDispatcher disp = request.getRequestDispatcher("paciente.jsp");
+						disp.forward(request, response);
+					}
+				}catch (Exception e) {
+					e.printStackTrace();
 				}
-		}else if(btn.equals("Alterar")){
-			ConfiguraAtributo ca = new ConfiguraAtributo();
-			String nomeUsuario = (String) request.getParameter("nomePaciente");
-			String rgUsuario = (String) request.getParameter("rgPaciente");
-			String cpfUsuario = (String) request.getParameter("cpfPaciente");
-			String dtNascUsuario = (String) request.getParameter("dtNascPaciente");
-			String sexoUsuario = (String) request.getParameter("sexoPaciente");
-			String responsavelPaciente = (String) request.getParameter("responsavelPaciente");
-			String logradouroPaciente =  (String) request.getParameter("logradouroPaciente");
-			String numeroLogradouroPaciente =  (String) request.getParameter("numeroLogradouroPaciente");
-			String complementoLogradouroPaciente =  (String) request.getParameter("complementoLogradouroPaciente");
-			String bairroPaciente =  (String) request.getParameter("bairroPaciente");
-			String cidadePaciente =  (String) request.getParameter("cidadePaciente");
-			String estadoPaciente =  (String) request.getParameter("estadoPaciente");
-			String cepPaciente =  (String) request.getParameter("cepPaciente");
-			String ddd1Paciente =  (String) request.getParameter("ddd1Paciente");
-			String telefone1Paciente =  (String) request.getParameter("telefone1Paciente");
-			String ddd2Paciente =  (String) request.getParameter("ddd2Paciente");
-			String telefone2Paciente =  (String) request.getParameter("telefone2Paciente");
-			String stringConvenio = (String) request.getParameter("convenio");
-			
-			Convenio convenio = new Convenio();
-			DaoConvenio daoConvenio = new DaoConvenio();
-			convenio = daoConvenio.pesquisarConvenioPorNome(stringConvenio);
-			
-			
-			if (validaCampos(nomeUsuario, rgUsuario, cpfUsuario, dtNascUsuario, sexoUsuario, stringConvenio)){
-				Paciente paciente = new Paciente();
+			}
+		}else if(btn.equals("Excluir")){
+			try{
 				paciente = (Paciente)objetoSessao.getAttribute("paciente");
-				paciente.setNomeUsuario(nomeUsuario);
-				paciente.setRgUsuario(rgUsuario);
-				paciente.setCpfUsuario(cpfUsuario);
-				paciente.setDataNascimentoUsuario(ca.dataStringParaDataSql(dtNascUsuario));
-				paciente.setSexoUsuario(sexoUsuario);	
-				paciente.setResponsavelPaciente(responsavelPaciente);
-				paciente.setLogradouroPaciente(logradouroPaciente);
-				paciente.setNumeroLogradouroPaciente(numeroLogradouroPaciente);
-				paciente.setComplementoLogradouroPaciente(complementoLogradouroPaciente);
-				paciente.setBairroPaciente(bairroPaciente);
-				paciente.setCidadePaciente(cidadePaciente);
-				paciente.setEstadoPaciente(estadoPaciente);
-				paciente.setCepPaciente(cepPaciente);
-				paciente.setDdd1Paciente(ddd1Paciente);
-				paciente.setTelefone1Paciente(telefone1Paciente);
-				paciente.setDdd2Paciente(ddd2Paciente);
-				paciente.setTelefone2Paciente(telefone2Paciente);
-				paciente.setConvenio(convenio);
 				DaoPaciente daoPaciente = new DaoPaciente();
-				boolean result = daoPaciente.alterarPaciente(paciente);
-				if (result){
-					mensagem = "Paciente alterado com sucesso.";
+				daoPaciente.excluirPaciente(paciente);
+				mensagem = "Paciente excluído(a) com sucesso.";
+				request.setAttribute("msg", mensagem);
+				objetoSessao.removeAttribute("paciente");
+				RequestDispatcher disp = request.getRequestDispatcher("paciente.jsp");
+				disp.forward(request, response);
+			}catch (Exception e) {
+				mensagem = "Ocorreu algum erro ao excluir o paciente(a).";
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("paciente.jsp");
+				disp.forward(request, response);
+				e.printStackTrace();
+			}
+		}else if(btn.equals("Alterar")){
+			paciente = preencheObjeto(request, response);
+			paciente.setIdUsuario(((Paciente)objetoSessao.getAttribute("paciente")).getIdUsuario());
+			if (validaCampos(paciente)){	
+				try{					
+					DaoPaciente daoPaciente = new DaoPaciente();
+					daoPaciente.alterarPaciente(paciente);
+					mensagem = "Paciente alterado(a) com sucesso.";
 					request.setAttribute("msg", mensagem);
 					objetoSessao.removeAttribute("paciente");
 					objetoSessao.removeAttribute("data");
 					RequestDispatcher disp = request.getRequestDispatcher("paciente.jsp");
 					disp.forward(request, response);
-				}else{
-					mensagem = "Ocorreu algum erro ao alterar o paciente.";
+				}catch (Exception e) {
+					mensagem = "Ocorreu algum erro ao alterar o(a) paciente.";
 					request.setAttribute("msg", mensagem);
 					RequestDispatcher disp = request.getRequestDispatcher("paciente.jsp");
 					disp.forward(request, response);
@@ -189,28 +124,85 @@ public class ServletPaciente extends HttpServlet {
 				RequestDispatcher disp = request.getRequestDispatcher("paciente_alterar.jsp");
 				disp.forward(request, response);
 			}
-			
 		}
 	}
 
-	public boolean validaCampos(String nome, String rg, String cpf, String dtnasc, String sexo, String convenio) {
+	public Paciente preencheObjeto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Paciente paciente = new Paciente();
+		ConfiguraAtributo ca = new ConfiguraAtributo();
+		paciente.setNomeUsuario((String) request.getParameter("nomePaciente"));
+		paciente.setSenhaUsuario(ca.gerarSenha());
+		paciente.setPerfilUsuario("DENTISTA");
+		paciente.setRgUsuario((String) request.getParameter("rgPaciente"));
+		paciente.setCpfUsuario((String) request.getParameter("cpfPaciente"));
+		paciente.setDataNascimentoUsuario(ca.dataStringParaDataSql((String) request.getParameter("dtNascPaciente")));
+		paciente.setSexoUsuario((String) request.getParameter("sexoPaciente"));
+		paciente.setResponsavelPaciente((String) request.getParameter("responsavelPaciente"));
+		paciente.setLogradouroPaciente((String) request.getParameter("logradouroPaciente"));
+		paciente.setNumeroLogradouroPaciente((String) request.getParameter("numeroLogradouroPaciente"));
+		paciente.setComplementoLogradouroPaciente((String) request.getParameter("complementoLogradouroPaciente"));
+		paciente.setBairroPaciente((String) request.getParameter("bairroPaciente"));
+		paciente.setCidadePaciente((String) request.getParameter("cidadePaciente"));
+		paciente.setEstadoPaciente((String) request.getParameter("estadoPaciente"));
+		paciente.setCepPaciente((String) request.getParameter("cepPaciente"));
+		paciente.setDdd1Paciente((String) request.getParameter("ddd1Paciente"));
+		paciente.setTelefone1Paciente((String) request.getParameter("telefone1Paciente"));
+		paciente.setDdd2Paciente((String) request.getParameter("ddd2Paciente"));
+		paciente.setTelefone2Paciente((String) request.getParameter("telefone2Paciente"));
+		return paciente;		
+	}
+	
+	public boolean validaCampos(Paciente paciente) {
+		// retira espaços
+		paciente.setNomeUsuario(paciente.getNomeUsuario().trim()); 
+		paciente.setRgUsuario(paciente.getRgUsuario().trim()); 
+		paciente.setCpfUsuario(paciente.getCpfUsuario().trim()); 
+		paciente.setSexoUsuario(paciente.getSexoUsuario().trim()); 
+		paciente.setResponsavelPaciente(paciente.getResponsavelPaciente().trim());
+		paciente.setLogradouroPaciente(paciente.getLogradouroPaciente().trim());
+		paciente.setNumeroLogradouroPaciente(paciente.getLogradouroPaciente().trim());
+		paciente.setComplementoLogradouroPaciente(paciente.getComplementoLogradouroPaciente().trim());
+		paciente.setBairroPaciente(paciente.getBairroPaciente().trim());
+		paciente.setCidadePaciente(paciente.getCidadePaciente().trim());
+		paciente.setEstadoPaciente(paciente.getEstadoPaciente().trim());
+		paciente.setCepPaciente(paciente.getCepPaciente().trim());
+		paciente.setDdd1Paciente(paciente.getDdd1Paciente().trim());
+		paciente.setTelefone1Paciente(paciente.getTelefone1Paciente().trim());
+		
 		boolean result = false;
-		if ((nome == null) || (nome.length() < 5)) {
-			mensagem = "Preencha o nome do paciente corretamente. O nome deve ter pelo menos 5 caracteres";
-		}else if ((rg == null) || (rg.length() < 5)) {
-			mensagem = "Preencha o RG do paciente corretamente.";
-		}else if ((cpf == null) || (cpf.length() < 11)) {
-			mensagem = "Preencha o CPF do paciente corretamente.";
-		}else if ((dtnasc == null) || (dtnasc.equals(""))) {
-			mensagem = "Preencha a data de nascimento do paciente corretamente.";
-		}else if ((sexo == null) || (sexo.equals(""))) {
-			mensagem = "Preencha o sexo do paciente corretamente.";
-		}else if ((convenio == null) || (convenio.equals(""))) {
-			mensagem = "Preencha o sexo do paciente corretamente.";
-		}else {
+		if ((paciente.getNomeUsuario() == null) || (paciente.getNomeUsuario().length() < 5)) {
+			mensagem = "Preencha o nome do(a) paciente corretamente. O nome deve ter pelo menos 5 caracteres";
+		}else if ((paciente.getRgUsuario() == null) || (paciente.getRgUsuario().length() < 5)) {
+			mensagem = "Preencha o RG da paciente corretamente.";
+		}else if ((paciente.getCpfUsuario() == null) || (paciente.getCpfUsuario().length() < 11)) {
+			mensagem = "Preencha o CPF da paciente corretamente.";
+		}else if ((paciente.getDataNascimentoUsuario() == null) || (paciente.getDataNascimentoUsuario().equals(""))) {
+			mensagem = "Preencha a data de nascimento da paciente corretamente.";
+		}else if ((paciente.getSexoUsuario() == null) || (paciente.getSexoUsuario().equals(""))) {
+			mensagem = "Preencha o sexo da paciente corretamente.";
+		}else if ((paciente.getDdd1Paciente() == null) || (paciente.getDdd1Paciente().equals(""))) {
+			mensagem = "Preencha o DDD do paciente corretamente.";
+		}else if ((paciente.getTelefone1Paciente() == null) || (paciente.getTelefone1Paciente().equals(""))) {
+			mensagem = "Preencha o sexo da paciente corretamente.";
+		}
+		
+		// outros campos do paciente
+		
+		
+		else {
 			result = true;
 		}
 		return result;
 	}
-
+	
+	public boolean validaNome(Paciente paciente){
+		boolean result = false;
+		paciente.setNomeUsuario(paciente.getNomeUsuario().trim());
+		if ((paciente.getNomeUsuario() == null) || (paciente.getNomeUsuario().length() < 5)) {
+			mensagem = "Preencha o nome do(a) paciente corretamente. O nome deve ter pelo menos 5 caracteres";
+		}else{
+			result = true;
+		}
+		return result;
+	}
 }

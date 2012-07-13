@@ -20,11 +20,11 @@
 	<table>
 		<tr>
 			<td align="right">Nome:</td>
-			<td><input class="maiuscula" type="text" name="nomePaciente" value="${paciente.nomeUsuario}" size="20" /><input type="submit" name="btn" value="Pesquisar" /></td>
+			<td><input type="text" name="nomePaciente" value="${paciente.nomeUsuario}" size="20" /><input type="submit" name="btn" value="Pesquisar" /></td>
 		</tr>
 		<tr>
 			<td align="right">Rg:</td>
-			<td><input class="maiuscula" type="text" name="rgPaciente" value="${paciente.rgUsuario}" size="20" /></td>
+			<td><input type="text" name="rgPaciente" value="${paciente.rgUsuario}" size="20" /></td>
 		</tr>
 		<tr>
 			<td align="right">Cpf:</td>

@@ -44,19 +44,19 @@ public class DaoUsuario {
 			session.close();
 	}
 
-	public Usuario pesquisarUsuarioPorCpf(String cpf) throws Exception{
+	public Usuario pesquisarUsuarioPorCpf(Usuario usuario) throws Exception{
 		Usuario u = null;
 		session = HibernateUtil.getSessionFactory().openSession();
-		Criteria cr = session.createCriteria(Usuario.class).add(Restrictions.eq("cpfUsuario", cpf));
+		Criteria cr = session.createCriteria(Usuario.class).add(Restrictions.eq("cpfUsuario", usuario.getCpfUsuario()));
 		u = (Usuario) cr.uniqueResult();
 		session.flush();
 		session.close();
 		return u;
 	}
 	
-	public Usuario pesquisarUsuarioPorNome(String nome) throws Exception{
+	public Usuario pesquisarUsuarioPorNome(Usuario usuario) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
-		Criteria cr = session.createCriteria(Usuario.class).add(Restrictions.eq("nomeUsuario", nome));
+		Criteria cr = session.createCriteria(Usuario.class).add(Restrictions.eq("nomeUsuario", usuario.getNomeUsuario()));
 		Usuario u = (Usuario)cr.uniqueResult();
 		session.flush();
 		session.close();

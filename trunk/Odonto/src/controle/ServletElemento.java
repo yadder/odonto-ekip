@@ -26,6 +26,7 @@ public class ServletElemento extends HttpServlet {
 		
 		String btn = (String)request.getParameter("btn");
 		HttpSession objetoSessao = request.getSession();
+		Elemento elemento = new Elemento();
 
 		if (btn.equals("Voltar")){
 			objetoSessao.removeAttribute("elemento");
@@ -33,72 +34,76 @@ public class ServletElemento extends HttpServlet {
 			disp.forward(request, response);
 			
 		}else if (btn.equals("Cadastrar")){
-			String nome = (String) request.getParameter("nomeElemento");
-			if (validaCampos(nome)){
-				Elemento elemento = new Elemento(nome);
-				DaoElemento dao = new DaoElemento();
-				dao.cadastrarElemento(elemento);
-				mensagem = "Elemento cadastrado com sucesso!";
-				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
-				disp.forward(request, response);
+			elemento = preencheObjeto(request, response);
+			if (validaCampos(elemento)){				
+				try{
+					DaoElemento dao = new DaoElemento();
+					dao.cadastrarElemento(elemento);
+					mensagem = "Fornecedor cadastrado com sucesso!";
+					request.setAttribute("msg", mensagem);
+					RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
+					disp.forward(request, response);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
 			}else{
 				request.setAttribute("msg", mensagem);
 				RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
 				disp.forward(request, response);
 			}
 		}else if (btn.equals("Pesquisar")){
-			
-			String nome = (String) request.getParameter("nomeElemento");
-			Elemento elemento = new Elemento(nome);
-			DaoElemento dao = new DaoElemento();
-			elemento = dao.pesquisarElementoPorNome(nome);
-			if (elemento != null){
-				mensagem = "Elemento encontrado.";
+			elemento = preencheObjeto(request, response);
+			if (validaCampos(elemento)){
+				try{
+					DaoElemento dao = new DaoElemento();
+					elemento = dao.pesquisarElementoPorNome(elemento);
+					if (elemento != null){
+						mensagem = "Fornecedor encontrado.";
+						request.setAttribute("msg", mensagem);
+						objetoSessao.setAttribute("elemento", elemento);
+						RequestDispatcher disp = request.getRequestDispatcher("elemento_alterar.jsp");
+						disp.forward(request, response);
+					}else{
+						mensagem = "Fornecedor não encontrado.";
+						request.setAttribute("msg", mensagem);
+						RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
+						disp.forward(request, response);
+					}
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}else if(btn.equals("Excluir")){
+			try{
+				elemento = (Elemento)objetoSessao.getAttribute("elemento");
+				DaoElemento dao = new DaoElemento();
+				dao.excluirElemento(elemento);
+				mensagem = "Fornecedor excluído com sucesso.";
 				request.setAttribute("msg", mensagem);
-				objetoSessao.setAttribute("elemento", elemento);
-				RequestDispatcher disp = request.getRequestDispatcher("elemento_alterar.jsp");
+				objetoSessao.removeAttribute("elemento");
+				RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
 				disp.forward(request, response);
-			}else{
-				mensagem = "Elemento não encontrado.";
+			}catch (Exception e) {
+				mensagem = "Ocorreu algum erro ao excluir o fornecedor.";
 				request.setAttribute("msg", mensagem);
 				RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
 				disp.forward(request, response);
+				e.printStackTrace();
 			}
-		}else if(btn.equals("Excluir")){
-
-				Elemento elemento = new Elemento();
-				elemento = (Elemento)objetoSessao.getAttribute("elemento");
-				DaoElemento dao = new DaoElemento();
-				boolean result = dao.excluirElemento(elemento);
-				if (result){
-					mensagem = "Elemento excluído com sucesso.";
-					request.setAttribute("msg", mensagem);
-					objetoSessao.removeAttribute("elemento");
-					RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
-					disp.forward(request, response);
-				}else{
-					mensagem = "Ocorreu algum erro ao excluir o elemento.";
-					request.setAttribute("msg", mensagem);
-					RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
-					disp.forward(request, response);
-				}
 		}else if(btn.equals("Alterar")){
-			String nome = (String) request.getParameter("nomeElemento");
-			if (validaCampos(nome)){
-				Elemento elemento = new Elemento();
-				elemento = (Elemento)objetoSessao.getAttribute("elemento");
-				elemento.setNomeElemento((String)request.getParameter("nomeElemento"));								
-				DaoElemento dao = new DaoElemento();
-				boolean result = dao.alterarElemento(elemento);
-				if (result){
-					mensagem = "Elemento alterado com sucesso.";
+			elemento = preencheObjeto(request, response);
+			elemento.setIdElemento(((Elemento)objetoSessao.getAttribute("elemento")).getIdElemento());
+			if (validaCampos(elemento)){	
+				try{					
+					DaoElemento dao = new DaoElemento();
+					dao.alterarElemento(elemento);
+					mensagem = "Fornecedor alterado com sucesso.";
 					request.setAttribute("msg", mensagem);
 					objetoSessao.removeAttribute("elemento");
 					RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
 					disp.forward(request, response);
-				}else{
-					mensagem = "Ocorreu algum erro ao alterar o elemento.";
+				}catch (Exception e) {
+					mensagem = "Ocorreu algum erro ao alterar o fornecedor.";
 					request.setAttribute("msg", mensagem);
 					RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
 					disp.forward(request, response);
@@ -111,14 +116,20 @@ public class ServletElemento extends HttpServlet {
 		}
 	}
 	
-	public boolean validaCampos(String nome){
+	public Elemento preencheObjeto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Elemento elemento = new Elemento();
+		elemento.setNomeElemento((String)request.getParameter("nomeElemento"));
+		return elemento;		
+	}
+		
+	public boolean validaCampos(Elemento elemento){
 		boolean result = false;
-		if ((nome == null) || (nome.length() !=2)){
+		elemento.setNomeElemento(elemento.getNomeElemento().trim()); // retira espaços
+		if ((elemento.getNomeElemento() == null) || (elemento.getNomeElemento().equals(""))){
 			mensagem = "Preencha o nome do elemento corretamente.";
 		}else{
 			result = true;
 		}
 		return result;
 	}
-
 }

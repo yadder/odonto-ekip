@@ -30,8 +30,8 @@ public class ServletLogin extends HttpServlet {
 		HttpSession objetoSessao;
 		try{
 			Usuario usuarioLogado = new Usuario(cpf, senha);
-			DaoUsuario dao = new DaoUsuario();
-			usuarioLogado = dao.pesquisarUsuarioPorCpf(cpf);
+			DaoUsuario daoUsuario = new DaoUsuario();
+			usuarioLogado = daoUsuario.pesquisarUsuarioPorCpf(usuarioLogado);
 			if ((usuarioLogado != null) && (usuarioLogado.getSenhaUsuario().equals(senha))){
 		        // resgata a sessao
 				objetoSessao = request.getSession();

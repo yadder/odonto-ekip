@@ -44,9 +44,9 @@ public class DaoFace {
 			session.close();
 	}
 
-	public Face pesquisarFacePorNome(String nome) throws Exception{
+	public Face pesquisarFacePorNome(Face face) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
-		Criteria cr = session.createCriteria(Face.class).add(Restrictions.eq("nomeFace", nome));
+		Criteria cr = session.createCriteria(Face.class).add(Restrictions.eq("nomeFace", face.getNomeFace()));
 		Face f = (Face) cr.uniqueResult();
 		session.flush();
 		session.close();

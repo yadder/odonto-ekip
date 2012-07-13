@@ -1,7 +1,6 @@
 package controle;
 
 import java.io.IOException;
-import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import modelo.Convenio;
 import modelo.Dentista;
 import persistencia.DaoDentista;
 import util.ConfiguraAtributo;
@@ -43,7 +41,7 @@ public class ServletDentista extends HttpServlet {
 					try{
 						DaoDentista dao = new DaoDentista();
 						dao.cadastrarDentista(dentista);
-						mensagem = "Dentista cadastrada com sucesso!";
+						mensagem = "Dentista cadastrado(a) com sucesso!";
 						request.setAttribute("msg", mensagem);
 						RequestDispatcher disp = request.getRequestDispatcher("dentista.jsp");
 						disp.forward(request, response);
@@ -59,73 +57,59 @@ public class ServletDentista extends HttpServlet {
 				}
 		}else if (btn.equals("Pesquisar")){
 			dentista = preencheObjeto(request, response);
-			if (validaNome(dentista)){
-				
+			if (validaCampos(dentista)){
+				try{
+					DaoDentista daoDentista = new DaoDentista();
+					dentista = daoDentista.pesquisarDentistaPorNome(dentista);
+					if (dentista != null){
+						mensagem = "Dentista encontrado(a).";
+						request.setAttribute("msg", mensagem);
+						objetoSessao.setAttribute("dentista", dentista);
+						objetoSessao.setAttribute("data", ca.dataSqlParaDataString(dentista.getDataNascimentoUsuario()));
+						RequestDispatcher disp = request.getRequestDispatcher("dentista_alterar.jsp");
+						disp.forward(request, response);
+					}else{
+						mensagem = "Dentista não encontrado(a).";
+						request.setAttribute("msg", mensagem);
+						RequestDispatcher disp = request.getRequestDispatcher("dentista.jsp");
+						disp.forward(request, response);
+					}
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-			
-				DaoDentista dao = new DaoDentista();
-				dentista = dao.pesquisarDentistaPorNome(nome);
-			if (dentista != null){
-				ConfiguraAtributo ca = new ConfiguraAtributo();
-				mensagem = "Dentista encontrada.";
+		}else if(btn.equals("Excluir")){
+			try{
+				dentista = (Dentista)objetoSessao.getAttribute("dentista");
+				DaoDentista daoDentista = new DaoDentista();
+				daoDentista.excluirDentista(dentista);
+				mensagem = "Dentista excluído(a) com sucesso.";
 				request.setAttribute("msg", mensagem);
-				objetoSessao.setAttribute("data", ca.dataSqlParaDataString(dentista.getDataNascimentoUsuario()));
-				System.out.println(dentista);
-				objetoSessao.setAttribute("dentista", dentista);
-				RequestDispatcher disp = request.getRequestDispatcher("dentista_alterar.jsp");
+				objetoSessao.removeAttribute("dentista");
+				RequestDispatcher disp = request.getRequestDispatcher("dentista.jsp");
 				disp.forward(request, response);
-			}else{
-				mensagem = "Dentista não encontrada.";
+			}catch (Exception e) {
+				mensagem = "Ocorreu algum erro ao excluir o dentista(a).";
 				request.setAttribute("msg", mensagem);
 				RequestDispatcher disp = request.getRequestDispatcher("dentista.jsp");
 				disp.forward(request, response);
+				e.printStackTrace();
 			}
-		}else if(btn.equals("Excluir")){
-				Dentista dentista = new Dentista();
-				dentista = (Dentista)objetoSessao.getAttribute("dentista");
-				DaoDentista dao = new DaoDentista();
-				boolean result = dao.excluirDentista(dentista);
-				if (result){
-					mensagem = "Dentista excluída com sucesso.";
-					request.setAttribute("msg", mensagem);
-					objetoSessao.removeAttribute("dentista");
-					objetoSessao.removeAttribute("data");
-					RequestDispatcher disp = request.getRequestDispatcher("dentista.jsp");
-					disp.forward(request, response);
-				}else{
-					mensagem = "Ocorreu algum erro ao excluir a dentista.";
-					request.setAttribute("msg", mensagem);
-					RequestDispatcher disp = request.getRequestDispatcher("dentista.jsp");
-					disp.forward(request, response);
-				}
 		}else if(btn.equals("Alterar")){
-			ConfiguraAtributo ca = new ConfiguraAtributo();
-			String nome = (String) request.getParameter("nomeDentista");
-			String rg = (String) request.getParameter("rgDentista");
-			String cpf = (String) request.getParameter("cpfDentista");
-			String dtnasc = (String) request.getParameter("dtNascDentista");
-			String sexo = (String) request.getParameter("sexoDentista");
-			String cro = (String) request.getParameter("croDentista");
-			if (validaCampos(nome, rg, cpf, dtnasc, sexo, cro)){
-				Dentista dentista = new Dentista();
-				dentista = (Dentista)objetoSessao.getAttribute("dentista");
-				dentista.setNomeUsuario(nome);
-				dentista.setRgUsuario(rg);
-				dentista.setCpfUsuario(cpf);
-				dentista.setDataNascimentoUsuario(ca.dataStringParaDataSql(dtnasc));
-				dentista.setSexoUsuario(sexo);		
-				dentista.setCroDentista(cro);
-				DaoDentista dao = new DaoDentista();
-				boolean result = dao.alterarDentista(dentista);
-				if (result){
-					mensagem = "Dentista alterada com sucesso.";
+			dentista = preencheObjeto(request, response);
+			dentista.setIdUsuario(((Dentista)objetoSessao.getAttribute("dentista")).getIdUsuario());
+			if (validaCampos(dentista)){	
+				try{					
+					DaoDentista daoDentista = new DaoDentista();
+					daoDentista.alterarDentista(dentista);
+					mensagem = "Dentista alterado(a) com sucesso.";
 					request.setAttribute("msg", mensagem);
 					objetoSessao.removeAttribute("dentista");
 					objetoSessao.removeAttribute("data");
 					RequestDispatcher disp = request.getRequestDispatcher("dentista.jsp");
 					disp.forward(request, response);
-				}else{
-					mensagem = "Ocorreu algum erro ao alterar a dentista.";
+				}catch (Exception e) {
+					mensagem = "Ocorreu algum erro ao alterar o(a) dentista.";
 					request.setAttribute("msg", mensagem);
 					RequestDispatcher disp = request.getRequestDispatcher("dentista.jsp");
 					disp.forward(request, response);
@@ -135,7 +119,6 @@ public class ServletDentista extends HttpServlet {
 				RequestDispatcher disp = request.getRequestDispatcher("dentista_alterar.jsp");
 				disp.forward(request, response);
 			}
-			
 		}
 	}
 

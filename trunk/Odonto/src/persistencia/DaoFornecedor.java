@@ -44,9 +44,9 @@ public class DaoFornecedor {
 			session.close();
 	}
 
-	public Fornecedor pesquisarFornecedorPorNome(String nomeFornecedor) throws Exception{
+	public Fornecedor pesquisarFornecedorPorNome(Fornecedor fornecedor) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
-		Criteria cr = session.createCriteria(Fornecedor.class).add(Restrictions.eq("nomeFornecedor", nomeFornecedor));
+		Criteria cr = session.createCriteria(Fornecedor.class).add(Restrictions.eq("nomeFornecedor", fornecedor.getNomeFornecedor()));
 		Fornecedor f = (Fornecedor)cr.uniqueResult();
 		return f;
 	}

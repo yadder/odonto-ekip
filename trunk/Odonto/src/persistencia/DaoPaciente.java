@@ -44,9 +44,9 @@ public class DaoPaciente {
 		session.close();
 	}
 	
-	public Paciente pesquisarPacientePorNome(String nome) throws Exception{
+	public Paciente pesquisarPacientePorNome(Paciente paciente) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
-		Criteria cr = session.createCriteria(Paciente.class).add(Restrictions.eq("nomeUsuario", nome));
+		Criteria cr = session.createCriteria(Paciente.class).add(Restrictions.eq("nomeUsuario", paciente.getNomeUsuario()));
 		Paciente p = (Paciente)cr.uniqueResult();
 		session.flush();
 		session.close();
