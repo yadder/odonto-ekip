@@ -2,10 +2,10 @@ package persistencia;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import modelo.Odontograma;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -16,7 +16,7 @@ public class DaoOdontograma {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public void cadastrarOdontograma(Odontograma odontograma) throws HibernateException{
+	public void cadastrarOdontograma(Odontograma odontograma) throws Exception{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.persist(odontograma);
@@ -25,7 +25,7 @@ public class DaoOdontograma {
 			session.close();
 	}
 
-	public void alterarOdontograma(Odontograma odontograma) throws HibernateException{
+	public void alterarOdontograma(Odontograma odontograma) throws Exception{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.update(odontograma);
@@ -34,7 +34,7 @@ public class DaoOdontograma {
 			session.close();
 	}
 
-	public void excluirOdontograma(Odontograma odontograma) throws HibernateException{
+	public void excluirOdontograma(Odontograma odontograma) throws Exception{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.delete(odontograma);
@@ -43,7 +43,7 @@ public class DaoOdontograma {
 			session.close();
 	}
 
-	public List<Odontograma> pesquisarTodosOdontograma() throws HibernateException{
+	public List<Odontograma> pesquisarTodosOdontograma() throws Exception{
 		List<Odontograma> lista = null;
 		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Odontograma.class);

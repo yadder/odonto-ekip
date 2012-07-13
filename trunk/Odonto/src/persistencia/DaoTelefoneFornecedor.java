@@ -6,7 +6,6 @@ import java.util.List;
 import modelo.TelefoneFornecedor;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -25,7 +24,7 @@ public class DaoTelefoneFornecedor {
 			session.persist(telefoneFornecedor);
 			transaction.commit();
 			retorno = true;
-		}catch(HibernateException e){
+		}catch(Exception e){
 			transaction.rollback();
 			e.printStackTrace();
 		}finally{
@@ -42,7 +41,7 @@ public class DaoTelefoneFornecedor {
 			session.update(telefoneFornecedor);
 			transaction.commit();
 			retorno = true;
-		}catch(HibernateException e){
+		}catch(Exception e){
 			transaction.rollback();
 			e.printStackTrace();
 		}finally{
@@ -59,7 +58,7 @@ public class DaoTelefoneFornecedor {
 			session.delete(telefoneFornecedor);
 			transaction.commit();
 			retorno = true;
-		}catch(HibernateException e){
+		}catch(Exception e){
 			transaction.rollback();
 			e.printStackTrace();
 		}finally{
@@ -73,7 +72,7 @@ public class DaoTelefoneFornecedor {
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			e = (TelefoneFornecedor)session.get(TelefoneFornecedor.class, telefoneFornecedor.getIdTelefone());
-		} catch (HibernateException ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}finally{
 			session.close();
@@ -87,7 +86,7 @@ public class DaoTelefoneFornecedor {
 			session = HibernateUtil.getSessionFactory().openSession();
 			Criteria cr = session.createCriteria(TelefoneFornecedor.class);
 			lista = (ArrayList)cr.list();
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			
 		}finally{

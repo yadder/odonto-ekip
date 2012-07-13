@@ -6,7 +6,6 @@ import java.util.List;
 import modelo.Paciente;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -18,7 +17,7 @@ public class DaoPaciente {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public void cadastrarPaciente(Paciente paciente) throws HibernateException{
+	public void cadastrarPaciente(Paciente paciente) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 		session.persist(paciente);
@@ -27,7 +26,7 @@ public class DaoPaciente {
 		session.close();
 	}
 
-	public void alterarPaciente(Paciente paciente) throws HibernateException{
+	public void alterarPaciente(Paciente paciente) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 		session.update(paciente);
@@ -36,7 +35,7 @@ public class DaoPaciente {
 		session.close();
 	}
 
-	public void excluirPaciente(Paciente paciente) throws HibernateException{
+	public void excluirPaciente(Paciente paciente) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 		session.delete(paciente);
@@ -45,7 +44,7 @@ public class DaoPaciente {
 		session.close();
 	}
 	
-	public Paciente pesquisarPacientePorNome(String nome) throws HibernateException{
+	public Paciente pesquisarPacientePorNome(String nome) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Paciente.class).add(Restrictions.eq("nomeUsuario", nome));
 		Paciente p = (Paciente)cr.uniqueResult();
@@ -54,7 +53,7 @@ public class DaoPaciente {
 		return p;
 	}
 
-	public List<Paciente> pesquisarTodosPaciente() throws HibernateException{
+	public List<Paciente> pesquisarTodosPaciente() throws Exception{
 		ArrayList<Paciente> lista = null;
 		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Paciente.class);

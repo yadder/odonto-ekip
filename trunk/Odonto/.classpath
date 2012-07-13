@@ -13,5 +13,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/JosueF/Desktop/COTIJAVADRIVER/JSTL - TAGLIB/javax.servlet.jsp.jstl-1.2.1-javadoc.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

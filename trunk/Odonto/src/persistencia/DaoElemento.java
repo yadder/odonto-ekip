@@ -6,7 +6,6 @@ import java.util.List;
 import modelo.Elemento;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -18,7 +17,7 @@ public class DaoElemento {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public void cadastrarElemento(Elemento elemento) throws HibernateException{
+	public void cadastrarElemento(Elemento elemento) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 		session.persist(elemento);
@@ -27,7 +26,7 @@ public class DaoElemento {
 		session.close();
 	}
 
-	public void alterarElemento(Elemento elemento) throws HibernateException{
+	public void alterarElemento(Elemento elemento) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 		session.update(elemento);
@@ -36,7 +35,7 @@ public class DaoElemento {
 		session.close();
 	}
 
-	public void excluirElemento(Elemento elemento) throws HibernateException{
+	public void excluirElemento(Elemento elemento) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 		session.delete(elemento);
@@ -45,7 +44,7 @@ public class DaoElemento {
 		session.close();
 	}
 
-	public Elemento pesquisarElementoPorNome(String nome) throws HibernateException{
+	public Elemento pesquisarElementoPorNome(String nome) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Elemento.class).add(Restrictions.eq("nomeElemento", nome));
 		Elemento e = (Elemento) cr.uniqueResult();
@@ -54,7 +53,7 @@ public class DaoElemento {
 		return e;
 	}
 
-	public List<Elemento> pesquisarTodosElemento() throws HibernateException{
+	public List<Elemento> pesquisarTodosElemento() throws Exception{
 		List<Elemento> lista = null;
 		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Elemento.class);

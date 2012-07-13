@@ -2,10 +2,10 @@ package persistencia;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import modelo.Prescricao;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -16,7 +16,7 @@ public class DaoPrescricao {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public void cadastrarPrescricao(Prescricao prescricao) throws HibernateException{
+	public void cadastrarPrescricao(Prescricao prescricao) throws Exception{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.persist(prescricao);
@@ -25,7 +25,7 @@ public class DaoPrescricao {
 			session.close();
 	}
 
-	public void alterarPrescricao(Prescricao prescricao) throws HibernateException{
+	public void alterarPrescricao(Prescricao prescricao) throws Exception{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.update(prescricao);
@@ -34,7 +34,7 @@ public class DaoPrescricao {
 			session.close();
 	}
 
-	public void excluirPrescricao(Prescricao prescricao) throws HibernateException{
+	public void excluirPrescricao(Prescricao prescricao) throws Exception{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.delete(prescricao);
@@ -43,7 +43,7 @@ public class DaoPrescricao {
 			session.close();
 	}
 
-	public List<Prescricao> pesquisarTodosPrescricao() throws HibernateException{
+	public List<Prescricao> pesquisarTodosPrescricao() throws Exception{
 		List<Prescricao> lista = null;
 		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Prescricao.class);

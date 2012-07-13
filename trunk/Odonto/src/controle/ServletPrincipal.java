@@ -27,23 +27,26 @@ public class ServletPrincipal extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession objetoSessao = request.getSession();
 		String acao = (String)request.getParameter("acao");		
-		
-		if (acao.equals("logout")){
-			objetoSessao.removeAttribute("usuarioLogado");
-			objetoSessao.invalidate();
-			mensagem = "A sessão foi finalizada!";
-			request.setAttribute("msg", mensagem);
-			RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
-			disp.forward(request, response);	
-		}else if (acao.equals("agendar_consulta")){
-			DaoDentista daoDentista = new DaoDentista();
-			List<Dentista> listaDentista = daoDentista.pesquisarTodosDentista();
-			objetoSessao.setAttribute("listaDentista", listaDentista);
+		try{
+			if (acao.equals("logout")){
+				objetoSessao.removeAttribute("usuarioLogado");
+				objetoSessao.invalidate();
+				mensagem = "A sessão foi finalizada!";
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
+				disp.forward(request, response);	
+			}else if (acao.equals("agendar_consulta")){
+				DaoDentista daoDentista = new DaoDentista();
+				List<Dentista> listaDentista = daoDentista.pesquisarTodosDentista();
+				objetoSessao.setAttribute("listaDentista", listaDentista);
+				
+				mensagem = "Os campos com (*) são obrigatórios.";
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("agendar_consulta.jsp");
+				disp.forward(request, response);
+			}
+		}catch (Exception e) {
 			
-			mensagem = "Os campos com (*) são obrigatórios.";
-			request.setAttribute("msg", mensagem);
-			RequestDispatcher disp = request.getRequestDispatcher("agendar_consulta.jsp");
-			disp.forward(request, response);
 		}
 		
 	}
