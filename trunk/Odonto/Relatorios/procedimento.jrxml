@@ -26,8 +26,8 @@ FROM
 		<groupHeader>
 			<band height="27">
 				<textField>
-					<reportElement mode="Opaque" x="1" y="0" width="533" height="27" forecolor="#000000" backcolor="#CCCCFF"/>
-					<textElement>
+					<reportElement mode="Opaque" x="1" y="0" width="554" height="27" forecolor="#000000" backcolor="#CCCCFF"/>
+					<textElement verticalAlignment="Middle">
 						<font size="18" isBold="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{tb_convenio_nome_convenio}]]></textFieldExpression>
@@ -61,7 +61,7 @@ FROM
 				<text><![CDATA[Procedimentos]]></text>
 			</staticText>
 			<image>
-				<reportElement x="1" y="9" width="200" height="39"/>
+				<reportElement x="3" y="10" width="200" height="39"/>
 				<imageExpression class="java.lang.String"><![CDATA["C:\\TCC\\trunk\\Odonto\\WebContent\\arquivos\\odontoEkip.jpg"]]></imageExpression>
 			</image>
 		</band>
@@ -72,22 +72,22 @@ FROM
 	<columnHeader>
 		<band height="18">
 			<staticText>
-				<reportElement mode="Opaque" x="137" y="0" width="144" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
-				<textElement>
+				<reportElement mode="Opaque" x="139" y="0" width="144" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Descrição]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="417" y="0" width="117" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
-				<textElement>
+				<reportElement mode="Opaque" x="452" y="0" width="99" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Valor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="11" y="0" width="126" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
-				<textElement>
+				<reportElement mode="Opaque" x="1" y="0" width="126" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Código]]></text>
@@ -97,22 +97,24 @@ FROM
 	<detail>
 		<band height="20">
 			<textField>
-				<reportElement x="137" y="0" width="228" height="20"/>
+				<reportElement x="139" y="0" width="301" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{tb_procedimento_descricao_procedimento}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00">
-				<reportElement x="417" y="0" width="117" height="20"/>
+				<reportElement x="452" y="0" width="99" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{tb_procedimento_valor_procedimento}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="11" y="0" width="100" height="20"/>
-				<textElement/>
+				<reportElement x="1" y="0" width="126" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{tb_procedimento_codigo_procedimento}]]></textFieldExpression>
 			</textField>
 		</band>
