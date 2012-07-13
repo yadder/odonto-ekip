@@ -44,9 +44,9 @@ public class DaoProcedimento {
 			session.close();
 	}
 
-	public Procedimento pesquisarProcedimentoPorDescricao(String nome) throws Exception{
+	public Procedimento pesquisarProcedimentoPorDescricao(Procedimento procedimento) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
-		Criteria cr = session.createCriteria(Procedimento.class).add(Restrictions.eq("descricaoProcedimento",nome));
+		Criteria cr = session.createCriteria(Procedimento.class).add(Restrictions.eq("descricaoProcedimento",procedimento.getDescricaoProcedimento()));
 		Procedimento p = (Procedimento)cr.uniqueResult();
 		session.flush();
 		session.close();

@@ -44,7 +44,7 @@ public class ConfiguraAtributo {
 		return s;
 	}
 	
-	public boolean somenteLetras(String palavra) throws Exception{
+	public boolean validaLetras(String palavra){
 		Pattern p = Pattern.compile("[A-Z a-z]+");
 		Matcher m = p.matcher(palavra);
 		if(m.matches()){
@@ -54,7 +54,7 @@ public class ConfiguraAtributo {
 		}
 	}
 	
-	public boolean validaEmail(String email) throws Exception{
+	public boolean validaEmail(String email) {
 		Pattern p = Pattern.compile(".+@.+\\.[a-z]+");
 		Matcher m = p.matcher(email);
 		if (m.matches()){
@@ -67,7 +67,7 @@ public class ConfiguraAtributo {
 	}
 	
 	
-	public boolean validaTelefone(String telefone) throws Exception{
+	public boolean validaTelefone(String telefone){
 		Pattern p = Pattern.compile("[0-9]{4}-[0-9]{4}");
 		Matcher m = p.matcher(telefone);
 		if (m.matches()){
@@ -77,7 +77,7 @@ public class ConfiguraAtributo {
 		}
 	}
 	
-	public boolean somenteNumeros(String numeros) throws Exception{
+	public boolean validaNumeros(String numeros){
 		Pattern p = Pattern.compile("[0-9]");
 		Matcher m = p.matcher(numeros);
 		if (m.matches()){
@@ -85,6 +85,12 @@ public class ConfiguraAtributo {
 		}else{
 			return false;
 		}
+	}
+	
+	public double validaValores(String valor){
+		double val = 0;
+		val = Double.parseDouble(valor);
+		return val;
 	}
 	
 }

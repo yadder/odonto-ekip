@@ -44,9 +44,9 @@ public class DaoElemento {
 		session.close();
 	}
 
-	public Elemento pesquisarElementoPorNome(String nome) throws Exception{
+	public Elemento pesquisarElementoPorNome(Elemento elemento) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
-		Criteria cr = session.createCriteria(Elemento.class).add(Restrictions.eq("nomeElemento", nome));
+		Criteria cr = session.createCriteria(Elemento.class).add(Restrictions.eq("nomeElemento", elemento.getNomeElemento()));
 		Elemento e = (Elemento) cr.uniqueResult();
 		session.flush();
 		session.close();

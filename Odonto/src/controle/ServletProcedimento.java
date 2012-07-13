@@ -9,10 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import modelo.Convenio;
 import modelo.Procedimento;
-import persistencia.DaoConvenio;
 import persistencia.DaoProcedimento;
+import util.ConfiguraAtributo;
 
 public class ServletProcedimento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -29,92 +28,85 @@ public class ServletProcedimento extends HttpServlet {
 
 		String btn = (String)request.getParameter("btn");
 		HttpSession objetoSessao = request.getSession();
+		Procedimento procedimento = new Procedimento();
 
 		if (btn.equals("Voltar")){
 			objetoSessao.removeAttribute("procedimento");
 			RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
 			disp.forward(request, response);
 		}else if (btn.equals("Cadastrar")){
-			String descricaoProcedimento = (String) request.getParameter("descricaoProcedimento");
-			String valorProcedimento = (String) request.getParameter("valorProcedimento");
-			String stringConvenio = (String) request.getParameter("convenio");
-			if (validaCampos(descricaoProcedimento, valorProcedimento)){
-				DaoConvenio daoConvenio = new DaoConvenio();
-				Convenio convenio = new Convenio();
-				convenio = daoConvenio.pesquisarConvenioPorNome(stringConvenio);
-				Procedimento procedimento = new Procedimento(descricaoProcedimento, Double.parseDouble(valorProcedimento), convenio);
-				DaoProcedimento daoProcedimento = new DaoProcedimento();
-				daoProcedimento.cadastrarProcedimento(procedimento);
-				mensagem = "Procedimento cadastrado com sucesso!";
-				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("procedimento.jsp");
-				disp.forward(request, response);
+			procedimento = preencheObjeto(request, response);
+			if (validaCampos(procedimento)){				
+				try{
+					DaoProcedimento dao = new DaoProcedimento();
+					dao.cadastrarProcedimento(procedimento);
+					mensagem = "Procedimento cadastrado com sucesso!";
+					request.setAttribute("msg", mensagem);
+					RequestDispatcher disp = request.getRequestDispatcher("procedimento.jsp");
+					disp.forward(request, response);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
 			}else{
 				request.setAttribute("msg", mensagem);
 				RequestDispatcher disp = request.getRequestDispatcher("procedimento.jsp");
 				disp.forward(request, response);
 			}
 		}else if (btn.equals("Pesquisar")){
-			
-			String descricaoProcedimento = (String) request.getParameter("descricaoProcedimento");
-			Procedimento procedimento = new Procedimento(descricaoProcedimento);
-			DaoProcedimento daoProcedimento = new DaoProcedimento();
-			procedimento = daoProcedimento.pesquisarProcedimentoPorDescricao(descricaoProcedimento);
-			if (procedimento != null){
-				mensagem = "Procedimento encontrado.";
-				request.setAttribute("msg", mensagem);
-				objetoSessao.setAttribute("procedimento", procedimento);
-				RequestDispatcher disp = request.getRequestDispatcher("procedimento_alterar.jsp");
-				disp.forward(request, response);
-			}else{
-				mensagem = "Procedimento não encontrado.";
-				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("procedimento.jsp");
-				disp.forward(request, response);
+			procedimento = preencheObjeto(request, response);
+			if (validaCampos(procedimento)){
+				try{
+					DaoProcedimento dao = new DaoProcedimento();
+					procedimento = dao.pesquisarProcedimentoPorDescricao(procedimento);
+					if (procedimento != null){
+						mensagem = "Procedimento encontrado.";
+						request.setAttribute("msg", mensagem);
+						objetoSessao.setAttribute("procedimento", procedimento);
+						RequestDispatcher disp = request.getRequestDispatcher("procedimento_alterar.jsp");
+						disp.forward(request, response);
+					}else{
+						mensagem = "Procedimento não encontrado.";
+						request.setAttribute("msg", mensagem);
+						RequestDispatcher disp = request.getRequestDispatcher("procedimento.jsp");
+						disp.forward(request, response);
+					}
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}else if(btn.equals("Excluir")){
-
-			Procedimento procedimento = new Procedimento();
-			procedimento = (Procedimento)objetoSessao.getAttribute("procedimento");
-			DaoProcedimento daoProcedimento = new DaoProcedimento();
-			daoProcedimento.excluirProcedimento(procedimento);
-			if (result){
+			try{
+				procedimento = (Procedimento)objetoSessao.getAttribute("procedimento");
+				DaoProcedimento dao = new DaoProcedimento();
+				dao.excluirProcedimento(procedimento);
 				mensagem = "Procedimento excluído com sucesso.";
 				request.setAttribute("msg", mensagem);
 				objetoSessao.removeAttribute("procedimento");
 				RequestDispatcher disp = request.getRequestDispatcher("procedimento.jsp");
 				disp.forward(request, response);
-			}else{
+			}catch (Exception e) {
 				mensagem = "Ocorreu algum erro ao excluir o procedimento.";
 				request.setAttribute("msg", mensagem);
 				RequestDispatcher disp = request.getRequestDispatcher("procedimento.jsp");
 				disp.forward(request, response);
+				e.printStackTrace();
 			}
 		}else if(btn.equals("Alterar")){
-			String descricaoProcedimento = (String) request.getParameter("descricaoProcedimento");
-			String valorProcedimento = (String) request.getParameter("valorProcedimento");
-			String stringConvenio = (String) request.getParameter("convenio");
-			if (validaCampos(descricaoProcedimento, valorProcedimento)){	
-				DaoConvenio daoConvenio = new DaoConvenio();
-				Convenio convenio = new Convenio();
-				convenio = daoConvenio.pesquisarConvenioPorNome(stringConvenio);
-				Procedimento procedimento = new Procedimento();
-				procedimento = (Procedimento)objetoSessao.getAttribute("procedimento");
-				procedimento.setDescricaoProcedimento(descricaoProcedimento);
-				procedimento.setValorProcedimento(Double.parseDouble(valorProcedimento));
-				procedimento.setConvenio(convenio);
-				DaoProcedimento daoProcedimento = new DaoProcedimento();
-				boolean result = daoProcedimento.alterarProcedimento(procedimento);
-				if (result){
+			procedimento = preencheObjeto(request, response);
+			procedimento.setIdProcedimento(((Procedimento)objetoSessao.getAttribute("procedimento")).getIdProcedimento());
+			if (validaCampos(procedimento)){	
+				try{					
+					DaoProcedimento dao = new DaoProcedimento();
+					dao.alterarProcedimento(procedimento);
 					mensagem = "Procedimento alterado com sucesso.";
 					request.setAttribute("msg", mensagem);
 					objetoSessao.removeAttribute("procedimento");
 					RequestDispatcher disp = request.getRequestDispatcher("procedimento.jsp");
 					disp.forward(request, response);
-				}else{
+				}catch (Exception e) {
 					mensagem = "Ocorreu algum erro ao alterar o procedimento.";
 					request.setAttribute("msg", mensagem);
-					RequestDispatcher disp = request.getRequestDispatcher("procedimento_alterar.jsp");
+					RequestDispatcher disp = request.getRequestDispatcher("procedimento.jsp");
 					disp.forward(request, response);
 				}
 			}else{
@@ -123,10 +115,34 @@ public class ServletProcedimento extends HttpServlet {
 				disp.forward(request, response);
 			}
 		}	
-			
-	
 	}
 	
+	public Procedimento preencheObjeto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		Procedimento procedimento = new Procedimento();
+		ConfiguraAtributo ca = new ConfiguraAtributo();
+		procedimento.setDescricaoProcedimento((String)request.getParameter("nomeProcedimento"));
+		procedimento.setCodigoProcedimento((String)request.getParameter("codigoProcedimento"));
+		procedimento.setValorProcedimento(ca.validaValores((String)request.getParameter("valorProcedimento")));
+		return procedimento;		
+	}
+		
+	public boolean validaCampos(Procedimento procedimento){
+		boolean result = false;
+		procedimento.setDescricaoProcedimento(procedimento.getDescricaoProcedimento().trim()); // retira espaços
+		procedimento.setCodigoProcedimento(procedimento.getCodigoProcedimento().trim());
+		if ((procedimento.getCodigoProcedimento() == null) || (procedimento.getCodigoProcedimento().equals(""))){
+			mensagem = "Preencha a descricao do procedimento corretamente.";
+		}else if ((procedimento.getDescricaoProcedimento() == null) || (procedimento.getDescricaoProcedimento().equals(""))){
+			mensagem = "Preencha a descricao do procedimento corretamente.";
+		}else if (procedimento.getValorProcedimento() == 0){
+			mensagem = "Preencha o valor do procedimento corretamente.";
+		}
+		else{
+			result = true;
+		}
+		return result;
+	}
+		
 	public boolean validaCampos(String descricaoProcedimento, String valorProcedimento){
 		boolean result = false;
 		if ((descricaoProcedimento == null) || (descricaoProcedimento.equals("") || (descricaoProcedimento.length()<3))){
