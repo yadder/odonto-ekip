@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import modelo.Convenio;
+
+import org.hibernate.exception.ConstraintViolationException;
+import org.hibernate.exception.GenericJDBCException;
+
 import persistencia.DaoConvenio;
 
 public class ServletConvenio extends HttpServlet {
@@ -72,6 +76,10 @@ public class ServletConvenio extends HttpServlet {
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
+			}else{
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("convenio.jsp");
+				disp.forward(request, response);
 			}
 		}else if(btn.equals("Excluir")){
 			try{
@@ -83,10 +91,22 @@ public class ServletConvenio extends HttpServlet {
 				objetoSessao.removeAttribute("convenio");
 				RequestDispatcher disp = request.getRequestDispatcher("convenio.jsp");
 				disp.forward(request, response);
+			}catch(ConstraintViolationException h){
+				mensagem = "O convênio não pode ser excluído pois está associado a um paciente ou um procedimento.";
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("convenio_alterar.jsp");
+				disp.forward(request, response);
+				h.printStackTrace();
+			}catch(GenericJDBCException g){
+				mensagem = "O convênio não pode ser excluído pois está associado a um paciente ou um procedimento.";
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("convenio_alterar.jsp");
+				disp.forward(request, response);
+				g.printStackTrace();
 			}catch (Exception e) {
 				mensagem = "Ocorreu algum erro ao excluir o convênio.";
 				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("convenio.jsp");
+				RequestDispatcher disp = request.getRequestDispatcher("convenio_alterar.jsp");
 				disp.forward(request, response);
 				e.printStackTrace();
 			}

@@ -16,7 +16,6 @@ public class ServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     public ServletLogin() {
-        super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,10 +27,12 @@ public class ServletLogin extends HttpServlet {
 		String senha = (String)request.getParameter("senha");
 		String mensagem = null;
 		HttpSession objetoSessao;
+		System.out.println("cpf: "+cpf+" senha: "+senha);
 		try{
 			Usuario usuarioLogado = new Usuario(cpf, senha);
 			DaoUsuario daoUsuario = new DaoUsuario();
 			usuarioLogado = daoUsuario.pesquisarUsuarioPorCpf(usuarioLogado);
+			System.out.println(usuarioLogado);
 			if ((usuarioLogado != null) && (usuarioLogado.getSenhaUsuario().equals(senha))){
 		        // resgata a sessao
 				objetoSessao = request.getSession();

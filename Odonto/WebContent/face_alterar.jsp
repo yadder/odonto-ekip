@@ -9,6 +9,8 @@
 </head>
 <body>
 <c:import url="cabecalho.jsp" />
+<br>
+<fieldset>
 <div id="msg">
 	<h3 class="information">${msg}</h3>
 </div>
@@ -27,6 +29,7 @@
 		</tr>
 	</table>
 </form>
+</fieldset>
 <c:import url="rodape.jsp" />	
 </body>
 </html>

@@ -82,6 +82,10 @@ public class ServletPaciente extends HttpServlet {
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
+			}else{
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("paciente.jsp");
+				disp.forward(request, response);
 			}
 		}else if(btn.equals("Excluir")){
 			try{

@@ -38,10 +38,12 @@ public class ServletRecepcionista extends HttpServlet {
 			
 		}else if (btn.equals("Cadastrar")){
 			usuario = preencheObjeto(request, response);
+			objetoSessao.setAttribute("usuario", usuario);
 			if (validaCampos(usuario)){
 				try{
 					DaoUsuario daoUsuario = new DaoUsuario();
 					daoUsuario.cadastrarUsuario(usuario);
+					objetoSessao.removeAttribute("usuario");
 					mensagem = "Recepcionista cadastrado(a) com sucesso!";
 					request.setAttribute("msg", mensagem);
 					RequestDispatcher disp = request.getRequestDispatcher("recepcionista.jsp");
@@ -58,41 +60,46 @@ public class ServletRecepcionista extends HttpServlet {
 			}
 		}else if (btn.equals("Pesquisar")){
 			usuario = preencheObjeto(request, response);
-			if (validaCampos(usuario)){
+			if (usuario.getNomeUsuario()!=null){
 				try{
 					DaoUsuario daoUsuario = new DaoUsuario();
 					usuario = daoUsuario.pesquisarUsuarioPorNome(usuario);
 					if (usuario != null){
-						mensagem = "Usuario encontrado(a).";
+						mensagem = "Recepcionista encontrado(a).";
 						request.setAttribute("msg", mensagem);
 						objetoSessao.setAttribute("usuario", usuario);
 						objetoSessao.setAttribute("data", ca.dataSqlParaDataString(usuario.getDataNascimentoUsuario()));
-						RequestDispatcher disp = request.getRequestDispatcher("usuario_alterar.jsp");
+						RequestDispatcher disp = request.getRequestDispatcher("recepcionista_alterar.jsp");
 						disp.forward(request, response);
 					}else{
-						mensagem = "Usuario não encontrado(a).";
+						mensagem = "Recepcionista não encontrado(a).";
 						request.setAttribute("msg", mensagem);
-						RequestDispatcher disp = request.getRequestDispatcher("usuario.jsp");
+						RequestDispatcher disp = request.getRequestDispatcher("recepcionista.jsp");
 						disp.forward(request, response);
 					}
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
+			}else{
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("recepcionista.jsp");
+				disp.forward(request, response);
 			}
 		}else if(btn.equals("Excluir")){
 			try{
 				usuario = (Usuario)objetoSessao.getAttribute("usuario");
 				DaoUsuario daoUsuario = new DaoUsuario();
 				daoUsuario.excluirUsuario(usuario);
-				mensagem = "Usuario(a) excluído(a) com sucesso.";
+				mensagem = "Recepcionista excluído(a) com sucesso.";
 				request.setAttribute("msg", mensagem);
 				objetoSessao.removeAttribute("usuario");
-				RequestDispatcher disp = request.getRequestDispatcher("usuario.jsp");
+				objetoSessao.removeAttribute("data");
+				RequestDispatcher disp = request.getRequestDispatcher("recepcionista.jsp");
 				disp.forward(request, response);
 			}catch (Exception e) {
-				mensagem = "Ocorreu algum erro ao excluir o(a) usuario(a).";
+				mensagem = "Ocorreu algum erro ao excluir o(a) recepcionista(a).";
 				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("usuario.jsp");
+				RequestDispatcher disp = request.getRequestDispatcher("recepcionista.jsp");
 				disp.forward(request, response);
 				e.printStackTrace();
 			}
@@ -103,21 +110,21 @@ public class ServletRecepcionista extends HttpServlet {
 				try{					
 					DaoUsuario daoUsuario = new DaoUsuario();
 					daoUsuario.alterarUsuario(usuario);
-					mensagem = "Usuario alterado(a) com sucesso.";
+					mensagem = "Recepcionista alterado(a) com sucesso.";
 					request.setAttribute("msg", mensagem);
 					objetoSessao.removeAttribute("usuario");
 					objetoSessao.removeAttribute("data");
-					RequestDispatcher disp = request.getRequestDispatcher("usuario.jsp");
+					RequestDispatcher disp = request.getRequestDispatcher("recepcionista.jsp");
 					disp.forward(request, response);
 				}catch (Exception e) {
-					mensagem = "Ocorreu algum erro ao alterar o(a) usuario.";
+					mensagem = "Ocorreu algum erro ao alterar o(a) recepcionista.";
 					request.setAttribute("msg", mensagem);
-					RequestDispatcher disp = request.getRequestDispatcher("usuario.jsp");
+					RequestDispatcher disp = request.getRequestDispatcher("recepcionista.jsp");
 					disp.forward(request, response);
 				}
 			}else{
 				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("usuario_alterar.jsp");
+				RequestDispatcher disp = request.getRequestDispatcher("recepcionista_alterar.jsp");
 				disp.forward(request, response);
 			}			
 		}
@@ -131,7 +138,9 @@ public class ServletRecepcionista extends HttpServlet {
 		usuario.setPerfilUsuario("RECEPCIONISTA");
 		usuario.setRgUsuario((String) request.getParameter("rgUsuario"));
 		usuario.setCpfUsuario((String) request.getParameter("cpfUsuario"));
-		usuario.setDataNascimentoUsuario(ca.dataStringParaDataSql((String) request.getParameter("dtNascUsuario")));
+		if (!((String) request.getParameter("dtNascUsuario")).equals("")){
+			usuario.setDataNascimentoUsuario(ca.dataStringParaDataSql((String) request.getParameter("dtNascUsuario")));
+		}
 		usuario.setSexoUsuario((String) request.getParameter("sexoUsuario"));
 		return usuario;		
 	}
@@ -145,15 +154,15 @@ public class ServletRecepcionista extends HttpServlet {
 		
 		boolean result = false;
 		if ((usuario.getNomeUsuario() == null) || (usuario.getNomeUsuario().length() < 5)) {
-			mensagem = "Preencha o nome do(a) usuario corretamente. O nome deve ter pelo menos 5 caracteres";
+			mensagem = "Preencha o nome do(a) recepcionista corretamente. O nome deve ter pelo menos 5 caracteres";
 		}else if ((usuario.getRgUsuario() == null) || (usuario.getRgUsuario().length() < 5)) {
-			mensagem = "Preencha o RG da usuario corretamente.";
+			mensagem = "Preencha o RG da recepcionista corretamente.";
 		}else if ((usuario.getCpfUsuario() == null) || (usuario.getCpfUsuario().length() < 11)) {
-			mensagem = "Preencha o CPF da usuario corretamente.";
+			mensagem = "Preencha o CPF da recepcionista corretamente.";
 		}else if ((usuario.getDataNascimentoUsuario() == null) || (usuario.getDataNascimentoUsuario().equals(""))) {
-			mensagem = "Preencha a data de nascimento da usuario corretamente.";
+			mensagem = "Preencha a data de nascimento da recepcionista corretamente.";
 		}else if ((usuario.getSexoUsuario() == null) || (usuario.getSexoUsuario().equals(""))) {
-			mensagem = "Preencha o sexo da usuario corretamente.";
+			mensagem = "Preencha o sexo da recepcionista corretamente.";
 		}else {
 			result = true;
 		}

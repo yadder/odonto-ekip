@@ -37,12 +37,14 @@ public class ServletDentista extends HttpServlet {
 			disp.forward(request, response);			
 		}else if (btn.equals("Cadastrar")){
 				dentista = preencheObjeto(request, response);
+				objetoSessao.setAttribute("dentista",dentista);
 				if (validaCampos(dentista)){
 					try{
 						DaoDentista dao = new DaoDentista();
 						dao.cadastrarDentista(dentista);
 						mensagem = "Dentista cadastrado(a) com sucesso!";
 						request.setAttribute("msg", mensagem);
+						objetoSessao.removeAttribute("dentista");
 						RequestDispatcher disp = request.getRequestDispatcher("dentista.jsp");
 						disp.forward(request, response);
 					}catch (Exception e) {
@@ -57,7 +59,7 @@ public class ServletDentista extends HttpServlet {
 				}
 		}else if (btn.equals("Pesquisar")){
 			dentista = preencheObjeto(request, response);
-			if (validaCampos(dentista)){
+			if (!dentista.getNomeUsuario().equals("")){
 				try{
 					DaoDentista daoDentista = new DaoDentista();
 					dentista = daoDentista.pesquisarDentistaPorNome(dentista);
@@ -77,6 +79,10 @@ public class ServletDentista extends HttpServlet {
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
+			}else{
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("dentista.jsp");
+				disp.forward(request, response);
 			}
 		}else if(btn.equals("Excluir")){
 			try{
@@ -86,6 +92,7 @@ public class ServletDentista extends HttpServlet {
 				mensagem = "Dentista excluído(a) com sucesso.";
 				request.setAttribute("msg", mensagem);
 				objetoSessao.removeAttribute("dentista");
+				objetoSessao.removeAttribute("data");
 				RequestDispatcher disp = request.getRequestDispatcher("dentista.jsp");
 				disp.forward(request, response);
 			}catch (Exception e) {

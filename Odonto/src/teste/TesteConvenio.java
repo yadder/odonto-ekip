@@ -2,20 +2,23 @@ package teste;
 
 import modelo.Convenio;
 import persistencia.DaoConvenio;
-import persistencia.DaoConvenio;
 
 public class TesteConvenio {
 
 	public static void main(String[] args) {
-		boolean result = false;
-		Convenio convenio = null;
-		DaoConvenio daoConvenio = new DaoConvenio();
 		
-		System.out.println("1------------------------------Testando a classe convenio (Cadastro)");
-		convenio = new Convenio("Amil");
-		result = daoConvenio.cadastrarConvenio(convenio);
-		System.out.println("Convenio "+convenio.getNomeConvenio()+" cadastrado!");
-	/*	
+		try{
+			Convenio convenio = null;
+			DaoConvenio daoConvenio = new DaoConvenio();
+			System.out.println("1------------------------------Testando a classe convenio (Cadastro)");
+			convenio = new Convenio("Amil");
+			daoConvenio.cadastrarConvenio(convenio);
+			System.out.println("Convenio "+convenio.getNomeConvenio()+" cadastrado!");
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		/*	
 		System.out.println("1------------------------------Testando a classe convenio (Pesquisa)");
 		convenio = new Convenio("Amil");
 		convenio = daoConvenio.pesquisarConvenioPorNome("Amil");
