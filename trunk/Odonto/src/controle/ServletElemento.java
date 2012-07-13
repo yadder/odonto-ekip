@@ -23,7 +23,6 @@ public class ServletElemento extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String btn = (String)request.getParameter("btn");
 		HttpSession objetoSessao = request.getSession();
 		Elemento elemento = new Elemento();
@@ -39,7 +38,7 @@ public class ServletElemento extends HttpServlet {
 				try{
 					DaoElemento dao = new DaoElemento();
 					dao.cadastrarElemento(elemento);
-					mensagem = "Fornecedor cadastrado com sucesso!";
+					mensagem = "Elemento cadastrado com sucesso!";
 					request.setAttribute("msg", mensagem);
 					RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
 					disp.forward(request, response);
@@ -58,13 +57,13 @@ public class ServletElemento extends HttpServlet {
 					DaoElemento dao = new DaoElemento();
 					elemento = dao.pesquisarElementoPorNome(elemento);
 					if (elemento != null){
-						mensagem = "Fornecedor encontrado.";
+						mensagem = "Elemento encontrado.";
 						request.setAttribute("msg", mensagem);
 						objetoSessao.setAttribute("elemento", elemento);
 						RequestDispatcher disp = request.getRequestDispatcher("elemento_alterar.jsp");
 						disp.forward(request, response);
 					}else{
-						mensagem = "Fornecedor não encontrado.";
+						mensagem = "Elemento não encontrado.";
 						request.setAttribute("msg", mensagem);
 						RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
 						disp.forward(request, response);
@@ -72,13 +71,17 @@ public class ServletElemento extends HttpServlet {
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
+			}else{
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
+				disp.forward(request, response);
 			}
 		}else if(btn.equals("Excluir")){
 			try{
 				elemento = (Elemento)objetoSessao.getAttribute("elemento");
 				DaoElemento dao = new DaoElemento();
 				dao.excluirElemento(elemento);
-				mensagem = "Fornecedor excluído com sucesso.";
+				mensagem = "Elemento excluído com sucesso.";
 				request.setAttribute("msg", mensagem);
 				objetoSessao.removeAttribute("elemento");
 				RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");
@@ -97,7 +100,7 @@ public class ServletElemento extends HttpServlet {
 				try{					
 					DaoElemento dao = new DaoElemento();
 					dao.alterarElemento(elemento);
-					mensagem = "Fornecedor alterado com sucesso.";
+					mensagem = "Elemento alterado com sucesso.";
 					request.setAttribute("msg", mensagem);
 					objetoSessao.removeAttribute("elemento");
 					RequestDispatcher disp = request.getRequestDispatcher("elemento.jsp");

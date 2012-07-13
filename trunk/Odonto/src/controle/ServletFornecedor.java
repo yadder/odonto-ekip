@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import modelo.Elemento;
 import modelo.Fornecedor;
-import persistencia.DaoElemento;
 import persistencia.DaoFornecedor;
 
 public class ServletFornecedor extends HttpServlet {
@@ -75,6 +73,10 @@ public class ServletFornecedor extends HttpServlet {
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
+			}else{
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("fornecedor.jsp");
+				disp.forward(request, response);
 			}
 		}else if(btn.equals("Excluir")){
 			try{

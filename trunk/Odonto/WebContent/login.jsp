@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -12,6 +11,10 @@
 	<h3 class="information">${msg}</h3>
 </div>
 <div class="cabecalho">
+<center>
+<br><br><br>
+<img src="arquivos/logo_horizontal.png" width="300">
+<br><br><br>
 <form name="formLogin" method="post" action="ServletLogin">
 	<table>
 		<tr>
@@ -23,10 +26,13 @@
 			<td><input type="password" name="senha" size="20" /></td>
 		</tr>
 		<tr>
-			<td colspan=2 align="right"><input type="submit" value="Entrar" /></td>
+			<td colspan=2 align="right">
+				<input type="submit" name="btn" value="Entrar" />
+			</td>
 		</tr>
 	</table>
 </form>
+
 </div>
 </body>
 </html>

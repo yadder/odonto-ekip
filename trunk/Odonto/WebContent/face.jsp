@@ -9,6 +9,8 @@
 </head>
 <body>
 <c:import url="cabecalho.jsp" />
+<br>
+<fieldset>
 <div id="msg">
 	<h3 class="information">${msg}</h3>
 </div>
@@ -16,7 +18,9 @@
 	<table>
 		<tr>
 			<td align="right">Nome da face:</td>
-			<td><input type="text" name="nomeFace" value="${face.nomeFace}" size="20" /><input type="submit" name="btn" value="Pesquisar" /></td>
+			<td><input type="text" name="nomeFace" value="${face.nomeFace}" size="20" />
+			<a href="ServletFace?btn=Pesquisar"><img src="arquivos/pesquisar.png" width="25"></a>
+			<input type="submit" name="btn" value="Pesquisar" /></td>
 		</tr>
 		<tr>
 			<td colspan=2 align="center">
@@ -27,6 +31,7 @@
 		</tr>
 	</table>
 </form>	
+</fieldset>
 <c:import url="rodape.jsp" />
 </body>
 </html>

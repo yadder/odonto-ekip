@@ -54,7 +54,7 @@ public class ServletProcedimento extends HttpServlet {
 			}
 		}else if (btn.equals("Pesquisar")){
 			procedimento = preencheObjeto(request, response);
-			if (validaCampos(procedimento)){
+			if (!procedimento.getDescricaoProcedimento().equals("")){
 				try{
 					DaoProcedimento dao = new DaoProcedimento();
 					procedimento = dao.pesquisarProcedimentoPorDescricao(procedimento);
@@ -73,6 +73,10 @@ public class ServletProcedimento extends HttpServlet {
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
+			}else{
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("procedimento.jsp");
+				disp.forward(request, response);
 			}
 		}else if(btn.equals("Excluir")){
 			try{
@@ -120,9 +124,11 @@ public class ServletProcedimento extends HttpServlet {
 	public Procedimento preencheObjeto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		Procedimento procedimento = new Procedimento();
 		ConfiguraAtributo ca = new ConfiguraAtributo();
-		procedimento.setDescricaoProcedimento((String)request.getParameter("nomeProcedimento"));
+		procedimento.setDescricaoProcedimento((String)request.getParameter("descricaoProcedimento"));
 		procedimento.setCodigoProcedimento((String)request.getParameter("codigoProcedimento"));
-		procedimento.setValorProcedimento(ca.validaValores((String)request.getParameter("valorProcedimento")));
+		if (!((String) request.getParameter("valorProcedimento")).equals("")){
+			procedimento.setValorProcedimento(ca.validaValores((String)request.getParameter("valorProcedimento")));
+		}
 		return procedimento;		
 	}
 		
@@ -131,9 +137,9 @@ public class ServletProcedimento extends HttpServlet {
 		procedimento.setDescricaoProcedimento(procedimento.getDescricaoProcedimento().trim()); // retira espaços
 		procedimento.setCodigoProcedimento(procedimento.getCodigoProcedimento().trim());
 		if ((procedimento.getCodigoProcedimento() == null) || (procedimento.getCodigoProcedimento().equals(""))){
-			mensagem = "Preencha a descricao do procedimento corretamente.";
+			mensagem = "Preencha o código do procedimento corretamente.";
 		}else if ((procedimento.getDescricaoProcedimento() == null) || (procedimento.getDescricaoProcedimento().equals(""))){
-			mensagem = "Preencha a descricao do procedimento corretamente.";
+			mensagem = "Preencha a descriçao do procedimento corretamente.";
 		}else if (procedimento.getValorProcedimento() == 0){
 			mensagem = "Preencha o valor do procedimento corretamente.";
 		}
