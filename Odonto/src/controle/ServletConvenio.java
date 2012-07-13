@@ -94,10 +94,9 @@ public class ServletConvenio extends HttpServlet {
 			}
 		}else if(btn.equals("Alterar")){
 			convenio = preencheObjeto(request, response);
+			convenio.setIdConvenio(((Convenio)objetoSessao.getAttribute("convenio")).getIdConvenio());
 			if (validaCampos(convenio)){	
-				try{
-					convenio = (Convenio)objetoSessao.getAttribute("convenio");
-					convenio.setNomeConvenio((String)request.getParameter("nomeConvenio"));								
+				try{					
 					DaoConvenio dao = new DaoConvenio();
 					dao.alterarConvenio(convenio);
 					mensagem = "Convênio alterado com sucesso.";
@@ -117,7 +116,6 @@ public class ServletConvenio extends HttpServlet {
 				disp.forward(request, response);
 			}
 		}
-	}
 	}
 
 	public Convenio preencheObjeto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

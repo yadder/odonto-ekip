@@ -14,7 +14,7 @@ public class Procedimento implements Serializable {
     @Column(name = "id_procedimento", nullable = false)
     private long idProcedimento;
     @Column(name = "codigo_procedimento", nullable = false)
-    private long codigoProcedimento;
+    private String codigoProcedimento;
     @Column(name = "descricao_procedimento", nullable = false, length = 50)
     private String descricaoProcedimento;
     @Column(name = "valor_procedimento", nullable = false)
@@ -79,11 +79,11 @@ public class Procedimento implements Serializable {
         this.convenio = convenio;
     }
     
-    public long getCodigoProcedimento() {
+    public String getCodigoProcedimento() {
 		return codigoProcedimento;
 	}
 
-	public void setCodigoProcedimento(long codigoProcedimento) {
+	public void setCodigoProcedimento(String codigoProcedimento) {
 		this.codigoProcedimento = codigoProcedimento;
 	}
 

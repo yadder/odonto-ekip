@@ -9,14 +9,18 @@ public class TesteDentista {
 
 	public static void main(String[] args) {
 		boolean result = false;
-		Dentista dentista = null;
-		DaoDentista daoDentista = new DaoDentista();
-		ConfiguraAtributo ca = new ConfiguraAtributo();
-				
-		System.out.println("1------------------------------Testando a classe dentista (Cadastro)");
-		dentista = new Dentista("JOSUE", "12345", "DENTISTA", "12345", "123.451.234-51","M",ca.dataStringParaDataSql("15/03/1970"),"12345");
-		daoDentista.cadastrarDentista(dentista);
-		System.out.println("Dentista "+dentista.getNomeUsuario()+" cadastrado!");
+		
+		try{
+			Dentista dentista = new Dentista();
+			DaoDentista daoDentista = new DaoDentista();
+			ConfiguraAtributo ca = new ConfiguraAtributo();
+			System.out.println("1------------------------------Testando a classe dentista (Cadastro)");
+			dentista = new Dentista("JOSUE", "12345", "DENTISTA", "12345", "123.451.234-51","M",ca.dataStringParaDataSql("15/03/1970"),"12345");
+			daoDentista.cadastrarDentista(dentista);
+			System.out.println("Dentista "+dentista.getNomeUsuario()+" cadastrado!");
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 /*		
 		System.out.println("1------------------------------Testando a classe dentista (Pesquisa)");
 		dentista = new Dentista("Michelle Silva");

@@ -1,6 +1,7 @@
 package controle;
 
 import java.io.IOException;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import modelo.Convenio;
 import modelo.Dentista;
 import persistencia.DaoDentista;
 import util.ConfiguraAtributo;
@@ -27,37 +29,27 @@ public class ServletDentista extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String btn = (String)request.getParameter("btn");
 		HttpSession objetoSessao = request.getSession();
+		Dentista dentista = new Dentista();
+		ConfiguraAtributo ca = new ConfiguraAtributo();
 
 		if (btn.equals("Voltar")){
 			objetoSessao.removeAttribute("dentista");
 			objetoSessao.removeAttribute("data");
 			RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
-			disp.forward(request, response);
-			
+			disp.forward(request, response);			
 		}else if (btn.equals("Cadastrar")){
-				ConfiguraAtributo ca = new ConfiguraAtributo();
-				String nome = (String) request.getParameter("nomeDentista");
-				String rg = (String) request.getParameter("rgDentista");
-				String cpf = (String) request.getParameter("cpfDentista");
-				String dtnasc = (String) request.getParameter("dtNascDentista");
-				String sexo = (String) request.getParameter("sexoDentista");
-				String cro = (String) request.getParameter("croDentista");
-				String perfil = "DENTISTA";
-				String senha = null;
-				Dentista dentista = new Dentista(nome, senha, perfil, rg, cpf, sexo, ca.dataStringParaDataSql(dtnasc), cro);
-				objetoSessao.setAttribute("dentista", dentista);
-				if (validaCampos(nome, rg, cpf, dtnasc, sexo, cro)){
-					// gerar uma string com 6 caracteres para colocar na senha
-					senha = "12345";					
-					dentista = new Dentista(nome, senha, perfil, rg, cpf, sexo, ca.dataStringParaDataSql(dtnasc), cro);
-					DaoDentista dao = new DaoDentista();
-					dao.cadastrarDentista(dentista);
-					mensagem = "Dentista cadastrada com sucesso!";
-					objetoSessao.removeAttribute("dentista");
-					objetoSessao.removeAttribute("data");
-					request.setAttribute("msg", mensagem);
-					RequestDispatcher disp = request.getRequestDispatcher("dentista.jsp");
-					disp.forward(request, response);
+				dentista = preencheObjeto(request, response);
+				if (validaCampos(dentista)){
+					try{
+						DaoDentista dao = new DaoDentista();
+						dao.cadastrarDentista(dentista);
+						mensagem = "Dentista cadastrada com sucesso!";
+						request.setAttribute("msg", mensagem);
+						RequestDispatcher disp = request.getRequestDispatcher("dentista.jsp");
+						disp.forward(request, response);
+					}catch (Exception e) {
+						e.printStackTrace();
+					}
 				}else{
 					request.setAttribute("msg", mensagem);
 					String data = ca.dataSqlParaDataString(dentista.getDataNascimentoUsuario());
@@ -66,10 +58,13 @@ public class ServletDentista extends HttpServlet {
 					disp.forward(request, response);
 				}
 		}else if (btn.equals("Pesquisar")){
-			String nome = (String) request.getParameter("nomeDentista");
-			Dentista dentista = new Dentista(nome);
-			DaoDentista dao = new DaoDentista();
-			dentista = dao.pesquisarDentistaPorNome(nome);
+			dentista = preencheObjeto(request, response);
+			if (validaNome(dentista)){
+				
+			}
+			
+				DaoDentista dao = new DaoDentista();
+				dentista = dao.pesquisarDentistaPorNome(nome);
 			if (dentista != null){
 				ConfiguraAtributo ca = new ConfiguraAtributo();
 				mensagem = "Dentista encontrada.";
@@ -144,21 +139,53 @@ public class ServletDentista extends HttpServlet {
 		}
 	}
 
-	public boolean validaCampos(String nome, String rg, String cpf, String dtnasc, String sexo, String cro) {
+	public Dentista preencheObjeto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Dentista dentista = new Dentista();
+		ConfiguraAtributo ca = new ConfiguraAtributo();
+		dentista.setNomeUsuario((String) request.getParameter("nomeDentista"));
+		dentista.setSenhaUsuario(ca.gerarSenha());
+		dentista.setPerfilUsuario("DENTISTA");
+		dentista.setRgUsuario((String) request.getParameter("rgDentista"));
+		dentista.setCpfUsuario((String) request.getParameter("cpfDentista"));
+		dentista.setDataNascimentoUsuario(ca.dataStringParaDataSql((String) request.getParameter("dtNascDentista")));
+		dentista.setSexoUsuario((String) request.getParameter("sexoDentista"));
+		dentista.setCroDentista((String) request.getParameter("croDentista"));
+		return dentista;		
+	}
+	
+	public boolean validaCampos(Dentista dentista) {
+		// retira espaços
+		dentista.setNomeUsuario(dentista.getNomeUsuario().trim()); 
+		dentista.setRgUsuario(dentista.getRgUsuario().trim()); 
+		dentista.setCpfUsuario(dentista.getCpfUsuario().trim()); 
+		dentista.setSexoUsuario(dentista.getSexoUsuario().trim()); 
+		dentista.setCroDentista(dentista.getCroDentista().trim()); 
+		
 		boolean result = false;
-		if ((nome == null) || (nome.length() < 5)) {
-			mensagem = "Preencha o nome da dentista corretamente. O nome deve ter pelo menos 5 caracteres";
-		}else if ((rg == null) || (rg.length() < 5)) {
+		if ((dentista.getNomeUsuario() == null) || (dentista.getNomeUsuario().length() < 5)) {
+			mensagem = "Preencha o nome do(a) dentista corretamente. O nome deve ter pelo menos 5 caracteres";
+		}else if ((dentista.getRgUsuario() == null) || (dentista.getRgUsuario().length() < 5)) {
 			mensagem = "Preencha o RG da dentista corretamente.";
-		}else if ((cpf == null) || (cpf.length() < 11)) {
+		}else if ((dentista.getCpfUsuario() == null) || (dentista.getCpfUsuario().length() < 11)) {
 			mensagem = "Preencha o CPF da dentista corretamente.";
-		}else if ((dtnasc == null) || (dtnasc.equals(""))) {
+		}else if ((dentista.getDataNascimentoUsuario() == null) || (dentista.getDataNascimentoUsuario().equals(""))) {
 			mensagem = "Preencha a data de nascimento da dentista corretamente.";
-		}else if ((sexo == null) || (sexo.equals(""))) {
+		}else if ((dentista.getSexoUsuario() == null) || (dentista.getSexoUsuario().equals(""))) {
 			mensagem = "Preencha o sexo da dentista corretamente.";
-		}else if ((cro == null) || (cro.equals(""))) {
+		}else if ((dentista.getCroDentista() == null) || (dentista.getCroDentista().equals(""))) {
 			mensagem = "Preencha o CRO da dentista corretamente.";
 		}else {
+			result = true;
+		}
+		return result;
+	}
+	
+	public boolean validaNome(Dentista dentista){
+		boolean result = false;
+		dentista.setNomeUsuario(dentista.getNomeUsuario().trim());
+		if ((dentista.getNomeUsuario() == null) || (dentista.getNomeUsuario().length() < 5)) {
+			mensagem = "Preencha o nome do(a) dentista corretamente. O nome deve ter pelo menos 5 caracteres";
+		}else{
 			result = true;
 		}
 		return result;
