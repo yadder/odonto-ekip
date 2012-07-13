@@ -8,9 +8,8 @@
 </head>
 <body>
 <div class="cabecalho">	
+<div id="menu">
 	<img src="arquivos/logo_horizontal.png" width="300">
-	<font size="2">${msgCabecalho} ${usuarioLogado.nomeUsuario}</font>
-	
 <ul class="navbar">
 	<li><a href="principal.jsp"><b>Home</b></a></li>
 	<li><a href="#"><b>Cadastro</b></a>
@@ -59,5 +58,10 @@
 	<li><a href="ServletPrincipal?acao=logout"><b>Logout</b></a></li>
 </ul>
 </div>
+</div>
+<div>
+	<font size="2">${msgCabecalho} ${usuarioLogado.nomeUsuario}</font>
+</div>
+
 </body>
 </html>

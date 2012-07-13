@@ -11,9 +11,9 @@ h3.information{font-family: cursive; color: #00F; text-shadow: 1px 1px 1px #000;
 .navbar li:hover li a{background-color: #69f; border-bottom: 1px solid #fff; color: #000;}
 .navbar li li a:hover{background-color: #8db3ff;}
 
-.cabecalho{background-color: #D6E0FF; height: 15%; padding-top: 10px;}
-.pagina{background-color: #fff; height: 78%;}
-.rodape{background-color: #D6E0FF; height: 5%;}
+.cabecalho{background-color: #D6E0FF;}
+.pagina{background-color: #fff;}
+.rodape{background-color: #D6E0FF;}
 
-
+body{background-color: #D6E0FF;}
  

@@ -32,7 +32,11 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="right">Procedimento:</td>
+			<td align="right">Código:</td>
+			<td><input type="text" name="codigoProcedimento" value="${procedimento.codigoProcedimento}" size="20" maxlength="20" />
+		</tr>
+		<tr>
+			<td align="right">Descrição:</td>
 			<td><input type="text" name="descricaoProcedimento" value="${procedimento.descricaoProcedimento}" size="20" maxlength="20" /><input type="submit" name="btn" value="Pesquisar" />
 		</tr>
 		<tr>
