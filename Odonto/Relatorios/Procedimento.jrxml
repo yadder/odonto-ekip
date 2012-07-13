@@ -26,7 +26,7 @@ FROM
 		<groupHeader>
 			<band height="27">
 				<textField>
-					<reportElement mode="Opaque" x="1" y="0" width="533" height="27" forecolor="#FFFFFF" backcolor="#CCCCFF"/>
+					<reportElement mode="Opaque" x="1" y="0" width="533" height="27" forecolor="#000000" backcolor="#CCCCFF"/>
 					<textElement>
 						<font size="18" isBold="true"/>
 					</textElement>
@@ -36,7 +36,7 @@ FROM
 		</groupHeader>
 		<groupFooter>
 			<band height="8">
-				<line direction="BottomUp">
+				<line>
 					<reportElement key="line" x="1" y="4" width="554" height="1"/>
 				</line>
 			</band>
@@ -46,7 +46,7 @@ FROM
 		<band/>
 	</background>
 	<title>
-		<band height="58">
+		<band height="53">
 			<line>
 				<reportElement x="0" y="8" width="555" height="1"/>
 			</line>
@@ -72,7 +72,7 @@ FROM
 	<columnHeader>
 		<band height="18">
 			<staticText>
-				<reportElement mode="Opaque" x="172" y="0" width="144" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="137" y="0" width="144" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement>
 					<font size="12" isBold="true" isPdfEmbedded="false"/>
 				</textElement>
@@ -97,13 +97,13 @@ FROM
 	<detail>
 		<band height="20">
 			<textField>
-				<reportElement x="172" y="0" width="228" height="20"/>
+				<reportElement x="137" y="0" width="228" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{tb_procedimento_descricao_procedimento}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="¤ #,##0.00">
 				<reportElement x="417" y="0" width="117" height="20"/>
 				<textElement>
 					<font size="12"/>
@@ -148,7 +148,7 @@ FROM
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="false">
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
 				<reportElement key="textField" x="1" y="6" width="209" height="19" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
