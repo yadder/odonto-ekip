@@ -99,16 +99,16 @@ public class ServletAcesso extends HttpServlet {
 			String descricaoAcesso = (String) request.getParameter("descricaoAcesso");
 			if (validaCampos(descricaoAcesso)){	
 				try{
-				Acesso acesso = new Acesso();
-				acesso = (Acesso)objetoSessao.getAttribute("acesso");
-				acesso.setDescricaoAcesso((String)request.getParameter("descricaoAcesso"));								
-				DaoAcesso daoAcesso = new DaoAcesso();
-				daoAcesso.alterarAcesso(acesso);
-				mensagem = "Acesso alterado com sucesso.";
-				request.setAttribute("msg", mensagem);
-				objetoSessao.removeAttribute("acesso");
-				RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
-				disp.forward(request, response);
+					Acesso acesso = new Acesso();
+					acesso = (Acesso)objetoSessao.getAttribute("acesso");
+					acesso.setDescricaoAcesso((String)request.getParameter("descricaoAcesso"));								
+					DaoAcesso daoAcesso = new DaoAcesso();
+					daoAcesso.alterarAcesso(acesso);
+					mensagem = "Acesso alterado com sucesso.";
+					request.setAttribute("msg", mensagem);
+					objetoSessao.removeAttribute("acesso");
+					RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
+					disp.forward(request, response);
 				}catch (Exception e) {
 					mensagem = "Ocorreu algum erro ao alterar o acesso.";
 					request.setAttribute("msg", mensagem);

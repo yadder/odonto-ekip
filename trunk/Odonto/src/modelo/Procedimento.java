@@ -13,6 +13,8 @@ public class Procedimento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_procedimento", nullable = false)
     private long idProcedimento;
+    @Column(name = "codigo_procedimento", nullable = false)
+    private long codigoProcedimento;
     @Column(name = "descricao_procedimento", nullable = false, length = 50)
     private String descricaoProcedimento;
     @Column(name = "valor_procedimento", nullable = false)
@@ -76,8 +78,16 @@ public class Procedimento implements Serializable {
     public void setConvenio(Convenio convenio) {
         this.convenio = convenio;
     }
+    
+    public long getCodigoProcedimento() {
+		return codigoProcedimento;
+	}
 
-    @Override
+	public void setCodigoProcedimento(long codigoProcedimento) {
+		this.codigoProcedimento = codigoProcedimento;
+	}
+
+	@Override
     public String toString() {
         return descricaoProcedimento;
     }

@@ -77,7 +77,7 @@ public class ServletProcedimento extends HttpServlet {
 			Procedimento procedimento = new Procedimento();
 			procedimento = (Procedimento)objetoSessao.getAttribute("procedimento");
 			DaoProcedimento daoProcedimento = new DaoProcedimento();
-			boolean result = daoProcedimento.excluirProcedimento(procedimento);
+			daoProcedimento.excluirProcedimento(procedimento);
 			if (result){
 				mensagem = "Procedimento excluído com sucesso.";
 				request.setAttribute("msg", mensagem);

@@ -15,7 +15,7 @@ public class DaoProcedimento {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public void cadastrarProcedimento(Procedimento procedimento) throws HibernateException{
+	public void cadastrarProcedimento(Procedimento procedimento) throws HibernateException, Exception{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.persist(procedimento);
