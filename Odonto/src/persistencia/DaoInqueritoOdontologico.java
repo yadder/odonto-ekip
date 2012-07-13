@@ -6,7 +6,6 @@ import java.util.List;
 import modelo.InqueritoOdontologico;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -17,7 +16,7 @@ public class DaoInqueritoOdontologico {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public void cadastrarInqueritoOdontologico(InqueritoOdontologico inqueritoOdontologico) throws HibernateException{
+	public void cadastrarInqueritoOdontologico(InqueritoOdontologico inqueritoOdontologico) throws Exception{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.persist(inqueritoOdontologico);
@@ -26,7 +25,7 @@ public class DaoInqueritoOdontologico {
 			session.close();
 	}
 
-	public void alterarInqueritoOdontologico(InqueritoOdontologico inqueritoOdontologico) throws HibernateException{
+	public void alterarInqueritoOdontologico(InqueritoOdontologico inqueritoOdontologico) throws Exception{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.update(inqueritoOdontologico);
@@ -35,7 +34,7 @@ public class DaoInqueritoOdontologico {
 			session.close();
 	}
 
-	public void excluirInqueritoOdontologico(InqueritoOdontologico inqueritoOdontologico) throws HibernateException{
+	public void excluirInqueritoOdontologico(InqueritoOdontologico inqueritoOdontologico) throws Exception{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.delete(inqueritoOdontologico);
@@ -44,7 +43,7 @@ public class DaoInqueritoOdontologico {
 			session.close();
 	}
 
-	public List<InqueritoOdontologico> pesquisarTodosInqueritoOdontologico() throws HibernateException{
+	public List<InqueritoOdontologico> pesquisarTodosInqueritoOdontologico() throws Exception{
 		List<InqueritoOdontologico> lista = null;
 		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(InqueritoOdontologico.class);

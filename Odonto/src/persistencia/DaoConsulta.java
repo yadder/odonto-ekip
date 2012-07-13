@@ -2,10 +2,10 @@ package persistencia;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import modelo.Consulta;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -16,7 +16,7 @@ public class DaoConsulta {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public void cadastrarConsulta(Consulta consulta) throws HibernateException{
+	public void cadastrarConsulta(Consulta consulta) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 		session.persist(consulta);
@@ -25,7 +25,7 @@ public class DaoConsulta {
 		session.close();
 	}
 
-	public void alterarConsulta(Consulta consulta) throws HibernateException{
+	public void alterarConsulta(Consulta consulta) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 		session.update(consulta);
@@ -34,7 +34,7 @@ public class DaoConsulta {
 		session.close();
 	}
 
-	public void excluirConsulta(Consulta consulta) throws HibernateException{
+	public void excluirConsulta(Consulta consulta) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 		session.delete(consulta);
@@ -43,7 +43,7 @@ public class DaoConsulta {
 		session.close();
 	}
 
-	public List<Consulta> pesquisarTodosConsulta() throws HibernateException{
+	public List<Consulta> pesquisarTodosConsulta() throws Exception{
 		List<Consulta> lista = null;
 		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Consulta.class);

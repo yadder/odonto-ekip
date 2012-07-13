@@ -38,7 +38,7 @@ public class TesteProcedimento {
 		System.out.println("1------------------------------Testando a classe procedimento (Alteracao)");
 		procedimento = daoProcedimento.pesquisarProcedimentoPorDescricao("obturação");
 		procedimento.setDescricaoProcedimento("obturacao");
-		result = daoProcedimento.alterarProcedimento(procedimento);
+		daoProcedimento.alterarProcedimento(procedimento);
 		if (result){
 			System.out.println("Procedimento alterado para: "+procedimento.getDescricaoProcedimento());
 		}else{

@@ -18,7 +18,7 @@ public class DaoAcesso {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public void cadastrarAcesso(Acesso acesso) throws HibernateException{
+	public void cadastrarAcesso(Acesso acesso) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 		session.persist(acesso);
@@ -27,7 +27,7 @@ public class DaoAcesso {
 		session.close();
 	}
 
-	public void alterarAcesso(Acesso acesso) throws HibernateException{
+	public void alterarAcesso(Acesso acesso) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 		session.update(acesso);
@@ -36,7 +36,7 @@ public class DaoAcesso {
 		session.close();
 	}
 
-	public void excluirAcesso(Acesso acesso) throws HibernateException{
+	public void excluirAcesso(Acesso acesso) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 		session.delete(acesso);
@@ -45,7 +45,7 @@ public class DaoAcesso {
 		session.close();
 	}
 
-	public Acesso pesquisarAcessoPorNome(String nome) throws HibernateException{
+	public Acesso pesquisarAcessoPorNome(String nome) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Acesso.class).add(Restrictions.eq("descricaoAcesso", nome));
 		Acesso a = (Acesso)cr.uniqueResult();
@@ -54,7 +54,7 @@ public class DaoAcesso {
 		return a;
 	}
 
-	public List<Acesso> pesquisarTodosAcesso() throws HibernateException{
+	public List<Acesso> pesquisarTodosAcesso() throws Exception{
 		List<Acesso> lista = null;
 		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Acesso.class);

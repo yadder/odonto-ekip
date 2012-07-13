@@ -45,7 +45,7 @@ public class ServletAcesso extends HttpServlet {
 					request.setAttribute("msg", mensagem);
 					RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
 					disp.forward(request, response);
-				}catch (HibernateException e) {
+				}catch (Exception e) {
 					mensagem = "Ocorreu algum erro ao excluir o acesso.";
 					request.setAttribute("msg", mensagem);
 					e.printStackTrace();
@@ -75,7 +75,7 @@ public class ServletAcesso extends HttpServlet {
 					RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
 					disp.forward(request, response);
 				}
-			}catch (HibernateException e) {
+			}catch (Exception e) {
 				e.printStackTrace();
 			}
 		}else if(btn.equals("Excluir")){
@@ -89,7 +89,7 @@ public class ServletAcesso extends HttpServlet {
 				objetoSessao.removeAttribute("acesso");
 				RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
 				disp.forward(request, response);
-			}catch (HibernateException e) {
+			}catch (Exception e) {
 				mensagem = "Ocorreu algum erro ao excluir o acesso.";
 				request.setAttribute("msg", mensagem);
 				RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");

@@ -6,7 +6,6 @@ import java.util.List;
 import modelo.Fornecedor;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -18,7 +17,7 @@ public class DaoFornecedor {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public void cadastrarFornecedor(Fornecedor fornecedor) throws HibernateException{
+	public void cadastrarFornecedor(Fornecedor fornecedor) throws Exception{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.persist(fornecedor);
@@ -27,7 +26,7 @@ public class DaoFornecedor {
 			session.close();
 	}
 
-	public void alterarFornecedor(Fornecedor fornecedor) throws HibernateException{
+	public void alterarFornecedor(Fornecedor fornecedor) throws Exception{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.update(fornecedor);
@@ -36,7 +35,7 @@ public class DaoFornecedor {
 			session.close();
 	}
 
-	public void excluirFornecedor(Fornecedor fornecedor) throws HibernateException{
+	public void excluirFornecedor(Fornecedor fornecedor) throws Exception{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.delete(fornecedor);
@@ -45,14 +44,14 @@ public class DaoFornecedor {
 			session.close();
 	}
 
-	public Fornecedor pesquisarFornecedorPorNome(String nomeFornecedor) throws HibernateException{
+	public Fornecedor pesquisarFornecedorPorNome(String nomeFornecedor) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Fornecedor.class).add(Restrictions.eq("nomeFornecedor", nomeFornecedor));
 		Fornecedor f = (Fornecedor)cr.uniqueResult();
 		return f;
 	}
 
-	public List<Fornecedor> pesquisarTodosFornecedor() throws HibernateException{
+	public List<Fornecedor> pesquisarTodosFornecedor() throws Exception{
 		List<Fornecedor> lista = null;
 		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Fornecedor.class);

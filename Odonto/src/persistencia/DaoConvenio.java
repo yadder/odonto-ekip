@@ -6,7 +6,6 @@ import java.util.List;
 import modelo.Convenio;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -18,7 +17,7 @@ public class DaoConvenio {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public void cadastrarConvenio(Convenio convenio) throws HibernateException{
+	public void cadastrarConvenio(Convenio convenio) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 		session.persist(convenio);
@@ -27,7 +26,7 @@ public class DaoConvenio {
 		session.close();
 	}
 
-	public void alterarConvenio(Convenio convenio) throws HibernateException{
+	public void alterarConvenio(Convenio convenio) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 		session.update(convenio);
@@ -36,7 +35,7 @@ public class DaoConvenio {
 		session.close();
 	}
 
-	public void excluirConvenio(Convenio convenio) throws HibernateException{
+	public void excluirConvenio(Convenio convenio) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 		session.delete(convenio);
@@ -45,16 +44,16 @@ public class DaoConvenio {
 		session.close();
 	}
 
-	public Convenio pesquisarConvenioPorNome(String nome) throws HibernateException{
+	public Convenio pesquisarConvenioPorNome(Convenio convenio) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
-		Criteria cr = session.createCriteria(Convenio.class).add(Restrictions.eq("nomeConvenio", nome));
+		Criteria cr = session.createCriteria(Convenio.class).add(Restrictions.eq("nomeConvenio", convenio.getNomeConvenio()));
 		Convenio c = (Convenio) cr.uniqueResult();
 		session.flush();
 		session.close();
 		return c;
 	}
 
-	public List<Convenio> pesquisarTodosConvenio() throws HibernateException{
+	public List<Convenio> pesquisarTodosConvenio() throws Exception{
 		List<Convenio> lista = null;
 		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Convenio.class);

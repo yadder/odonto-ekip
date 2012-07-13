@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.connector.Request;
+
 import modelo.Convenio;
 import persistencia.DaoConvenio;
 
@@ -27,78 +29,83 @@ public class ServletConvenio extends HttpServlet {
 
 		String btn = (String)request.getParameter("btn");
 		HttpSession objetoSessao = request.getSession();
-
+		Convenio convenio = new Convenio();
+		
 		if (btn.equals("Voltar")){
 			objetoSessao.removeAttribute("convenio");
 			RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
 			disp.forward(request, response);
-			
 		}else if (btn.equals("Cadastrar")){
-			String nome = (String) request.getParameter("nomeConvenio");
-			if (validaCampos(nome)){				
-				Convenio convenio = new Convenio(nome);
-				DaoConvenio dao = new DaoConvenio();
-				dao.cadastrarConvenio(convenio);
-				mensagem = "Convênio cadastrado com sucesso!";
-				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("convenio.jsp");
-				disp.forward(request, response);
+			convenio = preencheObjeto(request, response);
+			if (validaCampos(convenio)){				
+				try{
+					DaoConvenio dao = new DaoConvenio();
+					dao.cadastrarConvenio(convenio);
+					mensagem = "Convênio cadastrado com sucesso!";
+					request.setAttribute("msg", mensagem);
+					RequestDispatcher disp = request.getRequestDispatcher("convenio.jsp");
+					disp.forward(request, response);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
 			}else{
 				request.setAttribute("msg", mensagem);
 				RequestDispatcher disp = request.getRequestDispatcher("convenio.jsp");
 				disp.forward(request, response);
 			}
 		}else if (btn.equals("Pesquisar")){
-			
-			String nome = (String) request.getParameter("nomeConvenio");
-			Convenio convenio = new Convenio(nome);
-			DaoConvenio dao = new DaoConvenio();
-			convenio = dao.pesquisarConvenioPorNome(nome);
-			if (convenio != null){
-				mensagem = "Convênio encontrado.";
+			convenio = preencheObjeto(request, response);
+			if (validaCampos(convenio)){
+				try{
+					DaoConvenio dao = new DaoConvenio();
+					convenio = dao.pesquisarConvenioPorNome(convenio);
+					if (convenio != null){
+						mensagem = "Convênio encontrado.";
+						request.setAttribute("msg", mensagem);
+						objetoSessao.setAttribute("convenio", convenio);
+						RequestDispatcher disp = request.getRequestDispatcher("convenio_alterar.jsp");
+						disp.forward(request, response);
+					}else{
+						mensagem = "Convênio não encontrado.";
+						request.setAttribute("msg", mensagem);
+						RequestDispatcher disp = request.getRequestDispatcher("convenio.jsp");
+						disp.forward(request, response);
+					}
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}else if(btn.equals("Excluir")){
+			try{
+				convenio = (Convenio)objetoSessao.getAttribute("convenio");
+				DaoConvenio dao = new DaoConvenio();
+				dao.excluirConvenio(convenio);
+				mensagem = "Convênio excluído com sucesso.";
 				request.setAttribute("msg", mensagem);
-				objetoSessao.setAttribute("convenio", convenio);
-				RequestDispatcher disp = request.getRequestDispatcher("convenio_alterar.jsp");
+				objetoSessao.removeAttribute("convenio");
+				RequestDispatcher disp = request.getRequestDispatcher("convenio.jsp");
 				disp.forward(request, response);
-			}else{
-				mensagem = "Convênio não encontrado.";
+			}catch (Exception e) {
+				mensagem = "Ocorreu algum erro ao excluir o convênio.";
 				request.setAttribute("msg", mensagem);
 				RequestDispatcher disp = request.getRequestDispatcher("convenio.jsp");
 				disp.forward(request, response);
+				e.printStackTrace();
 			}
-		}else if(btn.equals("Excluir")){
-
-				Convenio convenio = new Convenio();
-				convenio = (Convenio)objetoSessao.getAttribute("convenio");
-				DaoConvenio dao = new DaoConvenio();
-				boolean result = dao.excluirConvenio(convenio);
-				if (result){
-					mensagem = "Convênio excluído com sucesso.";
-					request.setAttribute("msg", mensagem);
-					objetoSessao.removeAttribute("convenio");
-					RequestDispatcher disp = request.getRequestDispatcher("convenio.jsp");
-					disp.forward(request, response);
-				}else{
-					mensagem = "Ocorreu algum erro ao excluir o convênio.";
-					request.setAttribute("msg", mensagem);
-					RequestDispatcher disp = request.getRequestDispatcher("convenio.jsp");
-					disp.forward(request, response);
-				}
 		}else if(btn.equals("Alterar")){
-			String nome = (String) request.getParameter("nomeConvenio");
-			if (validaCampos(nome)){	
-				Convenio convenio = new Convenio();
-				convenio = (Convenio)objetoSessao.getAttribute("convenio");
-				convenio.setNomeConvenio((String)request.getParameter("nomeConvenio"));								
-				DaoConvenio dao = new DaoConvenio();
-				boolean result = dao.alterarConvenio(convenio);
-				if (result){
+			convenio = preencheObjeto(request, response);
+			if (validaCampos(convenio)){	
+				try{
+					convenio = (Convenio)objetoSessao.getAttribute("convenio");
+					convenio.setNomeConvenio((String)request.getParameter("nomeConvenio"));								
+					DaoConvenio dao = new DaoConvenio();
+					dao.alterarConvenio(convenio);
 					mensagem = "Convênio alterado com sucesso.";
 					request.setAttribute("msg", mensagem);
 					objetoSessao.removeAttribute("convenio");
 					RequestDispatcher disp = request.getRequestDispatcher("convenio.jsp");
 					disp.forward(request, response);
-				}else{
+				}catch (Exception e) {
 					mensagem = "Ocorreu algum erro ao alterar o convênio.";
 					request.setAttribute("msg", mensagem);
 					RequestDispatcher disp = request.getRequestDispatcher("convenio.jsp");
@@ -110,16 +117,24 @@ public class ServletConvenio extends HttpServlet {
 				disp.forward(request, response);
 			}
 		}
-	
 	}
-	
-	public boolean validaCampos(String nome){
+	}
+
+	public Convenio preencheObjeto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Convenio convenio = new Convenio();
+		convenio.setNomeConvenio((String)request.getParameter("nomeConvenio"));
+		return convenio;		
+	}
+		
+	public boolean validaCampos(Convenio convenio){
 		boolean result = false;
-		if ((nome == null) || (nome.equals(""))){
+		convenio.setNomeConvenio(convenio.getNomeConvenio().trim()); // retira espaços
+		if ((convenio.getNomeConvenio() == null) || (convenio.getNomeConvenio().equals(""))){
 			mensagem = "Preencha o nome do convenio corretamente.";
 		}else{
 			result = true;
 		}
 		return result;
 	}
+	
 }

@@ -28,30 +28,32 @@ public class ServletLogin extends HttpServlet {
 		String senha = (String)request.getParameter("senha");
 		String mensagem = null;
 		HttpSession objetoSessao;
-		
-		Usuario usuarioLogado = new Usuario(cpf, senha);
-		DaoUsuario dao = new DaoUsuario();
-		usuarioLogado = dao.pesquisarUsuarioPorCpf(cpf);
-		
-		if ((usuarioLogado != null) && (usuarioLogado.getSenhaUsuario().equals(senha))){
-	        // resgata a sessao
-			objetoSessao = request.getSession();
-			// verifica se o objeto session existe
-		    if (objetoSessao == null)
-		    { // se nao existe, cria um novo objeto session
-		        objetoSessao = request.getSession(true);
-		    }  
-			// seta o usuarioLogado na sessao
-			objetoSessao.setAttribute("usuarioLogado", usuarioLogado);
-			mensagem = "Seja bem vindo ";
-			request.setAttribute("msgCabecalho", mensagem);
-			RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
-			disp.forward(request, response);
-		}else{
-			mensagem = "Login ou senha inválido!";
-			request.setAttribute("msg", mensagem);
-			RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
-			disp.forward(request, response);
+		try{
+			Usuario usuarioLogado = new Usuario(cpf, senha);
+			DaoUsuario dao = new DaoUsuario();
+			usuarioLogado = dao.pesquisarUsuarioPorCpf(cpf);
+			if ((usuarioLogado != null) && (usuarioLogado.getSenhaUsuario().equals(senha))){
+		        // resgata a sessao
+				objetoSessao = request.getSession();
+				// verifica se o objeto session existe
+			    if (objetoSessao == null)
+			    { // se nao existe, cria um novo objeto session
+			        objetoSessao = request.getSession(true);
+			    }  
+				// seta o usuarioLogado na sessao
+				objetoSessao.setAttribute("usuarioLogado", usuarioLogado);
+				mensagem = "Seja bem vindo ";
+				request.setAttribute("msgCabecalho", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
+				disp.forward(request, response);
+			}else{
+				mensagem = "Login ou senha inválido!";
+				request.setAttribute("msg", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
+				disp.forward(request, response);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 }

@@ -6,7 +6,6 @@ import java.util.List;
 import modelo.OdontogramaProcedimento;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -17,7 +16,7 @@ public class DaoOdontogramaProcedimento {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public void cadastrarOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) throws HibernateException{
+	public void cadastrarOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) throws Exception{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.persist(odontogramaProcedimento);
@@ -26,7 +25,7 @@ public class DaoOdontogramaProcedimento {
 			session.close();
 	}
 
-	public void alterarOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) throws HibernateException{
+	public void alterarOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) throws Exception{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.update(odontogramaProcedimento);
@@ -35,7 +34,7 @@ public class DaoOdontogramaProcedimento {
 			session.close();
 	}
 
-	public void excluirOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) throws HibernateException{
+	public void excluirOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) throws Exception{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.delete(odontogramaProcedimento);
@@ -44,7 +43,7 @@ public class DaoOdontogramaProcedimento {
 			session.close();
 	}
 
-	public OdontogramaProcedimento pesquisarOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) throws HibernateException{
+	public OdontogramaProcedimento pesquisarOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		OdontogramaProcedimento o = (OdontogramaProcedimento)session.get(OdontogramaProcedimento.class, odontogramaProcedimento.getIdOdontogramaProcedimeto());
 		session.flush();
@@ -52,7 +51,7 @@ public class DaoOdontogramaProcedimento {
 		return o;
 	}
 
-	public List<OdontogramaProcedimento> pesquisarTodosOdontogramaProcedimento() throws HibernateException{
+	public List<OdontogramaProcedimento> pesquisarTodosOdontogramaProcedimento() throws Exception{
 		List<OdontogramaProcedimento> lista = null;
 		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(OdontogramaProcedimento.class);

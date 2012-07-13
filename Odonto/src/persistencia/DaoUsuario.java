@@ -6,7 +6,6 @@ import java.util.List;
 import modelo.Usuario;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -18,7 +17,7 @@ public class DaoUsuario {
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public void cadastrarUsuario(Usuario usuario) throws HibernateException{
+	public void cadastrarUsuario(Usuario usuario) throws Exception{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.persist(usuario);
@@ -27,7 +26,7 @@ public class DaoUsuario {
 			session.close();
 	}
 
-	public void alterarUsuario(Usuario usuario) throws HibernateException{
+	public void alterarUsuario(Usuario usuario) throws Exception{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.update(usuario);
@@ -36,7 +35,7 @@ public class DaoUsuario {
 			session.close();
 	}
 
-	public void excluirUsuario(Usuario usuario) throws HibernateException{
+	public void excluirUsuario(Usuario usuario) throws Exception{
 			session = HibernateUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			session.delete(usuario);
@@ -45,7 +44,7 @@ public class DaoUsuario {
 			session.close();
 	}
 
-	public Usuario pesquisarUsuarioPorCpf(String cpf) throws HibernateException{
+	public Usuario pesquisarUsuarioPorCpf(String cpf) throws Exception{
 		Usuario u = null;
 		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Usuario.class).add(Restrictions.eq("cpfUsuario", cpf));
@@ -55,7 +54,7 @@ public class DaoUsuario {
 		return u;
 	}
 	
-	public Usuario pesquisarUsuarioPorNome(String nome) throws HibernateException{
+	public Usuario pesquisarUsuarioPorNome(String nome) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Usuario.class).add(Restrictions.eq("nomeUsuario", nome));
 		Usuario u = (Usuario)cr.uniqueResult();
@@ -64,7 +63,7 @@ public class DaoUsuario {
 		return u;
 	}
 
-	public List<Usuario> pesquisarTodosUsuario() throws HibernateException{
+	public List<Usuario> pesquisarTodosUsuario() throws Exception{
 		List<Usuario> lista = null;
 		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Usuario.class);
