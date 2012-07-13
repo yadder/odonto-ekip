@@ -2,6 +2,7 @@ package util;
 
 import java.text.SimpleDateFormat;
 
+import java.util.Random;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -32,7 +33,17 @@ public class ConfiguraAtributo {
 		
 		return dataString;
 	}
-
+	
+	public String gerarSenha(){
+		Random ran = new Random();
+		StringBuffer senha = new StringBuffer();
+		for(int i=0; i<6; i++){
+			senha.append(Integer.toString(ran.nextInt(10)));
+		}		
+		String s = senha.toString();
+		return s;
+	}
+	
 	public boolean somenteLetras(String palavra) throws Exception{
 		Pattern p = Pattern.compile("[A-Z a-z]+");
 		Matcher m = p.matcher(palavra);
@@ -75,4 +86,5 @@ public class ConfiguraAtributo {
 			return false;
 		}
 	}
+	
 }

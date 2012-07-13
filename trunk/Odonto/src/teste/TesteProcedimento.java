@@ -10,11 +10,15 @@ import persistencia.DaoProcedimento;
 public class TesteProcedimento {
 	public static void main(String[] args) {
 		boolean result = false;
+		try{
 		Procedimento procedimento = null;
 		DaoProcedimento daoProcedimento = new DaoProcedimento();
 		Convenio convenio = new Convenio();
 		DaoConvenio daoConvenio = new DaoConvenio();
 		convenio = daoConvenio.pesquisarConvenioPorNome("BRADESCO");
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 		/*
 		System.out.println("1------------------------------Testando a classe procedimento (Cadastro)");
 		procedimento = new Procedimento("Prótese");
