@@ -3,15 +3,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro de dentista</title>
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body>
-<c:import url="cabecalho.jsp" />
+<fieldset class="pagina">
+<h1>:: Cadastro de dentista</h1>
 <div id="msg">
-	<h3 class="information">${msg}</h3>
+	<h5 class="information">${msg}</h5>
+	<h5 class="error">${msgE}</h5>
 </div>
+
 <form name="formDentista" method="post" action="ServletDentista">
 	<table>
 		<tr>
@@ -49,6 +51,8 @@
 		</tr>
 	</table>
 </form>
+</fieldset>
+<c:import url="cabecalho.jsp"/>
 <c:import url="rodape.jsp" />	
 </body>
 </html>

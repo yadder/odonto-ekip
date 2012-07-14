@@ -54,7 +54,7 @@ public class ServletProcedimento extends HttpServlet {
 			}
 		}else if (btn.equals("Pesquisar")){
 			procedimento = preencheObjeto(request, response);
-			if (!procedimento.getDescricaoProcedimento().equals("")){
+			if (procedimento.getDescricaoProcedimento()!=null){
 				try{
 					DaoProcedimento dao = new DaoProcedimento();
 					procedimento = dao.pesquisarProcedimentoPorDescricao(procedimento);

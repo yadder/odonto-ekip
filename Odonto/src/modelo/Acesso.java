@@ -33,7 +33,7 @@ public class Acesso implements Serializable {
         return idAcesso;
     }
 
-    public void setIdAcesso(Integer idAcesso) {
+    public void setIdAcesso(long idAcesso) {
         this.idAcesso = idAcesso;
     }
 

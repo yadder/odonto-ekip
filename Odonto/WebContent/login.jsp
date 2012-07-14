@@ -8,9 +8,8 @@
 </head>
 <body>
 <div id="msg">
-	<h3 class="information">${msg}</h3>
+	<h5 class="information">${msg}</h5>
 </div>
-<div class="cabecalho">
 <center>
 <br><br><br>
 <img src="arquivos/logo_horizontal.png" width="300">
@@ -33,6 +32,5 @@
 	</table>
 </form>
 
-</div>
 </body>
 </html>

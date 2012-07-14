@@ -27,12 +27,10 @@ public class ServletLogin extends HttpServlet {
 		String senha = (String)request.getParameter("senha");
 		String mensagem = null;
 		HttpSession objetoSessao;
-		System.out.println("cpf: "+cpf+" senha: "+senha);
 		try{
 			Usuario usuarioLogado = new Usuario(cpf, senha);
 			DaoUsuario daoUsuario = new DaoUsuario();
 			usuarioLogado = daoUsuario.pesquisarUsuarioPorCpf(usuarioLogado);
-			System.out.println(usuarioLogado);
 			if ((usuarioLogado != null) && (usuarioLogado.getSenhaUsuario().equals(senha))){
 		        // resgata a sessao
 				objetoSessao = request.getSession();
@@ -43,6 +41,7 @@ public class ServletLogin extends HttpServlet {
 			    }  
 				// seta o usuarioLogado na sessao
 				objetoSessao.setAttribute("usuarioLogado", usuarioLogado);
+				System.out.println("Usuario logado: "+usuarioLogado.getNomeUsuario());
 				mensagem = "Seja bem vindo ";
 				request.setAttribute("msgCabecalho", mensagem);
 				RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
