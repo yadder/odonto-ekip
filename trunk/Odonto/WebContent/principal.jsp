@@ -3,21 +3,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Sistema OdontoEkip - Principal</title>
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body>
-<c:import url="cabecalho.jsp" />
+<fieldset class="pagina">
+<h1>:: Sistema OdontoEkip</h1>
 <div id="msg">
-	<h3 class="information">${msg}</h3>
+	<h5 class="information">${msg}</h5>
+	<h5 class="error">${msgE}</h5>
 </div>
-<div class="pagina">	
+
 	<h6><font color="red">INCOMPLETAS<br/> </font></h6>
 	<a href="inqueritoOdontologico.jsp">Inquérito odontológico</a><br/>
 	<a href="pagamento.jsp">Efetuar pagamento</a><br/>
 	<a href="ServletPrincipal?acao=agendar_consulta">Agendar consulta</a><br/>
-</div>	
+	
+</fieldset>
+<c:import url="cabecalho.jsp" />
 <c:import url="rodape.jsp" />	
 </body>
 </html>

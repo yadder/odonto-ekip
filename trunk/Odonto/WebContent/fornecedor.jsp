@@ -3,56 +3,49 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro de fornecedor</title>
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body>
-<c:import url="cabecalho.jsp" />
+<fieldset class="pagina">
+<h1>:: Cadastro de fornecedor</h1>
 <div id="msg">
-	<h3 class="information">${msg}</h3>
+	<h5 class="information">${msg}</h5>
+	<h5 class="error">${msgE}</h5>
 </div>
+
 <form name="formFornecedor" method="post" action="ServletFornecedor">
 	<table>
 		<tr>
 			<td align="right">Nome do fornecedor:</td>
-			<td><input type="text" name="nomeFornecedor" value="${fornecedor.nomeFornecedor}" size="20" /><input type="submit" name="btn" value="Pesquisar" /></td>
+			<td><input type="text" name="nomeFornecedor" value="${fornecedor.nomeFornecedor}" size="45" /><input type="submit" name="btn" value="Pesquisar" /></td>
 		</tr>
 		<tr>
 			<td align="right">Nome do vendedor:</td>
-			<td><input type="text" name="nomeVendedor" value="${fornecedor.nomeVendedor}" size="20" /></td>
+			<td><input type="text" name="nomeVendedor" value="${fornecedor.nomeVendedor}" size="58" /></td>
 		</tr>
 		<tr>
 			<td align="right">E-mail do vendedor:</td>
-			<td><input type="text" name="emailVendedor" value="${fornecedor.emailVendedor}" size="20" /></td>
-		</tr>
-		<tr>
-			<td align="right">Site:</td>
-			<td><input type="text" name="siteFornecedor" value="${fornecedor.siteFornecedor}" size="20" /></td>
+			<td><input type="text" name="emailVendedor" value="${fornecedor.emailVendedor}" size="20" />
+			Site:<input type="text" name="siteFornecedor" value="${fornecedor.siteFornecedor}" size="27" /></td>
 		</tr>
 		<tr>
 			<td align="right">Cnpj:</td>
-			<td><input type="text" name="cnpjFornecedor" value="${fornecedor.cnpjFornecedor}" size="18" maxlength="18" OnKeyPress="formatar(this, '##.###.###/####-##')" /></td>
+			<td><input type="text" name="cnpjFornecedor" value="${fornecedor.cnpjFornecedor}" size="20" maxlength="18" OnKeyPress="formatar(this, '##.###.###/####-##')" /></td>
 		</tr>
 		<tr>
 			<td align="right">Logradouro:</td>
-			<td><input type="text" name="logradouroFornecedor" value="${fornecedor.logradouroFornecedor}" size="20" /></td>
+			<td><input type="text" name="logradouroFornecedor" value="${fornecedor.logradouroFornecedor}" size="58" /></td>
 		</tr>
 		<tr>
 			<td align="right">Número:</td>
-			<td><input type="text" name="numeroLogradouroFornecedor" value="${fornecedor.numeroLogradouroFornecedor}" size="5" /></td>
-		</tr>
-		<tr>
-			<td align="right">Complemento:</td>
-			<td><input type="text" name="complementoLogradouroFornecedor" value="${fornecedor.complementoLogradouroFornecedor}" size="20" /></td>
+			<td><input type="text" name="numeroLogradouroFornecedor" value="${fornecedor.numeroLogradouroFornecedor}" size="5" />
+			Complemento:<input type="text" name="complementoLogradouroFornecedor" value="${fornecedor.complementoLogradouroFornecedor}" size="31" /></td>
 		</tr>
 		<tr>
 			<td align="right">Bairro:</td>
-			<td><input type="text" name="bairroFornecedor" value="${fornecedor.bairroFornecedor}" size="20" /></td>
-		</tr>
-		<tr>
-			<td align="right">Cidade:</td>
-			<td><input type="text" name="cidadeFornecedor" value="${fornecedor.cidadeFornecedor}" size="20" /></td>
+			<td><input type="text" name="bairroFornecedor" value="${fornecedor.bairroFornecedor}" size="22" />
+			Cidade:<input type="text" name="cidadeFornecedor" value="${fornecedor.cidadeFornecedor}" size="21" /></td>
 		</tr>
 		<tr>
 			<td align="right">Estado:</td>
@@ -85,38 +78,31 @@
 	                <option  value="${fornecedor.estadoFornecedor}">SP</option>  
 	                <option  value="${fornecedor.estadoFornecedor}">TO</option>
 				</select>
-			</td>
+			Cep:<input type="text" name="cepFornecedor" value="${fornecedor.cepFornecedor}" size="10" maxlength="10" OnKeyPress="formatar(this, '##.###-###')" /></td>
 		</tr>
 		<tr>
-			<td align="right">Cep:</td>
-			<td><input type="text" name="cepFornecedor" value="${fornecedor.cepFornecedor}" size="10" maxlength="10" OnKeyPress="formatar(this, '##.###-###')" /></td>
+			<td align="right">DDD:</td>
+			<td><input type="text" name="ddd1Fornecedor" value="${fornecedor.ddd1Fornecedor}" size="2" maxlength="2"/>
+			Telefone 1:
+			<input type="text" name="telefone1Fornecedor" value="${fornecedor.telefone1Fornecedor}" size="9" maxlength="9" OnKeyPress="formatar(this, '####-####')"/></td>
 		</tr>
 		<tr>
-			<td align="right">Ddd:</td>
-			<td><input type="text" name="ddd1Fornecedor" value="${fornecedor.ddd1Fornecedor}" size="2" maxlength="2"/></td>
-		</tr>
-		<tr>
-			<td align="right">Telefone 1:</td>
-			<td><input type="text" name="telefone1Fornecedor" value="${fornecedor.telefone1Fornecedor}" size="9" maxlength="9" OnKeyPress="formatar(this, '####-####')"/></td>
-		</tr>
-		<tr>
-			<td align="right">Ddd:</td>
-			<td><input type="text" name="ddd2Fornecedor" value="${fornecedor.ddd2Fornecedor}" size="2" maxlength="2" /></td>
-		</tr>
-		<tr>
-			<td align="right">Telefone 2:</td>
-			<td><input type="text" name="telefone2Fornecedor" value="${fornecedor.telefone2Fornecedor}" size="9" maxlength="9" OnKeyPress="formatar(this, '####-####')"/></td>
+			<td align="right">DDD:</td>
+			<td><input type="text" name="ddd2Fornecedor" value="${fornecedor.ddd2Fornecedor}" size="2" maxlength="2" />
+			Telefone 2:
+			<input type="text" name="telefone2Fornecedor" value="${fornecedor.telefone2Fornecedor}" size="9" maxlength="9" OnKeyPress="formatar(this, '####-####')"/></td>
 		</tr>
 		
 		<tr>
-			<td colspan=2 align="center">
-				
+			<td colspan=2 align="right">				
 				<input type="submit" name="btn" value="Cadastrar" />
 				<input type="submit" name="btn" value="Voltar" />
 			</td>
 		</tr>
 	</table>
 </form>
+</fieldset>
+<c:import url="cabecalho.jsp"/>
 <c:import url="rodape.jsp" />	
 </body>
 </html>

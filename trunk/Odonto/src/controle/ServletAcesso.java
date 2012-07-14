@@ -27,105 +27,120 @@ public class ServletAcesso extends HttpServlet {
 		
 		String btn = (String)request.getParameter("btn");
 		HttpSession objetoSessao = request.getSession();
+		Acesso acesso = new Acesso();
 
 		if (btn.equals("Voltar")){
 			objetoSessao.removeAttribute("acesso");
 			RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
 			disp.forward(request, response);
 		}else if (btn.equals("Cadastrar")){
-			String descricaoAcesso = (String) request.getParameter("descricaoAcesso");
-			if (validaCampos(descricaoAcesso)){				
+			acesso = preencheObjeto(request, response);
+			if (validaCampos(acesso)){				
 				try{
-					Acesso acesso = new Acesso(descricaoAcesso);
 					DaoAcesso daoAcesso = new DaoAcesso();
 					daoAcesso.cadastrarAcesso(acesso);
 					mensagem = "Acesso cadastrado com sucesso!";
 					request.setAttribute("msg", mensagem);
+					request.setAttribute("msgE", null);
 					RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
 					disp.forward(request, response);
 				}catch (Exception e) {
-					mensagem = "Ocorreu algum erro ao excluir o acesso.";
-					request.setAttribute("msg", mensagem);
 					e.printStackTrace();
-					RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
-					disp.forward(request, response);					
 				}
 			}else{
-				request.setAttribute("msg", mensagem);
+				request.setAttribute("msg", null);
+				request.setAttribute("msgE", mensagem);
 				RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
 				disp.forward(request, response);
 			}
 		}else if (btn.equals("Pesquisar")){
-			String descricaoAcesso = (String) request.getParameter("descricaoAcesso");
-			try{
-				Acesso acesso = new Acesso(descricaoAcesso);
-				DaoAcesso daoAcesso = new DaoAcesso();
-				acesso = daoAcesso.pesquisarAcessoPorNome(descricaoAcesso);
-				if (acesso != null){
-					mensagem = "Acesso encontrado.";
-					request.setAttribute("msg", mensagem);
-					objetoSessao.setAttribute("acesso", acesso);
-					RequestDispatcher disp = request.getRequestDispatcher("acesso_alterar.jsp");
-					disp.forward(request, response);
-				}else{
-					mensagem = "Acesso não encontrado.";
-					request.setAttribute("msg", mensagem);
-					RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
-					disp.forward(request, response);
+			acesso = preencheObjeto(request, response);
+			if (acesso.getDescricaoAcesso()!=null){
+				try{
+					DaoAcesso daoAcesso = new DaoAcesso();
+					acesso = daoAcesso.pesquisarAcessoPorNome(acesso);
+					if (acesso != null){
+						mensagem = "Acesso encontrado.";
+						request.setAttribute("msg", mensagem);
+						request.setAttribute("msgE", null);
+						objetoSessao.setAttribute("acesso", acesso);
+						RequestDispatcher disp = request.getRequestDispatcher("acesso_alterar.jsp");
+						disp.forward(request, response);
+					}else{
+						mensagem = "Acesso não encontrado.";
+						request.setAttribute("msg", null);
+						request.setAttribute("msgE", mensagem);
+						RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
+						disp.forward(request, response);
+					}
+				}catch (Exception e) {
+					e.printStackTrace();
 				}
-			}catch (Exception e) {
-				e.printStackTrace();
+			}else{
+				request.setAttribute("msg", null);
+				request.setAttribute("msgE", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
+				disp.forward(request, response);
 			}
 		}else if(btn.equals("Excluir")){
 			try{
-				Acesso acesso = new Acesso();
 				acesso = (Acesso)objetoSessao.getAttribute("acesso");
 				DaoAcesso daoAcesso = new DaoAcesso();
 				daoAcesso.excluirAcesso(acesso);
 				mensagem = "Acesso excluído com sucesso.";
 				request.setAttribute("msg", mensagem);
+				request.setAttribute("msgE", null);
 				objetoSessao.removeAttribute("acesso");
 				RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
 				disp.forward(request, response);
 			}catch (Exception e) {
 				mensagem = "Ocorreu algum erro ao excluir o acesso.";
-				request.setAttribute("msg", mensagem);
+				request.setAttribute("msg", null);
+				request.setAttribute("msgE", mensagem);
 				RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
 				disp.forward(request, response);
+				e.printStackTrace();
 			}
 		}else if(btn.equals("Alterar")){
-			String descricaoAcesso = (String) request.getParameter("descricaoAcesso");
-			if (validaCampos(descricaoAcesso)){	
-				try{
-					Acesso acesso = new Acesso();
-					acesso = (Acesso)objetoSessao.getAttribute("acesso");
-					acesso.setDescricaoAcesso((String)request.getParameter("descricaoAcesso"));								
+			acesso = preencheObjeto(request, response);
+			acesso.setIdAcesso(((Acesso)objetoSessao.getAttribute("acesso")).getIdAcesso());
+			if (validaCampos(acesso)){	
+				try{					
 					DaoAcesso daoAcesso = new DaoAcesso();
 					daoAcesso.alterarAcesso(acesso);
 					mensagem = "Acesso alterado com sucesso.";
+					request.setAttribute("msgE", null);
 					request.setAttribute("msg", mensagem);
 					objetoSessao.removeAttribute("acesso");
+					objetoSessao.removeAttribute("data");
 					RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
 					disp.forward(request, response);
 				}catch (Exception e) {
 					mensagem = "Ocorreu algum erro ao alterar o acesso.";
-					request.setAttribute("msg", mensagem);
-					e.printStackTrace();
+					request.setAttribute("msg", null);
+					request.setAttribute("msgE", mensagem);
 					RequestDispatcher disp = request.getRequestDispatcher("acesso.jsp");
 					disp.forward(request, response);
 				}
 			}else{
-				request.setAttribute("msg", mensagem);
+				request.setAttribute("msg", null);
+				request.setAttribute("msgE", mensagem);
 				RequestDispatcher disp = request.getRequestDispatcher("acesso_alterar.jsp");
 				disp.forward(request, response);
-			}
+			}	
 		}
-	
 	}
 	
-	public boolean validaCampos(String descricaoAcesso){
+	public Acesso preencheObjeto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Acesso acesso = new Acesso();
+		acesso.setDescricaoAcesso((String)request.getParameter("descricaoAcesso"));
+		return acesso;		
+	}
+		
+	public boolean validaCampos(Acesso acesso){
 		boolean result = false;
-		if ((descricaoAcesso == null) || (descricaoAcesso.equals(""))){
+		acesso.setDescricaoAcesso(acesso.getDescricaoAcesso().trim()); // retira espaços
+		if ((acesso.getDescricaoAcesso() == null) || (acesso.getDescricaoAcesso().equals(""))){
 			mensagem = "Preencha o nome do acesso corretamente.";
 		}else{
 			result = true;

@@ -3,17 +3,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro de elemento</title>
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body>
-<c:import url="cabecalho.jsp" />
-<br>
-<fieldset>
-<center><h1>Cadastro de elementos</h1>
+<fieldset class="pagina">
+<h1>:: Cadastro de elemento</h1>
 <div id="msg">
-	<h3 class="information">${msg}</h3>
+	<h5 class="information">${msg}</h5>
 </div>
 
 <form name="formElemento" method="post" action="ServletElemento">
@@ -35,6 +32,7 @@
 	</table>
 </form>	
 </fieldset>
+<c:import url="cabecalho.jsp" />
 <c:import url="rodape.jsp" />
 </body>
 </html>

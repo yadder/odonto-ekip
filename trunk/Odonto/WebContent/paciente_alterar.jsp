@@ -6,32 +6,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Alteração de paciente</title>
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body>
-<c:import url="cabecalho.jsp" />
+<fieldset class="pagina">
+<h1>:: Alteração de paciente</h1>
 <div id="msg">
-	<h3 class="information">${msg}</h3>
+	<h5 class="information">${msg}</h5>
+	<h5 class="error">${msgE}</h5>
 </div>
+
 <form name="formPaciente" method="post" action="ServletPaciente">
 	<table>
 		<tr>
 			<td align="right">Nome:</td>
-			<td><input type="text" name="nomePaciente" value="${paciente.nomeUsuario}" size="20" /></td>
+			<td><input type="text" name="nomePaciente" value="${paciente.nomeUsuario}" size="45" /></td>
 		</tr>
 		<tr>
 			<td align="right">Rg:</td>
-			<td><input type="text" name="rgPaciente" value="${paciente.rgUsuario}" size="20" /></td>
-		</tr>
-		<tr>
-			<td align="right">Cpf:</td>
-			<td><input type="text" name="cpfPaciente" value="${paciente.cpfUsuario}" size="20" maxlength="14" OnKeyPress="formatar(this, '###.###.###-##')" /></td>
-		</tr>
-		<tr>
-			<td align="right">Data nasc.:</td>
-			<td><input type="text" name="dtNascPaciente" value="${data}" size="20" maxlength="10" OnKeyPress="formatar(this, '##/##/####')" /></td>
+			<td><input type="text" name="rgPaciente" value="${paciente.rgUsuario}" size="15" maxlength="15"/>
+			Cpf:<input type="text" name="cpfPaciente" value="${paciente.cpfUsuario}" size="15" maxlength="14" OnKeyPress="formatar(this, '###.###.###-##')" />
+			Dt nasc.:<input type="text" name="dtNascPaciente" value="${data}" size="6" maxlength="10" OnKeyPress="formatar(this, '##/##/####')" /></td>
 		</tr>
 		<tr>
 			<td align="right">Sexo:</td>
@@ -42,11 +38,11 @@
 		</tr>
 		<tr>
 			<td align="right">Responsável:</td>
-			<td><input type="text" name="responsavelPaciente" value="${paciente.responsavelPaciente}" size="20" /></td>
+			<td><input type="text" name="responsavelPaciente" value="${paciente.responsavelPaciente}" size="58" /></td>
 		</tr>
 		<tr>
 			<td align="right">Logradouro:</td>
-			<td><input type="text" name="logradouroPaciente" value="${paciente.logradouroPaciente}" size="20" /></td>
+			<td><input type="text" name="logradouroPaciente" value="${paciente.logradouroPaciente}" size="58" /></td>
 		</tr>
 		<tr>
 			<td align="right">Número:</td>
@@ -58,11 +54,8 @@
 		</tr>
 		<tr>
 			<td align="right">Bairro:</td>
-			<td><input type="text" name="bairroPaciente" value="${paciente.bairroPaciente}" size="20" /></td>
-		</tr>
-		<tr>
-			<td align="right">Cidade:</td>
-			<td><input type="text" name="cidadePaciente" value="${paciente.cidadePaciente}" size="20" /></td>
+			<td><input type="text" name="bairroPaciente" value="${paciente.bairroPaciente}" size="22" />
+			Cidade:<input type="text" name="cidadePaciente" value="${paciente.cidadePaciente}" size="21" /></td>
 		</tr>
 		<tr>
 			<td align="right">Estado:</td>
@@ -95,27 +88,17 @@
 	                <option  value="${paciente.estadoPaciente}">SP</option>  
 	                <option  value="${paciente.estadoPaciente}">TO</option>
 				</select>
-			</td>
-		</tr>
-		<tr>
-			<td align="right">Cep:</td>
-			<td><input type="text" name="cepPaciente" value="${paciente.cepPaciente}" size="20" maxlength="10" OnKeyPress="formatar(this, '##.###-###')"/></td>
+			Cep:<input type="text" name="cepPaciente" value="${paciente.cepPaciente}" size="20" maxlength="10" OnKeyPress="formatar(this, '##.###-###')"/></td>
 		</tr>
 		<tr>
 			<td align="right">DDD:</td>
-			<td><input type="text" name="ddd1Paciente" value="${paciente.ddd1Paciente}" size="20" maxlength="2"/></td>
-		</tr>
-		<tr>
-			<td align="right">Telefone1:</td>
-			<td><input type="text" name="telefone1Paciente" value="${paciente.telefone1Paciente}" size="20" maxlength="9" OnKeyPress="formatar(this, '####-####')" /></td>
+			<td><input type="text" name="ddd1Paciente" value="${paciente.ddd1Paciente}" size="20" maxlength="2"/>
+			Telefone1:<input type="text" name="telefone1Paciente" value="${paciente.telefone1Paciente}" size="20" maxlength="9" OnKeyPress="formatar(this, '####-####')" /></td>
 		</tr>
 		<tr>
 			<td align="right">DDD:</td>
-			<td><input type="text" name="ddd2Paciente" value="${paciente.ddd2Paciente}" size="20" maxlength="2"/></td>
-		</tr>
-		<tr>
-			<td align="right">Telefone2:</td>
-			<td><input type="text" name="telefone2Paciente" value="${paciente.telefone2Paciente}" size="20" maxlength="9" OnKeyPress="formatar(this, '####-####')"/></td>
+			<td><input type="text" name="ddd2Paciente" value="${paciente.ddd2Paciente}" size="20" maxlength="2"/>
+			Telefone2:<input type="text" name="telefone2Paciente" value="${paciente.telefone2Paciente}" size="20" maxlength="9" OnKeyPress="formatar(this, '####-####')"/></td>
 		</tr>
 		<tr>
 			<td align="right">Convênio:</td>
@@ -139,6 +122,8 @@
 		</tr>
 	</table>
 </form>	
+</fieldset>
+<c:import url="cabecalho.jsp"/>
 <c:import url="rodape.jsp" />
 </body>
 </html>

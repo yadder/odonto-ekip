@@ -3,17 +3,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Alteração de face</title>
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
 </head>
 <body>
-<c:import url="cabecalho.jsp" />
-<br>
-<fieldset>
+<fieldset class="pagina">
+<h1>:: Alteração de face</h1>
 <div id="msg">
-	<h3 class="information">${msg}</h3>
+	<h5 class="information">${msg}</h5>
+	<h5 class="error">${msgE}</h5>
 </div>
+
 <form name="form" id="form" method="post" action="ServletFace?method=doPost">
 	<table>
 		<tr>
@@ -30,6 +30,7 @@
 	</table>
 </form>
 </fieldset>
+<c:import url="cabecalho.jsp"/>
 <c:import url="rodape.jsp" />	
 </body>
 </html>

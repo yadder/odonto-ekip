@@ -6,7 +6,6 @@ import java.util.List;
 import modelo.Acesso;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -45,9 +44,9 @@ public class DaoAcesso {
 		session.close();
 	}
 
-	public Acesso pesquisarAcessoPorNome(String nome) throws Exception{
+	public Acesso pesquisarAcessoPorNome(Acesso acesso) throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
-		Criteria cr = session.createCriteria(Acesso.class).add(Restrictions.eq("descricaoAcesso", nome));
+		Criteria cr = session.createCriteria(Acesso.class).add(Restrictions.eq("descricaoAcesso", acesso.getDescricaoAcesso()));
 		Acesso a = (Acesso)cr.uniqueResult();
 		session.flush();
 		session.close();
