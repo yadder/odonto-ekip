@@ -2,12 +2,12 @@ package teste;
 
 import modelo.Acesso;
 import persistencia.DaoAcesso;
-import persistencia.DaoAcesso;
 
 public class TesteAcesso {
 
 	public static void main(String[] args) {
 		boolean result = false;
+		try{
 		Acesso acesso = null;
 		DaoAcesso daoAcesso = new DaoAcesso();
 		/*
@@ -19,7 +19,7 @@ public class TesteAcesso {
 			
 		System.out.println("1------------------------------Testando a classe acesso (Pesquisa)");
 		acesso = new Acesso();
-		acesso = daoAcesso.pesquisarAcessoPorNome("TelaFace");
+		acesso = daoAcesso.pesquisarAcessoPorNome(acesso);
 		if (acesso != null){
 			System.out.println("Acesso "+acesso.getDescricaoAcesso()+" encontrado!");
 		}else{
@@ -42,13 +42,15 @@ public class TesteAcesso {
 		*/
 		
 		System.out.println("1------------------------------Testando a classe acesso (Exclusao)");
-		result = daoAcesso.excluirAcesso(acesso);
+		daoAcesso.excluirAcesso(acesso);
 		if (result){
 			System.out.println("Acesso excluído");
 		}else{
 			System.out.println("Erro na exclusão");
 		}
-		
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 }

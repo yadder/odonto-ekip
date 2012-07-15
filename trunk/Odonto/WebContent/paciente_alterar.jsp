@@ -25,8 +25,8 @@
 		</tr>
 		<tr>
 			<td align="right">Rg:</td>
-			<td><input type="text" name="rgPaciente" value="${paciente.rgUsuario}" size="15" maxlength="15"/>
-			Cpf:<input type="text" name="cpfPaciente" value="${paciente.cpfUsuario}" size="15" maxlength="14" OnKeyPress="formatar(this, '###.###.###-##')" />
+			<td><input type="text" name="rgPaciente" value="${paciente.rgUsuario}" size="13" maxlength="15"/>
+			Cpf:<input type="text" name="cpfPaciente" value="${paciente.cpfUsuario}" size="12" maxlength="14" OnKeyPress="formatar(this, '###.###.###-##')" />
 			Dt nasc.:<input type="text" name="dtNascPaciente" value="${data}" size="6" maxlength="10" OnKeyPress="formatar(this, '##/##/####')" /></td>
 		</tr>
 		<tr>
@@ -46,11 +46,8 @@
 		</tr>
 		<tr>
 			<td align="right">Número:</td>
-			<td><input type="text" name="numeroLogradouroPaciente" value="${paciente.numeroLogradouroPaciente}" size="20" /></td>
-		</tr>
-		<tr>
-			<td align="right">Complemento:</td>
-			<td><input type="text" name="complementoLogradouroPaciente" value="${paciente.complementoLogradouroPaciente}" size="20" /></td>
+			<td><input type="text" name="numeroLogradouroPaciente" value="${paciente.numeroLogradouroPaciente}" size="5" />
+			Complemento:<input type="text" name="complementoLogradouroPaciente" value="${paciente.complementoLogradouroPaciente}" size="31" /></td>
 		</tr>
 		<tr>
 			<td align="right">Bairro:</td>
@@ -92,13 +89,13 @@
 		</tr>
 		<tr>
 			<td align="right">DDD:</td>
-			<td><input type="text" name="ddd1Paciente" value="${paciente.ddd1Paciente}" size="20" maxlength="2"/>
-			Telefone1:<input type="text" name="telefone1Paciente" value="${paciente.telefone1Paciente}" size="20" maxlength="9" OnKeyPress="formatar(this, '####-####')" /></td>
+			<td><input type="text" name="ddd1Paciente" value="${paciente.ddd1Paciente}" size="3" maxlength="2"/>
+			Telefone1:<input type="text" name="telefone1Paciente" value="${paciente.telefone1Paciente}" size="10" maxlength="9" OnKeyPress="formatar(this, '####-####')" /></td>
 		</tr>
 		<tr>
 			<td align="right">DDD:</td>
-			<td><input type="text" name="ddd2Paciente" value="${paciente.ddd2Paciente}" size="20" maxlength="2"/>
-			Telefone2:<input type="text" name="telefone2Paciente" value="${paciente.telefone2Paciente}" size="20" maxlength="9" OnKeyPress="formatar(this, '####-####')"/></td>
+			<td><input type="text" name="ddd2Paciente" value="${paciente.ddd2Paciente}" size="3" maxlength="2"/>
+			Telefone2:<input type="text" name="telefone2Paciente" value="${paciente.telefone2Paciente}" size="10" maxlength="9" OnKeyPress="formatar(this, '####-####')"/></td>
 		</tr>
 		<tr>
 			<td align="right">Convênio:</td>

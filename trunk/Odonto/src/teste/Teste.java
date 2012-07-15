@@ -1,12 +1,5 @@
 package teste;
 
-import modelo.Convenio;
-import modelo.Usuario;
-import persistencia.DaoConvenio;
-import persistencia.DaoConvenio;
-import persistencia.DaoUsuario;
-import persistencia.DaoUsuario;
-import util.ConfiguraAtributo;
 
 public class Teste {
 

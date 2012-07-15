@@ -157,7 +157,7 @@ public class ServletRecepcionista extends HttpServlet {
 			mensagem = "Preencha o nome do(a) recepcionista corretamente. O nome deve ter pelo menos 5 caracteres";
 		}else if ((usuario.getRgUsuario() == null) || (usuario.getRgUsuario().length() < 5)) {
 			mensagem = "Preencha o RG da recepcionista corretamente.";
-		}else if ((usuario.getCpfUsuario() == null) || (usuario.getCpfUsuario().length() < 11)) {
+		}else if ((usuario.getCpfUsuario() == null) || (usuario.getCpfUsuario().length() < 14)) {
 			mensagem = "Preencha o CPF da recepcionista corretamente.";
 		}else if ((usuario.getDataNascimentoUsuario() == null) || (usuario.getDataNascimentoUsuario().equals(""))) {
 			mensagem = "Preencha a data de nascimento da recepcionista corretamente.";

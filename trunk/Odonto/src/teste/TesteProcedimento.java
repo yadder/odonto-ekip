@@ -3,8 +3,6 @@ package teste;
 import modelo.Convenio;
 import modelo.Procedimento;
 import persistencia.DaoConvenio;
-import persistencia.DaoConvenio;
-import persistencia.DaoProcedimento;
 import persistencia.DaoProcedimento;
 
 public class TesteProcedimento {
@@ -15,10 +13,8 @@ public class TesteProcedimento {
 		DaoProcedimento daoProcedimento = new DaoProcedimento();
 		Convenio convenio = new Convenio();
 		DaoConvenio daoConvenio = new DaoConvenio();
-		convenio = daoConvenio.pesquisarConvenioPorNome("BRADESCO");
-		}catch (Exception e) {
-			// TODO: handle exception
-		}
+		convenio = daoConvenio.pesquisarConvenioPorNome(convenio);
+		
 		/*
 		System.out.println("1------------------------------Testando a classe procedimento (Cadastro)");
 		procedimento = new Procedimento("Prótese");
@@ -40,7 +36,7 @@ public class TesteProcedimento {
 		*/
 		
 		System.out.println("1------------------------------Testando a classe procedimento (Alteracao)");
-		procedimento = daoProcedimento.pesquisarProcedimentoPorDescricao("obturação");
+		procedimento = daoProcedimento.pesquisarProcedimentoPorDescricao(procedimento);
 		procedimento.setDescricaoProcedimento("obturacao");
 		daoProcedimento.alterarProcedimento(procedimento);
 		if (result){
@@ -58,6 +54,8 @@ public class TesteProcedimento {
 			System.out.println("Erro na exclusão");
 		}
 */
-		
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 }

@@ -45,11 +45,8 @@
 		</tr>
 		<tr>
 			<td align="right">Número:</td>
-			<td><input type="text" name="numeroLogradouroPaciente" value="${paciente.numeroLogradouroPaciente}" size="20" /></td>
-		</tr>
-		<tr>
-			<td align="right">Complemento:</td>
-			<td><input type="text" name="complementoLogradouroPaciente" value="${paciente.complementoLogradouroPaciente}" size="20" /></td>
+			<td><input type="text" name="numeroLogradouroPaciente" value="${paciente.numeroLogradouroPaciente}" size="5" />
+			Complemento:<input type="text" name="complementoLogradouroPaciente" value="${paciente.complementoLogradouroPaciente}" size="31" /></td>
 		</tr>
 		<tr>
 			<td align="right">Bairro:</td>

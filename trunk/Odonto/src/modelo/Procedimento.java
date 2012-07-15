@@ -13,9 +13,9 @@ public class Procedimento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_procedimento", nullable = false)
     private long idProcedimento;
-    @Column(name = "codigo_procedimento", nullable = false, length=30)
+    @Column(name = "codigo_procedimento", nullable = false, length=100)
     private String codigoProcedimento;
-    @Column(name = "descricao_procedimento", nullable = false, length = 50)
+    @Column(name = "descricao_procedimento", nullable = false, length = 100)
     private String descricaoProcedimento;
     @Column(name = "valor_procedimento", nullable = false)
     private double valorProcedimento;
