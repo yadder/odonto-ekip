@@ -62,7 +62,7 @@ public class ServletPaciente extends HttpServlet {
 			}
 		}else if (btn.equals("Pesquisar")){
 			paciente = preencheObjeto(request, response);
-			if (validaCampos(paciente)){
+			if (paciente.getNomeUsuario()!=null){
 				try{
 					DaoPaciente daoPaciente = new DaoPaciente();
 					paciente = daoPaciente.pesquisarPacientePorNome(paciente);
@@ -107,6 +107,7 @@ public class ServletPaciente extends HttpServlet {
 		}else if(btn.equals("Alterar")){
 			paciente = preencheObjeto(request, response);
 			paciente.setIdUsuario(((Paciente)objetoSessao.getAttribute("paciente")).getIdUsuario());
+			objetoSessao.setAttribute("paciente", paciente);
 			if (validaCampos(paciente)){	
 				try{					
 					DaoPaciente daoPaciente = new DaoPaciente();
@@ -136,10 +137,12 @@ public class ServletPaciente extends HttpServlet {
 		ConfiguraAtributo ca = new ConfiguraAtributo();
 		paciente.setNomeUsuario((String) request.getParameter("nomePaciente"));
 		paciente.setSenhaUsuario(ca.gerarSenha());
-		paciente.setPerfilUsuario("DENTISTA");
+		paciente.setPerfilUsuario("PACIENTE");
 		paciente.setRgUsuario((String) request.getParameter("rgPaciente"));
 		paciente.setCpfUsuario((String) request.getParameter("cpfPaciente"));
-		paciente.setDataNascimentoUsuario(ca.dataStringParaDataSql((String) request.getParameter("dtNascPaciente")));
+		if (!((String) request.getParameter("dtNascPaciente")).equals("")){
+			paciente.setDataNascimentoUsuario(ca.dataStringParaDataSql((String) request.getParameter("dtNascPaciente")));
+		}			
 		paciente.setSexoUsuario((String) request.getParameter("sexoPaciente"));
 		paciente.setResponsavelPaciente((String) request.getParameter("responsavelPaciente"));
 		paciente.setLogradouroPaciente((String) request.getParameter("logradouroPaciente"));
@@ -161,7 +164,6 @@ public class ServletPaciente extends HttpServlet {
 		paciente.setNomeUsuario(paciente.getNomeUsuario().trim()); 
 		paciente.setRgUsuario(paciente.getRgUsuario().trim()); 
 		paciente.setCpfUsuario(paciente.getCpfUsuario().trim()); 
-		paciente.setSexoUsuario(paciente.getSexoUsuario().trim()); 
 		paciente.setResponsavelPaciente(paciente.getResponsavelPaciente().trim());
 		paciente.setLogradouroPaciente(paciente.getLogradouroPaciente().trim());
 		paciente.setNumeroLogradouroPaciente(paciente.getLogradouroPaciente().trim());
@@ -177,17 +179,17 @@ public class ServletPaciente extends HttpServlet {
 		if ((paciente.getNomeUsuario() == null) || (paciente.getNomeUsuario().length() < 5)) {
 			mensagem = "Preencha o nome do(a) paciente corretamente. O nome deve ter pelo menos 5 caracteres";
 		}else if ((paciente.getRgUsuario() == null) || (paciente.getRgUsuario().length() < 5)) {
-			mensagem = "Preencha o RG da paciente corretamente.";
-		}else if ((paciente.getCpfUsuario() == null) || (paciente.getCpfUsuario().length() < 11)) {
-			mensagem = "Preencha o CPF da paciente corretamente.";
+			mensagem = "Preencha o RG do(a) paciente corretamente.";
+		}else if ((paciente.getCpfUsuario() == null) || (paciente.getCpfUsuario().length() < 14)) {
+			mensagem = "Preencha o CPF do(a) paciente corretamente.";
 		}else if ((paciente.getDataNascimentoUsuario() == null) || (paciente.getDataNascimentoUsuario().equals(""))) {
-			mensagem = "Preencha a data de nascimento da paciente corretamente.";
+			mensagem = "Preencha a data de nascimento do(a) paciente corretamente.";
 		}else if ((paciente.getSexoUsuario() == null) || (paciente.getSexoUsuario().equals(""))) {
-			mensagem = "Preencha o sexo da paciente corretamente.";
-		}else if ((paciente.getDdd1Paciente() == null) || (paciente.getDdd1Paciente().equals(""))) {
-			mensagem = "Preencha o DDD do paciente corretamente.";
-		}else if ((paciente.getTelefone1Paciente() == null) || (paciente.getTelefone1Paciente().equals(""))) {
-			mensagem = "Preencha o sexo da paciente corretamente.";
+			mensagem = "Preencha o sexo do(a) paciente corretamente.";
+		}else if ((paciente.getDdd1Paciente() == null) || (paciente.getDdd1Paciente().equals("")) ||(paciente.getDdd1Paciente().length()<2)) {
+			mensagem = "Preencha o DDD do(a) paciente corretamente.";
+		}else if ((paciente.getTelefone1Paciente() == null) || (paciente.getTelefone1Paciente().equals("")) || (paciente.getTelefone1Paciente().length()<9)) {
+			mensagem = "Preencha o telefone1 do(a) paciente corretamente.";
 		}
 		
 		// outros campos do paciente

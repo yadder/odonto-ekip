@@ -130,7 +130,7 @@ public class Script {
 			dentista.setPerfilUsuario("DENTISTA");
 			dentista.setRgUsuario("22222222-2");
 			dentista.setCpfUsuario("222.222.222-22");
-			dentista.setDataNascimentoUsuario(ca.dataStringParaDataSql("10/01/1968"));
+			dentista.setDataNascimentoUsuario(ca.dataStringParaDataSql("15/03/1968"));
 			dentista.setSexoUsuario("M");
 			dentista.setCroDentista("2222222");
 			daoDentista.cadastrarDentista(dentista);
@@ -158,6 +158,8 @@ public class Script {
 			paciente.setCidadePaciente("RIO DE JANEIRO");
 			paciente.setEstadoPaciente("RJ");
 			paciente.setCepPaciente("33.333-333");
+			paciente.setDdd1Paciente("33");
+			paciente.setTelefone1Paciente("3333-3333");
 			daoPaciente.cadastrarPaciente(paciente);
 			System.out.println("--- Paciente cadastrados");
 		}catch (Exception e) {

@@ -2,13 +2,11 @@ package teste;
 
 import modelo.Dentista;
 import persistencia.DaoDentista;
-import persistencia.DaoDentista;
 import util.ConfiguraAtributo;
 
 public class TesteDentista {
 
 	public static void main(String[] args) {
-		boolean result = false;
 		
 		try{
 			Dentista dentista = new Dentista();

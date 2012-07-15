@@ -34,11 +34,11 @@
 		</tr>
 		<tr>
 			<td align="right">Código:</td>
-			<td><input type="text" name="codigoProcedimento" value="${procedimento.codigoProcedimento}" size="20" maxlength="20" />
+			<td><input type="text" name="codigoProcedimento" value="${procedimento.codigoProcedimento}" size="20" maxlength="100" />
 		</tr>
 		<tr>
 			<td align="right">Descrição:</td>
-			<td><input type="text" name="descricaoProcedimento" value="${procedimento.descricaoProcedimento}" size="20" maxlength="20" /><input type="submit" name="btn" value="Pesquisar" />
+			<td><input type="text" name="descricaoProcedimento" value="${procedimento.descricaoProcedimento}" size="20" maxlength="100" /><input type="submit" name="btn" value="Pesquisar" />
 		</tr>
 		<tr>
 			<td align="right">Valor:</td>

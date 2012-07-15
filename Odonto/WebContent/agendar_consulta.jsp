@@ -36,15 +36,6 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="right">Selecione o(a) dentista: taglig***</td>
-			<td><select name="dentista">
-						<c:forEach var="lista" items="${listaDentista}">
-							<option value="${lista.nomeUsuario}">${lista.nomeUsuario}</option>
-						</c:forEach>
-				</select>
-			</td>
-		</tr>
-		<tr>
 			<td align="right">Selecione o(a) dentista:</td>
 			<td><select name="dentista">
 				<%
@@ -59,11 +50,24 @@
 		</tr>
 		<tr>
 			<td align="right">Selecione a data da consulta:</td>
-			<td><input type="text" name="dataConsulta" /></td>
+			<td><input type="text" name="dataConsulta" value="${data}" size="17" maxlength="10" OnKeyPress="formatar(this, '##/##/####')" /></td>
 		</tr>
 		<tr>
 			<td align="right">Selecione a hora da consulta:</td>
-			<td>Fazer um for trazendo os horarios livres daquela data escolhida</td>
+			<td><select name="horaConsulta">
+					<option value="08:00">08:00</option>
+					<option value="09:00">09:00</option>
+					<option value="10:00">10:00</option>
+					<option value="11:00">11:00</option>
+					<option value="12:00">12:00</option>
+					<option value="13:00">13:00</option>
+					<option value="14:00">14:00</option>
+					<option value="15:00">15:00</option>
+					<option value="16:00">16:00</option>
+					<option value="17:00">17:00</option>
+					<option value="18:00">18:00</option>
+				</select>
+			</td>
 		<tr>
 			<td colspan=2 align="center">
 				<input type="submit" name="btn" value="Agendar Consulta" />

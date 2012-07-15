@@ -1,9 +1,18 @@
 package modelo;
 
 import java.io.Serializable;
-import java.sql.Time;
 import java.util.Date;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tb_consulta")
@@ -18,10 +27,8 @@ public class Consulta implements Serializable {
     private Date dataConsulta;
     @Column(name = "status_consulta", nullable = false, length = 20)
     private String statusConsulta;
-    @Column(name = "hora_inicio", nullable = false)
-    private Time horaInicio;
-    @Column(name = "hora_fim", nullable = false)
-    private Time horaFim;
+    @Column(name = "hora_consulta", nullable = false)
+    private String horaConsulta;
     @ManyToOne(fetch=FetchType.EAGER)
 	private Paciente paciente;
     @ManyToOne(fetch=FetchType.EAGER)
@@ -74,20 +81,12 @@ public class Consulta implements Serializable {
 		return serialVersionUID;
 	}
 
-	public Time getHoraInicio() {
-		return horaInicio;
+	public String getHoraConsulta() {
+		return horaConsulta;
 	}
 
-	public void setHoraInicio(Time horaInicio) {
-		this.horaInicio = horaInicio;
-	}
-
-	public Time getHoraFim() {
-		return horaFim;
-	}
-
-	public void setHoraFim(Time horaFim) {
-		this.horaFim = horaFim;
+	public void setHoraConsulta(String horaConsulta) {
+		this.horaConsulta = horaConsulta;
 	}
     
 }

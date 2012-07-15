@@ -31,6 +31,7 @@
 					<li><a href="#">Cancelar consulta</a></li>
 					<li><a href="#">Listar consultas</a></li>
 					<li><a href="#">Remarcar consulta</a></li>
+					<li><a href="teste.jsp">Teste TagLib</a></li>
 				</ul>
 			</li>
 			<li><a href="#"><b>Pagamento</b></a>
@@ -57,13 +58,11 @@
 			</li>
 			<li><a href="ServletPrincipal?acao=logout"><b>Logout</b></a></li>
 		</ul>
-	</div><!-- fim do div navbar -->
-	
-	<div class="sessao">
-		${msgCabecalho} Usuário: ${usuarioLogado.nomeUsuario}
-	</div><!-- fim do div sessao -->
-	 
+	</div><!-- fim do div navbar -->	 
 </div> <!-- fim do div cabeçalho -->
+<div class="sessao">
+		${msgCabecalho} Usuário: ${usuarioLogado.nomeUsuario}
+</div><!-- fim do div sessao -->
 
 </body>
 </html>

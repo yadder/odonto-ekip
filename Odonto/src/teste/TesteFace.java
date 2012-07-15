@@ -2,13 +2,13 @@ package teste;
 
 import modelo.Face;
 import persistencia.DaoFace;
-import persistencia.DaoFace;
 
 public class TesteFace {
 
 
 	public static void main(String[] args) {
 		boolean result = false;
+		try{
 		Face face = null;
 		DaoFace daoFace = new DaoFace();
 		
@@ -19,7 +19,7 @@ public class TesteFace {
 		
 		System.out.println("1------------------------------Testando a classe face (Pesquisa)");
 		face = new Face("MESIAL");
-		face = daoFace.pesquisarFacePorNome("MESIAL");
+		face = daoFace.pesquisarFacePorNome(face);
 		if (face != null){
 			System.out.println("Face "+face.getNomeFace()+" encontrado!");
 		}else{
@@ -28,7 +28,7 @@ public class TesteFace {
 		
 		System.out.println("1------------------------------Testando a classe face (Alteracao)");
 		face.setNomeFace("UNIMED");
-		result = daoFace.alterarFace(face);
+		daoFace.alterarFace(face);
 		if (result){
 			System.out.println("Face alterado para: "+face.getNomeFace());
 		}else{
@@ -36,11 +36,14 @@ public class TesteFace {
 		}
 		
 		System.out.println("1------------------------------Testando a classe face (Exclusao)");
-		result = daoFace.excluirFace(face);
+		daoFace.excluirFace(face);
 		if (result){
 			System.out.println("Face excluído");
 		}else{
 			System.out.println("Erro na exclusão");
+		}
+		}catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 
