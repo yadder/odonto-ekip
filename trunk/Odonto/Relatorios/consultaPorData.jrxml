@@ -2,30 +2,25 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="consultaPorData" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<queryString>
 		<![CDATA[SELECT
-     *,
-     tb_consulta.`data_consulta` AS tb_consulta_data_consulta,
-     tb_consulta.`status_consulta` AS tb_consulta_status_consulta,
-     tb_consulta.`hora_inicio` AS tb_consulta_hora_inicio,
-     tb_consulta.`hora_fim` AS tb_consulta_hora_fim,
-     tb_usuario.`nome_usuario` AS tb_usuario_nome_usuario,
-     tb_consulta.`paciente_idUsuario` AS tb_consulta_paciente_idUsuario
+     tpaciente.nome_usuario AS paciente,
+     tdentista.nome_usuario AS dentista,
+     tconsulta.data_consulta
 FROM
-     `tb_usuario` tb_usuario INNER JOIN `tb_paciente` tb_paciente ON tb_usuario.`id_usuario` = tb_paciente.`idUsuario`
-     LEFT OUTER JOIN `tb_consulta` tb_consulta ON tb_paciente.`idUsuario` = tb_consulta.`paciente_idUsuario`]]>
+     tb_usuario tpaciente,
+     tb_usuario tdentista,
+     tb_consulta tconsulta
+WHERE
+     tconsulta.data_consulta = '2012-07-17'
+     and tconsulta.paciente_id_usuario = tpaciente.id_usuario
+     and tconsulta.dentista_id_usuario = tdentista.id_usuario]]>
 	</queryString>
-	<field name="nome_usuario" class="java.lang.String">
+	<field name="paciente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dentista" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="data_consulta" class="java.sql.Date">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="hora_fim" class="java.sql.Time">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="hora_inicio" class="java.sql.Time">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="status_consulta" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<sortField name="data_consulta"/>
@@ -94,14 +89,7 @@ FROM
 				<text><![CDATA[Paciente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="370" y="0" width="65" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Hora Fim]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="268" y="0" width="72" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="313" y="0" width="91" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -126,18 +114,11 @@ FROM
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nome_usuario}]]></textFieldExpression>
 			</textField>
 			<textField pattern="K:mm a">
-				<reportElement x="370" y="0" width="65" height="20"/>
+				<reportElement x="313" y="0" width="91" height="20"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression class="java.sql.Time"><![CDATA[$F{hora_fim}]]></textFieldExpression>
-			</textField>
-			<textField pattern="K:mm a">
-				<reportElement x="268" y="0" width="72" height="20"/>
-				<textElement textAlignment="Center">
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression class="java.sql.Time"><![CDATA[$F{hora_inicio}]]></textFieldExpression>
+				<textFieldExpression class="java.sql.Time"><![CDATA[$F{hora_consulta}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="449" y="0" width="102" height="20"/>
