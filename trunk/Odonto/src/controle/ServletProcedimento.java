@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import modelo.Convenio;
 import modelo.Procedimento;
+import persistencia.DaoConvenio;
 import persistencia.DaoProcedimento;
 import util.ConfiguraAtributo;
 
@@ -123,13 +125,23 @@ public class ServletProcedimento extends HttpServlet {
 	
 	public Procedimento preencheObjeto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		Procedimento procedimento = new Procedimento();
-		ConfiguraAtributo ca = new ConfiguraAtributo();
-		procedimento.setDescricaoProcedimento((String)request.getParameter("descricaoProcedimento"));
-		procedimento.setCodigoProcedimento((String)request.getParameter("codigoProcedimento"));
-		if (!((String) request.getParameter("valorProcedimento")).equals("")){
-			procedimento.setValorProcedimento(ca.validaValores((String)request.getParameter("valorProcedimento")));
+		try{
+			ConfiguraAtributo ca = new ConfiguraAtributo();
+			DaoConvenio daoConvenio = new DaoConvenio();
+			Convenio convenio = new Convenio();
+			convenio.setNomeConvenio((String)request.getParameter("convenio"));
+			convenio = daoConvenio.pesquisarConvenioPorNome(convenio);
+			procedimento.setConvenio(convenio);
+			procedimento.setCodigoProcedimento((String)request.getParameter("codigoProcedimento"));
+			procedimento.setDescricaoProcedimento((String)request.getParameter("descricaoProcedimento"));
+			if (!((String) request.getParameter("valorProcedimento")).equals("")){
+				procedimento.setValorProcedimento(ca.validaValores((String)request.getParameter("valorProcedimento")));
+			}
+			return procedimento;
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-		return procedimento;		
+		return procedimento;
 	}
 		
 	public boolean validaCampos(Procedimento procedimento){

@@ -29,8 +29,14 @@
 				<ul>
 					<li><a href="agendar_consulta.jsp">Agendar consulta</a></li>
 					<li><a href="cancelar_consulta.jsp">Cancelar consulta</a></li>
-					<li><a href="listar_consultas.jsp?btn=listarconsultas">Listar consultas</a></li>
+					<li><a href="ServletConsulta?btn=listarconsultas">Listar consultas agendadas</a></li>
 					<li><a href="#">Remarcar consulta</a></li>
+				</ul>
+			</li>
+			<li><a href="#"><b>Odontograma</b></a>
+				<ul>
+					<li><a href="#">Novo odontograma</a></li>
+					<li><a href="#">Atendimento paciente</a></li>
 				</ul>
 			</li>
 			<li><a href="#"><b>Pagamento</b></a>
