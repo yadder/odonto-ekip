@@ -1,6 +1,9 @@
 package controle;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,6 +39,7 @@ public class ServletConsulta extends HttpServlet {
 		
 		if (btn.equals("Voltar")){
 			objetoSessao.removeAttribute("consulta");
+			objetoSessao.removeAttribute("listaConsulta");
 			RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
 			disp.forward(request, response);
 			
@@ -61,6 +65,33 @@ public class ServletConsulta extends HttpServlet {
 				RequestDispatcher disp = request.getRequestDispatcher("agendar_consulta.jsp");
 				disp.forward(request, response);
 			}
+		}else if (btn.equals("listarconsultas")){
+			try{
+				DaoConsulta dao = new DaoConsulta();
+				List<Consulta> listaConsulta = new ArrayList<Consulta>();
+				listaConsulta = dao.pesquisarTodosConsultaAgendada();
+				objetoSessao.setAttribute("listaConsulta", listaConsulta);
+				RequestDispatcher disp = request.getRequestDispatcher("listar_consultas.jsp");
+				disp.forward(request, response);
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
+		}else if (btn.equals("Pesquisar")){
+			ConfiguraAtributo ca = new ConfiguraAtributo();
+			Date data = (ca.dataStringParaDataSql((String)request.getParameter("dataConsulta")));
+			try{
+				DaoConsulta dao = new DaoConsulta();
+				List<Consulta> listaConsulta = new ArrayList<>();
+				listaConsulta = dao.pesquisarTodosConsultaData(data);
+				objetoSessao.setAttribute("listaConsulta", listaConsulta);
+				request.setAttribute("msg", mensagem);
+				request.setAttribute("msgE", null);
+				RequestDispatcher disp = request.getRequestDispatcher("listar_consultas.jsp");
+				disp.forward(request, response);
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
+			
 		}
 	}
 	

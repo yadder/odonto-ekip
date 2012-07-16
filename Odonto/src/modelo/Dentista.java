@@ -47,7 +47,7 @@ public class Dentista extends Usuario implements Serializable {
 
 	@Override
 	public String toString() {
-		return super.toString()+ " Cro: "+croDentista;
+		return super.getNomeUsuario();
 	}
     
     

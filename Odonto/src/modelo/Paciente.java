@@ -184,4 +184,8 @@ public class Paciente extends Usuario implements Serializable {
         this.cepPaciente = cepPaciente;
     }
    
+    @Override
+    public String toString() {
+    	return super.getNomeUsuario();
+    }
 }
