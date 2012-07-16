@@ -110,7 +110,7 @@ FROM
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{tb_procedimento_valor_procedimento}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.000">
+			<textField pattern="###0">
 				<reportElement x="1" y="0" width="126" height="20"/>
 				<textElement>
 					<font size="12"/>
