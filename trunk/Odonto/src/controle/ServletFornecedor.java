@@ -54,7 +54,7 @@ public class ServletFornecedor extends HttpServlet {
 			}
 		}else if (btn.equals("Pesquisar")){
 			fornecedor = preencheObjeto(request, response);
-			if (validaCampos(fornecedor)){
+			if (fornecedor.getNomeFornecedor()!=null){
 				try{
 					DaoFornecedor dao = new DaoFornecedor();
 					fornecedor = dao.pesquisarFornecedorPorNome(fornecedor);
