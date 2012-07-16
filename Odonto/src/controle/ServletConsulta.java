@@ -66,32 +66,58 @@ public class ServletConsulta extends HttpServlet {
 				disp.forward(request, response);
 			}
 		}else if (btn.equals("listarconsultas")){
+			System.out.println("listarconsultas");
 			try{
 				DaoConsulta dao = new DaoConsulta();
 				List<Consulta> listaConsulta = new ArrayList<Consulta>();
 				listaConsulta = dao.pesquisarTodosConsultaAgendada();
-				objetoSessao.setAttribute("listaConsulta", listaConsulta);
-				RequestDispatcher disp = request.getRequestDispatcher("listar_consultas.jsp");
-				disp.forward(request, response);
+				if (listaConsulta!= null){
+					System.out.println("A lista nao esta vazia");
+					objetoSessao.setAttribute("listaConsulta", listaConsulta);
+					RequestDispatcher disp = request.getRequestDispatcher("listar_consultas.jsp");
+					disp.forward(request, response);
+				}else{
+					objetoSessao.removeAttribute("listaConsulta");
+					mensagem = "Não existe consultas agendadas.";
+					request.setAttribute("msg", null);
+					request.setAttribute("msgE", mensagem);
+					RequestDispatcher disp = request.getRequestDispatcher("cancelar_consulta.jsp");
+					disp.forward(request, response);
+				}				
 			}catch(Exception ex){
 				ex.printStackTrace();
 			}
 		}else if (btn.equals("Pesquisar")){
-			ConfiguraAtributo ca = new ConfiguraAtributo();
-			Date data = (ca.dataStringParaDataSql((String)request.getParameter("dataConsulta")));
-			try{
-				DaoConsulta dao = new DaoConsulta();
-				List<Consulta> listaConsulta = new ArrayList<>();
-				listaConsulta = dao.pesquisarTodosConsultaData(data);
-				objetoSessao.setAttribute("listaConsulta", listaConsulta);
-				request.setAttribute("msg", mensagem);
-				request.setAttribute("msgE", null);
-				RequestDispatcher disp = request.getRequestDispatcher("listar_consultas.jsp");
+			if (validaData(((String)request.getParameter("dataConsulta")))){
+				ConfiguraAtributo ca = new ConfiguraAtributo();
+				Date data = (ca.dataStringParaDataSql((String)request.getParameter("dataConsulta")));
+				try{
+					DaoConsulta dao = new DaoConsulta();
+					List<Consulta> listaConsulta = new ArrayList<Consulta>();
+					listaConsulta = dao.pesquisarTodosConsultaData(data);
+					if (listaConsulta.size()>0){
+						objetoSessao.setAttribute("listaConsulta", listaConsulta);
+						request.setAttribute("msg", null);
+						request.setAttribute("msgE", null);
+						RequestDispatcher disp = request.getRequestDispatcher("listar_consultas.jsp");
+						disp.forward(request, response);
+					}else{
+						objetoSessao.removeAttribute("listaConsulta");
+						mensagem = "Nenhuma consulta foi agendada para a data "+ca.dataSqlParaDataString(data);
+						request.setAttribute("msg", null);
+						request.setAttribute("msgE", mensagem);
+						RequestDispatcher disp = request.getRequestDispatcher("cancelar_consulta.jsp");
+						disp.forward(request, response);
+					}
+				}catch(Exception ex){
+					ex.printStackTrace();
+				}
+			}else{
+				request.setAttribute("msg", null);
+				request.setAttribute("msgE", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("cancelar_consulta.jsp");
 				disp.forward(request, response);
-			}catch(Exception ex){
-				ex.printStackTrace();
-			}
-			
+			}			
 		}
 	}
 	
@@ -135,6 +161,16 @@ public class ServletConsulta extends HttpServlet {
 			mensagem = "Preencha o horário da consulta.";
 		} 
 		else{
+			result = true;
+		}
+		return result;
+	}
+	
+	public boolean validaData(String data){
+		boolean result = false;
+		if ((data == null) || (data.equals("")) || (data.length()!=10)){
+			mensagem = "Preencha a data da consulta corretamente.";
+		}else{
 			result = true;
 		}
 		return result;

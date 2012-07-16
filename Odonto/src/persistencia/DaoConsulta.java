@@ -4,8 +4,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
-
 import modelo.Consulta;
 
 import org.hibernate.Criteria;
@@ -14,6 +12,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import util.ConfiguraAtributo;
 import util.HibernateUtil;
 
 public class DaoConsulta {
@@ -61,7 +60,7 @@ public class DaoConsulta {
 	public List<Consulta> pesquisarTodosConsultaAgendada() throws Exception{
 		List<Consulta> lista = null;
 		session = HibernateUtil.getSessionFactory().openSession();
-		Criteria cr = session.createCriteria(Consulta.class).add((Restrictions.eq("statusConsulta", "AGENDADA"))).addOrder(Order.asc("dataConsulta"));
+		Criteria cr = session.createCriteria(Consulta.class).add(Restrictions.eq("statusConsulta", "AGENDADA")).addOrder(Order.asc("dataConsulta"));
 		lista = (ArrayList)cr.list();
 		session.flush();
 		session.close();
@@ -71,7 +70,7 @@ public class DaoConsulta {
 	public List<Consulta> pesquisarTodosConsultaData(Date data) throws Exception{
 		List<Consulta> lista = null;
 		session = HibernateUtil.getSessionFactory().openSession();
-		Criteria cr = session.createCriteria(Consulta.class).add((Restrictions.eq("dataConsulta", data)));
+		Criteria cr = session.createCriteria(Consulta.class).add(Restrictions.eq("dataConsulta", data));
 		lista = (ArrayList)cr.list();
 		session.flush();
 		session.close();
@@ -80,14 +79,20 @@ public class DaoConsulta {
 	
 	public static void main(String[] args) {
 		try{
+			ConfiguraAtributo ca = new ConfiguraAtributo();
 			DaoConsulta dao = new DaoConsulta();
 			List<Consulta> lista = new ArrayList<Consulta>();
-			lista = dao.pesquisarTodosConsultaAgendada();
-			for (Consulta consulta : lista) {
-				System.out.println(consulta);
+			Date data = ca.dataStringParaDataSql("28/07/2012");
+			lista = dao.pesquisarTodosConsultaData(data);
+			if (lista.size()>0){
+				for (Consulta consulta : lista) {
+					System.out.println(consulta.getDataConsulta());
+				}
+			}else{
+				System.out.println("Nenhuma consulta encontrada");
 			}
 		}catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 	}
