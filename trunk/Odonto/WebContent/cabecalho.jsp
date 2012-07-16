@@ -28,10 +28,9 @@
 			<li><a href="#"><b>Consulta</b></a>
 				<ul>
 					<li><a href="agendar_consulta.jsp">Agendar consulta</a></li>
-					<li><a href="#">Cancelar consulta</a></li>
-					<li><a href="#">Listar consultas</a></li>
+					<li><a href="cancelar_consulta.jsp">Cancelar consulta</a></li>
+					<li><a href="listar_consultas.jsp?btn=listarconsultas">Listar consultas</a></li>
 					<li><a href="#">Remarcar consulta</a></li>
-					<li><a href="teste.jsp">Teste TagLib</a></li>
 				</ul>
 			</li>
 			<li><a href="#"><b>Pagamento</b></a>

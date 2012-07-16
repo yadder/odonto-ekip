@@ -1,13 +1,18 @@
 package persistencia;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 
 import modelo.Consulta;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import util.HibernateUtil;
 
@@ -52,4 +57,41 @@ public class DaoConsulta {
 		session.close();
 		return lista;
 	}
+	
+	public List<Consulta> pesquisarTodosConsultaAgendada() throws Exception{
+		List<Consulta> lista = null;
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Consulta.class).add((Restrictions.eq("statusConsulta", "AGENDADA"))).addOrder(Order.asc("dataConsulta"));
+		lista = (ArrayList)cr.list();
+		session.flush();
+		session.close();
+		return lista;
+	}
+	
+	public List<Consulta> pesquisarTodosConsultaData(Date data) throws Exception{
+		List<Consulta> lista = null;
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Consulta.class).add((Restrictions.eq("dataConsulta", data)));
+		lista = (ArrayList)cr.list();
+		session.flush();
+		session.close();
+		return lista;
+	}
+	
+	public static void main(String[] args) {
+		try{
+			DaoConsulta dao = new DaoConsulta();
+			List<Consulta> lista = new ArrayList<Consulta>();
+			lista = dao.pesquisarTodosConsultaAgendada();
+			for (Consulta consulta : lista) {
+				System.out.println(consulta);
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+	
 }
+
+
