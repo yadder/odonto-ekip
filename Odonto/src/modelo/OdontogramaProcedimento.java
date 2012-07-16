@@ -15,6 +15,8 @@ public class OdontogramaProcedimento implements Serializable {
     private long idOdontogramaProcedimeto;
     @Column(name = "status_procedimento", nullable = false, length = 20)
     private String statusProcedimento;
+    @Column(name = "status_autorizacao", nullable = false, length = 20)
+    private String statusAutorizacao;
     @JoinColumn(name = "id_elemento", referencedColumnName = "id_elemento", nullable = false)
     @ManyToOne(optional = false)
     private Elemento idElemento;
@@ -93,6 +95,14 @@ public class OdontogramaProcedimento implements Serializable {
 
 	public void setDataExecucaoProcedimento(Date dataExecucaoProcedimento) {
 		this.dataExecucaoProcedimento = dataExecucaoProcedimento;
+	}
+
+	public String getStatusAutorizacao() {
+		return statusAutorizacao;
+	}
+
+	public void setStatusAutorizacao(String statusAutorizacao) {
+		this.statusAutorizacao = statusAutorizacao;
 	}
 
 	@Override
