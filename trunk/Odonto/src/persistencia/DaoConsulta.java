@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.Consulta;
+import modelo.Paciente;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -77,26 +78,15 @@ public class DaoConsulta {
 		return lista;
 	}
 	
-	public static void main(String[] args) {
-		try{
-			ConfiguraAtributo ca = new ConfiguraAtributo();
-			DaoConsulta dao = new DaoConsulta();
-			List<Consulta> lista = new ArrayList<Consulta>();
-			Date data = ca.dataStringParaDataSql("28/07/2012");
-			lista = dao.pesquisarTodosConsultaData(data);
-			if (lista.size()>0){
-				for (Consulta consulta : lista) {
-					System.out.println(consulta.getDataConsulta());
-				}
-			}else{
-				System.out.println("Nenhuma consulta encontrada");
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
-	
+	public List<Consulta> pesquisarConsultaPorPaciente(Paciente paciente) throws Exception{
+		List<Consulta> lista = null;
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Consulta.class).add(Restrictions.eq("paciente", paciente));
+		lista = (ArrayList)cr.list();
+		session.flush();
+		session.close();
+		return lista;
+	}	
 }
 
 

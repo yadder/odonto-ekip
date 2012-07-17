@@ -138,14 +138,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-    	return " Id: "+idUsuario+
-    		   " Nome: "+ nomeUsuario+ 
-    		   " Senha: "+senhaUsuario+ 
-    		   " Perfil: "+perfilUsuario+
-    		   " RG: "+rgUsuario+ 
-    		   " CPF: "+cpfUsuario+ 
-    		   " Nasc.: "+dataNascimentoUsuario+ 
-    		   " Sexo: "+sexoUsuario;
+    	return nomeUsuario;
     }
     
 }

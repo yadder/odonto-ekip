@@ -12,26 +12,40 @@
 </head>
 <body>
 <fieldset class="pagina">
-<h1>:: Remarcar consulta</h1>
+<h1>:: Selecionar face e procedimento</h1>
 <div id="msg">
 	<h5 class="information">${msg}</h5>
 	<h5 class="error">${msgE}</h5>
 </div>
-
-<form name="formRemarcarConsulta" method="post" action="ServletConsulta">
+<center>
+<form action="ServletOdontograma" method="post" name="formSelecionarProcedimento">
 	<table>
 		<tr>
-			<td align="right">Nome do paciente:</td>
-			<td><input type="text" name="nomePaciente" size="45" /><input type="submit" name="btn" value="Pesquisar Paciente" /></td>
+			<td align="center"><img src="arquivos/elemento_superior_grande.png"></td>
 		</tr>
 		<tr>
-			<td colspan=2 align="right">
-				<input type="submit" name="btn" value="Voltar" />
+			<td align="center">
+				<select name="procedimento">
+					<c:forEach items="${sessionScope.listaFace}" var="colecao">
+						<option value="${colecao.nomeFace}" >${colecao.nomeFace}</option>
+					</c:forEach>
+				</select>	
+				<select name="procedimento">
+					<c:forEach items="${sessionScope.listaProcedimento}" var="colecao">
+						<option value="${colecao.descricaoProcedimento}" >${colecao.descricaoProcedimento}</option>
+					</c:forEach>
+				</select>	
+			</td>		
+		</tr>
+		<tr>
+			<td align="center">
+				<input type="submit" name="btn" value="Cancelar" />
+				<input type="submit" name="btn" value="Gravar procedimento" />
 			</td>
 		</tr>
-	</table>
+	</table>	
 </form>
-
+</center>
 </fieldset>
 <c:import url="cabecalho.jsp" />
 <c:import url="rodape.jsp" />

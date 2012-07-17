@@ -12,13 +12,13 @@
 </head>
 <body>
 <fieldset class="pagina">
-<h1>:: Remarcar consulta</h1>
+<h1>:: Pesquisar paciente</h1>
 <div id="msg">
 	<h5 class="information">${msg}</h5>
 	<h5 class="error">${msgE}</h5>
 </div>
 
-<form name="formRemarcarConsulta" method="post" action="ServletConsulta">
+<form name="formBuscarPaciente" method="post" action="ServletOdontograma">
 	<table>
 		<tr>
 			<td align="right">Nome do paciente:</td>
