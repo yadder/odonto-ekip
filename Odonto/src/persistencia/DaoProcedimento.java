@@ -3,6 +3,7 @@ package persistencia;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.Convenio;
 import modelo.Procedimento;
 
 import org.hibernate.Criteria;
@@ -51,6 +52,16 @@ public class DaoProcedimento {
 		session.flush();
 		session.close();
 		return p;
+	}
+	
+	public List<Procedimento> pesquisarProcedimentoPorConvenio(Convenio convenio) throws Exception{
+		List<Procedimento> lista = null;
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Procedimento.class).add(Restrictions.eq("convenio",convenio));
+		lista = (ArrayList)cr.list();
+		session.flush();
+		session.close();
+		return lista;
 	}
 
 	public List<Procedimento> pesquisarTodosProcedimento() throws Exception{

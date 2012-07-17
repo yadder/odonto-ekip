@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import modelo.Convenio;
 import modelo.Paciente;
+import persistencia.DaoConvenio;
 import persistencia.DaoPaciente;
 import util.ConfiguraAtributo;
 
@@ -156,9 +158,25 @@ public class ServletPaciente extends HttpServlet {
 		paciente.setTelefone1Paciente((String) request.getParameter("telefone1Paciente"));
 		paciente.setDdd2Paciente((String) request.getParameter("ddd2Paciente"));
 		paciente.setTelefone2Paciente((String) request.getParameter("telefone2Paciente"));
+		if (!((String) request.getParameter("convenio")).equals("")){
+			paciente.setConvenio(getConvenio((String) request.getParameter("convenio")));
+		}			
 		return paciente;		
 	}
 	
+	public Convenio getConvenio(String nomeConvenio){
+		try{
+			DaoConvenio daoConvenio = new DaoConvenio();
+			Convenio convenio = new Convenio();
+			convenio.setNomeConvenio(nomeConvenio);
+			convenio = daoConvenio.pesquisarConvenioPorNome(convenio);
+			return convenio;
+		}catch (Exception e) {
+			mensagem = "Erro ao buscar convênio.";
+			e.printStackTrace();
+			return null;
+		}		
+	}
 	public boolean validaCampos(Paciente paciente) {
 		// retira espaços
 		paciente.setNomeUsuario(paciente.getNomeUsuario().trim()); 
@@ -190,6 +208,8 @@ public class ServletPaciente extends HttpServlet {
 			mensagem = "Preencha o DDD do(a) paciente corretamente.";
 		}else if ((paciente.getTelefone1Paciente() == null) || (paciente.getTelefone1Paciente().equals("")) || (paciente.getTelefone1Paciente().length()<9)) {
 			mensagem = "Preencha o telefone1 do(a) paciente corretamente.";
+		}else if ((paciente.getConvenio()==null)){
+			mensagem = "Preencha o convênio do paciente.";
 		}
 		
 		// outros campos do paciente

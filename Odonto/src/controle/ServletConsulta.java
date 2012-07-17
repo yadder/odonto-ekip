@@ -118,6 +118,45 @@ public class ServletConsulta extends HttpServlet {
 				RequestDispatcher disp = request.getRequestDispatcher("cancelar_consulta.jsp");
 				disp.forward(request, response);
 			}			
+		}else if(btn.equals("Pesquisar Paciente")){
+			if (validaNome(((String)request.getParameter("nomePaciente")))){
+				Paciente paciente = new Paciente();
+				paciente = getPaciente((String)request.getParameter("nomePaciente"));
+				if (paciente != null){
+					try{
+						DaoConsulta daoConsulta = new DaoConsulta();
+						List<Consulta> listaConsulta = new ArrayList<Consulta>();
+						listaConsulta = daoConsulta.pesquisarConsultaPorPaciente(paciente);
+						if (listaConsulta.size()>0){
+							objetoSessao.setAttribute("listaConsulta", listaConsulta);
+							request.setAttribute("msg", null);
+							request.setAttribute("msgE", null);
+							RequestDispatcher disp = request.getRequestDispatcher("listar_consultas.jsp");
+							disp.forward(request, response);
+						}else{
+							objetoSessao.removeAttribute("listaConsulta");
+							mensagem = "Nenhuma consulta foi agendada para o paciente "+(String)request.getParameter("nomePaciente");
+							request.setAttribute("msg", null);
+							request.setAttribute("msgE", mensagem);
+							RequestDispatcher disp = request.getRequestDispatcher("remarcar_consulta.jsp");
+							disp.forward(request, response);
+						}
+					}catch(Exception ex){
+						ex.printStackTrace();
+					}
+				}else{
+					mensagem = "Paciente não encontrado.";
+					request.setAttribute("msg", null);
+					request.setAttribute("msgE", mensagem);
+					RequestDispatcher disp = request.getRequestDispatcher("remarcar_consulta.jsp");
+					disp.forward(request, response);
+				}
+			}else{
+				request.setAttribute("msg", null);
+				request.setAttribute("msgE", mensagem);
+				RequestDispatcher disp = request.getRequestDispatcher("remarcar_consulta.jsp");
+				disp.forward(request, response);
+			}		
 		}
 	}
 	
@@ -152,6 +191,20 @@ public class ServletConsulta extends HttpServlet {
 		}
 		return consulta;		
 	}
+	
+	public Paciente getPaciente(String nome){
+		try{
+			Paciente paciente = new Paciente();
+			paciente.setNomeUsuario(nome);
+			DaoPaciente daoPaciente = new DaoPaciente();
+			paciente = daoPaciente.pesquisarPacientePorNome(paciente);
+			return paciente;
+		}catch(Exception ex){
+			mensagem = "Erro ao pesquisar paciente.";
+			ex.printStackTrace();
+			return null;
+		}
+	}
 		
 	public boolean validaCampos(Consulta consulta){
 		boolean result = false;
@@ -170,6 +223,16 @@ public class ServletConsulta extends HttpServlet {
 		boolean result = false;
 		if ((data == null) || (data.equals("")) || (data.length()!=10)){
 			mensagem = "Preencha a data da consulta corretamente.";
+		}else{
+			result = true;
+		}
+		return result;
+	}
+	
+	public boolean validaNome(String nome){
+		boolean result = false;
+		if ((nome == null) || (nome.equals("") || (nome.length()<5))){
+			mensagem = "Preencha o nome do paciente corretamente.";
 		}else{
 			result = true;
 		}

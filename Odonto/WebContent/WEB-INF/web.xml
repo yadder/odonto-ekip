@@ -127,4 +127,14 @@
     <servlet-name>ServletAcesso</servlet-name>
     <url-pattern>/ServletAcesso</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletOdontograma</display-name>
+    <servlet-name>ServletOdontograma</servlet-name>
+    <servlet-class>controle.ServletOdontograma</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletOdontograma</servlet-name>
+    <url-pattern>/ServletOdontograma</url-pattern>
+  </servlet-mapping>
 </web-app>
