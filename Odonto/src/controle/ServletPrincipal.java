@@ -1,6 +1,7 @@
 package controle;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -43,6 +44,15 @@ public class ServletPrincipal extends HttpServlet {
 				mensagem = "Os campos com (*) são obrigatórios.";
 				request.setAttribute("msg", mensagem);
 				RequestDispatcher disp = request.getRequestDispatcher("agendar_consulta.jsp");
+				disp.forward(request, response);
+			}else if (acao.equals("home")){
+				
+				StringBuffer perdidosNaSessao = new StringBuffer();
+				for(Enumeration e = objetoSessao.getAttributeNames(); e.hasMoreElements();){
+					perdidosNaSessao.append(e.nextElement() + "\n");
+				}
+				objetoSessao.setAttribute("perdidosNaSessao", perdidosNaSessao);
+				RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
 				disp.forward(request, response);
 			}
 		}catch (Exception e) {

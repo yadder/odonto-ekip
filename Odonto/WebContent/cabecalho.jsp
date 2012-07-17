@@ -11,7 +11,7 @@
 	<img src="arquivos/logo_horizontal.png" width="300">
 	<div id="barramenu">		
 		<ul class="navbar">
-			<li><a href="principal.jsp"><b>Home</b></a></li>
+			<li><a href="ServletPrincipal?acao=home"><b>Home</b></a></li>
 			<li><a href="#"><b>Cadastro</b></a>
 				<ul>
 					<li><a href="acesso.jsp">Acesso</a></li>
@@ -64,9 +64,11 @@
 			<li><a href="ServletPrincipal?acao=logout"><b>Logout</b></a></li>
 		</ul>
 	</div><!-- fim do div navbar -->	 
+	
 </div> <!-- fim do div cabeçalho -->
 <div class="sessao">
-		${msgCabecalho} Usuário: ${usuarioLogado.nomeUsuario}
+		${msgCabecalho} Usuário: ${usuarioLogado.nomeUsuario}<br>
+		Perdidos na sessao: ${perdidosNaSessao}
 </div><!-- fim do div sessao -->
 
 </body>
