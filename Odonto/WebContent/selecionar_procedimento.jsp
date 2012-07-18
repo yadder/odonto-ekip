@@ -19,17 +19,21 @@
 </div>
 <center>
 <form action="ServletOdontograma" method="post" name="formSelecionarProcedimento">
-	<table>
+	<table border="1">
 		<tr>
-			<td align="center"><img src="arquivos/elemento_superior_grande.png"></td>
-		</tr>
-		<tr>
-			<td align="center">
-				<select name="procedimento">
+			<td align="center">Selecione a face:
+				<select name="face">
 					<c:forEach items="${sessionScope.listaFace}" var="colecao">
 						<option value="${colecao.nomeFace}" >${colecao.nomeFace}</option>
 					</c:forEach>
 				</select>	
+			</td>
+		</tr>
+		<tr>
+			<td align="center"><img src="arquivos/elemento_superior_grande.png"></td>
+		</tr>
+		<tr>
+			<td align="center">Procedimentos: ${convenioPaciente}
 				<select name="procedimento">
 					<c:forEach items="${sessionScope.listaProcedimento}" var="colecao">
 						<option value="${colecao.descricaoProcedimento}" >${colecao.descricaoProcedimento}</option>
