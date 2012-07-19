@@ -18,7 +18,7 @@ public class Odontograma implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataInicioOdontograma;
     
-    @Column(name = "data_fim_odontograma", nullable = false)
+    @Column(name = "data_fim_odontograma")
     @Temporal(TemporalType.DATE)
     private Date dataFimOdontograma;
     
@@ -100,7 +100,7 @@ public class Odontograma implements Serializable {
 
 	@Override
     public String toString() {
-        return "odonto.Odontograma[ idOdontograma=" + idOdontograma + " ]";
+        return "Odontograma: " + idOdontograma;
     }
     
 }

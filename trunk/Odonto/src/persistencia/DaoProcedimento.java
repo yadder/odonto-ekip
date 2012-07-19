@@ -54,6 +54,15 @@ public class DaoProcedimento {
 		return p;
 	}
 	
+	public Procedimento pesquisarProcedimentoPorId(Procedimento procedimento) throws Exception{
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Procedimento.class).add(Restrictions.eq("idProcedimento",procedimento.getIdProcedimento()));
+		Procedimento p = (Procedimento)cr.uniqueResult();
+		session.flush();
+		session.close();
+		return p;
+	}
+	
 	public List<Procedimento> pesquisarProcedimentoPorConvenio(Convenio convenio) throws Exception{
 		List<Procedimento> lista = null;
 		session = HibernateUtil.getSessionFactory().openSession();

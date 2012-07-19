@@ -16,8 +16,9 @@
 
 	<h6><font color="red">INCOMPLETAS<br/> </font></h6>
 	<a href="inqueritoOdontologico.jsp">Inquérito odontológico</a><br/>
-	<a href="pagamento.jsp">Efetuar pagamento</a><br/>
-	<a href="ServletPrincipal?acao=agendar_consulta">Agendar consulta</a><br/>
+	<a href=#>Efetuar pagamento</a><br/>
+	<a href=#>Conceder acesso</a><br/>
+	<a href=#>Prescrição médica</a><br/>
 	
 </fieldset>
 <c:import url="cabecalho.jsp" />

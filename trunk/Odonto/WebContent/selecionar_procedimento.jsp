@@ -12,14 +12,14 @@
 </head>
 <body>
 <fieldset class="pagina">
-<h1>:: Selecionar face e procedimento</h1>
+<h1>:: Selecionar face e procedimento para o elemento: ${elemento}</h1>
 <div id="msg">
 	<h5 class="information">${msg}</h5>
 	<h5 class="error">${msgE}</h5>
 </div>
 <center>
 <form action="ServletOdontograma" method="post" name="formSelecionarProcedimento">
-	<table border="1">
+	<table>
 		<tr>
 			<td align="center">Selecione a face:
 				<select name="face">
@@ -33,7 +33,7 @@
 			<td align="center"><img src="arquivos/elemento_superior_grande.png"></td>
 		</tr>
 		<tr>
-			<td align="center">Procedimentos: ${convenioPaciente}
+			<td align="center">Procedimentos ${convenioPaciente}:
 				<select name="procedimento">
 					<c:forEach items="${sessionScope.listaProcedimento}" var="colecao">
 						<option value="${colecao.descricaoProcedimento}" >${colecao.descricaoProcedimento}</option>
@@ -43,7 +43,7 @@
 		</tr>
 		<tr>
 			<td align="center">
-				<input type="submit" name="btn" value="Cancelar" />
+				<input type="submit" name="btn" value="Voltar" />
 				<input type="submit" name="btn" value="Gravar procedimento" />
 			</td>
 		</tr>

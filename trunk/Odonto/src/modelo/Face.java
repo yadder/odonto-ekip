@@ -57,6 +57,6 @@ public class Face implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "ID: "+ idFace + " Nome: " +nomeFace;
+		return nomeFace;
 	}
 }
