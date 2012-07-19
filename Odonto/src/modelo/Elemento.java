@@ -49,6 +49,10 @@ public class Elemento implements Serializable {
     public void setNomeElemento(String nomeElemento) {
         this.nomeElemento = nomeElemento;
     }
+    @Override
+    public String toString() {
+       	return nomeElemento;
+    }
 }
 
 

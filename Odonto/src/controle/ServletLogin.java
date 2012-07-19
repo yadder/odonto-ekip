@@ -41,7 +41,6 @@ public class ServletLogin extends HttpServlet {
 			    }  
 				// seta o usuarioLogado na sessao
 				objetoSessao.setAttribute("usuarioLogado", usuarioLogado);
-				System.out.println("Usuario logado: "+usuarioLogado.getNomeUsuario());
 				mensagem = "Seja bem vindo ";
 				request.setAttribute("msgCabecalho", mensagem);
 				RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");

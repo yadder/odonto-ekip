@@ -137,4 +137,14 @@
     <servlet-name>ServletOdontograma</servlet-name>
     <url-pattern>/ServletOdontograma</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletRelatorio</display-name>
+    <servlet-name>ServletRelatorio</servlet-name>
+    <servlet-class>controle.ServletRelatorio</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletRelatorio</servlet-name>
+    <url-pattern>/ServletRelatorio</url-pattern>
+  </servlet-mapping>
 </web-app>

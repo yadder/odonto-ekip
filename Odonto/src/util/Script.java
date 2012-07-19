@@ -160,6 +160,11 @@ public class Script {
 			paciente.setCepPaciente("33.333-333");
 			paciente.setDdd1Paciente("33");
 			paciente.setTelefone1Paciente("3333-3333");
+			DaoConvenio daoConvenio = new DaoConvenio();
+			Convenio convenio = new Convenio();
+			convenio.setNomeConvenio("UNIMED");
+			convenio = daoConvenio.pesquisarConvenioPorNome(convenio);
+			paciente.setConvenio(convenio);
 			daoPaciente.cadastrarPaciente(paciente);
 			System.out.println("--- Paciente cadastrados");
 		}catch (Exception e) {

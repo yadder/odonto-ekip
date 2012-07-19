@@ -1,6 +1,22 @@
 package util;
 
-import modelo.*;
+import modelo.Acesso;
+import modelo.Consulta;
+import modelo.Convenio;
+import modelo.Dentista;
+import modelo.Elemento;
+import modelo.Face;
+import modelo.Fornecedor;
+import modelo.InqueritoOdontologico;
+import modelo.Odontograma;
+import modelo.OdontogramaProcedimento;
+import modelo.Paciente;
+import modelo.Pagamento;
+import modelo.Prescricao;
+import modelo.Procedimento;
+import modelo.TelefoneFornecedor;
+import modelo.TelefonePaciente;
+import modelo.Usuario;
 
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;

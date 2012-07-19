@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.Odontograma;
+import modelo.OdontogramaProcedimento;
+import modelo.Paciente;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import util.HibernateUtil;
 
@@ -43,6 +46,16 @@ public class DaoOdontograma {
 			session.close();
 	}
 
+	public Odontograma pesquisarOdontogramaPorPaciente(Paciente paciente) throws Exception{
+		Odontograma o = null;
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Odontograma.class).add(Restrictions.eq("paciente", paciente)).add(Restrictions.eq("statusOdontograma", "INICIADO"));
+		o = (Odontograma)cr.uniqueResult();
+		session.flush();
+		session.close();
+		return o;
+	}
+	
 	public List<Odontograma> pesquisarTodosOdontograma() throws Exception{
 		List<Odontograma> lista = null;
 		session = HibernateUtil.getSessionFactory().openSession();
