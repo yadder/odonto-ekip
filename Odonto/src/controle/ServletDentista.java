@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import modelo.Dentista;
 import persistencia.DaoDentista;
-import util.ConfiguraAtributo;
 
 public class ServletDentista extends HttpServlet {
 	private static final long serialVersionUID = 1L;

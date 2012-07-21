@@ -27,10 +27,11 @@
 			</li>
 			<li><a href="#"><b>Consulta</b></a>
 				<ul>
-					<li><a href="ServletConsulta?btn=preencheCombo">Agendar consulta</a></li>
-					<li><a href="cancelar_consulta.jsp">Cancelar consulta</a></li>
-					<li><a href="ServletConsulta?btn=listarconsultas">Listar consultas agendadas</a></li>
-					<li><a href="remarcar_consulta.jsp">Remarcar consulta</a></li>
+					<li><a href="pesquisar_paciente_agendar_consulta.jsp">Agendar consulta</a></li>
+					<li><a href="pesquisar_consulta_por_data.jsp">Pesquisar consulta por data</a></li>
+					<li><a href="pesquisar_consulta_por_nome.jsp">Pesquisar consulta por paciente</a></li>
+					<li><a href="ServletConsulta?btn=listarconsultas">Listar todas as consultas agendadas</a></li>
+					
 				</ul>
 			</li>
 			<li><a href="#"><b>Odontograma</b></a>

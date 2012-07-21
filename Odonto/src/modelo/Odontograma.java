@@ -34,8 +34,13 @@ public class Odontograma implements Serializable {
     public Odontograma() {
     }
 
-    public Odontograma(long idOdontograma) {
-        this.idOdontograma = idOdontograma;
+    public Odontograma(Date dataInicioOdontograma, Date dataFimOdontograma, String statusOdontograma, double valorOdontograma, Dentista dentista, Paciente paciente) {
+    	this.dataFimOdontograma = dataFimOdontograma;
+    	this.dataInicioOdontograma = dataInicioOdontograma;
+    	this.statusOdontograma = statusOdontograma;
+    	this.valorOdontograma = valorOdontograma;
+    	this.dentista = dentista;
+    	this.paciente = paciente;
     }
 
     public Date getDataInicioOdontograma() {

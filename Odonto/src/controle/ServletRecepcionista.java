@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import modelo.Usuario;
 import persistencia.DaoUsuario;
-import util.ConfiguraAtributo;
 
 public class ServletRecepcionista extends HttpServlet {
 	private static final long serialVersionUID = 1L;

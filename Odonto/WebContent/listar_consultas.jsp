@@ -19,25 +19,25 @@
 </div>
 
 
-<table border=1>
+<table border=1 bordercolor="#5e8ce9" width="95%" align="center">
 <tr>
-	<th>Data consulta</th>
-	<th>Hora consulta</th>
-	<th>Paciente</th>
-	<th>Dentista</th>
-	<th>Status consulta</th>
-	<th>Remarcar</th>
-	<th>Cancelar</th>	
+	<th bgcolor="#5e8ce9" width="8%">Data consulta</th>
+	<th bgcolor="#5e8ce9" width="5%">Hora consulta</th>
+	<th bgcolor="#5e8ce9" width="37%">Paciente</th>
+	<th bgcolor="#5e8ce9" width="23%">Dentista</th>
+	<th bgcolor="#5e8ce9" width="11%">Status consulta</th>
+	<th bgcolor="#5e8ce9" width="8%">Remarcar</th>
+	<th bgcolor="#5e8ce9" width="8%">Cancelar</th>	
 </tr>
 <c:forEach items="${sessionScope.listaConsulta}" var="colecao">
 	<tr>
-		<td><c:out value="${colecao.dataConsulta}" /></td>
-		<td><c:out value="${colecao.horaConsulta}" /></td>
+		<td align="center"><c:out value="${colecao.dataConsulta}" /></td>
+		<td align="center"><c:out value="${colecao.horaConsulta}" /></td>
 		<td><c:out value="${colecao.paciente}"/></td>
 		<td><c:out value="${colecao.dentista}"/></td>
-		<td><c:out value="${colecao.statusConsulta}" /></td>
-		<td> </td>
-		<td> </td>
+		<td align="center"><c:out value="${colecao.statusConsulta}" /></td>
+		<td align="center"><a href="ServletConsulta?btn=Remarcar&id=${colecao.idConsulta}">Remarcar</a></td>
+		<td align="center"><a href="ServletConsulta?btn=Excluir&id=${colecao.idConsulta}">Excluir</a></td>
 	</tr>
 </c:forEach>
 </table>

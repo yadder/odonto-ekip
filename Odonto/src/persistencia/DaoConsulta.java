@@ -13,7 +13,8 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import util.ConfiguraAtributo;
+import controle.ConfiguraAtributo;
+
 import util.HibernateUtil;
 
 public class DaoConsulta {

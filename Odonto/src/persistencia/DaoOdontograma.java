@@ -46,10 +46,10 @@ public class DaoOdontograma {
 			session.close();
 	}
 
-	public Odontograma pesquisarOdontogramaPorPaciente(Paciente paciente) throws Exception{
+	public Odontograma pesquisarOdontogramaPorPacienteEmAndamento(Paciente paciente) throws Exception{
 		Odontograma o = null;
 		session = HibernateUtil.getSessionFactory().openSession();
-		Criteria cr = session.createCriteria(Odontograma.class).add(Restrictions.eq("paciente", paciente)).add(Restrictions.eq("statusOdontograma", "INICIADO"));
+		Criteria cr = session.createCriteria(Odontograma.class).add(Restrictions.eq("paciente", paciente)).add(Restrictions.eq("statusOdontograma", "EM ANDAMENTO"));
 		o = (Odontograma)cr.uniqueResult();
 		session.flush();
 		session.close();

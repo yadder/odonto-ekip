@@ -1,10 +1,10 @@
 package teste;
 
+import controle.ConfiguraAtributo;
 import modelo.Convenio;
 import modelo.Paciente;
 import persistencia.DaoConvenio;
 import persistencia.DaoPaciente;
-import util.ConfiguraAtributo;
 
 public class TestePaciente {
 

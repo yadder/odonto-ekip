@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +15,6 @@ import modelo.Consulta;
 import modelo.Dentista;
 import modelo.Paciente;
 import persistencia.DaoConsulta;
-import persistencia.DaoDentista;
-import persistencia.DaoPaciente;
-import util.ConfiguraAtributo;
 
 public class ServletConsulta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -36,60 +32,75 @@ public class ServletConsulta extends HttpServlet {
 		String btn = (String)request.getParameter("btn");
 		HttpSession objetoSessao = request.getSession();
 		Consulta consulta = new Consulta();
+		ConfiguraAtributo ca = new ConfiguraAtributo();
+		ProcurarObjeto po = new ProcurarObjeto();
 		
 		if (btn.equals("Voltar")){
 			objetoSessao.removeAttribute("consulta");
+			objetoSessao.removeAttribute("paciente");
 			objetoSessao.removeAttribute("listaConsulta");
-			RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
-			disp.forward(request, response);
-			
+			ca.sendRedirect(request, response, null, null, "principal.jsp");
+		}else if(btn.equals("Pesquisar Paciente")){
+			if (validaNome(((String)request.getParameter("nomePaciente")))){
+				Paciente paciente = new Paciente();
+				paciente = po.getPaciente((String)request.getParameter("nomePaciente"));
+				if (paciente != null){
+					objetoSessao.setAttribute("paciente", paciente);
+					ca.sendRedirect(request, response, null, null, "ServletConsulta?btn=preencheCombo");
+				}else{
+					ca.sendRedirect(request, response, null, "Paciente não encontrado.", "pesquisar_paciente_agendar_consulta.jsp");
+				}
+			}else{
+				ca.sendRedirect(request, response, null, mensagem, "pesquisar_paciente_agendar_consulta.jsp");
+			}
 		}else if(btn.equals("Agendar Consulta")){
 			consulta = preencheObjeto(request, response);
 			objetoSessao.setAttribute("consulta", consulta);
 			if (validaCampos(consulta)){				
 				try{
+					consulta.setPaciente((Paciente)objetoSessao.getAttribute("paciente"));
 					DaoConsulta daoConsulta = new DaoConsulta();
 					daoConsulta.cadastrarConsulta(consulta);
-					mensagem = "Consulta agendada com sucesso!";
 					objetoSessao.removeAttribute("consulta");
-					request.setAttribute("msg", mensagem);
-					request.setAttribute("msgE", null);
-					RequestDispatcher disp = request.getRequestDispatcher("agendar_consulta.jsp");
-					disp.forward(request, response);
+					objetoSessao.removeAttribute("paciente");
+					ca.sendRedirect(request, response, "Consulta agendada com sucesso!", null, "principal.jsp");
 				}catch (Exception e) {
-					e.printStackTrace();
+					ca.sendRedirect(request, response, null, "Erro ao agendar consulta. "+e.getMessage(), "agendar_consulta.jsp");
 				}
 			}else{
-				request.setAttribute("msg", null);
-				request.setAttribute("msgE", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("agendar_consulta.jsp");
-				disp.forward(request, response);
+				ca.sendRedirect(request, response, null, mensagem, "agendar_consulta.jsp");
 			}
 		}else if (btn.equals("listarconsultas")){
-			System.out.println("listarconsultas");
 			try{
 				DaoConsulta dao = new DaoConsulta();
 				List<Consulta> listaConsulta = new ArrayList<Consulta>();
 				listaConsulta = dao.pesquisarTodosConsultaAgendada();
 				if (listaConsulta!= null){
-					System.out.println("A lista nao esta vazia");
 					objetoSessao.setAttribute("listaConsulta", listaConsulta);
-					RequestDispatcher disp = request.getRequestDispatcher("listar_consultas.jsp");
-					disp.forward(request, response);
+					ca.sendRedirect(request, response, null, null, "listar_consultas.jsp");
 				}else{
 					objetoSessao.removeAttribute("listaConsulta");
-					mensagem = "Não existe consultas agendadas.";
-					request.setAttribute("msg", null);
-					request.setAttribute("msgE", mensagem);
-					RequestDispatcher disp = request.getRequestDispatcher("cancelar_consulta.jsp");
-					disp.forward(request, response);
+					ca.sendRedirect(request, response, null, "Não existe consultas agendadas.", "listar_consultas.jsp");
 				}				
 			}catch(Exception ex){
-				ex.printStackTrace();
+				ca.sendRedirect(request, response, null, "Erro ao buscar consultas agendadas. "+ex.getMessage(), "listar_consultas.jsp");
+			}
+		}else if (btn.equals("preencheCombo")){
+			try{
+				List<Dentista> listaDentista = new ArrayList<Dentista>();
+				listaDentista = po.getListaDentista();
+				if (listaDentista!= null){
+					objetoSessao.setAttribute("listaDentista", listaDentista);
+					ca.sendRedirect(request, response, null, null, "agendar_consulta.jsp");
+				}else{
+					objetoSessao.removeAttribute("listaDentista");
+					ca.sendRedirect(request, response, null, "Nenhum dentista encontrado.", "agendar_consulta.jsp");
+				}				
+			}catch(Exception ex){
+				ca.sendRedirect(request, response, null, "Erro ao buscar dentistas. "+ex.getMessage(), "agendar_consulta.jsp");
 			}
 		}else if (btn.equals("Pesquisar")){
 			if (validaData(((String)request.getParameter("dataConsulta")))){
-				ConfiguraAtributo ca = new ConfiguraAtributo();
 				Date data = (ca.dataStringParaDataSql((String)request.getParameter("dataConsulta")));
 				try{
 					DaoConsulta dao = new DaoConsulta();
@@ -97,115 +108,97 @@ public class ServletConsulta extends HttpServlet {
 					listaConsulta = dao.pesquisarTodosConsultaData(data);
 					if (listaConsulta.size()>0){
 						objetoSessao.setAttribute("listaConsulta", listaConsulta);
-						request.setAttribute("msg", null);
-						request.setAttribute("msgE", null);
-						RequestDispatcher disp = request.getRequestDispatcher("listar_consultas.jsp");
-						disp.forward(request, response);
+						ca.sendRedirect(request, response, null, null, "listar_consultas.jsp");
 					}else{
 						objetoSessao.removeAttribute("listaConsulta");
-						mensagem = "Nenhuma consulta foi agendada para a data "+ca.dataSqlParaDataString(data);
-						request.setAttribute("msg", null);
-						request.setAttribute("msgE", mensagem);
-						RequestDispatcher disp = request.getRequestDispatcher("cancelar_consulta.jsp");
-						disp.forward(request, response);
+						ca.sendRedirect(request, response, null, "Nenhuma consulta foi agendada para a data "+ca.dataSqlParaDataString(data), "pesquisar_consulta_por_data.jsp");
 					}
 				}catch(Exception ex){
-					ex.printStackTrace();
+					ca.sendRedirect(request, response, null, "Erro ao buscar consultas. "+ex.getMessage(), "principal.jsp");
 				}
 			}else{
-				request.setAttribute("msg", null);
-				request.setAttribute("msgE", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("cancelar_consulta.jsp");
-				disp.forward(request, response);
+				ca.sendRedirect(request, response, null, mensagem, "pesquisar_consulta_por_data.jsp");
 			}			
-		}else if(btn.equals("Pesquisar Paciente")){
+		}else if (btn.equals("Pesquisar por paciente")){
 			if (validaNome(((String)request.getParameter("nomePaciente")))){
-				Paciente paciente = new Paciente();
-				paciente = getPaciente((String)request.getParameter("nomePaciente"));
-				if (paciente != null){
-					try{
-						DaoConsulta daoConsulta = new DaoConsulta();
+				try{
+					DaoConsulta dao = new DaoConsulta();
+					Paciente paciente = new Paciente();
+					paciente = po.getPaciente((String)request.getParameter("nomePaciente"));
+					if (paciente!=null){
 						List<Consulta> listaConsulta = new ArrayList<Consulta>();
-						listaConsulta = daoConsulta.pesquisarConsultaPorPaciente(paciente);
+						listaConsulta = dao.pesquisarConsultaPorPaciente(paciente);
 						if (listaConsulta.size()>0){
 							objetoSessao.setAttribute("listaConsulta", listaConsulta);
-							request.setAttribute("msg", null);
-							request.setAttribute("msgE", null);
-							RequestDispatcher disp = request.getRequestDispatcher("listar_consultas.jsp");
-							disp.forward(request, response);
+							ca.sendRedirect(request, response, null, null, "listar_consultas.jsp");
 						}else{
 							objetoSessao.removeAttribute("listaConsulta");
-							mensagem = "Nenhuma consulta foi agendada para o paciente "+(String)request.getParameter("nomePaciente");
-							request.setAttribute("msg", null);
-							request.setAttribute("msgE", mensagem);
-							RequestDispatcher disp = request.getRequestDispatcher("remarcar_consulta.jsp");
-							disp.forward(request, response);
+							ca.sendRedirect(request, response, null, "Nenhuma consulta foi agendada para o paciente "+paciente.getNomeUsuario(), "pesquisar_consulta_por_nome.jsp");
 						}
-					}catch(Exception ex){
-						ex.printStackTrace();
+					}else{
+						ca.sendRedirect(request, response, null, "Paciente não encontrado", "pesquisar_consulta_por_nome.jsp");
 					}
-				}else{
-					mensagem = "Paciente não encontrado.";
-					request.setAttribute("msg", null);
-					request.setAttribute("msgE", mensagem);
-					RequestDispatcher disp = request.getRequestDispatcher("remarcar_consulta.jsp");
-					disp.forward(request, response);
+				}catch(Exception ex){
+					ca.sendRedirect(request, response, null, "Erro ao buscar consultas. "+ex.getMessage(), "principal.jsp");
 				}
 			}else{
-				request.setAttribute("msg", null);
-				request.setAttribute("msgE", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("remarcar_consulta.jsp");
-				disp.forward(request, response);
-			}		
+				ca.sendRedirect(request, response, null, mensagem, "pesquisar_consulta_por_nome.jsp");
+			}			
+		}else if (btn.equals("Excluir")){
+			long idConsulta = Long.parseLong((String)request.getParameter("id"));
+			//pesquisar consulta
+			consulta = po.getConsultaPorId(idConsulta);
+			if (consulta!=null){
+				DaoConsulta daoConsulta = new DaoConsulta();
+				//verificar RN de 24 horas 
+			
+				//excluir consulta
+				try{
+					daoConsulta.excluirConsulta(consulta);
+					ca.sendRedirect(request, response, "Consulta excluída com sucesso!", null, "ServletConsulta?btn=listarconsultas");
+				}catch (Exception e) {
+					ca.sendRedirect(request, response, null, "Erro ao excluir consulta. "+e.getMessage(),"listar_consultas.jsp");
+				}
+			}else{
+				ca.sendRedirect(request, response, null, "Consulta não encontrada.", "listar_consultas.jsp");
+			}
+			
+		}else if (btn.equals("Remarcar")){
+			long idConsulta = Long.parseLong((String)request.getParameter("id"));
+			//pesquisar consulta
+			
+			
+			//verificar RN de 24 horas
 		}
 	}
 	
 	public Consulta preencheObjeto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Consulta consulta = new Consulta();
+		ProcurarObjeto po = new ProcurarObjeto();
+		ConfiguraAtributo ca = new ConfiguraAtributo();
 		try{
-			ConfiguraAtributo ca = new ConfiguraAtributo();
-			Paciente paciente = new Paciente();
-			DaoPaciente daoPaciente = new DaoPaciente();
-			paciente.setNomeUsuario((String)request.getParameter("paciente"));
-			paciente = daoPaciente.pesquisarPacientePorNome(paciente);
-			if (paciente!=null){
-				consulta.setPaciente(paciente);
-			}
 			Dentista dentista = new Dentista();
-			DaoDentista daoDentista = new DaoDentista();
-			dentista.setNomeUsuario((String)request.getParameter("dentista"));
-			dentista = daoDentista.pesquisarDentistaPorNome(dentista);
+			dentista = po.getDentista((String)request.getParameter("dentista"));
 			if (dentista!=null){
 				consulta.setDentista(dentista);
+			}else{
+				mensagem = "Erro ao gravar o dentista.";
 			}
+
 			if((String)request.getParameter("dataConsulta")!=null){
 				consulta.setDataConsulta(ca.dataStringParaDataSql((String)request.getParameter("dataConsulta")));
-				System.out.println();
+			}else{
+				mensagem = "Erro ao gravar a data da consulta.";
 			}
 			consulta.setHoraConsulta((String)request.getParameter("horaConsulta"));
 			consulta.setStatusConsulta("AGENDADA");
 			return consulta;
 		}catch (Exception e) {
 			mensagem = "Erro ao preencher o objeto consulta";
-			e.printStackTrace();
 		}
 		return consulta;		
 	}
 	
-	public Paciente getPaciente(String nome){
-		try{
-			Paciente paciente = new Paciente();
-			paciente.setNomeUsuario(nome);
-			DaoPaciente daoPaciente = new DaoPaciente();
-			paciente = daoPaciente.pesquisarPacientePorNome(paciente);
-			return paciente;
-		}catch(Exception ex){
-			mensagem = "Erro ao pesquisar paciente.";
-			ex.printStackTrace();
-			return null;
-		}
-	}
-		
 	public boolean validaCampos(Consulta consulta){
 		boolean result = false;
 		if ((consulta.getDataConsulta() == null) || (consulta.getDataConsulta().equals(""))){

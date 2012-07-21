@@ -1,8 +1,8 @@
 package teste;
 
+import controle.ConfiguraAtributo;
 import modelo.Dentista;
 import persistencia.DaoDentista;
-import util.ConfiguraAtributo;
 
 public class TesteDentista {
 

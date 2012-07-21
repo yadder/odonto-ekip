@@ -10,6 +10,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.Delete;
 
 import util.HibernateUtil;
 
@@ -48,7 +49,7 @@ public class DaoOdontogramaProcedimento {
 	public OdontogramaProcedimento pesquisarOdontogramaProcedimentoPorId(long idOdontogramaProcedimento) throws Exception{
 		OdontogramaProcedimento o = null;
 		session = HibernateUtil.getSessionFactory().openSession();
-		Criteria cr = session.createCriteria(OdontogramaProcedimento.class).add(Restrictions.eq("idOdontogramaProcedimeto", idOdontogramaProcedimento));
+		Criteria cr = session.createCriteria(OdontogramaProcedimento.class).add(Restrictions.eq("idOdontogramaProcedimento", idOdontogramaProcedimento));
 		o = (OdontogramaProcedimento)cr.uniqueResult();
 		session.flush();
 		session.close();

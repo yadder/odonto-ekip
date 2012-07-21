@@ -21,30 +21,15 @@
 <form name="formAgendarConsulta" method="post" action="ServletConsulta">
 	<table>
 		<tr>
-			<td align="right">Selecione o(a) paciente:</td>
-			<td><select name="paciente">
-				<%
-					DaoPaciente daoPaciente = new DaoPaciente();
-									List<Paciente> pacientes = daoPaciente.pesquisarTodosPaciente();
-									for(Paciente paciente : pacientes){
-				%>
-				<option value="<%=paciente.getNomeUsuario()%>"><%=paciente.getNomeUsuario()%></option>
-				<%
-					}
-				%>
-				</select>
-			</td>
+			<td align="right">Paciente selecionado:</td>
+			<td><input type="text" name="nomePaciente" value="${paciente.nomeUsuario}" disabled="disabled" size="45"/></td>
 		</tr>
 		<tr>
 			<td align="right">Selecione o(a) dentista:</td>
-			<td><select name="dentista">
-				<%
-					DaoDentista daoDentista = new DaoDentista();
-							List<Dentista> dentistas = daoDentista.pesquisarTodosDentista();
-							for(Dentista dentista : dentistas){
-				%>
-				<option value="<%=dentista.getNomeUsuario() %>"><%=dentista.getNomeUsuario() %></option>
-				<%} %>
+				<td><select name="dentista">
+					<c:forEach items="${sessionScope.listaDentista}" var="colecao">
+						<option value="${colecao.nomeUsuario}">${colecao.nomeUsuario}</option>
+					</c:forEach>
 				</select>
 			</td>
 		</tr>
