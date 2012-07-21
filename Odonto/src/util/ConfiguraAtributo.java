@@ -1,10 +1,16 @@
 package util;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import java.util.Random;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class ConfiguraAtributo {
 	
@@ -92,5 +98,11 @@ public class ConfiguraAtributo {
 		val = Double.parseDouble(valor);
 		return val;
 	}
-	
+
+	public void sendRedirect(HttpServletRequest request, HttpServletResponse response, String msg, String msgE, String url) throws ServletException, IOException{
+		request.setAttribute("msg", msg);
+		request.setAttribute("msgE", msgE);
+		RequestDispatcher disp = request.getRequestDispatcher(url);
+		disp.forward(request, response);
+	}
 }
