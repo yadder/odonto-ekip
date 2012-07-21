@@ -27,7 +27,7 @@
 			</li>
 			<li><a href="#"><b>Consulta</b></a>
 				<ul>
-					<li><a href="agendar_consulta.jsp">Agendar consulta</a></li>
+					<li><a href="ServletConsulta?btn=preencheCombo">Agendar consulta</a></li>
 					<li><a href="cancelar_consulta.jsp">Cancelar consulta</a></li>
 					<li><a href="ServletConsulta?btn=listarconsultas">Listar consultas agendadas</a></li>
 					<li><a href="remarcar_consulta.jsp">Remarcar consulta</a></li>
@@ -49,7 +49,8 @@
 				<ul>
 					<li><a href="#">Emitir atestado médico</a></li>
 					<li><a href="#">Emitir receituário</a></li>
-					<li><a href="#">Emitir relatório de consultas</a></li>
+					<li><a href="relatorioConsultaPorData.jsp">Emitir relatório de consultas por data</a>
+					<li><a href="relatorioConsultaPorStatus.jsp">Emitir relatório de consultas por status</a>							
 					<li><a href="relatorioProcedimento.jsp">Emitir relatório de procedimentos</a></li>
 					<li><a href="#">Emitir relatório de pagamentos</a></li>
 					<li><a href="#">Emitir relatório de odontogramas</a></li>
