@@ -34,7 +34,7 @@
 		</tr>
 		<tr>
 			<td colspan=2 align="center">
-				
+				<input type="submit" name="btn" value="Voltar" />
 				<input type="submit" name="btn" value="Gerar por Convenio" />				
 			</td>
 		</tr>		
