@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,27 +13,17 @@ import javax.servlet.http.HttpSession;
 
 import modelo.Convenio;
 import modelo.Dentista;
-import modelo.Elemento;
 import modelo.Face;
 import modelo.Odontograma;
 import modelo.OdontogramaProcedimento;
 import modelo.Paciente;
 import modelo.Procedimento;
-import persistencia.DaoDentista;
-import persistencia.DaoElemento;
-import persistencia.DaoFace;
 import persistencia.DaoOdontograma;
 import persistencia.DaoOdontogramaProcedimento;
-import persistencia.DaoPaciente;
-import persistencia.DaoProcedimento;
-import util.ConfiguraAtributo;
 
 public class ServletOdontograma extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String mensagem = null;
-	private String msg = null;
-	private String msgE = null;
-	private String url = null;
 	private ConfiguraAtributo ca = new ConfiguraAtributo();
 	private ProcurarObjeto po = new ProcurarObjeto();
 	
@@ -56,230 +45,149 @@ public class ServletOdontograma extends HttpServlet {
 				Paciente paciente = new Paciente();
 				paciente = po.getPaciente((String)request.getParameter("nomePaciente"));
 				if (paciente != null){
-					objetoSessao.setAttribute("pacienteNovoOdontograma", paciente.getNomeUsuario());
-					objetoSessao.setAttribute("convenioPaciente", paciente.getConvenio());
-					ca.sendRedirect(request, response, null, null, "novo_odontograma.jsp");	
+					//pesquisar se paciente ja tem odontograma em andamento
+					if (po.getOdontogramaEmAndamento(paciente) != null){
+						ca.sendRedirect(request, response, null, "Este paciente já tem um odontograma em andamento.", "pesquisar_paciente.jsp");
+					}else{
+						//pesquisa dentista
+						Dentista dentista = new Dentista();
+						dentista = (Dentista)objetoSessao.getAttribute("usuarioLogado");
+						try{
+							//criar novo odontograma
+							DaoOdontograma daoOdontograma = new DaoOdontograma();
+							odontograma = new Odontograma(new Date(), null, "INICIADO", 0., dentista, paciente);
+							daoOdontograma.cadastrarOdontograma(odontograma);
+							// grava objetos na sessao
+							objetoSessao.setAttribute("odontograma", odontograma);
+							objetoSessao.setAttribute("dentista", dentista);
+							objetoSessao.setAttribute("pacienteNovoOdontograma", paciente.getNomeUsuario());
+							objetoSessao.setAttribute("convenioPaciente", paciente.getConvenio());
+							ca.sendRedirect(request, response, null, null, "novo_odontograma.jsp");
+						}catch(Exception e){
+							ca.sendRedirect(request, response, null, "Erro ao criar odontograma", "pesquisar_paciente.jsp");
+						}
+					}
 				}else{
 					ca.sendRedirect(request, response, null, "Paciente não encontrado.", "pesquisar_paciente.jsp");					
 				}
 			}else{
 				ca.sendRedirect(request, response, null, mensagem, "pesquisar_paciente.jsp");
 			}		
-		}
-		
-		
-		else if (btn.equals("Cancelar odontograma")){
-			//excluir todos os procedimentos do odontograma
-			
-			//excluir o odontograma caso tenha sido criado
-			
-			objetoSessao.removeAttribute("odontograma");
-			ca.sendRedirect(request, response, null, null, "principal.jsp");
-		} 
-		
-		
-		
-		
-		else if(btn.equals("Cancelar")){
-			RequestDispatcher disp = request.getRequestDispatcher("novo_odontograma.jsp");
-			disp.forward(request, response);
-		}else if (btn.equals("procedimento")){
+		}else if (btn.equals("Cancelar odontograma")){
 			try{
-				String dente = request.getParameter("dente");
-				System.out.println(dente);
-				objetoSessao.setAttribute("elemento", dente);
-				//getPaciente
-				DaoPaciente daoPaciente = new DaoPaciente();
-				Paciente paciente = new Paciente();
-				paciente.setNomeUsuario((String)objetoSessao.getAttribute("pacienteNovoOdontograma"));
-				paciente = daoPaciente.pesquisarPacientePorNome(paciente);
-				System.out.println("Paciente: "+paciente);
-				
-				//getDentista
-				DaoDentista daoDentista = new DaoDentista();
-				Dentista dentista = new Dentista();
-				dentista = (Dentista)objetoSessao.getAttribute("usuarioLogado");
-				dentista = daoDentista.pesquisarDentistaPorNome(dentista);
-				System.out.println("Dentista: "+dentista);
-				
-				//getOdontograma
-				DaoOdontograma daoOdontograma = new DaoOdontograma();
-				odontograma = new Odontograma();
-				if (daoOdontograma.pesquisarOdontogramaPorPaciente(paciente) != null){
-					//se paciente ja tiver odontograma
-					odontograma = daoOdontograma.pesquisarOdontogramaPorPaciente(paciente);
-					System.out.println("Odontograma ja existia...");
-				}else{
-					System.out.println("Odontograma não existia...");
-					//se paciente nao tiver odontograma
-					odontograma.setDentista(dentista);
-					odontograma.setPaciente(paciente);
-					odontograma.setValorOdontograma(0.);
-					odontograma.setDataInicioOdontograma(new Date());
-					odontograma.setDataFimOdontograma(null);
-					odontograma.setStatusOdontograma("INICIADO");
-					
-					objetoSessao.setAttribute("odontograma", odontograma);
-					//gravar odontograma
-					daoOdontograma.cadastrarOdontograma(odontograma);
-				}
-				
+				DaoOdontogramaProcedimento daoOdontogramaProcedimento = new DaoOdontogramaProcedimento();
+				List<OdontogramaProcedimento> listaTratamento = new ArrayList<OdontogramaProcedimento>();
+				odontograma = (Odontograma)objetoSessao.getAttribute("odontograma");
+				if (odontograma!=null){
+					listaTratamento = daoOdontogramaProcedimento.pesquisarOdontogramaProcedimentoPorOdontograma(odontograma);
+					if (listaTratamento.isEmpty()){
+						//se odontograma nao tiver procedimentos associados
+						DaoOdontograma daoOdontograma = new DaoOdontograma();
+						daoOdontograma.excluirOdontograma(odontograma);
+						objetoSessao.removeAttribute("odontograma");
+						ca.sendRedirect(request, response, "Odontograma excluído com sucesso!", null, "principal.jsp");
+					}else{
+						ca.sendRedirect(request, response, null, "Exclua os procedimentos antes de excluir o odontograma.", "lista_odontograma.jsp");
+					}
+				}				
 			}catch (Exception e) {
-				e.printStackTrace();
-			}		
-			//gravando odontograma na sessao
-			objetoSessao.setAttribute("odontograma", odontograma);
-			
+				ca.sendRedirect(request, response, null, "Erro ao buscar procedimentos do odontograma" +e.getMessage(), "pesquisar_paciente.jsp");
+			}	
+		}else if (btn.equals("procedimento")){
+			String dente = request.getParameter("dente");
+			objetoSessao.setAttribute("elemento", dente);
 			//getProcedimento do convênio do paciente
-			List<Procedimento> listaProcedimento = getProcedimentos((Convenio)objetoSessao.getAttribute("convenioPaciente"));
+			List<Procedimento> listaProcedimento = po.getListaProcedimentosPorConvenio((Convenio)objetoSessao.getAttribute("convenioPaciente"));
 			objetoSessao.setAttribute("listaProcedimento", listaProcedimento);
-			
 			//getFaces
-			List<Face> listaFace = getFaces();
+			List<Face> listaFace = po.getListaFaces();
 			objetoSessao.setAttribute("listaFace", listaFace);
-
-			RequestDispatcher disp = request.getRequestDispatcher("selecionar_procedimento.jsp");
-			disp.forward(request, response);
-			
-		}else if(btn.equals("Gravar procedimento")){
-			System.out.println("Gravando OdontogramaProcedimento");
+			ca.sendRedirect(request, response, null, null, "selecionar_procedimento.jsp");
+		}else if(btn.equals("Voltar")){
+			objetoSessao.removeAttribute("listaTratamento");
+			ca.sendRedirect(request, response, null, null, "novo_odontograma.jsp");
+		}
+				
+		else if(btn.equals("Gravar procedimento")){
 			try{
 				DaoOdontogramaProcedimento daoOdontogramaProcedimento = new DaoOdontogramaProcedimento();
 				OdontogramaProcedimento odontogramaProcedimento = new OdontogramaProcedimento();
 				odontogramaProcedimento.setStatusAutorizacao("PENDENTE");
 				odontogramaProcedimento.setStatusProcedimento("PENDENTE");
 				odontogramaProcedimento.setDataExecucaoProcedimento(null);
-				
-				//getElemento
-				Elemento elemento = new Elemento();
-				DaoElemento daoElemento = new DaoElemento();
-				elemento.setNomeElemento((String)objetoSessao.getAttribute("elemento"));
-				elemento = daoElemento.pesquisarElementoPorNome(elemento);
-				odontogramaProcedimento.setElemento(elemento);
-				
-				//getFace
-				Face face = new Face();
-				DaoFace daoFace = new DaoFace();
-				face.setNomeFace((String)request.getParameter("face"));
-				face = daoFace.pesquisarFacePorNome(face);
-				odontogramaProcedimento.setFace(face);
-				
+				odontogramaProcedimento.setElemento(po.getElemento((String)objetoSessao.getAttribute("elemento")));
+				odontogramaProcedimento.setFace(po.getFace((String)request.getParameter("face")));
+				if (po.getProcedimento((String)request.getParameter("procedimento"))!=null){
+					odontogramaProcedimento.setProcedimento(po.getProcedimento((String)request.getParameter("procedimento")));
+				}else{
+					ca.sendRedirect(request, response, null, "Este convênio não tem procedimentos cadastrados.", "novo_odontograma.jsp");
+				}
 				//getOdontograma
 				odontograma = new Odontograma();
 				odontograma = (Odontograma)objetoSessao.getAttribute("odontograma");
 				odontogramaProcedimento.setOdontograma(odontograma);
-				
-				//getProcedimento
-				Procedimento procedimento = new Procedimento();
-				DaoProcedimento daoProcedimento = new DaoProcedimento();
-				procedimento.setDescricaoProcedimento((String)request.getParameter("procedimento"));
-				procedimento = daoProcedimento.pesquisarProcedimentoPorDescricao(procedimento);
-				odontogramaProcedimento.setProcedimento(procedimento);
-				System.out.println("Procedimento: "+procedimento);
-				
 				//gravando odontogramaProcedimento
 				daoOdontogramaProcedimento.cadastrarOdontogramaProcedimento(odontogramaProcedimento);
-				
-				RequestDispatcher disp = request.getRequestDispatcher("ServletOdontograma?btn=Visualizar tratamento");
-				disp.forward(request, response);
-				
+				ca.sendRedirect(request, response, "Procedimento cadastrado com sucesso!", null, "ServletOdontograma?btn=Visualizar tratamento");
 			}catch (Exception e) {
-				mensagem = "Erro ao gravar odontogramaProcedimento";
-				System.out.println(mensagem);
-				e.printStackTrace();
+				ca.sendRedirect(request, response, null, "Erro ao gravar odontogramaProcedimento. "+e.getMessage(), "novo_odontograma.jsp");
 			}
 			
 		}else if(btn.equals("Visualizar tratamento")){
 			try{
 				DaoOdontogramaProcedimento daoOdontogramaProcedimento = new DaoOdontogramaProcedimento();
-				odontograma = (Odontograma)objetoSessao.getAttribute("odontograma");
 				List<OdontogramaProcedimento> listaTratamento = new ArrayList<OdontogramaProcedimento>();
-				listaTratamento = daoOdontogramaProcedimento.pesquisarOdontogramaProcedimentoPorOdontograma(odontograma);
-				objetoSessao.setAttribute("listaTratamento", listaTratamento);
-				RequestDispatcher disp = request.getRequestDispatcher("lista_odontograma.jsp");
-				disp.forward(request, response);
-			}catch(Exception e){
-				e.printStackTrace();
-				mensagem = "Erro ao buscar os procedimentos deste odontograma";
-				RequestDispatcher disp = request.getRequestDispatcher("novo_odontograma.jsp");
-				disp.forward(request, response);
-			}
-		}else if(btn.equals("Voltar")){
-			RequestDispatcher disp = request.getRequestDispatcher("novo_odontograma.jsp");
-			disp.forward(request, response);
-		}else if(btn.equals("Excluir")){
-			try{
-				OdontogramaProcedimento odontogramaProcedimento = new OdontogramaProcedimento();
-				DaoOdontogramaProcedimento daoOdontogramaProcedimento = new DaoOdontogramaProcedimento();
-				long idOdontogramaProcedimento = Long.parseLong((String)request.getParameter("index"));
-				System.out.println(idOdontogramaProcedimento);
-				odontogramaProcedimento = daoOdontogramaProcedimento.pesquisarOdontogramaProcedimentoPorId(idOdontogramaProcedimento);
-				if (odontogramaProcedimento != null){
-					daoOdontogramaProcedimento.excluirOdontogramaProcedimento(odontogramaProcedimento);
-					RequestDispatcher disp = request.getRequestDispatcher("ServletOdontograma?btn=Visualizar tratamento");
-					disp.forward(request, response);
+				odontograma = (Odontograma)objetoSessao.getAttribute("odontograma");
+				if (odontograma!=null){
+					listaTratamento = daoOdontogramaProcedimento.pesquisarOdontogramaProcedimentoPorOdontograma(odontograma);
+					objetoSessao.setAttribute("listaTratamento", listaTratamento);
+					ca.sendRedirect(request, response, null, null, "lista_odontograma.jsp");
+				}else{
+					ca.sendRedirect(request, response, null, "Odontograma não encontrado.", "principal.jsp");
 				}
-			}catch (Exception e) {
-				e.printStackTrace();
-				mensagem = "Erro ao remover procedimento.";
-			}
-		}else if(btn.equals("Gravar odontograma")){
-			try{
-				//calcular o valor do odontograma
-				double valorOdontograma = 0.;
-				DaoOdontogramaProcedimento daoOdontogramaProcedimento = new DaoOdontogramaProcedimento();
-				odontograma = (Odontograma)objetoSessao.getAttribute("odontograma");
-				List<OdontogramaProcedimento> listaTratamento = new ArrayList<OdontogramaProcedimento>();
-				listaTratamento = daoOdontogramaProcedimento.pesquisarOdontogramaProcedimentoPorOdontograma(odontograma);
-				DaoProcedimento daoProcedimento = new DaoProcedimento();
-				Procedimento procedimento = new Procedimento();
-				for(OdontogramaProcedimento o : listaTratamento){
-					procedimento = daoProcedimento.pesquisarProcedimentoPorId(o.getProcedimento());
-					valorOdontograma = valorOdontograma+procedimento.getValorProcedimento(); 
-				}				
-				DaoOdontograma daoOdontograma = new DaoOdontograma();
-				odontograma.setStatusOdontograma("EM ANDAMENTO");
-				odontograma.setValorOdontograma(valorOdontograma);
-				daoOdontograma.alterarOdontograma(odontograma);
-				RequestDispatcher disp = request.getRequestDispatcher("pesquisar_paciente_atendimento.jsp");
-				disp.forward(request, response);
 			}catch(Exception e){
-				e.printStackTrace();
-				mensagem = "Erro ao gravar o odontograma.";
+				ca.sendRedirect(request, response, null, "Erro ao buscar os procedimentos deste odontograma." +e.getMessage(), "novo_odontograma.jsp");
+			}
+		}
+		
+		else if(btn.equals("Gravar odontograma")){
+			odontograma = (Odontograma)objetoSessao.getAttribute("odontograma");
+			DaoOdontograma daoOdontograma = new DaoOdontograma();
+			
+			// mudar o status para "em andamento"
+			odontograma.setStatusOdontograma("EM ANDAMENTO");
+			
+			// calcular o valor do odontograma
+			DaoOdontogramaProcedimento daoOdontogramaProcedimento = new DaoOdontogramaProcedimento();
+			List<OdontogramaProcedimento> listaTratamento = new ArrayList<OdontogramaProcedimento>();
+			try{
+				listaTratamento = daoOdontogramaProcedimento.pesquisarOdontogramaProcedimentoPorOdontograma(odontograma);
+				double valor = 0.;
+				for (OdontogramaProcedimento o : listaTratamento) {
+					valor = valor + o.getProcedimento().getValorProcedimento();
+				}
+				odontograma.setValorOdontograma(valor);
+			}catch (Exception e) {
+				ca.sendRedirect(request, response, null, "Erro ao calcular valor do odontograma. "+e.getMessage(), "novo_odontograma.jsp");
+			}			
+						
+			// gravar odontograma
+			try{
+				daoOdontograma.alterarOdontograma(odontograma);
+				objetoSessao.removeAttribute("listaFace");
+				objetoSessao.removeAttribute("pacienteNovoOdontograma");
+				objetoSessao.removeAttribute("listaProcedimento");
+				objetoSessao.removeAttribute("convenioPaciente");
+				objetoSessao.removeAttribute("odontograma");
+				objetoSessao.removeAttribute("elemento");
+				objetoSessao.removeAttribute("dentista");
+				ca.sendRedirect(request, response, "Odontograma gravado com sucesso!", null, "principal.jsp");
+			}catch (Exception e) {
+				ca.sendRedirect(request, response, null, "Erro ao gravar odontograma. "+e.getMessage(), "novo_odontograma.jsp");
 			}
 		}
 				
 	}
-	
-	public List<Face> getFaces(){
-		try{
-			List<Face> listaFace = new ArrayList<Face>();
-			DaoFace daoFace = new DaoFace();
-			listaFace = daoFace.pesquisarTodosFace();
-			return listaFace;
-		}catch (Exception e) {
-			mensagem = "Erro ao buscar faces.";
-			e.printStackTrace();
-			return null;
-		}
-	}
-	public List<Procedimento> getProcedimentos(Convenio convenio){
-		try{
-			List<Procedimento> listaProcedimento = new ArrayList<Procedimento>();
-			DaoProcedimento daoProcedimento = new DaoProcedimento();
-			if (convenio!=null){
-				listaProcedimento = daoProcedimento.pesquisarProcedimentoPorConvenio(convenio);
-			}else{
-				mensagem = "Convenio não encontrado.";
-			}
-			return listaProcedimento;				
-		}catch (Exception e) {
-			mensagem = "Erro ao buscar procedimentos.";
-			e.printStackTrace();
-			return null;
-		}		
-	}
-	
 	
 	public boolean validaNome(String nome){
 		boolean result = false;

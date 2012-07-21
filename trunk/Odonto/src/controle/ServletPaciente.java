@@ -13,7 +13,6 @@ import modelo.Convenio;
 import modelo.Paciente;
 import persistencia.DaoConvenio;
 import persistencia.DaoPaciente;
-import util.ConfiguraAtributo;
 
 public class ServletPaciente extends HttpServlet {
 	private static final long serialVersionUID = 1L;

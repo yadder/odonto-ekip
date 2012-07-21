@@ -12,17 +12,17 @@
 </head>
 <body>
 <fieldset class="pagina">
-<h1>:: Cancelar consulta</h1>
+<h1>:: Pesquisar consulta por paciente</h1>
 <div id="msg">
 	<h5 class="information">${msg}</h5>
 	<h5 class="error">${msgE}</h5>
 </div>
 
-<form name="formCancelarConsulta" method="post" action="ServletConsulta">
+<form name="formRemarcarConsulta" method="post" action="ServletConsulta">
 	<table>
 		<tr>
-			<td align="right">Informe a data:</td>
-			<td><input type="text" name="dataConsulta" value="${data}" size="17" maxlength="10" OnKeyPress="formatar(this, '##/##/####')" /><input type="submit" name="btn" value="Pesquisar" /></td>
+			<td align="right">Nome do paciente:</td>
+			<td><input type="text" name="nomePaciente" size="45" /><input type="submit" name="btn" value="Pesquisar por paciente" /></td>
 		</tr>
 		<tr>
 			<td colspan=2 align="right">

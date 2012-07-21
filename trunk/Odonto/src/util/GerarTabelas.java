@@ -47,6 +47,7 @@ public class GerarTabelas {
 			SchemaExport se = new SchemaExport(conf);
 			se.create(true, true);
 			System.out.println("Tabelas criadas com êxito.");
+			
 		}catch(Exception e){
 			System.out.println("Erro ao criar as tabelas: "+ e.getMessage());
 		}

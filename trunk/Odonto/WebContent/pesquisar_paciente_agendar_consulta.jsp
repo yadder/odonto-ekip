@@ -1,7 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="modelo.Dentista, modelo.Paciente" %>
-<%@ page import="persistencia.DaoDentista,persistencia.DaoDentista,persistencia.DaoPaciente,persistencia.DaoPaciente" %>
-<%@ page import="java.util.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,13 +9,13 @@
 </head>
 <body>
 <fieldset class="pagina">
-<h1>:: Remarcar consulta</h1>
+<h1>:: Pesquisar paciente para agendar consulta</h1>
 <div id="msg">
 	<h5 class="information">${msg}</h5>
 	<h5 class="error">${msgE}</h5>
 </div>
 
-<form name="formRemarcarConsulta" method="post" action="ServletConsulta">
+<form name="formBuscarPaciente" method="post" action="ServletConsulta">
 	<table>
 		<tr>
 			<td align="right">Nome do paciente:</td>
