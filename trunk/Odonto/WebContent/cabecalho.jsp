@@ -49,8 +49,7 @@
 				<ul>
 					<li><a href="#">Emitir atestado médico</a></li>
 					<li><a href="#">Emitir receituário</a></li>
-					<li><a href="relatorioConsultaPorData.jsp">Emitir relatório de consultas por data</a>
-					<li><a href="relatorioConsultaPorStatus.jsp">Emitir relatório de consultas por status</a>							
+					<li><a href="relatorioConsultaStatusPorData.jsp">Emitir consultas por Status e data</a></li>												
 					<li><a href="relatorioProcedimento.jsp">Emitir relatório de procedimentos</a></li>
 					<li><a href="#">Emitir relatório de pagamentos</a></li>
 					<li><a href="#">Emitir relatório de odontogramas</a></li>
