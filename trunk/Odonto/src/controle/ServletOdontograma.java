@@ -27,11 +27,16 @@ import persistencia.DaoOdontograma;
 import persistencia.DaoOdontogramaProcedimento;
 import persistencia.DaoPaciente;
 import persistencia.DaoProcedimento;
+import util.ConfiguraAtributo;
 
 public class ServletOdontograma extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String mensagem = null;
-	
+	private String msg = null;
+	private String msgE = null;
+	private String url = null;
+	private ConfiguraAtributo ca = new ConfiguraAtributo();
+	private ProcurarObjeto po = new ProcurarObjeto();
 	
     public ServletOdontograma() {
     }
@@ -46,38 +51,36 @@ public class ServletOdontograma extends HttpServlet {
 		HttpSession objetoSessao = request.getSession();	
 		Odontograma odontograma = new Odontograma();
 		
-		if (btn.equals("Cancelar odontograma")){
-			//excluir o odontograma caso tenha sido criado
-			objetoSessao.removeAttribute("odontograma");
-			RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
-			disp.forward(request, response);
-		}else if(btn.equals("Pesquisar Paciente")){
+		if(btn.equals("Pesquisar Paciente")){
 			if (validaNome(((String)request.getParameter("nomePaciente")))){
 				Paciente paciente = new Paciente();
-				paciente = getPaciente((String)request.getParameter("nomePaciente"));
+				paciente = po.getPaciente((String)request.getParameter("nomePaciente"));
 				if (paciente != null){
-					//paciente encontrado
-					// verificar se paciente ja tem odontograma aberto.
 					objetoSessao.setAttribute("pacienteNovoOdontograma", paciente.getNomeUsuario());
 					objetoSessao.setAttribute("convenioPaciente", paciente.getConvenio());
-					request.setAttribute("msg", null);
-					request.setAttribute("msgE", null);
-					RequestDispatcher disp = request.getRequestDispatcher("novo_odontograma.jsp");
-					disp.forward(request, response);
+					ca.sendRedirect(request, response, null, null, "novo_odontograma.jsp");	
 				}else{
-					mensagem = "Paciente não encontrado.";
-					request.setAttribute("msg", null);
-					request.setAttribute("msgE", mensagem);
-					RequestDispatcher disp = request.getRequestDispatcher("pesquisar_paciente.jsp");
-					disp.forward(request, response);
+					ca.sendRedirect(request, response, null, "Paciente não encontrado.", "pesquisar_paciente.jsp");					
 				}
 			}else{
-				request.setAttribute("msg", null);
-				request.setAttribute("msgE", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("pesquisar_paciente.jsp");
-				disp.forward(request, response);
+				ca.sendRedirect(request, response, null, mensagem, "pesquisar_paciente.jsp");
 			}		
-		}else if(btn.equals("Cancelar")){
+		}
+		
+		
+		else if (btn.equals("Cancelar odontograma")){
+			//excluir todos os procedimentos do odontograma
+			
+			//excluir o odontograma caso tenha sido criado
+			
+			objetoSessao.removeAttribute("odontograma");
+			ca.sendRedirect(request, response, null, null, "principal.jsp");
+		} 
+		
+		
+		
+		
+		else if(btn.equals("Cancelar")){
 			RequestDispatcher disp = request.getRequestDispatcher("novo_odontograma.jsp");
 			disp.forward(request, response);
 		}else if (btn.equals("procedimento")){
@@ -277,19 +280,6 @@ public class ServletOdontograma extends HttpServlet {
 		}		
 	}
 	
-	public Paciente getPaciente(String nome){
-		try{
-			Paciente paciente = new Paciente();
-			paciente.setNomeUsuario(nome);
-			DaoPaciente daoPaciente = new DaoPaciente();
-			paciente = daoPaciente.pesquisarPacientePorNome(paciente);
-			return paciente;
-		}catch(Exception ex){
-			mensagem = "Erro ao pesquisar paciente.";
-			ex.printStackTrace();
-			return null;
-		}
-	}
 	
 	public boolean validaNome(String nome){
 		boolean result = false;
