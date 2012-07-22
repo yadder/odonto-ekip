@@ -1,8 +1,10 @@
 package persistencia;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.Consulta;
 import modelo.Odontograma;
 import modelo.Paciente;
 
@@ -64,4 +66,18 @@ public class DaoOdontograma {
 		session.close();
 		return lista;
 	}
+	
+	public List<Odontograma> pesquisarTodosOdontogramaFinalizadoDataIniDataFim(Date dataini,Date datafim, String status ) throws Exception{
+		List<Odontograma> lista = null;
+		session = HibernateUtil.getSessionFactory().openSession();
+		//Criteria cr = session.createCriteria(Consulta.class).add(Restrictions.between(Data, dataini, datafim)eq("dataConsulta", data));
+		Criteria cr = session.createCriteria(Odontograma.class).add(Restrictions.between("dataFimOdontograma", dataini,datafim)).add(Restrictions.eq("statusOdontograma", "FINALIZADO"));
+		lista = (ArrayList)cr.list();
+		session.flush();
+		session.close();
+		return lista;
+	}
+	
+	
+	
 }
