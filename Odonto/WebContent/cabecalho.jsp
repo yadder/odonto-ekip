@@ -36,6 +36,7 @@
 			</li>
 			<li><a href="#"><b>Odontograma</b></a>
 				<ul>
+					<li><a href="pesquisar_paciente_inquerito.jsp">Inquérito odontológico</a></li>
 					<li><a href="pesquisar_paciente.jsp">Novo odontograma</a></li>
 					<li><a href="#">Atendimento paciente</a></li>
 				</ul>
@@ -46,11 +47,14 @@
 					<li><a href="#">Efetuar pagamento</a></li>
 				</ul>
 			</li>
+			<li>
+				<a href="pesquisar_paciente_prescricao.jsp"><b>Prescrição</b></a>
+			</li>
 			<li><a href="#"><b>Relatórios</b></a>
 				<ul>
 					<li><a href="#">Emitir atestado médico</a></li>
 					<li><a href="#">Emitir receituário</a></li>
-					<li><a href="relatorioConsultaStatusPorData.jsp">Emitir consultas por Status e data</a></li>												
+					<li><a href="relatorioConsultaStatusPorData.jsp">Emitir consultas por status e data</a></li>												
 					<li><a href="relatorioProcedimento.jsp">Emitir relatório de procedimentos</a></li>
 					<li><a href="#">Emitir relatório de pagamentos</a></li>
 					<li><a href="#">Emitir relatório de odontogramas</a></li>

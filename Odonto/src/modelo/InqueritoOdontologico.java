@@ -12,11 +12,11 @@ public class InqueritoOdontologico implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_inquerito_odontologico", nullable = false)
     private long idInqueritoOdontologico;
-    @Column(name = "tratamento_medico", nullable = false, length = 1)
+    @Column(name = "tratamento_medico", nullable = false, length = 30)
     private String tratamentoMedico;
-    @Column(name = "usando_medicacao", nullable = false, length = 1)
+    @Column(name = "usando_medicacao", nullable = false, length = 30)
     private String usandoMedicacao;
-    @Column(name = "alergia", nullable = false, length = 1)
+    @Column(name = "alergia", nullable = false, length = 30)
     private String alergia;
     @Column(name = "anemia", nullable = false, length = 1)
     private String anemia;
@@ -49,29 +49,29 @@ public class InqueritoOdontologico implements Serializable {
     private String concluiuTratamento;
     @Column(name = "experiencia_negativa_tratamento", nullable = false, length = 1)
     private String experienciaNegativaTratamento;
-    @Column(name = "roer_unhas", nullable = false, length = 1)
+    @Column(name = "roer_unhas", length = 1)
     private String roerUnhas;
-    @Column(name = "respirar_pela_boca", nullable = false, length = 1)
+    @Column(name = "respirar_pela_boca", length = 1)
     private String respirarPelaBoca;
-    @Column(name = "morder_objetos", nullable = false, length = 1)
+    @Column(name = "morder_objetos", length = 1)
     private String morderObjetos;
-    @Column(name = "ranger_os_dentes", nullable = false, length = 1)
+    @Column(name = "ranger_os_dentes", length = 1)
     private String rangerOsDentes;
-    @Column(name = "chupar_dedo_chupeta", nullable = false, length = 1)
+    @Column(name = "chupar_dedo_chupeta", length = 1)
     private String chuparDedoChupeta;
     @Column(name = "outros", length = 255)
     private String outros;
-    @Column(name = "fio_fita_dental", nullable = false, length = 1)
+    @Column(name = "fio_fita_dental", length = 1)
     private String fioFitaDental;
-    @Column(name = "palito", nullable = false, length = 1)
+    @Column(name = "palito", length = 1)
     private String palito;
-    @Column(name = "unitufo_bitufo", nullable = false, length = 7)
+    @Column(name = "unitufo_bitufo", length = 1)
     private String unitufoBitufo;
-    @Column(name = "tipo_escova", nullable = false, length = 5)
+    @Column(name = "tipo_escova", length = 1)
     private String tipoEscova;
-    @Column(name = "interdental", nullable = false, length = 1)
+    @Column(name = "interdental", length = 1)
     private String interdental;
-    @Column(name = "creme_dental", nullable = false, length = 1)
+    @Column(name = "creme_dental", length = 1)
     private String cremeDental;
     @Column(name = "ingere_alimentos_entre_refeicoes", nullable = false, length = 1)
     private String ingereAlimentosEntreRefeicoes;

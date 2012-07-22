@@ -30,7 +30,7 @@
 		</tr>
 		<tr>
 			<td align="right">Data nasc.:</td>
-			<td><input type="text" name="dtNascUsuario" value="${data}" size="20" maxlength="10" OnKeyPress="formatar(this, '##/##/####')" /></td>
+			<td><input type="text" name="dtNascUsuario" id="calendario" value="${data}" size="20" maxlength="10" OnKeyPress="formatar(this, '##/##/####')"/></td>
 		</tr>
 		<tr>
 			<td align="right">Sexo:</td>

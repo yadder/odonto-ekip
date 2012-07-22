@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +15,6 @@ import persistencia.DaoDentista;
 
 public class ServletPrincipal extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private String mensagem = null;   
 
     public ServletPrincipal() {
     }
@@ -28,35 +26,28 @@ public class ServletPrincipal extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession objetoSessao = request.getSession();
 		String acao = (String)request.getParameter("acao");		
+		ConfiguraAtributo ca = new ConfiguraAtributo();
 		try{
 			if (acao.equals("logout")){
 				objetoSessao.removeAttribute("usuarioLogado");
 				objetoSessao.invalidate();
-				mensagem = "A sessão foi finalizada!";
-				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
-				disp.forward(request, response);	
+				ca.sendRedirect(request, response, "A sessão foi finalizada!", null, "login.jsp");
 			}else if (acao.equals("agendar_consulta")){
 				DaoDentista daoDentista = new DaoDentista();
 				List<Dentista> listaDentista = daoDentista.pesquisarTodosDentista();
 				objetoSessao.setAttribute("listaDentista", listaDentista);
-				
-				mensagem = "Os campos com (*) são obrigatórios.";
-				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("agendar_consulta.jsp");
-				disp.forward(request, response);
+				ca.sendRedirect(request, response, null, "Os campos com (*) são obrigatórios.", "agendar_consulta.jsp");
 			}else if (acao.equals("home")){
 				
 				StringBuffer perdidosNaSessao = new StringBuffer();
-				for(Enumeration e = objetoSessao.getAttributeNames(); e.hasMoreElements();){
+				for(Enumeration<?> e = objetoSessao.getAttributeNames(); e.hasMoreElements();){
 					perdidosNaSessao.append(e.nextElement() + "\n");
 				}
 				objetoSessao.setAttribute("perdidosNaSessao", perdidosNaSessao);
-				RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
-				disp.forward(request, response);
+				ca.sendRedirect(request, response, null, null, "principal.jsp");
 			}
 		}catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		
 	}

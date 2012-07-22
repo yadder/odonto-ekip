@@ -39,6 +39,9 @@ public class ServletConsulta extends HttpServlet {
 			objetoSessao.removeAttribute("consulta");
 			objetoSessao.removeAttribute("paciente");
 			objetoSessao.removeAttribute("listaConsulta");
+			objetoSessao.removeAttribute("listaDentista");
+			objetoSessao.removeAttribute("dentista");
+			objetoSessao.removeAttribute("idConsulta");
 			ca.sendRedirect(request, response, null, null, "principal.jsp");
 		}else if(btn.equals("Pesquisar Paciente")){
 			if (validaNome(((String)request.getParameter("nomePaciente")))){
@@ -165,10 +168,40 @@ public class ServletConsulta extends HttpServlet {
 			
 		}else if (btn.equals("Remarcar")){
 			long idConsulta = Long.parseLong((String)request.getParameter("id"));
-			//pesquisar consulta
-			
-			
-			//verificar RN de 24 horas
+			consulta = po.getConsultaPorId(idConsulta);
+			if (consulta!=null){
+				Paciente paciente = new Paciente();
+				Dentista dentista = new Dentista();
+				paciente = po.getPacientePorId(consulta.getPaciente().getIdUsuario());
+				dentista = po.getDentistaPorId(consulta.getDentista().getIdUsuario());				
+				objetoSessao.setAttribute("paciente", paciente);
+				objetoSessao.setAttribute("dentista", dentista);
+				objetoSessao.setAttribute("idConsulta", idConsulta);
+				ca.sendRedirect(request, response, "Informe a nova data ou hora da consulta", null, "remarcar_consulta.jsp");
+			}else{
+				ca.sendRedirect(request, response, null, "Consulta não encontrada.", "listar_consultas.jsp");
+			}
+		}else if (btn.equals("Remarcar consulta")){		
+			long idConsulta = Long.parseLong((objetoSessao.getAttribute("idConsulta")).toString());
+			consulta = po.getConsultaPorId(idConsulta);
+			if (consulta!=null){
+				//remarcar consulta
+				try{
+					if (validaData((String)request.getParameter("dataConsulta"))){
+						consulta.setDataConsulta(ca.dataStringParaDataSql((String)request.getParameter("dataConsulta")));
+					}else{
+						ca.sendRedirect(request, response, null, mensagem, "remarcar_consulta.jsp");
+					}
+					consulta.setHoraConsulta((String)request.getParameter("horaConsulta"));
+					DaoConsulta daoConsulta = new DaoConsulta();
+					daoConsulta.alterarConsulta(consulta);
+					ca.sendRedirect(request, response, "Consulta remarcada com sucesso!", null, "ServletConsulta?btn=listarconsultas");
+				}catch (Exception e) {
+					ca.sendRedirect(request, response, null, "Erro ao remarcar a consulta. "+e.getMessage(),"remarcar_consultas.jsp");
+				}	
+			}else{
+				ca.sendRedirect(request, response, null, "Consulta não encontrada.", "listar_consultas.jsp");
+			}
 		}
 	}
 	
