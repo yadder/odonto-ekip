@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="consultaPorData" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioConsulta" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="dataConsulta" class="java.util.Date">
-		<fieldDescription><![CDATA[dataConsulta]]></fieldDescription>
-	</field>
-	<field name="dentista" class="modelo.Dentista">
-		<fieldDescription><![CDATA[dentista]]></fieldDescription>
-	</field>
-	<field name="horaConsulta" class="java.lang.String">
-		<fieldDescription><![CDATA[horaConsulta]]></fieldDescription>
+	<field name="statusConsulta" class="java.lang.String">
+		<fieldDescription><![CDATA[statusConsulta]]></fieldDescription>
 	</field>
 	<field name="paciente" class="modelo.Paciente">
 		<fieldDescription><![CDATA[paciente]]></fieldDescription>
 	</field>
-	<field name="statusConsulta" class="java.lang.String">
-		<fieldDescription><![CDATA[statusConsulta]]></fieldDescription>
+	<field name="horaConsulta" class="java.lang.String">
+		<fieldDescription><![CDATA[horaConsulta]]></fieldDescription>
 	</field>
+	<field name="dentista" class="modelo.Dentista">
+		<fieldDescription><![CDATA[dentista]]></fieldDescription>
+	</field>
+	<field name="dataConsulta" class="java.util.Date">
+		<fieldDescription><![CDATA[dataConsulta]]></fieldDescription>
+	</field>
+	<sortField name="dataConsulta"/>
+	<sortField name="statusConsulta"/>
 	<background>
 		<band/>
 	</background>
 	<title>
-		<band height="58">
+		<band height="53">
 			<line>
 				<reportElement x="0" y="8" width="555" height="1"/>
 			</line>
@@ -31,10 +33,10 @@
 			</line>
 			<staticText>
 				<reportElement x="65" y="13" width="424" height="35"/>
-				<textElement textAlignment="Center">
-					<font size="26" isBold="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Consulta por data]]></text>
+				<text><![CDATA[Consultas por status]]></text>
 			</staticText>
 			<image>
 				<reportElement x="1" y="11" width="180" height="38"/>
@@ -46,75 +48,73 @@
 		<band/>
 	</pageHeader>
 	<columnHeader>
-		<band height="39">
+		<band height="22">
 			<staticText>
-				<reportElement x="2" y="19" width="100" height="20"/>
-				<textElement verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Paciente]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="170" y="21" width="100" height="20"/>
-				<textElement verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Hora]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="321" y="19" width="100" height="20"/>
+				<reportElement mode="Opaque" x="1" y="2" width="164" height="20" backcolor="#CCCCCC"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Dentista]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="455" y="21" width="100" height="20"/>
+				<reportElement mode="Opaque" x="165" y="2" width="221" height="20" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paciente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="387" y="2" width="65" height="20" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="452" y="2" width="103" height="20" backcolor="#CCCCCC"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Status]]></text>
 			</staticText>
-			<elementGroup>
-				<textField>
-					<reportElement x="2" y="-1" width="100" height="20"/>
-					<textElement verticalAlignment="Middle">
-						<font size="12" isBold="true"/>
-					</textElement>
-					<textFieldExpression class="java.util.Date"><![CDATA[$F{dataConsulta}]]></textFieldExpression>
-				</textField>
-			</elementGroup>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="20">
-			<textField>
-				<reportElement x="2" y="1" width="100" height="20"/>
+		<band height="43">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="23" width="164" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{dentista}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="165" y="23" width="221" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{paciente}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="170" y="1" width="100" height="20"/>
+			<textField pattern="HH.mm">
+				<reportElement x="387" y="23" width="65" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{horaConsulta}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="321" y="1" width="100" height="20"/>
-				<textElement verticalAlignment="Middle">
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{dentista}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="452" y="2" width="100" height="20"/>
+				<reportElement x="455" y="23" width="100" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{statusConsulta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="1" y="3" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{dataConsulta}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -147,7 +147,7 @@
 				<textElement textAlignment="Right">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
 				<reportElement key="textField" x="1" y="6" width="209" height="19" forecolor="#000000" backcolor="#FFFFFF"/>
