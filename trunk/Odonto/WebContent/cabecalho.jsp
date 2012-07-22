@@ -54,10 +54,10 @@
 				<ul>
 					<li><a href="#">Emitir atestado médico</a></li>
 					<li><a href="#">Emitir receituário</a></li>
-					<li><a href="relatorioConsultaStatusPorData.jsp">Emitir consultas por status e data</a></li>												
+					<li><a href="relatorioConsulta.jsp">Emitir relatório de consultas</a></li>												
 					<li><a href="relatorioProcedimento.jsp">Emitir relatório de procedimentos</a></li>
-					<li><a href="#">Emitir relatório de pagamentos</a></li>
-					<li><a href="#">Emitir relatório de odontogramas</a></li>
+					<li><a href="relatorioPagamento.jsp">Emitir relatório de pagamentos</a></li>
+					<li><a href="relatorioOdontograma.jsp">Emitir relatório de odontogramas</a></li>
 				</ul>
 			</li>
 			<li><a href="#"><b>Ajuda</b></a>
