@@ -32,7 +32,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="20" isBold="true"/>
 				</textElement>
-				<text><![CDATA[PROCEDIMENTOS POR CONVÊNIO]]></text>
+				<text><![CDATA[RELATÓRIO DE PROCEDIMENTOS]]></text>
 			</staticText>
 			<image>
 				<reportElement x="1" y="11" width="180" height="38"/>
@@ -67,14 +67,14 @@
 				<text><![CDATA[Código]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="2" width="273" height="20" backcolor="#CCCCCC"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
+				<reportElement mode="Opaque" x="0" y="2" width="77" height="20" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CONVÊNIO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement mode="Opaque" x="273" y="2" width="282" height="20" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="77" y="2" width="478" height="20" backcolor="#CCCCCC"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
