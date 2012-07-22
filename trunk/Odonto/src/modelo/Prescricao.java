@@ -1,7 +1,15 @@
 package modelo;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_prescricao")
@@ -17,7 +25,7 @@ public class Prescricao implements Serializable {
     private String observacao;
 
     @ManyToOne(fetch=FetchType.EAGER)
-	private Odontograma odontograma;
+	private Paciente paciente;
     
 	@ManyToOne(fetch=FetchType.EAGER)
     private Dentista dentista;    
@@ -26,12 +34,12 @@ public class Prescricao implements Serializable {
     	
     }
     
-    public Odontograma getOdontograma() {
-		return odontograma;
+    public Paciente getPaciente() {
+		return paciente;
 	}
 
-	public void setOdontograma(Odontograma odontograma) {
-		this.odontograma = odontograma;
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
 	public Dentista getDentista() {

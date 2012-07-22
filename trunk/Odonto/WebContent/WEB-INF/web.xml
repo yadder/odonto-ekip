@@ -147,4 +147,24 @@
     <servlet-name>ServletRelatorio</servlet-name>
     <url-pattern>/ServletRelatorio</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletPrescricao</display-name>
+    <servlet-name>ServletPrescricao</servlet-name>
+    <servlet-class>controle.ServletPrescricao</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletPrescricao</servlet-name>
+    <url-pattern>/ServletPrescricao</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletInquerito</display-name>
+    <servlet-name>ServletInquerito</servlet-name>
+    <servlet-class>controle.ServletInquerito</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletInquerito</servlet-name>
+    <url-pattern>/ServletInquerito</url-pattern>
+  </servlet-mapping>
 </web-app>

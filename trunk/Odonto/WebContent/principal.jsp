@@ -14,11 +14,15 @@
 	<h5 class="error">${msgE}</h5>
 </div>
 
-	<h6><font color="red">INCOMPLETAS<br/> </font></h6>
-	<a href="inqueritoOdontologico.jsp">Inquérito odontológico</a><br/>
+	<h6><font color="red">À fazer:</font></h6>
 	<a href=#>Efetuar pagamento</a><br/>
+	<a href=#>Atendimento ao paciente</a><br/>
+	<a href=#>Verificação inicial</a><br/>
 	<a href=#>Conceder acesso</a><br/>
-	<a href=#>Prescrição médica</a><br/>
+	<a href=#>Trocar o campo data por componente calendario</a><br/>
+	<a href=#>Fazer validação com jQuery</a><br/>
+	
+	
 	
 </fieldset>
 <c:import url="cabecalho.jsp" />

@@ -38,6 +38,23 @@ public class ProcurarObjeto {
 		}
 	}
 	
+	public Paciente getPacientePorId(long id){
+		try{
+			Paciente paciente = new Paciente();
+			paciente.setIdUsuario(id);
+			DaoPaciente daoPaciente = new DaoPaciente();
+			paciente = daoPaciente.pesquisarPacientePorId(paciente);
+			if (paciente!=null){
+				return paciente;
+			}else{
+				return null;
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+			return null;
+		}
+	}
+	
 	public Odontograma getOdontogramaEmAndamento(Paciente paciente){
 		try{
 			DaoOdontograma daoOdontograma = new DaoOdontograma();
@@ -60,6 +77,23 @@ public class ProcurarObjeto {
 			dentista.setNomeUsuario(nome);
 			DaoDentista daoDentista = new DaoDentista();
 			dentista = daoDentista.pesquisarDentistaPorNome(dentista);
+			if (dentista!=null){
+				return dentista;
+			}else{
+				return null;
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+			return null;
+		}
+	}
+	
+	public Dentista getDentistaPorId(long id){
+		try{
+			Dentista dentista = new Dentista();
+			dentista.setIdUsuario(id);
+			DaoDentista daoDentista = new DaoDentista();
+			dentista = daoDentista.pesquisarDentistaPorId(dentista);
 			if (dentista!=null){
 				return dentista;
 			}else{

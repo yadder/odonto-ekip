@@ -9,26 +9,21 @@
 </head>
 <body>
 <fieldset class="pagina">
-<h1>:: Agendar consulta</h1>
+<h1>:: Remarcar consulta</h1>
 <div id="msg">
 	<h5 class="information">${msg}</h5>
 	<h5 class="error">${msgE}</h5>
 </div>
 
-<form name="formAgendarConsulta" method="post" action="ServletConsulta">
+<form name="formRemarcarConsulta" method="post" action="ServletConsulta">
 	<table>
 		<tr>
 			<td align="right">Paciente selecionado:</td>
 			<td><input type="text" name="nomePaciente" value="${paciente.nomeUsuario}" disabled="disabled" size="45"/></td>
 		</tr>
 		<tr>
-			<td align="right">Selecione o(a) dentista:</td>
-				<td><select name="dentista">
-					<c:forEach items="${sessionScope.listaDentista}" var="colecao">
-						<option value="${colecao.nomeUsuario}">${colecao.nomeUsuario}</option>
-					</c:forEach>
-				</select>
-			</td>
+			<td align="right">Dentista selecionado:</td>
+			<td><input type="text" name="nomeDentista" value="${dentista.nomeUsuario}" disabled="disabled" size="45"/></td>
 		</tr>
 		<tr>
 			<td align="right">Selecione a data da consulta:</td>
@@ -52,7 +47,7 @@
 			</td>
 		<tr>
 			<td colspan=2 align="center">
-				<input type="submit" name="btn" value="Agendar Consulta" />
+				<input type="submit" name="btn" value="Remarcar consulta" />
 				<input type="submit" name="btn" value="Voltar" />
 			</td>
 		</tr>

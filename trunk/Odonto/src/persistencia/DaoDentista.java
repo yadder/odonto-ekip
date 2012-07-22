@@ -52,6 +52,15 @@ public class DaoDentista {
 		session.close();
 		return d;
 	}
+	
+	public Dentista pesquisarDentistaPorId(Dentista dentista) throws Exception{
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Dentista.class).add(Restrictions.eq("idUsuario", dentista.getIdUsuario()));
+		Dentista d = (Dentista)cr.uniqueResult();
+		session.flush();
+		session.close();
+		return d;
+	}
 
 	public List<Dentista> pesquisarTodosDentista() throws Exception{
 		List<Dentista> lista = null;
