@@ -23,8 +23,8 @@
 		</tr>			
 		<tr>				
 			<td align="left">Concluiu tratamento?
-				<input type="radio" name="tratamento" value="SIM" />Sim
-				<input type="radio" name="tratamento" value="NÃO" />Não
+				<input type="radio" name="tratamento" value="S" />Sim
+				<input type="radio" name="tratamento" value="N" />Não
 			</td>				
 		</tr>
 		<tr>						
@@ -66,7 +66,7 @@
 			</td>							
 		</tr>
 		<tr>
-			<td colspan=2 align="center">								
+			<td colspan=2 align="right">								
 				<input type="submit" name="btn" value="Cadastrar" />
 				<input type="submit" name="btn" value="Voltar" />				
 			</td>

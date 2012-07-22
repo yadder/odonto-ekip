@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.Odontograma;
-import modelo.OdontogramaProcedimento;
 import modelo.Paciente;
 
 import org.hibernate.Criteria;

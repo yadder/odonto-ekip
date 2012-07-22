@@ -167,4 +167,14 @@
     <servlet-name>ServletInquerito</servlet-name>
     <url-pattern>/ServletInquerito</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletAtendimento</display-name>
+    <servlet-name>ServletAtendimento</servlet-name>
+    <servlet-class>controle.ServletAtendimento</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletAtendimento</servlet-name>
+    <url-pattern>/ServletAtendimento</url-pattern>
+  </servlet-mapping>
 </web-app>

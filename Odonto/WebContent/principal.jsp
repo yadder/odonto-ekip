@@ -15,10 +15,11 @@
 </div>
 
 	<h6><font color="red">À fazer:</font></h6>
-	<a href=#>Efetuar pagamento</a><br/>
 	<a href=#>Atendimento ao paciente</a><br/>
+	<a href=#>Efetuar pagamento</a><br/>	
 	<a href=#>Verificação inicial</a><br/>
 	<a href=#>Conceder acesso</a><br/>
+	<a href=#>Se a sessão for expirada mandar para o login</a><br/>
 	<a href=#>Trocar o campo data por componente calendario</a><br/>
 	<a href=#>Fazer validação com jQuery</a><br/>
 	
