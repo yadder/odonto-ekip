@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
-<%@ page import="modelo.Convenio" %>
-<%@ page import="persistencia.DaoConvenio" %>
+<%@ page import="modelo.Odontograma" %>
+<%@ page import="persistencia.DaoOdontograma" %>
 <%@ page import="java.util.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -11,31 +11,26 @@
 </head>
 <body>
 <fieldset class="pagina">
-<h1>:: Relatório de procedimentos por convênio </h1>
+<h1>:: Relatório de odontogramas finalizados por período </h1>
 <div id="msg">
 	<h5 class="information">${msg}</h5>
 	<h5 class="error">${msgE}</h5>
 </div>
 
-<form name="formRelatorioProcedimento" method="post" action="ServletRelatorio">
+<form name="formRelatorioOdontograma" method="post" action="ServletRelatorio">
 	<table>
 		<tr>
-			<td align="right">Selecione o convênio:</td>
-			<td><select name="convenio">
-				<%
-					DaoConvenio daoConvenio = new DaoConvenio();
-							List<Convenio> convenios = daoConvenio.pesquisarTodosConvenio();
-							for(Convenio convenio : convenios){
-				%>
-				<option value="<%=convenio.getNomeConvenio() %>"><%=convenio.getNomeConvenio() %></option>
-				<%} %>
-				</select>
-			</td>
+			<td align="right">Data início:</td>
+			<td><input type="text" name="dataInicio" value="${data}" size="17" maxlength="10" OnKeyPress="formatar(this, '##/##/####')" /></td>
 		</tr>
 		<tr>
+			<td align="right">Data fim:</td>
+			<td><input type="text" name="dataFim" value="${data}" size="17" maxlength="10" OnKeyPress="formatar(this, '##/##/####')" /></td>
+		<tr>
+				
 			<td colspan=2 align="center">
 				<input type="submit" name="btn" value="Voltar" />
-				<input type="submit" name="btn" value="Gerar relatório de procedimentos" />				
+				<input type="submit" name="btn" value="Gerar relatório de Odontogramas" />				
 			</td>
 		</tr>		
 	</table>
