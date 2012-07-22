@@ -13,12 +13,14 @@ import javax.servlet.http.HttpSession;
 
 import modelo.Consulta;
 import modelo.Convenio;
+import modelo.Odontograma;
 import modelo.Procedimento;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 import persistencia.DaoConsulta;
 import persistencia.DaoConvenio;
+import persistencia.DaoOdontograma;
 import persistencia.DaoProcedimento;
 
 public class ServletRelatorio extends HttpServlet {
@@ -43,7 +45,7 @@ public class ServletRelatorio extends HttpServlet {
 			objetoSessao.removeAttribute("convenio");
 			ca.sendRedirect(request, response, null, null, "principal.jsp");
 		
-		}else if (btn.equals("Gerar por Convenio")){						
+		}else if (btn.equals("Gerar relatório de procedimentos")){						
 				try{	
 					Convenio convenio= new Convenio();
 					convenio.setNomeConvenio((String)request.getParameter("convenio"));
@@ -55,41 +57,68 @@ public class ServletRelatorio extends HttpServlet {
 					
 					if(!listaProcedimento.isEmpty()){
 						JRBeanCollectionDataSource jr = new JRBeanCollectionDataSource(listaProcedimento);					
-						JasperFillManager.fillReportToFile("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\procedimento.jasper", new HashMap(), jr);					
-						JasperViewer.viewReport("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\procedimento.jrprint", false, false);
+						JasperFillManager.fillReportToFile("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\relatorioProcedimento.jasper", new HashMap(), jr);					
+						JasperViewer.viewReport("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\relatorioProcedimento.jrprint", false, false);
 						jr=null;
-						ca.sendRedirect(request, response, null, null, "relatorioCosultaStatusPorData.jsp");
+						ca.sendRedirect(request, response, null, null, "relatorioProcedimento.jsp");
 					}else{
-						ca.sendRedirect(request, response, null, "Nenhum convênio encontrado", "relatorioCosultaStatusPorData.jsp");
+						ca.sendRedirect(request, response, null, "Nenhum procedimento encontrado", "relatorioProcedimento.jsp");
 					}
 					 
 				}catch (Exception e) {
 					e.printStackTrace();
 					
 				}
-		}else if (btn.equals("Gerar Consultas por Status Data")){						
+		}else if (btn.equals("Gerar relatório de Consultas")){						
 			try{	
-				Consulta consulta = new Consulta();
 				DaoConsulta daoConsulta= new DaoConsulta();
 				List<Consulta> listaConsulta= new ArrayList<Consulta>();
+				listaConsulta= daoConsulta.pesquisarTodosConsultaStatusDataIniDataFim(
+						ca.dataStringParaDataSql((String)request.getParameter("dataConsultaInicio")), 
+						ca.dataStringParaDataSql((String)request.getParameter("dataConsultaFim")), 
+						(String)request.getParameter("statusConsulta"));
 				
-				if(!listaConsulta.isEmpty()){
-				
-					listaConsulta= daoConsulta.pesquisarTodosConsultaStatusDataIniDataFim(ca.dataStringParaDataSql((String)request.getParameter("dataConsultaInicio")), ca.dataStringParaDataSql((String)request.getParameter("dataConsultaFim")), (String)request.getParameter("statusConsulta"));
+				if(!listaConsulta.isEmpty()){			
 					JRBeanCollectionDataSource jr = new JRBeanCollectionDataSource(listaConsulta); 
-					JasperFillManager.fillReportToFile("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\consultaStatusPorData.jasper", new HashMap(), jr);
-					JasperViewer.viewReport("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\consultaStatusPorData.jrprint", false, false);
+					JasperFillManager.fillReportToFile("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\relatorioConsulta.jasper", new HashMap(), jr);
+					JasperViewer.viewReport("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\relatorioConsulta.jrprint", false, false);
+					jr=null;
+					ca.sendRedirect(request, response, null, null, "relatorioConsulta.jsp");
 				}else{
-					ca.sendRedirect(request, response, null, "Nenhuma consulta encontrada", "relatorioCosultaStatusPorData.jsp");
+					ca.sendRedirect(request, response, null, "Nenhuma consulta encontrada", "relatorioConsulta.jsp");
 				}					                                    
 				
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
+		
+		}else if (btn.equals("Gerar Odontogramas")){						
+			try{	
+				DaoOdontograma daoOdontograma= new DaoOdontograma();
+				List<Odontograma> listaOdontograma= new ArrayList<Odontograma>();
+				listaOdontograma= daoOdontograma.pesquisarTodosOdontogramaFinalizadoDataIniDataFim(
+						ca.dataStringParaDataSql((String)request.getParameter("dataInicio")), 
+						ca.dataStringParaDataSql((String)request.getParameter("dataFim")), 
+						(String)request.getParameter("statusOdontograma"));
+				
+				if(!listaOdontograma.isEmpty()){			
+					JRBeanCollectionDataSource jr = new JRBeanCollectionDataSource(listaOdontograma); 
+					JasperFillManager.fillReportToFile("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\relatorioOdontograma.jasper", new HashMap(), jr);
+					JasperViewer.viewReport("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\relatorioOdontograma.jrprint", false, false);
+					jr=null;
+					ca.sendRedirect(request, response, null, null, "relatorioOdontograma.jsp");
+				}else{
+					ca.sendRedirect(request, response, null, "Nenhum odontograma encontrado", "relatorioOdontograma.jsp");
+				}					                                    
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}	
 			
 		}	
 	
 	
 	}
-
+	
 }
+
