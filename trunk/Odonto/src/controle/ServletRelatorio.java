@@ -1,21 +1,23 @@
 package controle;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import modelo.Consulta;
 import modelo.Convenio;
 import modelo.Procedimento;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
+import persistencia.DaoConsulta;
 import persistencia.DaoConvenio;
 import persistencia.DaoProcedimento;
 
@@ -35,15 +37,15 @@ public class ServletRelatorio extends HttpServlet {
 		
 		String btn = (String)request.getParameter("btn");
 		HttpSession objetoSessao = request.getSession();
-		Convenio convenio= new Convenio();
+		ConfiguraAtributo ca= new ConfiguraAtributo(); 
 		
 		if (btn.equals("Voltar")){
 			objetoSessao.removeAttribute("convenio");
-			RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
-			disp.forward(request, response);
+			ca.sendRedirect(request, response, null, null, "principal.jsp");
 		
 		}else if (btn.equals("Gerar por Convenio")){						
-				try{					
+				try{	
+					Convenio convenio= new Convenio();
 					convenio.setNomeConvenio((String)request.getParameter("convenio"));
 					DaoConvenio daoConvenio= new DaoConvenio();
 					convenio= daoConvenio.pesquisarConvenioPorNome(convenio);
@@ -51,22 +53,40 @@ public class ServletRelatorio extends HttpServlet {
 					DaoProcedimento daoProcedimento= new DaoProcedimento();
 					List<Procedimento> listaProcedimento=daoProcedimento.pesquisarProcedimentoPorConvenio(convenio);
 					
-					System.out.println(listaProcedimento);
-					// passo 1 -> preparar a lista para ser enviada para o relatorio
-					JRBeanCollectionDataSource jr = new JRBeanCollectionDataSource(listaProcedimento);
-					
-					// passo 2 -> preencher o arquivo relatorio.jasper com as informacoes preparadas da lista
-					JasperFillManager.fillReportToFile("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\procedimento.jasper", new HashMap(), jr);
-					// o arquivo Relatorio.jasper preenchido é o relatório.jrprint				
-					
-					// passo 3 -> mostrar o arquivo relatorio.jrprint
-					JasperViewer.viewReport("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\procedimento.jrprint", false, false);
-					                                     //1ºfalse -> Se o arquivo está em XML
-														 //2ºfalse -> Se o sistema deve ser fechado quando o relatorio for fechado
-					
+					if(!listaProcedimento.isEmpty()){
+						JRBeanCollectionDataSource jr = new JRBeanCollectionDataSource(listaProcedimento);					
+						JasperFillManager.fillReportToFile("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\procedimento.jasper", new HashMap(), jr);					
+						JasperViewer.viewReport("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\procedimento.jrprint", false, false);
+						jr=null;
+						ca.sendRedirect(request, response, null, null, "relatorioCosultaStatusPorData.jsp");
+					}else{
+						ca.sendRedirect(request, response, null, "Nenhum convênio encontrado", "relatorioCosultaStatusPorData.jsp");
+					}
+					 
 				}catch (Exception e) {
 					e.printStackTrace();
+					
 				}
+		}else if (btn.equals("Gerar Consultas por Status Data")){						
+			try{	
+				Consulta consulta = new Consulta();
+				DaoConsulta daoConsulta= new DaoConsulta();
+				List<Consulta> listaConsulta= new ArrayList<Consulta>();
+				
+				if(!listaConsulta.isEmpty()){
+				
+					listaConsulta= daoConsulta.pesquisarTodosConsultaStatusDataIniDataFim(ca.dataStringParaDataSql((String)request.getParameter("dataConsultaInicio")), ca.dataStringParaDataSql((String)request.getParameter("dataConsultaFim")), (String)request.getParameter("statusConsulta"));
+					JRBeanCollectionDataSource jr = new JRBeanCollectionDataSource(listaConsulta); 
+					JasperFillManager.fillReportToFile("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\consultaStatusPorData.jasper", new HashMap(), jr);
+					JasperViewer.viewReport("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\consultaStatusPorData.jrprint", false, false);
+				}else{
+					ca.sendRedirect(request, response, null, "Nenhuma consulta encontrada", "relatorioCosultaStatusPorData.jsp");
+				}					                                    
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		}	
 	
 	
