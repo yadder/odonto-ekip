@@ -47,7 +47,7 @@ public class InqueritoOdontologico implements Serializable {
     private Date dataUltimoAtendimento;
     @Column(name = "concluiu_tratamento", nullable = false, length = 1)
     private String concluiuTratamento;
-    @Column(name = "experiencia_negativa_tratamento", nullable = false, length = 1)
+    @Column(name = "experiencia_negativa_tratamento", length = 100)
     private String experienciaNegativaTratamento;
     @Column(name = "roer_unhas", length = 1)
     private String roerUnhas;

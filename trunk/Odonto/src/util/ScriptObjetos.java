@@ -27,12 +27,14 @@ public class ScriptObjetos {
 			Convenio convenio3 = new Convenio("BRADESCO");
 			Convenio convenio4 = new Convenio("DIX");
 			Convenio convenio5 = new Convenio("MEDIAL");
+			Convenio convenio6 = new Convenio("PARTICULAR");
 			DaoConvenio daoConvenio = new DaoConvenio();
 			daoConvenio.cadastrarConvenio(convenio1);
 			daoConvenio.cadastrarConvenio(convenio2);
 			daoConvenio.cadastrarConvenio(convenio3);
 			daoConvenio.cadastrarConvenio(convenio4);
 			daoConvenio.cadastrarConvenio(convenio5);
+			daoConvenio.cadastrarConvenio(convenio6);
 			System.out.println("--- Convênios cadastrados");
 		}catch (Exception e) {
 			System.out.println("Erro ao inserir convênios...");

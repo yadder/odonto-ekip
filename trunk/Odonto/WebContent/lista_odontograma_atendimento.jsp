@@ -9,7 +9,7 @@
 </head>
 <body>
 <fieldset class="pagina">
-<h1>:: Plano de tratamento</h1>
+<h1>:: Plano de tratamento - Atendimento</h1>
 <div id="msg">
 	<h5 class="information">${msg}</h5>
 	<h5 class="error">${msgE}</h5>
@@ -19,22 +19,24 @@
 	<table border="1" width="80%" bordercolor="#5e8ce9">
 		<tr>
 			<td align="center" bgcolor="#5e8ce9" width="10%"><b>Elemento</b></td>
-			<td align="center" bgcolor="#5e8ce9" width="40%"><b>Procedimento</b></td>
-			<td align="center" bgcolor="#5e8ce9" width="20%"><b>Face</b></td>
-			<td align="center" bgcolor="#5e8ce9" width="20%"><b>Autorização</b></td>
-			<td align="center" bgcolor="#5e8ce9" width="10%"><b>Remover</b>
+			<td align="center" bgcolor="#5e8ce9" width="35%"><b>Procedimento</b></td>
+			<td align="center" bgcolor="#5e8ce9" width="15%"><b>Face</b></td>
+			<td align="center" bgcolor="#5e8ce9" width="15%"><b>Autorização</b></td>
+			<td align="center" bgcolor="#5e8ce9" width="15%"><b>Situação</b>
+			<td align="center" bgcolor="#5e8ce9" width="10%"><b>Ação</b>
 		</tr>
 		<c:forEach items="${sessionScope.listaTratamento}" var="colecao">
 		<tr>
 			<td align="center">${colecao.elemento}</td>
 			<td align="center">${colecao.procedimento}</td>
 			<td align="center">${colecao.face}</td>
-			<td align="center">${colecao.statusAutorizacao}</td>									
-			<td align="center"><a href="ServletOdontograma?btn=Excluir&index=${colecao.idOdontogramaProcedimento}">Excluir</a></td>
+			<td align="center">${colecao.statusAutorizacao}</td>
+			<td align="center">${colecao.statusProcedimento}</td>										
+			<td align="center"><a href="ServletAtendimento?btn=Realizado&index=${colecao.idOdontogramaProcedimento}">Concluir</a></td>
 		</tr>	
 		</c:forEach>
 	</table>
-	<form name="formBtn" method="post" action="ServletOdontograma">
+	<form name="formBtn" method="post" action="ServletAtendimento">
 		<input type="submit" name="btn" value="Voltar"/>
 	</form>	
 </center>

@@ -9,6 +9,7 @@ import modelo.Dentista;
 import modelo.Elemento;
 import modelo.Face;
 import modelo.Odontograma;
+import modelo.OdontogramaProcedimento;
 import modelo.Paciente;
 import modelo.Procedimento;
 import persistencia.DaoConsulta;
@@ -16,6 +17,7 @@ import persistencia.DaoDentista;
 import persistencia.DaoElemento;
 import persistencia.DaoFace;
 import persistencia.DaoOdontograma;
+import persistencia.DaoOdontogramaProcedimento;
 import persistencia.DaoPaciente;
 import persistencia.DaoProcedimento;
 
@@ -187,12 +189,13 @@ public class ProcurarObjeto {
 		}
 	}
 	
-	public Procedimento getProcedimento(String nome){
+	public Procedimento getProcedimentoPorNomeEConvenio(String nome, Convenio convenio){
 		try{
 			Procedimento procedimento = new Procedimento();
 			DaoProcedimento daoProcedimento = new DaoProcedimento();
 			procedimento.setDescricaoProcedimento(nome);
-			procedimento = daoProcedimento.pesquisarProcedimentoPorDescricao(procedimento);
+			procedimento.setConvenio(convenio);
+			procedimento = daoProcedimento.pesquisarProcedimentoPorDescricaoEConvenio(procedimento);
 			if (procedimento != null){
 				return procedimento;
 			}else{
@@ -220,5 +223,20 @@ public class ProcurarObjeto {
 		}
 	}
 	
+	public OdontogramaProcedimento getOdontogramaProcedimentoPorId(long id){
+		try{
+			OdontogramaProcedimento odontogramaProcedimento = new OdontogramaProcedimento();
+			DaoOdontogramaProcedimento daoOdontogramaProcedimento = new DaoOdontogramaProcedimento();
+			odontogramaProcedimento = daoOdontogramaProcedimento.pesquisarOdontogramaProcedimentoPorId(id);
+			if (odontogramaProcedimento != null){
+				return odontogramaProcedimento;
+			}else{
+				return null;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 }

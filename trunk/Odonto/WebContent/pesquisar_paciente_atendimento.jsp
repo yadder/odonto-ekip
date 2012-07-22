@@ -19,12 +19,7 @@
 	<table>
 		<tr>
 			<td align="right">Nome do paciente:</td>
-			<td><input type="text" name="nomePaciente" size="45" /><input type="submit" name="btn" value="Pesquisar Paciente" /></td>
-		</tr>
-		<tr>
-			<td colspan=2 align="right">
-				<input type="submit" name="btn" value="Voltar" />
-			</td>
+			<td><input type="text" name="nomePaciente" size="45" /><input type="submit" name="btn" value="Pesquisar paciente para atendimento" /></td>
 		</tr>
 	</table>
 </form>

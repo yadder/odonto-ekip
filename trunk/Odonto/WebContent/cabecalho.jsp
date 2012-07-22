@@ -38,7 +38,7 @@
 				<ul>
 					<li><a href="pesquisar_paciente_inquerito.jsp">Inquérito odontológico</a></li>
 					<li><a href="pesquisar_paciente.jsp">Novo odontograma</a></li>
-					<li><a href="#">Atendimento paciente</a></li>
+					<li><a href="pesquisar_paciente_atendimento.jsp">Atendimento paciente</a></li>
 				</ul>
 			</li>
 			<li><a href="#"><b>Pagamento</b></a>

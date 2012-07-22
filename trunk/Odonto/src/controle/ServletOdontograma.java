@@ -112,13 +112,19 @@ public class ServletOdontograma extends HttpServlet {
 			try{
 				DaoOdontogramaProcedimento daoOdontogramaProcedimento = new DaoOdontogramaProcedimento();
 				OdontogramaProcedimento odontogramaProcedimento = new OdontogramaProcedimento();
-				odontogramaProcedimento.setStatusAutorizacao("PENDENTE");
 				odontogramaProcedimento.setStatusProcedimento("PENDENTE");
 				odontogramaProcedimento.setDataExecucaoProcedimento(null);
 				odontogramaProcedimento.setElemento(po.getElemento((String)objetoSessao.getAttribute("elemento")));
 				odontogramaProcedimento.setFace(po.getFace((String)request.getParameter("face")));
-				if (po.getProcedimento((String)request.getParameter("procedimento"))!=null){
-					odontogramaProcedimento.setProcedimento(po.getProcedimento((String)request.getParameter("procedimento")));
+				if ((po.getProcedimentoPorNomeEConvenio(((String)request.getParameter("procedimento")), (Convenio)objetoSessao.getAttribute("convenioPaciente")))!=null){
+					odontogramaProcedimento.setProcedimento(po.getProcedimentoPorNomeEConvenio(((String)request.getParameter("procedimento")), (Convenio)objetoSessao.getAttribute("convenioPaciente")));
+					//Se convenio particular entao status autorizacao = aprovado
+					if (odontogramaProcedimento.getProcedimento().getConvenio().getNomeConvenio().equals("PARTICULAR")){
+						odontogramaProcedimento.setStatusAutorizacao("APROVADO");
+					}//senao status autorizacao = pendente
+					else{
+						odontogramaProcedimento.setStatusAutorizacao("PENDENTE");
+					}
 				}else{
 					ca.sendRedirect(request, response, null, "Este convênio não tem procedimentos cadastrados.", "novo_odontograma.jsp");
 				}
