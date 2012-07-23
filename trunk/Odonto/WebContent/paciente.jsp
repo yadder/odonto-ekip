@@ -27,7 +27,7 @@
 			<td align="right">Rg:</td>
 			<td><input type="text" name="rgPaciente" value="${paciente.rgUsuario}" size="13" maxlength="15"/>
 			Cpf:<input type="text" name="cpfPaciente" value="${paciente.cpfUsuario}" size="12" maxlength="14" OnKeyPress="formatar(this, '###.###.###-##')" />
-			Dt nasc.:<input type="text" name="dtNascPaciente" value="${data}" size="6" maxlength="10" OnKeyPress="formatar(this, '##/##/####')" /></td>
+			Dt nasc.:<input type="text" name="dtNascPaciente" value="${data}" size="8" maxlength="10" OnKeyPress="formatar(this, '##/##/####')" /></td>
 		</tr>
 		<tr>
 			<td align="right">Sexo:</td>
