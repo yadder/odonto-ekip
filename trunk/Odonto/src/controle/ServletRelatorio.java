@@ -92,14 +92,14 @@ public class ServletRelatorio extends HttpServlet {
 				e.printStackTrace();
 			}
 		
-		}else if (btn.equals("Gerar Odontogramas")){						
+		}else if (btn.equals("Gerar relatório de Odontogramas")){						
 			try{	
 				DaoOdontograma daoOdontograma= new DaoOdontograma();
 				List<Odontograma> listaOdontograma= new ArrayList<Odontograma>();
 				listaOdontograma= daoOdontograma.pesquisarTodosOdontogramaFinalizadoDataIniDataFim(
 						ca.dataStringParaDataSql((String)request.getParameter("dataInicio")), 
-						ca.dataStringParaDataSql((String)request.getParameter("dataFim")), 
-						(String)request.getParameter("statusOdontograma"));
+						ca.dataStringParaDataSql((String)request.getParameter("dataFim"))); 
+						
 				
 				if(!listaOdontograma.isEmpty()){			
 					JRBeanCollectionDataSource jr = new JRBeanCollectionDataSource(listaOdontograma); 
