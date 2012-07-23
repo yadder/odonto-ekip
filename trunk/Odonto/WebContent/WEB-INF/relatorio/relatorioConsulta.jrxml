@@ -20,6 +20,30 @@
 	</field>
 	<sortField name="dataConsulta"/>
 	<sortField name="statusConsulta"/>
+	<variable name="dataConsulta_1" class="java.lang.Integer" resetType="Column" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{dataConsulta}]]></variableExpression>
+	</variable>
+	<group name="dataConsulta">
+		<groupExpression><![CDATA[$F{dataConsulta}]]></groupExpression>
+		<groupHeader>
+			<band height="25">
+				<staticText>
+					<reportElement mode="Opaque" x="1" y="2" width="35" height="20" backcolor="#CCCCCC"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Data:]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement mode="Opaque" x="36" y="2" width="519" height="20" backcolor="#CCCCCC"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{dataConsulta}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
 	<background>
 		<band/>
 	</background>
@@ -50,28 +74,28 @@
 	<columnHeader>
 		<band height="22">
 			<staticText>
-				<reportElement mode="Opaque" x="1" y="2" width="164" height="20" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="1" y="2" width="164" height="20" backcolor="#999999"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Dentista]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="165" y="2" width="221" height="20" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="165" y="2" width="222" height="20" backcolor="#999999"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Paciente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="387" y="2" width="65" height="20" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="387" y="2" width="65" height="20" backcolor="#999999"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Hora]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="452" y="2" width="103" height="20" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="452" y="2" width="103" height="20" backcolor="#999999"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -80,42 +104,36 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="43">
+		<band height="28">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="23" width="164" height="20"/>
+				<reportElement x="0" y="3" width="164" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{dentista}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="165" y="23" width="221" height="20"/>
+				<reportElement x="165" y="3" width="221" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{paciente}]]></textFieldExpression>
 			</textField>
 			<textField pattern="HH.mm">
-				<reportElement x="387" y="23" width="65" height="20"/>
+				<reportElement x="387" y="3" width="65" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{horaConsulta}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="455" y="23" width="100" height="20"/>
+				<reportElement x="455" y="3" width="100" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{statusConsulta}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="1" y="3" width="100" height="20"/>
-				<textElement verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.util.Date"><![CDATA[$F{dataConsulta}]]></textFieldExpression>
-			</textField>
+			<elementGroup/>
 		</band>
 	</detail>
 	<columnFooter>
