@@ -41,6 +41,35 @@ public class ScriptObjetos {
 		}
 /////////////////////////////////////////////////////
 		try{
+			System.out.println("--- Inserindo convênios");
+			
+			1016 Ulotomia / Ulectomia 16,85
+			1024 Extração de dentes decíduos 13,52
+			1032 Extração simples 15,80
+			1040 Extração de dentes inclusos ou impactados 80,05
+			1057 Alveoloplastia (por arcada) 24,43
+			1073 Aprofundamento de vestíbulo 24,13
+			1081 Frenectomia do lábio 14,04
+			1099 Frenectomia da língua 19,66
+			1123 Remoção de tórus 26,89
+			1172 Remoção ou correção de Bridas Musculares 33,70
+			1198 Biópsia incisional 50,54
+			1214 Excisão de Mucocele 42,68
+			1222 Excisão de Rânula 56,16
+			1305 Extração com Retalho 29,64
+			1321 Fratura Alvéolo-Dentária / Redução Cruenta 96,00
+			1339 Fratura Alvéolo-Dentária / Redução Incruenta 48,00
+			1628 Exodontia de Raiz Residual sem Retalho 15,80
+			
+			
+			System.out.println("--- Convênios cadastrados");
+		}catch (Exception e) {
+			System.out.println("Erro ao inserir convênios...");
+		}
+		
+		
+/////////////////////////////////////////////////////
+		try{
 			System.out.println("--- Inserindo elemento");
 			
 			DaoElemento daoElemento = new DaoElemento();
