@@ -1,7 +1,11 @@
+* {border-radius: 7px;}
 body{background-color: #D6E0FF;}
 h5.error{font-family: cursive; color: #F00; text-shadow: 1px 1px 1px #FFF;}
 h5.information{font-family: cursive; color: #00F; text-shadow: 1px 1px 1px #FFF;}
 h1{color: #5E8CE9; text-shadow: 2px 2px 2px #000; margin: 0%;}
+input{border: 1px solid;border-color: #5E8CE9;}
+select{border: 1px solid;border-color: #5E8CE9;}
+textarea{border: 1px solid;border-color: #5E8CE9;}
 
 .navbar{padding: 5px; width: 100%}
 .navbar li{list-style: none; float: left;}

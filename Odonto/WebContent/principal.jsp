@@ -15,9 +15,11 @@
 </div>
 
 	<h6><font color="red">À fazer:</font></h6>
+	<a href=#>Gerar pagamento</a><br/>
 	<a href=#>Efetuar pagamento</a><br/>
 	<a href=#>Verificação inicial</a><br/>
 	<a href=#>Conceder acesso</a><br/>
+	<a href=#>Tratar busca de procedimento por procedimento</a><br/>
 	
 	<h6><font color="red">Melhorias:</font></h6>
 	<a href=#>Na tela de consulta, só mostrar horarios disponiveis</a><br/>

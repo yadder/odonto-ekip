@@ -1,12 +1,12 @@
 package util;
 
-import controle.ConfiguraAtributo;
 import modelo.Acesso;
 import modelo.Convenio;
 import modelo.Dentista;
 import modelo.Elemento;
 import modelo.Face;
 import modelo.Paciente;
+import modelo.Procedimento;
 import modelo.Usuario;
 import persistencia.DaoAcesso;
 import persistencia.DaoConvenio;
@@ -14,12 +14,16 @@ import persistencia.DaoDentista;
 import persistencia.DaoElemento;
 import persistencia.DaoFace;
 import persistencia.DaoPaciente;
+import persistencia.DaoProcedimento;
 import persistencia.DaoUsuario;
+import controle.ConfiguraAtributo;
 
 public class ScriptObjetos {
 	
 	public static void main(String[] args) {
 		ConfiguraAtributo ca = new ConfiguraAtributo();
+		Convenio conv = new Convenio();
+		Convenio conv1 = new Convenio();
 		try{
 			System.out.println("--- Inserindo convênios");
 			Convenio convenio1 = new Convenio("AMIL");
@@ -35,36 +39,77 @@ public class ScriptObjetos {
 			daoConvenio.cadastrarConvenio(convenio4);
 			daoConvenio.cadastrarConvenio(convenio5);
 			daoConvenio.cadastrarConvenio(convenio6);
+			conv = convenio6;
+			conv1 = convenio2;
 			System.out.println("--- Convênios cadastrados");
 		}catch (Exception e) {
 			System.out.println("Erro ao inserir convênios...");
 		}
 /////////////////////////////////////////////////////
+			
 		try{
 			System.out.println("--- Inserindo convênios");
+			DaoProcedimento daoProcedimento = new DaoProcedimento();
+			Procedimento procedimento = new Procedimento();
+			procedimento.setConvenio(conv);
+			procedimento.setCodigoProcedimento("1016");
+			procedimento.setDescricaoProcedimento("Ulotomia / Ulectomia");
+			procedimento.setValorProcedimento(16.85);
+			daoProcedimento.cadastrarProcedimento(procedimento);
 			
-			1016 Ulotomia / Ulectomia 16,85
-			1024 Extração de dentes decíduos 13,52
-			1032 Extração simples 15,80
-			1040 Extração de dentes inclusos ou impactados 80,05
-			1057 Alveoloplastia (por arcada) 24,43
-			1073 Aprofundamento de vestíbulo 24,13
-			1081 Frenectomia do lábio 14,04
-			1099 Frenectomia da língua 19,66
-			1123 Remoção de tórus 26,89
-			1172 Remoção ou correção de Bridas Musculares 33,70
-			1198 Biópsia incisional 50,54
-			1214 Excisão de Mucocele 42,68
-			1222 Excisão de Rânula 56,16
-			1305 Extração com Retalho 29,64
-			1321 Fratura Alvéolo-Dentária / Redução Cruenta 96,00
-			1339 Fratura Alvéolo-Dentária / Redução Incruenta 48,00
-			1628 Exodontia de Raiz Residual sem Retalho 15,80
+			procedimento = new Procedimento();
+			procedimento.setConvenio(conv);
+			procedimento.setCodigoProcedimento("1024");
+			procedimento.setDescricaoProcedimento("Extração de dentes decíduos");
+			procedimento.setValorProcedimento(13.52);
+			daoProcedimento.cadastrarProcedimento(procedimento);
+			
+			procedimento = new Procedimento();
+			procedimento.setConvenio(conv);
+			procedimento.setCodigoProcedimento("1032");
+			procedimento.setDescricaoProcedimento("Extração simples");
+			procedimento.setValorProcedimento(15.80);
+			daoProcedimento.cadastrarProcedimento(procedimento);
+			
+			procedimento = new Procedimento();
+			procedimento.setConvenio(conv);
+			procedimento.setCodigoProcedimento("1123");
+			procedimento.setDescricaoProcedimento("Remoção de tórus");
+			procedimento.setValorProcedimento(26.89);
+			daoProcedimento.cadastrarProcedimento(procedimento);
+			
+			procedimento = new Procedimento();
+			procedimento.setConvenio(conv1);
+			procedimento.setCodigoProcedimento("1016");
+			procedimento.setDescricaoProcedimento("Ulotomia / Ulectomia");
+			procedimento.setValorProcedimento(16.85);
+			daoProcedimento.cadastrarProcedimento(procedimento);
+			
+			procedimento = new Procedimento();
+			procedimento.setConvenio(conv1);
+			procedimento.setCodigoProcedimento("1024");
+			procedimento.setDescricaoProcedimento("Extração de dentes decíduos");
+			procedimento.setValorProcedimento(13.52);
+			daoProcedimento.cadastrarProcedimento(procedimento);
+			
+			procedimento = new Procedimento();
+			procedimento.setConvenio(conv1);
+			procedimento.setCodigoProcedimento("1032");
+			procedimento.setDescricaoProcedimento("Extração simples");
+			procedimento.setValorProcedimento(15.80);
+			daoProcedimento.cadastrarProcedimento(procedimento);
+			
+			procedimento = new Procedimento();
+			procedimento.setConvenio(conv1);
+			procedimento.setCodigoProcedimento("1123");
+			procedimento.setDescricaoProcedimento("Remoção de tórus");
+			procedimento.setValorProcedimento(26.89);
+			daoProcedimento.cadastrarProcedimento(procedimento);
 			
 			
-			System.out.println("--- Convênios cadastrados");
+			System.out.println("--- Procedimentos cadastrados");
 		}catch (Exception e) {
-			System.out.println("Erro ao inserir convênios...");
+			System.out.println("Erro ao inserir procedimentos...");
 		}
 		
 		
