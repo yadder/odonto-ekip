@@ -19,11 +19,11 @@
 	<table>
 		<tr>
 			<td align="right">Nome do paciente:</td>
-			<td><input type="text" name="nomePaciente" value="${paciente.nomeUsuario}" size="53" disabled="disabled"/></td>
+			<td><input type="text" name="nomePaciente" value="${paciente.nomeUsuario}" size="53" readonly="readonly"/></td>
 		</tr>
 		<tr>
 			<td align="right">Valor do tratamento:</td>
-			<td><input type="text" name="valorOdontograma" id="valorOdontograma" value="${odontograma.valorOdontograma}" size="10" disabled="disabled"/></td>
+			<td><input type="text" name="valorOdontograma" id="valorOdontograma" value="${odontograma.valorOdontograma}" size="10" readonly="readonly" /></td>
 		</tr>
 		<tr>
 			<td align="right">Forma de pagamento: </td>
@@ -44,7 +44,7 @@
 					<option value="9">9 parcelas</option>
 					<option value="10">10 parcelas</option>
 				</select> 
-				<input type="text" id="valorParcela" name="valorParcela" value="0" disabled="disabled"/>				
+				<input type="text" name="valorParcela" id="valorParcela" readonly="readonly" />				
 			</td>
 		</tr>
 		<tr>

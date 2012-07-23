@@ -25,8 +25,7 @@ function calculaParcela(){
 	var valor = document.getElementById("valorOdontograma").value;
 	var parcela = document.getElementById("parcelas").value;
 	var resultado = valor / parcela;
-	resultado.toFixed(2);
-	resultado.toPrecision(2);
+	resultado =  Math.round(resultado*Math.pow(10,2))/Math.pow(10,2);
 	document.getElementById("valorParcela").value = resultado;	
 }
 

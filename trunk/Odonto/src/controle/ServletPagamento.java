@@ -71,8 +71,8 @@ public class ServletPagamento extends HttpServlet {
 				ca.sendRedirect(request, response, null, "Preencha o nome do paciente.", "pesquisar_paciente_gerar_pagamento.jsp");
 			}
 		}else if(btn.equals("Gerar pagamento")){
-			System.out.println("---------------------------"+(String)request.getParameter("valorParcela"));
-			if (((String)request.getParameter("valorParcela") != null)){
+			String valParcela = (String)request.getParameter("valorParcela");
+			if (!valParcela.equals("") && valParcela != null){
 				double valor = Double.parseDouble((String)request.getParameter("valorOdontograma"));
 				if (((String)request.getParameter("formaPagamento")).equals("DINHEIRO") && valor<500){
 					int par = Integer.parseInt((String)request.getParameter("parcelas"));
@@ -85,7 +85,7 @@ public class ServletPagamento extends HttpServlet {
 						calendar.setTime(minhaData);
 						SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
 						for (int i = 0; i < par; i++) {
-							calendar.add(Calendar.DAY_OF_MONTH, (i+1)*30);// incrementa na data a qtd de meses							
+							calendar.add(Calendar.DAY_OF_MONTH,30);// incrementa na data a qtd de dias							
 							Pagamento pagamento = new Pagamento();
 							pagamento.setNumeroParcela(i+1);							
 							pagamento.setValorParcela(valorParcela);
