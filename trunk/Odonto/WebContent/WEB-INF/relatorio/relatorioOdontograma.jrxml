@@ -3,24 +3,28 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="valorOdontograma" class="java.lang.Double">
-		<fieldDescription><![CDATA[valorOdontograma]]></fieldDescription>
-	</field>
-	<field name="statusOdontograma" class="java.lang.String">
-		<fieldDescription><![CDATA[statusOdontograma]]></fieldDescription>
-	</field>
-	<field name="paciente" class="modelo.Paciente">
-		<fieldDescription><![CDATA[paciente]]></fieldDescription>
-	</field>
-	<field name="dentista" class="modelo.Dentista">
-		<fieldDescription><![CDATA[dentista]]></fieldDescription>
+	<field name="dataFimOdontograma" class="java.util.Date">
+		<fieldDescription><![CDATA[dataFimOdontograma]]></fieldDescription>
 	</field>
 	<field name="dataInicioOdontograma" class="java.util.Date">
 		<fieldDescription><![CDATA[dataInicioOdontograma]]></fieldDescription>
 	</field>
-	<field name="dataFimOdontograma" class="java.util.Date">
-		<fieldDescription><![CDATA[dataFimOdontograma]]></fieldDescription>
+	<field name="dentista" class="modelo.Dentista">
+		<fieldDescription><![CDATA[dentista]]></fieldDescription>
 	</field>
+	<field name="paciente" class="modelo.Paciente">
+		<fieldDescription><![CDATA[paciente]]></fieldDescription>
+	</field>
+	<field name="statusOdontograma" class="java.lang.String">
+		<fieldDescription><![CDATA[statusOdontograma]]></fieldDescription>
+	</field>
+	<field name="valorOdontograma" class="java.lang.Double">
+		<fieldDescription><![CDATA[valorOdontograma]]></fieldDescription>
+	</field>
+	<field name="convenio" class="modelo.Convenio">
+		<fieldDescription><![CDATA[convenio]]></fieldDescription>
+	</field>
+	<sortField name="dataFimOdontograma"/>
 	<background>
 		<band/>
 	</background>
@@ -49,10 +53,59 @@
 		<band/>
 	</pageHeader>
 	<columnHeader>
-		<band height="18"/>
+		<band height="22">
+			<staticText>
+				<reportElement mode="Opaque" x="4" y="1" width="195" height="20" backcolor="#999999"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paciente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="200" y="1" width="231" height="20" backcolor="#999999"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dentista]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="431" y="1" width="100" height="20" backcolor="#999999"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="20"/>
+		<band height="20">
+			<textField>
+				<reportElement x="433" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{statusOdontograma}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="199" y="-1" width="232" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{dentista}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="-1" width="196" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{paciente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="342" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{convenio}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
 		<band/>
