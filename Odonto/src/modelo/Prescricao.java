@@ -23,6 +23,9 @@ public class Prescricao implements Serializable {
     
     @Column(name = "observacao", nullable = false, length = 255)
     private String observacao;
+    
+    @Column(name = "tipo_prescricao", nullable = false, length = 15)
+    private String tipoPrescricao;
 
     @ManyToOne(fetch=FetchType.EAGER)
 	private Paciente paciente;
@@ -78,10 +81,12 @@ public class Prescricao implements Serializable {
     public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
+    
+    public String getTipoPrescricao() {
+		return tipoPrescricao;
+	}
 
-    @Override
-    public String toString() {
-        return "odonto.Prescricao[ idPrescricao=" + idPrescricao + " ]";
-    }
-   
+	public void setTipoPrescricao(String tipoPrescricao) {
+		this.tipoPrescricao = tipoPrescricao;
+	}   
 }

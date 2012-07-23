@@ -101,6 +101,7 @@ public class ServletAtendimento extends HttpServlet {
 								odontograma = ((Odontograma)objetoSessao.getAttribute("odontograma"));
 								DaoOdontograma daoOdontograma = new DaoOdontograma();
 								odontograma.setStatusOdontograma("FINALIZADO");
+								
 								daoOdontograma.alterarOdontograma(odontograma);
 								ca.sendRedirect(request, response, "Tratamento concluído!", null, "principal.jsp");
 							}else{							

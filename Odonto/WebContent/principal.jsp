@@ -9,17 +9,18 @@
 <body>
 <fieldset class="pagina">
 <h1>:: Sistema OdontoEkip</h1>
-<div id="msg">
+<div id="msg" >
 	<h5 class="information">${msg}</h5>
 	<h5 class="error">${msgE}</h5>
 </div>
 
 	<h6><font color="red">À fazer:</font></h6>
-	<a href=#>Atendimento ao paciente</a><br/>
-	<a href=#>Efetuar pagamento</a><br/>	
+	<a href=#>Efetuar pagamento</a><br/>
 	<a href=#>Verificação inicial</a><br/>
 	<a href=#>Conceder acesso</a><br/>
-	<a href=#>Se a sessão for expirada mandar para o login</a><br/>
+	
+	<h6><font color="red">Melhorias:</font></h6>
+	<a href=#>Na tela de consulta, só mostrar horarios disponiveis</a><br/>
 	<a href=#>Trocar o campo data por componente calendario</a><br/>
 	<a href=#>Fazer validação com jQuery</a><br/>
 	

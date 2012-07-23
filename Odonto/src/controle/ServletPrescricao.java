@@ -50,6 +50,7 @@ public class ServletPrescricao extends HttpServlet {
 				prescricao.setObservacao((String)request.getParameter("observacao"));
 				prescricao.setDentista((Dentista)objetoSessao.getAttribute("usuarioLogado"));
 				prescricao.setPaciente((Paciente)objetoSessao.getAttribute("paciente"));
+				prescricao.setTipoPrescricao((String)request.getParameter("tipoPrescricao"));
 				try{
 					daoPrescricao.cadastrarPrescricao(prescricao);
 					ca.sendRedirect(request, response, "Prescrição cadastrada com sucesso!", null, "principal.jsp");

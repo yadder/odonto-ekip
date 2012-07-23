@@ -43,6 +43,7 @@
 			</li>
 			<li><a href="#"><b>Pagamento</b></a>
 				<ul>
+					<li><a href="pesquisar_paciente_gerar_pagamento.jsp">Gerar pagamento</a></li>
 					<li><a href="#">Consultar pagamento</a></li>
 					<li><a href="#">Efetuar pagamento</a></li>
 				</ul>
@@ -52,8 +53,7 @@
 			</li>
 			<li><a href="#"><b>Relatórios</b></a>
 				<ul>
-					<li><a href="#">Emitir atestado médico</a></li>
-					<li><a href="#">Emitir receituário</a></li>
+					<li><a href="pesquisar_paciente_prescricao.jsp">Emitir atestado/receituário médico</a></li>
 					<li><a href="relatorioConsulta.jsp">Emitir relatório de consultas</a></li>												
 					<li><a href="relatorioProcedimento.jsp">Emitir relatório de procedimentos</a></li>
 					<li><a href="relatorioPagamento.jsp">Emitir relatório de pagamentos</a></li>
