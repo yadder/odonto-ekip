@@ -11,6 +11,7 @@ import modelo.Face;
 import modelo.Odontograma;
 import modelo.OdontogramaProcedimento;
 import modelo.Paciente;
+import modelo.Pagamento;
 import modelo.Procedimento;
 import persistencia.DaoConsulta;
 import persistencia.DaoDentista;
@@ -19,6 +20,7 @@ import persistencia.DaoFace;
 import persistencia.DaoOdontograma;
 import persistencia.DaoOdontogramaProcedimento;
 import persistencia.DaoPaciente;
+import persistencia.DaoPagamento;
 import persistencia.DaoProcedimento;
 
 public class ProcurarObjeto {
@@ -232,6 +234,22 @@ public class ProcurarObjeto {
 				return odontogramaProcedimento;
 			}else{
 				return null;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public List<Pagamento> getPagamentoPorOdontograma(Odontograma odontograma){
+		try{
+			List<Pagamento> listaPagamento = new ArrayList<Pagamento>();
+			DaoPagamento daoPagamento = new DaoPagamento();
+			listaPagamento = daoPagamento.pesquisarPagamentoPorOdontograma(odontograma);
+			if (listaPagamento.isEmpty()){
+				return null;
+			}else{
+				return listaPagamento;
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
