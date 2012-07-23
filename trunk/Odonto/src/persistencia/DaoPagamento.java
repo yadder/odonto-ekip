@@ -3,6 +3,7 @@ package persistencia;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.Odontograma;
 import modelo.Paciente;
 import modelo.Pagamento;
 
@@ -45,10 +46,10 @@ public class DaoPagamento {
 			session.close();
 	}
 
-	public List<Pagamento> pesquisarPagamentoPaciente(Paciente paciente) throws Exception{
+	public List<Pagamento> pesquisarPagamentoPorOdontograma(Odontograma odontograma) throws Exception{
 		List<Pagamento> lista = null;
 		session = HibernateUtil.getSessionFactory().openSession();
-		Criteria cr = session.createCriteria(Pagamento.class).createCriteria("paciente").add(Restrictions.eq("codigo_pagamento",paciente.getIdUsuario()));
+		Criteria cr = session.createCriteria(Pagamento.class).add(Restrictions.eq("odontograma",odontograma));
 		lista = (ArrayList)cr.list();
 		session.flush();
 		session.close();
