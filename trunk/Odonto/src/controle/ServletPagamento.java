@@ -1,6 +1,12 @@
 package controle;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +15,8 @@ import javax.servlet.http.HttpSession;
 
 import modelo.Odontograma;
 import modelo.Paciente;
+import modelo.Pagamento;
+import persistencia.DaoPagamento;
 
 public class ServletPagamento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -42,11 +50,16 @@ public class ServletPagamento extends HttpServlet {
 					}else{
 						//odontograma é de convenio particular
 						if (odontograma.getPaciente().getConvenio().getNomeConvenio().equals("PARTICULAR")){						
-							if()
-							
-							objetoSessao.setAttribute("odontograma", odontograma);
-							objetoSessao.setAttribute("paciente", paciente);
-							ca.sendRedirect(request, response, "Paciente encontrado!", null, "gerar_pagamento.jsp");
+							//verificar se ja existe pagamento para este odontograma
+							List<Pagamento> listaPagamento = new ArrayList<Pagamento>();
+							listaPagamento = po.getPagamentoPorOdontograma(odontograma);
+							if(listaPagamento == null){
+								objetoSessao.setAttribute("odontograma", odontograma);
+								objetoSessao.setAttribute("paciente", paciente);
+								ca.sendRedirect(request, response, "Paciente encontrado!", null, "gerar_pagamento.jsp");
+							}else{
+								ca.sendRedirect(request, response, null, "Já existe pagamento gerado para este odontograma.", "pesquisar_paciente_gerar_pagamento.jsp");
+							}
 						}else{
 							ca.sendRedirect(request, response, null, "O odontograma deste paciente não é particular, logo o pagamento é feito pela operadora do convênio.", "pesquisar_paciente_gerar_pagamento.jsp");
 						}
@@ -58,7 +71,44 @@ public class ServletPagamento extends HttpServlet {
 				ca.sendRedirect(request, response, null, "Preencha o nome do paciente.", "pesquisar_paciente_gerar_pagamento.jsp");
 			}
 		}else if(btn.equals("Gerar pagamento")){
-			
+			System.out.println("---------------------------"+(String)request.getParameter("valorParcela"));
+			if (((String)request.getParameter("valorParcela") != null)){
+				double valor = Double.parseDouble((String)request.getParameter("valorOdontograma"));
+				if (((String)request.getParameter("formaPagamento")).equals("DINHEIRO") && valor<500){
+					int par = Integer.parseInt((String)request.getParameter("parcelas"));
+					if(((String)request.getParameter("formaPagamento")).equals("DINHEIRO") && par<=5){
+						DaoPagamento daoPagamento = new DaoPagamento();
+						double valorParcela = Double.parseDouble((String)request.getParameter("valorParcela"));
+						// dia de hoje)  
+						Date minhaData = new Date();  
+						Calendar calendar = Calendar.getInstance();  
+						calendar.setTime(minhaData);
+						SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+						for (int i = 0; i < par; i++) {
+							calendar.add(Calendar.DAY_OF_MONTH, (i+1)*30);// incrementa na data a qtd de meses							
+							Pagamento pagamento = new Pagamento();
+							pagamento.setNumeroParcela(i+1);							
+							pagamento.setValorParcela(valorParcela);
+							pagamento.setStatusPagamento("PENDENTE");
+							pagamento.setOdontograma((Odontograma)objetoSessao.getAttribute("odontograma"));
+							pagamento.setDataVencimento(ca.dataStringParaDataSql(dataFormatada.format(calendar.getTime())));
+							pagamento.setDataPagamento(null);							
+							try{
+								daoPagamento.cadastrarPagamento(pagamento);
+							}catch (Exception e) {
+								ca.sendRedirect(request, response, null, "Erro ao gravar pagamento.", "gerar_pagamento.jsp");
+							}
+						}
+						ca.sendRedirect(request, response, "Pagamento cadastrado com sucesso!", null, "principal.jsp");						
+					}else{
+						ca.sendRedirect(request, response, null, "Pagamento em dinheiro só pode ser parcelado em até 5 vezes.", "gerar_pagamento.jsp");
+					}
+				}else{
+					ca.sendRedirect(request, response, null, "Parcelamento em dinheiro só pode ser feito para tratamento inferior a R$ 500,00.", "gerar_pagamento.jsp");
+				}
+			}else{
+				ca.sendRedirect(request, response, null, "Selecione a quantidade de parcelas.", "gerar_pagamento.jsp");
+			}
 		}
 	
 	}
