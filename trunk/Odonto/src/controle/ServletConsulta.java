@@ -147,25 +147,23 @@ public class ServletConsulta extends HttpServlet {
 			}else{
 				ca.sendRedirect(request, response, null, mensagem, "pesquisar_consulta_por_nome.jsp");
 			}			
-		}else if (btn.equals("Excluir")){
+		}else if (btn.equals("Cancelar")){
 			long idConsulta = Long.parseLong((String)request.getParameter("id"));
 			//pesquisar consulta
 			consulta = po.getConsultaPorId(idConsulta);
 			if (consulta!=null){
-				DaoConsulta daoConsulta = new DaoConsulta();
-				//verificar RN de 24 horas 
-			
-				//excluir consulta
 				try{
-					daoConsulta.excluirConsulta(consulta);
-					ca.sendRedirect(request, response, "Consulta excluída com sucesso!", null, "ServletConsulta?btn=listarconsultas");
+					DaoConsulta daoConsulta = new DaoConsulta();
+					//verificar RN de 24 horas
+					consulta.setStatusConsulta("CANCELADA");
+					daoConsulta.alterarConsulta(consulta);
+					ca.sendRedirect(request, response, "Consulta cancelada com sucesso!", null, "ServletConsulta?btn=listarconsultas");
 				}catch (Exception e) {
-					ca.sendRedirect(request, response, null, "Erro ao excluir consulta. "+e.getMessage(),"listar_consultas.jsp");
+					ca.sendRedirect(request, response, null, "Erro ao cancelar consulta. "+e.getMessage(),"listar_consultas.jsp");
 				}
 			}else{
 				ca.sendRedirect(request, response, null, "Consulta não encontrada.", "listar_consultas.jsp");
-			}
-			
+			}			
 		}else if (btn.equals("Remarcar")){
 			long idConsulta = Long.parseLong((String)request.getParameter("id"));
 			consulta = po.getConsultaPorId(idConsulta);

@@ -21,6 +21,15 @@
 			<td><input type="text" name="nomePaciente" value="${paciente.nomeUsuario}" size="50" disabled="disabled" /><td>
 		</tr>
 		<tr>
+			<td align="right">Tipo de prescrição:</td>
+			<td>
+				<select name="tipoPrescricao">
+					<option value="ATESTADO">ATESTADO</option>
+					<option value="PRESCRIÇÃO">PRESCRIÇÃO</option>
+				</select>
+			<td>
+		</tr>		
+		<tr>
 			<td align="right">Prescrição:</td>
 			<td><textarea rows="10" cols="100" name="observacao" ></textarea> </td>
 		</tr>
