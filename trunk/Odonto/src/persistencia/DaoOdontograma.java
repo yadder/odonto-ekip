@@ -67,7 +67,7 @@ public class DaoOdontograma {
 		return lista;
 	}
 	
-	public List<Odontograma> pesquisarTodosOdontogramaFinalizadoDataIniDataFim(Date dataini,Date datafim, String status ) throws Exception{
+	public List<Odontograma> pesquisarTodosOdontogramaFinalizadoDataIniDataFim(Date dataini,Date datafim) throws Exception{
 		List<Odontograma> lista = null;
 		session = HibernateUtil.getSessionFactory().openSession();
 		//Criteria cr = session.createCriteria(Consulta.class).add(Restrictions.between(Data, dataini, datafim)eq("dataConsulta", data));
