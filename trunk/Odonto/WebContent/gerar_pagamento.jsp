@@ -23,7 +23,7 @@
 		</tr>
 		<tr>
 			<td align="right">Valor do tratamento:</td>
-			<td><input type="text" name="valorOdontograma" value="${odontograma.valorOdontograma}" size="10" disabled="disabled"/></td>
+			<td><input type="text" name="valorOdontograma" id="valorOdontograma" value="${odontograma.valorOdontograma}" size="10" disabled="disabled"/></td>
 		</tr>
 		<tr>
 			<td align="right">Forma de pagamento: </td>
@@ -32,7 +32,7 @@
 					<option value="DINHEIRO">DINHEIRO</option>
 					<option value="CARTÃO">CARTÃO</option>
 				</select> 
-				<select name="parcelas">
+				<select name="parcelas" id="parcelas" onchange="calculaParcela()">
 					<option value="1">1 parcela</option>
 					<option value="2">2 parcelas</option>
 					<option value="3">3 parcelas</option>
@@ -44,7 +44,7 @@
 					<option value="9">9 parcelas</option>
 					<option value="10">10 parcelas</option>
 				</select> 
-				<input type="text" id="valorParcela" value="" disabled="disabled"/>				
+				<input type="text" id="valorParcela" name="valorParcela" value="0" disabled="disabled"/>				
 			</td>
 		</tr>
 		<tr>
@@ -52,7 +52,6 @@
 		</tr>
 	</table>
 </form>
-
 </fieldset>
 <c:import url="cabecalho.jsp" />
 <c:import url="rodape.jsp" />

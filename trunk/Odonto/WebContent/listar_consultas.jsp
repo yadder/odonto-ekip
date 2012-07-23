@@ -37,7 +37,7 @@
 		<td><c:out value="${colecao.dentista}"/></td>
 		<td align="center"><c:out value="${colecao.statusConsulta}" /></td>
 		<td align="center"><a href="ServletConsulta?btn=Remarcar&id=${colecao.idConsulta}">Remarcar</a></td>
-		<td align="center"><input type="button" value="Cancelar" onclick="javascript:confirmarExclusao('ServletConsulta?btn=Cancelar&id=${colecao.idConsulta}');"></td>
+		<td align="center"><input type="button" value="Cancelar" onclick="javascript:confirmarCancelar('ServletConsulta?btn=Cancelar&id=${colecao.idConsulta}');"></td>
 	</tr>
 </c:forEach>
 </table>
