@@ -3,9 +3,10 @@ body{background-color: #D6E0FF;}
 h5.error{font-family: cursive; color: #F00; text-shadow: 1px 1px 1px #FFF;}
 h5.information{font-family: cursive; color: #00F; text-shadow: 1px 1px 1px #FFF;}
 h1{color: #5E8CE9; text-shadow: 2px 2px 2px #000; margin: 0%;}
-input{border: 1px solid;border-color: #5E8CE9;}
-select{border: 1px solid;border-color: #5E8CE9;}
-textarea{border: 1px solid;border-color: #5E8CE9;}
+input{border: 1px solid; border-color: #5E8CE9;}
+select{border: 1px solid; border-color: #5E8CE9;}
+textarea{border: 1px solid; border-color: #5E8CE9;}
+a{text-decoration: none; color: #008cff;}
 
 .navbar{padding: 5px; width: 100%}
 .navbar li{list-style: none; float: left;}
@@ -14,11 +15,11 @@ textarea{border: 1px solid;border-color: #5E8CE9;}
 .navbar li:hover ul{display: block; position: absolute; margin: 0;	padding: 0;}
 .navbar li:hover li{float: none;}
 .navbar li:hover li a{background-color: #69f; border-bottom: 1px solid #fff; color: #000;}
-.navbar li li a:hover{background-color: #8db3ff;}
+.navbar li li a:hover{background-color: #8d8dff;}
 
 .cabecalho{background-color: #D6E0FF; position: absolute; left: 0px;}
 .rodape{background-color: #5E8CE9; position: absolute; left: 0px; bottom: 0px; color: #FFF; font-family: cursive; font-size: 7pt; text-shadow: 1px 1px 1px #000; width: 100%;}
-.pagina{background-color: #fff;	position: fixed; top: 140px; left: 20px; margin: 5px; width: 90%;}
+.pagina{background-color: #fff;	position: fixed; top: 140px; left: 20px; margin: 5px; width: 90%; height: 100%;}
 .sessao{background-color: #5E8CE9; position:absolute; right:0px; top: 0px; width: 300px; height: 20px; color: #F00; font-family: cursive; font-size: 9pt; text-shadow: 1px 1px 1px #F00;}
 .odontograma a{text-decoration: none;}
 
