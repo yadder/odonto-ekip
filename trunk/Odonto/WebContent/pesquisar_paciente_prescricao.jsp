@@ -23,7 +23,7 @@
 		</tr>
 		<tr>
 			<td colspan=2 align="right">
-				<input type="submit" name="btn" value="Voltar" />
+				<input type="submit" name="btn" value="Voltar" />				
 			</td>
 		</tr>
 	</table>
