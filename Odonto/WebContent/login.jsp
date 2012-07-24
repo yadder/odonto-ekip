@@ -17,11 +17,11 @@
 <form name="formLogin" method="post" action="ServletLogin">
 	<table>
 		<tr>
-			<td>CPF:</td>
+			<td align="right">CPF:</td>
 			<td><input type="text" name="login" size="20" maxlength="14" OnKeyPress="formatar(this, '###.###.###-##')" /></td>
 		</tr>
 		<tr>
-			<td>Senha:</td>
+			<td align="right">Senha:</td>
 			<td><input type="password" name="senha" size="20" /></td>
 		</tr>
 		<tr>

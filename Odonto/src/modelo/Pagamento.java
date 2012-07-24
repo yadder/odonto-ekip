@@ -28,14 +28,16 @@ public class Pagamento implements Serializable {
     private double valorParcela;
     @Column(name = "status_pagamento", nullable = false, length = 20)
     private String statusPagamento;
-    @ManyToOne(fetch=FetchType.EAGER)
-	private Odontograma odontograma;
     @Column(name = "data_vencimento")
     @Temporal(TemporalType.DATE)
     private Date dataVencimento;
     @Column(name = "data_pagamento")
     @Temporal(TemporalType.DATE)
     private Date dataPagamento;
+    @ManyToOne(fetch=FetchType.EAGER)
+	private Odontograma odontograma;
+    @ManyToOne(fetch=FetchType.EAGER)
+	private Paciente paciente;
     
     public Pagamento() {
     }
@@ -110,6 +112,14 @@ public class Pagamento implements Serializable {
 
 	public void setOdontograma(Odontograma odontograma) {
 		this.odontograma = odontograma;
+	}
+
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
 	public static long getSerialversionuid() {

@@ -36,6 +36,9 @@ public class ServletPagamento extends HttpServlet {
 		ConfiguraAtributo ca = new ConfiguraAtributo();
 		
 		if (btn.equals("Voltar")){
+			objetoSessao.removeAttribute("paciente");
+			objetoSessao.removeAttribute("odontograma");
+			objetoSessao.removeAttribute("listaPagamento");
 			ca.sendRedirect(request, response, null, null, "principal.jsp");
 		}else if(btn.equals("Pesquisar paciente para pagamento")){
 			if (((String)request.getParameter("nomePaciente"))!=null){
@@ -74,43 +77,113 @@ public class ServletPagamento extends HttpServlet {
 			String valParcela = (String)request.getParameter("valorParcela");
 			if (!valParcela.equals("") && valParcela != null){
 				double valor = Double.parseDouble((String)request.getParameter("valorOdontograma"));
-				if (((String)request.getParameter("formaPagamento")).equals("DINHEIRO") && valor<500){
-					int par = Integer.parseInt((String)request.getParameter("parcelas"));
-					if(((String)request.getParameter("formaPagamento")).equals("DINHEIRO") && par<=5){
-						DaoPagamento daoPagamento = new DaoPagamento();
-						double valorParcela = Double.parseDouble((String)request.getParameter("valorParcela"));
-						// dia de hoje)  
-						Date minhaData = new Date();  
-						Calendar calendar = Calendar.getInstance();  
-						calendar.setTime(minhaData);
-						SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
-						for (int i = 0; i < par; i++) {
-							calendar.add(Calendar.DAY_OF_MONTH,30);// incrementa na data a qtd de dias							
-							Pagamento pagamento = new Pagamento();
-							pagamento.setNumeroParcela(i+1);							
-							pagamento.setValorParcela(valorParcela);
-							pagamento.setStatusPagamento("PENDENTE");
-							pagamento.setOdontograma((Odontograma)objetoSessao.getAttribute("odontograma"));
-							pagamento.setDataVencimento(ca.dataStringParaDataSql(dataFormatada.format(calendar.getTime())));
-							pagamento.setDataPagamento(null);							
-							try{
-								daoPagamento.cadastrarPagamento(pagamento);
-							}catch (Exception e) {
-								ca.sendRedirect(request, response, null, "Erro ao gravar pagamento.", "gerar_pagamento.jsp");
-							}
+				int par = Integer.parseInt((String)request.getParameter("parcelas"));
+				double valorParcela = Double.parseDouble((String)request.getParameter("valorParcela"));
+				DaoPagamento daoPagamento = new DaoPagamento();
+				if (((String)request.getParameter("formaPagamento")).equals("CARTÃO")){
+					Date minhaData = new Date();  
+					Calendar calendar = Calendar.getInstance();  
+					calendar.setTime(minhaData);
+					SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+					for (int i = 0; i < par; i++) {
+						calendar.add(Calendar.DAY_OF_MONTH,31);// incrementa na data a qtd de dias							
+						Pagamento pagamento = new Pagamento();
+						pagamento.setNumeroParcela(i+1);							
+						pagamento.setValorParcela(valorParcela);
+						pagamento.setStatusPagamento("PENDENTE");
+						pagamento.setOdontograma((Odontograma)objetoSessao.getAttribute("odontograma"));
+						pagamento.setPaciente((Paciente)objetoSessao.getAttribute("paciente"));
+						pagamento.setDataVencimento(ca.dataStringParaDataSql(dataFormatada.format(calendar.getTime())));
+						pagamento.setDataPagamento(null);							
+						try{
+							daoPagamento.cadastrarPagamento(pagamento);
+						}catch (Exception e) {
+							ca.sendRedirect(request, response, null, "Erro ao gravar pagamento.", "gerar_pagamento.jsp");
 						}
-						ca.sendRedirect(request, response, "Pagamento cadastrado com sucesso!", null, "principal.jsp");						
-					}else{
-						ca.sendRedirect(request, response, null, "Pagamento em dinheiro só pode ser parcelado em até 5 vezes.", "gerar_pagamento.jsp");
 					}
-				}else{
-					ca.sendRedirect(request, response, null, "Parcelamento em dinheiro só pode ser feito para tratamento inferior a R$ 500,00.", "gerar_pagamento.jsp");
+					objetoSessao.removeAttribute("paciente");
+					objetoSessao.removeAttribute("odontograma");
+					ca.sendRedirect(request, response, "Pagamento no cartão cadastrado com sucesso!", null, "principal.jsp");
+				}else if (((String)request.getParameter("formaPagamento")).equals("DINHEIRO")){
+					if (valor<=500){
+						if (par<=5){
+							Date minhaData = new Date();  
+							Calendar calendar = Calendar.getInstance();  
+							calendar.setTime(minhaData);
+							SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+							for (int i = 0; i < par; i++) {
+								calendar.add(Calendar.DAY_OF_MONTH,31);// incrementa na data a qtd de dias							
+								Pagamento pagamento = new Pagamento();
+								pagamento.setNumeroParcela(i+1);							
+								pagamento.setValorParcela(valorParcela);
+								pagamento.setStatusPagamento("PENDENTE");
+								pagamento.setOdontograma((Odontograma)objetoSessao.getAttribute("odontograma"));
+								pagamento.setPaciente((Paciente)objetoSessao.getAttribute("paciente"));
+								pagamento.setDataVencimento(ca.dataStringParaDataSql(dataFormatada.format(calendar.getTime())));
+								pagamento.setDataPagamento(null);							
+								try{
+									daoPagamento.cadastrarPagamento(pagamento);
+								}catch (Exception e) {
+									ca.sendRedirect(request, response, null, "Erro ao gravar pagamento.", "gerar_pagamento.jsp");
+								}
+							}
+							objetoSessao.removeAttribute("paciente");
+							objetoSessao.removeAttribute("odontograma");
+							ca.sendRedirect(request, response, "Pagamento em dinheiro cadastrado com sucesso!", null, "principal.jsp");
+						}else{
+							ca.sendRedirect(request, response, null, "Pagamento em dinheiro só pode ser parcelado em até 5 vezes.", "gerar_pagamento.jsp");
+						}
+					}else{
+						ca.sendRedirect(request, response, null, "Parcelamento em dinheiro só pode ser feito para tratamento inferior a R$ 500,00.", "gerar_pagamento.jsp");
+					}	
 				}
 			}else{
 				ca.sendRedirect(request, response, null, "Selecione a quantidade de parcelas.", "gerar_pagamento.jsp");
+			}		
+		}else if (btn.equals("Pesquisar paciente para efetuar pagamento")){
+			if (((String)request.getParameter("nomePaciente"))!=null){
+				Paciente paciente = new Paciente();
+				paciente = po.getPaciente((String)request.getParameter("nomePaciente"));
+				if (paciente != null){
+					//pesquisar pagamentos por paciente 
+					List<Pagamento> listaPagamento = new ArrayList<Pagamento>();
+					listaPagamento = po.getPagamentoPendentePorPaciente(paciente);
+					if (listaPagamento == null){
+						ca.sendRedirect(request, response, null, "O paciente informado não possui pagamentos pendentes.", "pesquisar_paciente_efetuar_pagamento.jsp");
+					}else{
+						objetoSessao.setAttribute("listaPagamento", listaPagamento);
+						objetoSessao.setAttribute("paciente", paciente);
+						ca.sendRedirect(request, response, null, null, "efetuar_pagamento.jsp");
+					}					
+				}else{
+					ca.sendRedirect(request, response, null, "Paciente não encontrado.", "pesquisar_paciente_efetuar_pagamento.jsp");
+				}
+			}else{
+				ca.sendRedirect(request, response, null, "Preencha o nome do paciente.", "pesquisar_paciente_efetuar_pagamento.jsp");
+			}
+		}else if(btn.equals("Pagar")){
+			long index = Long.parseLong((String)request.getParameter("index"));
+			DaoPagamento daoPagamento = new DaoPagamento();
+			Pagamento pagamento = new Pagamento();
+			pagamento = po.getPagamentoPorId(index); 
+			if (pagamento!=null){
+				pagamento.setStatusPagamento("PAGO");
+				try{
+					daoPagamento.alterarPagamento(pagamento);
+					Paciente paciente = new Paciente();
+					paciente = (Paciente)objetoSessao.getAttribute("paciente");
+					List<Pagamento> listaPagamento = new ArrayList<Pagamento>();
+					listaPagamento = po.getPagamentoPendentePorPaciente(paciente);
+					objetoSessao.setAttribute("listaPagamento", listaPagamento);
+					ca.sendRedirect(request, response, "Pagamento realizado com sucesso", null, "efetuar_pagamento.jsp");
+				}catch (Exception e) {
+					ca.sendRedirect(request, response, null, "Erro ao alterar o status do pagamento", "efetuar_pagamento.jsp");
+				}
+			}else{
+				ca.sendRedirect(request, response, null, "Pagamento não encontrado.", "efetuar_pagamento.jsp");
 			}
 		}
-	
-	}
+						
+	} // post
 
 }

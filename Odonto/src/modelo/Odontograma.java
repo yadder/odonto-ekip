@@ -105,7 +105,7 @@ public class Odontograma implements Serializable {
 
 	@Override
     public String toString() {
-        return "Odontograma: " + idOdontograma;
+        return ""+idOdontograma;
     }
     
 }
