@@ -1,6 +1,9 @@
 package controle;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,8 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.exception.ConstraintViolationException;
+
 import modelo.Convenio;
 import modelo.Paciente;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 import persistencia.DaoConvenio;
 import persistencia.DaoPaciente;
 
@@ -46,11 +54,10 @@ public class ServletPaciente extends HttpServlet {
 				try{
 					DaoPaciente dao = new DaoPaciente();
 					dao.cadastrarPaciente(paciente);
-					mensagem = "Paciente cadastrado(a) com sucesso!";
-					objetoSessao.removeAttribute("paciente");
-					request.setAttribute("msg", mensagem);
-					RequestDispatcher disp = request.getRequestDispatcher("paciente.jsp");
-					disp.forward(request, response);
+					mensagem = "Paciente cadastrado(a) com sucesso!";					
+					ca.sendRedirect(request, response, null, null, "ServletPaciente?btn=Imprimir");					
+				}catch(ConstraintViolationException ex){
+					ca.sendRedirect(request, response, null, "Já existe paciente com este CPF cadastrado", "paciente.jsp");	
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -129,9 +136,34 @@ public class ServletPaciente extends HttpServlet {
 				request.setAttribute("msg", mensagem);
 				RequestDispatcher disp = request.getRequestDispatcher("paciente_alterar.jsp");
 				disp.forward(request, response);
-			}
-		}
-	}
+			}	
+			
+			}else if (btn.equals("Imprimir")){						
+				try{	
+
+					List<Paciente>listaPaciente=new ArrayList<Paciente>();
+					paciente=new Paciente(); 
+					paciente=(Paciente)objetoSessao.getAttribute("paciente");
+					listaPaciente.add(paciente);
+					
+					if(!listaPaciente.isEmpty()){			
+						JRBeanCollectionDataSource jr = new JRBeanCollectionDataSource(listaPaciente); 
+						//JRBeanArrayDataSource jr = new JRBeanArrayDataSource(listaPaciente);
+						JasperFillManager.fillReportToFile("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\loginSenha.jasper", new HashMap(), jr);
+						JasperViewer.viewReport("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\loginSenha.jrprint", false, false);
+						jr=null;
+						ca.sendRedirect(request, response, mensagem+" Imprima login e senha do usuário", null, "paciente.jsp");
+					}else{
+						ca.sendRedirect(request, response, "Paciente cadastrado", "Erro ao imprimir login e senha", "paciente.jsp");
+					}					                                    
+					
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}	
+			
+	}	
 
 	public Paciente preencheObjeto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Paciente paciente = new Paciente();
