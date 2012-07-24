@@ -24,7 +24,7 @@
 				<reportElement positionType="FixRelativeToBottom" x="0" y="51" width="555" height="1"/>
 			</line>
 			<staticText>
-				<reportElement x="65" y="13" width="424" height="35"/>
+				<reportElement x="68" y="11" width="424" height="35"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="20" isBold="true"/>
 				</textElement>
