@@ -257,4 +257,36 @@ public class ProcurarObjeto {
 		}
 	}
 	
+	public List<Pagamento> getPagamentoPendentePorPaciente(Paciente paciente){
+		try{
+			List<Pagamento> listaPagamento = new ArrayList<Pagamento>();
+			DaoPagamento daoPagamento = new DaoPagamento();
+			listaPagamento = daoPagamento.pesquisarPagamentoPendentePorPaciente(paciente);
+			if (listaPagamento.isEmpty()){
+				return null;
+			}else{
+				return listaPagamento;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public Pagamento getPagamentoPorId(long id){
+		try{
+			Pagamento pagamento = new Pagamento();
+			DaoPagamento daoPagamento = new DaoPagamento();
+			pagamento = daoPagamento.pesquisarPagamentoPorId(id);
+			if (pagamento!= null){
+				return pagamento;
+			}else{
+				return null;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 }

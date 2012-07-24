@@ -56,6 +56,26 @@ public class DaoPagamento {
 		return lista;
 	}
 	
+	public List<Pagamento> pesquisarPagamentoPendentePorPaciente(Paciente paciente) throws Exception{
+		List<Pagamento> lista = null;
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Pagamento.class).add(Restrictions.eq("paciente",paciente)).add(Restrictions.eq("statusPagamento","PENDENTE"));
+		lista = (ArrayList)cr.list();
+		session.flush();
+		session.close();
+		return lista;
+	}
+	
+	public Pagamento pesquisarPagamentoPorId(long id) throws Exception{
+		Pagamento p = null;
+		session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(Pagamento.class).add(Restrictions.eq("idPagamento",id));
+		p = (Pagamento)cr.uniqueResult();
+		session.flush();
+		session.close();
+		return p;
+	}
+	
 	public List<Pagamento> pesquisarTodosPagamento() throws Exception{
 		List<Pagamento> lista = null;
 		session = HibernateUtil.getSessionFactory().openSession();

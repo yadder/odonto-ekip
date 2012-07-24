@@ -44,8 +44,9 @@
 			<li><a href="#"><b>Pagamento</b></a>
 				<ul>
 					<li><a href="pesquisar_paciente_gerar_pagamento.jsp">Gerar pagamento</a></li>
-					<li><a href="#">Consultar pagamento</a></li>
-					<li><a href="#">Efetuar pagamento</a></li>
+					<li><a href="pesquisar_paciente_efetuar_pagamento.jsp">Efetuar pagamento</a></li>
+					<li><a href="#">Listar pagamentos pendentes</a></li>
+					<li><a href="#">Listar pagamentos realizados por período</a></li>
 				</ul>
 			</li>
 			<li>
