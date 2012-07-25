@@ -14,8 +14,6 @@ import modelo.Paciente;
 import modelo.Pagamento;
 import modelo.Prescricao;
 import modelo.Procedimento;
-import modelo.TelefoneFornecedor;
-import modelo.TelefonePaciente;
 import modelo.Usuario;
 
 import org.hibernate.cfg.AnnotationConfiguration;
@@ -40,8 +38,6 @@ public class GerarTabelas {
 			conf.addAnnotatedClass(Pagamento.class);
 			conf.addAnnotatedClass(Prescricao.class);
 			conf.addAnnotatedClass(Procedimento.class);
-			conf.addAnnotatedClass(TelefoneFornecedor.class);
-			conf.addAnnotatedClass(TelefonePaciente.class);
 			conf.addAnnotatedClass(Acesso.class);
 			
 			SchemaExport se = new SchemaExport(conf);

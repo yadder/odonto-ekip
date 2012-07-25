@@ -7,19 +7,23 @@ import modelo.Acesso;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import util.HibernateUtil;
-
 public class DaoAcesso {
 
+	private SessionFactory fabrica;
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public void cadastrarAcesso(Acesso acesso) throws Exception{
-		session = HibernateUtil.getSessionFactory().openSession();
+	public DaoAcesso(){
+		fabrica = Fabrica.obtemFabrica();
+		session = fabrica.openSession();
 		transaction = session.beginTransaction();
+	}	
+	
+	public void cadastrarAcesso(Acesso acesso) throws Exception{
 		session.persist(acesso);
 		transaction.commit();
 		session.flush();
@@ -27,8 +31,6 @@ public class DaoAcesso {
 	}
 
 	public void alterarAcesso(Acesso acesso) throws Exception{
-		session = HibernateUtil.getSessionFactory().openSession();
-		transaction = session.beginTransaction();
 		session.update(acesso);
 		transaction.commit();
 		session.flush();
@@ -36,8 +38,6 @@ public class DaoAcesso {
 	}
 
 	public void excluirAcesso(Acesso acesso) throws Exception{
-		session = HibernateUtil.getSessionFactory().openSession();
-		transaction = session.beginTransaction();
 		session.delete(acesso);
 		transaction.commit();
 		session.flush();
@@ -45,7 +45,6 @@ public class DaoAcesso {
 	}
 
 	public Acesso pesquisarAcessoPorNome(Acesso acesso) throws Exception{
-		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Acesso.class).add(Restrictions.eq("descricaoAcesso", acesso.getDescricaoAcesso()));
 		Acesso a = (Acesso)cr.uniqueResult();
 		session.flush();
@@ -55,7 +54,6 @@ public class DaoAcesso {
 
 	public List<Acesso> pesquisarTodosAcesso() throws Exception{
 		List<Acesso> lista = null;
-		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Acesso.class);
 		lista = (ArrayList)cr.list();
 		session.flush();

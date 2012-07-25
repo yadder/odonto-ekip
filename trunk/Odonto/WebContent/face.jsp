@@ -18,9 +18,7 @@
 	<table>
 		<tr>
 			<td align="right">Nome da face:</td>
-			<td><input type="text" name="nomeFace" value="${face.nomeFace}" size="20" />
-			<a href="ServletFace?btn=Pesquisar"><img src="arquivos/pesquisar.png" width="25"></a>
-			<input type="submit" name="btn" value="Pesquisar" /></td>
+			<td><input type="text" name="nomeFace" value="${face.nomeFace}" size="20" /><input type="submit" name="btn" value="Pesquisar" /></td>
 		</tr>
 		<tr>
 			<td colspan=2 align="center">

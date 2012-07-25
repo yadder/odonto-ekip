@@ -40,7 +40,9 @@ public class ServletOdontograma extends HttpServlet {
 		HttpSession objetoSessao = request.getSession();	
 		Odontograma odontograma = new Odontograma();
 		
-		if(btn.equals("Pesquisar Paciente")){
+		if(btn.equals("Voltar")){
+			ca.sendRedirect(request, response, null, null, "principal.jsp");
+		}else if(btn.equals("Pesquisar Paciente")){
 			if (validaNome(((String)request.getParameter("nomePaciente")))){
 				Paciente paciente = new Paciente();
 				paciente = po.getPaciente((String)request.getParameter("nomePaciente"));
@@ -85,6 +87,9 @@ public class ServletOdontograma extends HttpServlet {
 						DaoOdontograma daoOdontograma = new DaoOdontograma();
 						daoOdontograma.excluirOdontograma(odontograma);
 						objetoSessao.removeAttribute("odontograma");
+						objetoSessao.removeAttribute("dentista");
+						objetoSessao.removeAttribute("pacienteNovoOdontograma");
+						objetoSessao.removeAttribute("convenioPaciente");
 						ca.sendRedirect(request, response, "Odontograma excluído com sucesso!", null, "principal.jsp");
 					}else{
 						ca.sendRedirect(request, response, null, "Exclua os procedimentos antes de excluir o odontograma.", "lista_odontograma.jsp");
@@ -103,7 +108,7 @@ public class ServletOdontograma extends HttpServlet {
 			List<Face> listaFace = po.getListaFaces();
 			objetoSessao.setAttribute("listaFace", listaFace);
 			ca.sendRedirect(request, response, null, null, "selecionar_procedimento.jsp");
-		}else if(btn.equals("Voltar")){
+		}else if(btn.equals("Cancelar")){
 			objetoSessao.removeAttribute("listaTratamento");
 			ca.sendRedirect(request, response, null, null, "novo_odontograma.jsp");
 		}

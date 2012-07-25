@@ -8,20 +8,23 @@ import modelo.OdontogramaProcedimento;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.sql.Delete;
-
-import util.HibernateUtil;
 
 public class DaoOdontogramaProcedimento {
 
+	private SessionFactory fabrica;
 	private Session session = null;
 	private Transaction transaction = null;
 	
+	public DaoOdontogramaProcedimento(){
+		fabrica = Fabrica.obtemFabrica();
+		session = fabrica.openSession();
+		transaction = session.beginTransaction();
+	}	
+	
 	public void cadastrarOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) throws Exception{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
 			session.persist(odontogramaProcedimento);
 			transaction.commit();
 			session.flush();
@@ -29,8 +32,6 @@ public class DaoOdontogramaProcedimento {
 	}
 
 	public void alterarOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) throws Exception{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
 			session.update(odontogramaProcedimento);
 			transaction.commit();
 			session.flush();
@@ -38,8 +39,6 @@ public class DaoOdontogramaProcedimento {
 	}
 
 	public void excluirOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) throws Exception{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
 			session.delete(odontogramaProcedimento);
 			transaction.commit();
 			session.flush();
@@ -48,7 +47,6 @@ public class DaoOdontogramaProcedimento {
 
 	public OdontogramaProcedimento pesquisarOdontogramaProcedimentoPorId(long idOdontogramaProcedimento) throws Exception{
 		OdontogramaProcedimento o = null;
-		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(OdontogramaProcedimento.class).add(Restrictions.eq("idOdontogramaProcedimento", idOdontogramaProcedimento));
 		o = (OdontogramaProcedimento)cr.uniqueResult();
 		session.flush();
@@ -58,7 +56,6 @@ public class DaoOdontogramaProcedimento {
 	
 	public List<OdontogramaProcedimento> pesquisarOdontogramaProcedimentoPorOdontograma(Odontograma odontograma) throws Exception{
 		List<OdontogramaProcedimento> lista = null;
-		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(OdontogramaProcedimento.class).add(Restrictions.eq("odontograma", odontograma));
 		lista = (ArrayList)cr.list();
 		session.flush();
@@ -68,7 +65,6 @@ public class DaoOdontogramaProcedimento {
 
 	public List<OdontogramaProcedimento> pesquisarTodosOdontogramaProcedimento() throws Exception{
 		List<OdontogramaProcedimento> lista = null;
-		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(OdontogramaProcedimento.class);
 		lista = (ArrayList)cr.list();
 		session.flush();

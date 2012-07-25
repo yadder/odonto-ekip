@@ -43,7 +43,7 @@
 		</tr>
 		<tr>
 			<td align="center">
-				<input type="submit" name="btn" value="Voltar" />
+				<input type="submit" name="btn" value="Cancelar" />
 				<input type="submit" name="btn" value="Gravar procedimento" />
 			</td>
 		</tr>

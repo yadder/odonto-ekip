@@ -7,19 +7,23 @@ import modelo.Convenio;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import util.HibernateUtil;
-
 public class DaoConvenio {
 
+	private SessionFactory fabrica;
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public void cadastrarConvenio(Convenio convenio) throws Exception{
-		session = HibernateUtil.getSessionFactory().openSession();
+	public DaoConvenio(){
+		fabrica = Fabrica.obtemFabrica();
+		session = fabrica.openSession();
 		transaction = session.beginTransaction();
+	}	
+	
+	public void cadastrarConvenio(Convenio convenio) throws Exception{
 		session.persist(convenio);
 		transaction.commit();
 		session.flush();
@@ -27,8 +31,6 @@ public class DaoConvenio {
 	}
 
 	public void alterarConvenio(Convenio convenio) throws Exception{
-		session = HibernateUtil.getSessionFactory().openSession();
-		transaction = session.beginTransaction();
 		session.update(convenio);
 		transaction.commit();
 		session.flush();
@@ -36,8 +38,6 @@ public class DaoConvenio {
 	}
 
 	public void excluirConvenio(Convenio convenio) throws Exception{
-		session = HibernateUtil.getSessionFactory().openSession();
-		transaction = session.beginTransaction();
 		session.delete(convenio);
 		transaction.commit();
 		session.flush();
@@ -45,7 +45,6 @@ public class DaoConvenio {
 	}
 
 	public Convenio pesquisarConvenioPorNome(Convenio convenio) throws Exception{
-		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Convenio.class).add(Restrictions.eq("nomeConvenio", convenio.getNomeConvenio()));
 		Convenio c = (Convenio) cr.uniqueResult();
 		session.flush();
@@ -55,7 +54,6 @@ public class DaoConvenio {
 
 	public List<Convenio> pesquisarTodosConvenio() throws Exception{
 		List<Convenio> lista = null;
-		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Convenio.class);
 		lista = (ArrayList)cr.list();
 		session.flush();

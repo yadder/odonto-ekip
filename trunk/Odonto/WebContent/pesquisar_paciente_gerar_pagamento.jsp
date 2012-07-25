@@ -9,7 +9,7 @@
 </head>
 <body>
 <fieldset class="pagina">
-<h1>:: Pesquisar paciente para atendimento</h1>
+<h1>:: Pesquisar paciente para gerar pagamento</h1>
 <div id="msg">
 	<h5 class="information">${msg}</h5>
 	<h5 class="error">${msgE}</h5>

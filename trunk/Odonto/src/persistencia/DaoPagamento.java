@@ -9,19 +9,23 @@ import modelo.Pagamento;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import util.HibernateUtil;
-
 public class DaoPagamento {
 
+	private SessionFactory fabrica;
 	private Session session = null;
 	private Transaction transaction = null;
 	
+	public DaoPagamento(){
+		fabrica = Fabrica.obtemFabrica();
+		session = fabrica.openSession();
+		transaction = session.beginTransaction();
+	}	
+	
 	public void cadastrarPagamento(Pagamento pagamento) throws Exception{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
 			session.persist(pagamento);
 			transaction.commit();
 			session.flush();
@@ -29,8 +33,6 @@ public class DaoPagamento {
 	}
 
 	public void alterarPagamento(Pagamento pagamento) throws Exception{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
 			session.update(pagamento);
 			transaction.commit();
 			session.flush();
@@ -38,8 +40,6 @@ public class DaoPagamento {
 	}
 
 	public void excluirPagamento(Pagamento pagamento) throws Exception{
-			session = HibernateUtil.getSessionFactory().openSession();
-			transaction = session.beginTransaction();
 			session.delete(pagamento);
 			transaction.commit();
 			session.flush();
@@ -48,7 +48,6 @@ public class DaoPagamento {
 
 	public List<Pagamento> pesquisarPagamentoPorOdontograma(Odontograma odontograma) throws Exception{
 		List<Pagamento> lista = null;
-		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Pagamento.class).add(Restrictions.eq("odontograma",odontograma));
 		lista = (ArrayList)cr.list();
 		session.flush();
@@ -58,7 +57,6 @@ public class DaoPagamento {
 	
 	public List<Pagamento> pesquisarPagamentoPendentePorPaciente(Paciente paciente) throws Exception{
 		List<Pagamento> lista = null;
-		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Pagamento.class).add(Restrictions.eq("paciente",paciente)).add(Restrictions.eq("statusPagamento","PENDENTE"));
 		lista = (ArrayList)cr.list();
 		session.flush();
@@ -68,7 +66,6 @@ public class DaoPagamento {
 	
 	public Pagamento pesquisarPagamentoPorId(long id) throws Exception{
 		Pagamento p = null;
-		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Pagamento.class).add(Restrictions.eq("idPagamento",id));
 		p = (Pagamento)cr.uniqueResult();
 		session.flush();
@@ -78,7 +75,6 @@ public class DaoPagamento {
 	
 	public List<Pagamento> pesquisarTodosPagamento() throws Exception{
 		List<Pagamento> lista = null;
-		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Pagamento.class);
 		lista = (ArrayList)cr.list();
 		session.flush();

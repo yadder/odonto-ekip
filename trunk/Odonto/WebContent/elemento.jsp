@@ -17,9 +17,7 @@
 	<table>
 		<tr>
 			<td align="right">Nome do elemento:</td>
-			<td><input type="text" name="nomeElemento" value="${elemento.nomeElemento}" size="20" maxlength="2" />
-			<a href="ServletElemento?btn=Pesquisar"><img src="arquivos/pesquisar.png" width="25"></a>
-			<input type="submit" name="btn" value="Pesquisar" />
+			<td><input type="text" name="nomeElemento" value="${elemento.nomeElemento}" size="20" maxlength="2" /><input type="submit" name="btn" value="Pesquisar" />
 			</td>
 		</tr>
 		<tr>
