@@ -23,32 +23,38 @@ public class DaoConvenio {
 		transaction = session.beginTransaction();
 	}	
 	
+	public void doRollBack() {
+		transaction.rollback();
+		closeSession();
+	}
+	
+	public void closeSession(){
+		session.flush();
+		session.close();
+	}
+	
 	public void cadastrarConvenio(Convenio convenio) throws Exception{
 		session.persist(convenio);
 		transaction.commit();
-		session.flush();
-		session.close();
+		closeSession();
 	}
 
 	public void alterarConvenio(Convenio convenio) throws Exception{
 		session.update(convenio);
 		transaction.commit();
-		session.flush();
-		session.close();
+		closeSession();
 	}
 
 	public void excluirConvenio(Convenio convenio) throws Exception{
 		session.delete(convenio);
 		transaction.commit();
-		session.flush();
-		session.close();
+		closeSession();
 	}
 
 	public Convenio pesquisarConvenioPorNome(Convenio convenio) throws Exception{
 		Criteria cr = session.createCriteria(Convenio.class).add(Restrictions.eq("nomeConvenio", convenio.getNomeConvenio()));
 		Convenio c = (Convenio) cr.uniqueResult();
-		session.flush();
-		session.close();
+		closeSession();
 		return c;
 	}
 
@@ -56,8 +62,7 @@ public class DaoConvenio {
 		List<Convenio> lista = null;
 		Criteria cr = session.createCriteria(Convenio.class);
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
 	

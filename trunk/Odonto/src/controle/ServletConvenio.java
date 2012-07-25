@@ -32,6 +32,7 @@ public class ServletConvenio extends HttpServlet {
 		String btn = (String)request.getParameter("btn");
 		HttpSession objetoSessao = request.getSession();
 		Convenio convenio = new Convenio();
+		ConfiguraAtributo ca = new ConfiguraAtributo();
 		
 		if (btn.equals("Voltar")){
 			objetoSessao.removeAttribute("convenio");
@@ -39,14 +40,17 @@ public class ServletConvenio extends HttpServlet {
 			disp.forward(request, response);
 		}else if (btn.equals("Cadastrar")){
 			convenio = preencheObjeto(request, response);
-			if (validaCampos(convenio)){				
-				try{
-					DaoConvenio dao = new DaoConvenio();
+			if (validaCampos(convenio)){		
+				DaoConvenio dao = new DaoConvenio();
+				try{					
 					dao.cadastrarConvenio(convenio);
 					mensagem = "Convênio cadastrado com sucesso!";
 					request.setAttribute("msg", mensagem);
 					RequestDispatcher disp = request.getRequestDispatcher("convenio.jsp");
 					disp.forward(request, response);
+				}catch(ConstraintViolationException cve){
+					dao.doRollBack();
+					ca.sendRedirect(request, response, null, "Erro: Já existe um convênio com essa descrição cadastrado.", "convenio.jsp");
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -114,18 +118,21 @@ public class ServletConvenio extends HttpServlet {
 			convenio = preencheObjeto(request, response);
 			convenio.setIdConvenio(((Convenio)objetoSessao.getAttribute("convenio")).getIdConvenio());
 			if (validaCampos(convenio)){	
-				try{					
-					DaoConvenio dao = new DaoConvenio();
+				DaoConvenio dao = new DaoConvenio();
+				try{										
 					dao.alterarConvenio(convenio);
 					mensagem = "Convênio alterado com sucesso.";
 					request.setAttribute("msg", mensagem);
 					objetoSessao.removeAttribute("convenio");
 					RequestDispatcher disp = request.getRequestDispatcher("convenio.jsp");
 					disp.forward(request, response);
+				}catch(ConstraintViolationException cve){
+					dao.doRollBack();
+					ca.sendRedirect(request, response, null, "Erro: Já existe um convênio com essa descrição cadastrado.", "convenio_alterar.jsp");
 				}catch (Exception e) {
 					mensagem = "Ocorreu algum erro ao alterar o convênio.";
 					request.setAttribute("msg", mensagem);
-					RequestDispatcher disp = request.getRequestDispatcher("convenio.jsp");
+					RequestDispatcher disp = request.getRequestDispatcher("convenio_alterar.jsp");
 					disp.forward(request, response);
 				}
 			}else{

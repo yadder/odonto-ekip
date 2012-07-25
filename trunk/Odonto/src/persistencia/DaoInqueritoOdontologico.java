@@ -22,35 +22,39 @@ public class DaoInqueritoOdontologico {
 		transaction = session.beginTransaction();
 	}	
 	
-
+	public void doRollBack() {
+		transaction.rollback();
+		closeSession();
+	}
+	
+	public void closeSession(){
+		session.flush();
+		session.close();
+	}
+	
 	public void cadastrarInqueritoOdontologico(InqueritoOdontologico inqueritoOdontologico) throws Exception{
-			session.persist(inqueritoOdontologico);
-			transaction.commit();
-			session.flush();
-			session.close();
+		session.persist(inqueritoOdontologico);
+		transaction.commit();
+		closeSession();
 	}
 
 	public void alterarInqueritoOdontologico(InqueritoOdontologico inqueritoOdontologico) throws Exception{
-			session.update(inqueritoOdontologico);
-			transaction.commit();
-			session.flush();
-			session.close();
+		session.update(inqueritoOdontologico);
+		transaction.commit();
+		closeSession();
 	}
 
 	public void excluirInqueritoOdontologico(InqueritoOdontologico inqueritoOdontologico) throws Exception{
-			session.delete(inqueritoOdontologico);
-			transaction.commit();
-			session.flush();
-			session.close();
+		session.delete(inqueritoOdontologico);
+		transaction.commit();
+		closeSession();
 	}
 
 	public List<InqueritoOdontologico> pesquisarTodosInqueritoOdontologico() throws Exception{
 		List<InqueritoOdontologico> lista = null;
 		Criteria cr = session.createCriteria(InqueritoOdontologico.class);
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
-
 }

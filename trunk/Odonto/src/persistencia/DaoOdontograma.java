@@ -25,34 +25,39 @@ public class DaoOdontograma {
 		transaction = session.beginTransaction();
 	}	
 	
-
+	public void doRollBack() {
+		transaction.rollback();
+		closeSession();
+	}
+	
+	public void closeSession(){
+		session.flush();
+		session.close();
+	}
+	
 	public void cadastrarOdontograma(Odontograma odontograma) throws Exception{
-			session.persist(odontograma);
-			transaction.commit();
-			session.flush();
-			session.close();
+		session.persist(odontograma);
+		transaction.commit();
+		closeSession();
 	}
 
 	public void alterarOdontograma(Odontograma odontograma) throws Exception{
-			session.update(odontograma);
-			transaction.commit();
-			session.flush();
-			session.close();
+		session.update(odontograma);
+		transaction.commit();
+		closeSession();
 	}
 
 	public void excluirOdontograma(Odontograma odontograma) throws Exception{
-			session.delete(odontograma);
-			transaction.commit();
-			session.flush();
-			session.close();
+		session.delete(odontograma);
+		transaction.commit();
+		closeSession();
 	}
 
 	public Odontograma pesquisarOdontogramaPorPacienteEmAndamento(Paciente paciente) throws Exception{
 		Odontograma o = null;
 		Criteria cr = session.createCriteria(Odontograma.class).add(Restrictions.eq("paciente", paciente)).add(Restrictions.eq("statusOdontograma", "EM ANDAMENTO"));
 		o = (Odontograma)cr.uniqueResult();
-		session.flush();
-		session.close();
+		closeSession();
 		return o;
 	}
 	
@@ -60,8 +65,7 @@ public class DaoOdontograma {
 		List<Odontograma> lista = null;
 		Criteria cr = session.createCriteria(Odontograma.class);
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
 	
@@ -69,11 +73,7 @@ public class DaoOdontograma {
 		List<Odontograma> lista = null;
 		Criteria cr = session.createCriteria(Odontograma.class).add(Restrictions.between("dataFimOdontograma", dataini,datafim)).add(Restrictions.eq("statusOdontograma", "FINALIZADO"));
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
-	}
-	
-	
-	
+	}	
 }

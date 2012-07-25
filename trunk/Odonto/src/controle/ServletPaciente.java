@@ -5,20 +5,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.exception.ConstraintViolationException;
-
 import modelo.Convenio;
 import modelo.Paciente;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
+
+import org.hibernate.AssertionFailure;
+import org.hibernate.exception.ConstraintViolationException;
+
 import persistencia.DaoConvenio;
 import persistencia.DaoPaciente;
 
@@ -44,29 +45,28 @@ public class ServletPaciente extends HttpServlet {
 		if (btn.equals("Voltar")){
 			objetoSessao.removeAttribute("paciente");
 			objetoSessao.removeAttribute("data");
-			RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
-			disp.forward(request, response);
-			
+			ca.sendRedirect(request, response, null, null, "principal.jsp");
 		}else if (btn.equals("Cadastrar")){
 			paciente = preencheObjeto(request, response);
 			objetoSessao.setAttribute("paciente",paciente);
 			if (validaCampos(paciente)){
-				try{
-					DaoPaciente dao = new DaoPaciente();
+				DaoPaciente dao = new DaoPaciente();
+				try{					
 					dao.cadastrarPaciente(paciente);
-					mensagem = "Paciente cadastrado(a) com sucesso!";					
-					ca.sendRedirect(request, response, null, null, "ServletPaciente?btn=Imprimir");					
-				}catch(ConstraintViolationException ex){
-					ca.sendRedirect(request, response, null, "Já existe paciente com este CPF cadastrado", "paciente.jsp");	
+					ca.sendRedirect(request, response, "Paciente cadastrado(a) com sucesso!", null, "ServletPaciente?btn=Imprimir");					
+				}catch (AssertionFailure e) {
+					dao.doRollBack();
+					ca.sendRedirect(request, response, null, "Erro: Já existe um(a) paciente com este CPF cadastrado(a).", "paciente.jsp");
+				}catch(ConstraintViolationException cve){
+					dao.doRollBack();
+					ca.sendRedirect(request, response, null, "Erro: Já existe um(a) paciente com este CPF cadastrado(a).", "paciente.jsp");
 				}catch (Exception e) {
-					e.printStackTrace();
+					ca.sendRedirect(request, response, null, "Erro: "+e.getMessage(), "paciente.jsp");
 				}
 			}else{
-				request.setAttribute("msg", mensagem);
 				String data = ca.dataSqlParaDataString(paciente.getDataNascimentoUsuario());
 				objetoSessao.setAttribute("data", data);
-				RequestDispatcher disp = request.getRequestDispatcher("paciente.jsp");
-				disp.forward(request, response);
+				ca.sendRedirect(request, response, mensagem, null, "paciente.jsp");
 			}
 		}else if (btn.equals("Pesquisar")){
 			paciente = preencheObjeto(request, response);
@@ -75,67 +75,47 @@ public class ServletPaciente extends HttpServlet {
 					DaoPaciente daoPaciente = new DaoPaciente();
 					paciente = daoPaciente.pesquisarPacientePorNome(paciente);
 					if (paciente != null){
-						mensagem = "Paciente encontrado(a).";
-						request.setAttribute("msg", mensagem);
 						objetoSessao.setAttribute("paciente", paciente);
 						objetoSessao.setAttribute("data", ca.dataSqlParaDataString(paciente.getDataNascimentoUsuario()));
-						RequestDispatcher disp = request.getRequestDispatcher("paciente_alterar.jsp");
-						disp.forward(request, response);
+						ca.sendRedirect(request, response, "Paciente encontrado(a).", null, "paciente_alterar.jsp");
 					}else{
-						mensagem = "Paciente não encontrado(a).";
-						request.setAttribute("msg", mensagem);
-						RequestDispatcher disp = request.getRequestDispatcher("paciente.jsp");
-						disp.forward(request, response);
+						ca.sendRedirect(request, response, null, "Paciente não encontrado(a).", "paciente.jsp");
 					}
 				}catch (Exception e) {
-					e.printStackTrace();
+					ca.sendRedirect(request, response, null, "Erro: "+e.getMessage(), "paciente.jsp");
 				}
 			}else{
-				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("paciente.jsp");
-				disp.forward(request, response);
+				ca.sendRedirect(request, response, null, mensagem, "paciente.jsp");
 			}
 		}else if(btn.equals("Excluir")){
 			try{
 				paciente = (Paciente)objetoSessao.getAttribute("paciente");
 				DaoPaciente daoPaciente = new DaoPaciente();
 				daoPaciente.excluirPaciente(paciente);
-				mensagem = "Paciente excluído(a) com sucesso.";
-				request.setAttribute("msg", mensagem);
 				objetoSessao.removeAttribute("paciente");
-				RequestDispatcher disp = request.getRequestDispatcher("paciente.jsp");
-				disp.forward(request, response);
+				ca.sendRedirect(request, response, "Paciente excluído(a) com sucesso.", null, "paciente.jsp");
 			}catch (Exception e) {
-				mensagem = "Ocorreu algum erro ao excluir o paciente(a).";
-				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("paciente.jsp");
-				disp.forward(request, response);
-				e.printStackTrace();
+				ca.sendRedirect(request, response, null, "Erro: "+e.getMessage(), "paciente.jsp");
 			}
 		}else if(btn.equals("Alterar")){
 			paciente = preencheObjeto(request, response);
 			paciente.setIdUsuario(((Paciente)objetoSessao.getAttribute("paciente")).getIdUsuario());
 			objetoSessao.setAttribute("paciente", paciente);
 			if (validaCampos(paciente)){	
-				try{					
-					DaoPaciente daoPaciente = new DaoPaciente();
+				DaoPaciente daoPaciente = new DaoPaciente();
+				try{										
 					daoPaciente.alterarPaciente(paciente);
-					mensagem = "Paciente alterado(a) com sucesso.";
-					request.setAttribute("msg", mensagem);
 					objetoSessao.removeAttribute("paciente");
 					objetoSessao.removeAttribute("data");
-					RequestDispatcher disp = request.getRequestDispatcher("paciente.jsp");
-					disp.forward(request, response);
+					ca.sendRedirect(request, response, "Paciente alterado(a) com sucesso.", null, "paciente.jsp");
+				}catch(ConstraintViolationException cve){
+					daoPaciente.doRollBack();
+					ca.sendRedirect(request, response, null, "Erro: Já existe um(a) paciente com este CPF cadastrado(a).", "paciente_alterar.jsp");
 				}catch (Exception e) {
-					mensagem = "Ocorreu algum erro ao alterar o(a) paciente.";
-					request.setAttribute("msg", mensagem);
-					RequestDispatcher disp = request.getRequestDispatcher("paciente.jsp");
-					disp.forward(request, response);
+					ca.sendRedirect(request, response, null, "Erro: "+e.getMessage(), "paciente_alterar.jsp");
 				}
 			}else{
-				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("paciente_alterar.jsp");
-				disp.forward(request, response);
+				ca.sendRedirect(request, response, null, mensagem, "paciente_alterar.jsp");
 			}	
 			
 			}else if (btn.equals("Imprimir")){						
@@ -148,22 +128,18 @@ public class ServletPaciente extends HttpServlet {
 					
 					if(!listaPaciente.isEmpty()){			
 						JRBeanCollectionDataSource jr = new JRBeanCollectionDataSource(listaPaciente); 
-						//JRBeanArrayDataSource jr = new JRBeanArrayDataSource(listaPaciente);
 						JasperFillManager.fillReportToFile("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\loginSenha.jasper", new HashMap(), jr);
 						JasperViewer.viewReport("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\loginSenha.jrprint", false, false);
 						jr=null;
 						objetoSessao.removeAttribute("paciente");
-						ca.sendRedirect(request, response, mensagem+" Imprima login e senha do usuário", null, "paciente.jsp");
+						ca.sendRedirect(request, response, mensagem+"... Imprima login e senha do paciente.", null, "paciente.jsp");
 					}else{
 						ca.sendRedirect(request, response, "Paciente cadastrado", "Erro ao imprimir login e senha", "paciente.jsp");
-					}					                                    
-					
+					}					
 				}catch (Exception e) {
-					e.printStackTrace();
+					ca.sendRedirect(request, response, null, "Erro ao gerar o relatório. "+e.getMessage(), "paciente.jsp");
 				}
-
-			}	
-			
+			}				
 	}	
 
 	public Paciente preencheObjeto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -242,11 +218,9 @@ public class ServletPaciente extends HttpServlet {
 			mensagem = "Preencha o telefone1 do(a) paciente corretamente.";
 		}else if ((paciente.getConvenio()==null)){
 			mensagem = "Preencha o convênio do paciente.";
-		}
-		
+		}		
 		// outros campos do paciente
-		
-		
+			
 		else {
 			result = true;
 		}

@@ -23,32 +23,38 @@ public class DaoElemento {
 		transaction = session.beginTransaction();
 	}	
 	
+	public void doRollBack() {
+		transaction.rollback();
+		closeSession();
+	}
+	
+	public void closeSession(){
+		session.flush();
+		session.close();
+	}
+	
 	public void cadastrarElemento(Elemento elemento) throws Exception{
 		session.persist(elemento);
 		transaction.commit();
-		session.flush();
-		session.close();
+		closeSession();
 	}
 
 	public void alterarElemento(Elemento elemento) throws Exception{
 		session.update(elemento);
 		transaction.commit();
-		session.flush();
-		session.close();
+		closeSession();
 	}
 
 	public void excluirElemento(Elemento elemento) throws Exception{
 		session.delete(elemento);
 		transaction.commit();
-		session.flush();
-		session.close();
+		closeSession();
 	}
 
 	public Elemento pesquisarElementoPorNome(Elemento elemento) throws Exception{
 		Criteria cr = session.createCriteria(Elemento.class).add(Restrictions.eq("nomeElemento", elemento.getNomeElemento()));
 		Elemento e = (Elemento) cr.uniqueResult();
-		session.flush();
-		session.close();
+		closeSession();
 		return e;
 	}
 
@@ -56,8 +62,7 @@ public class DaoElemento {
 		List<Elemento> lista = null;
 		Criteria cr = session.createCriteria(Elemento.class);
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
 

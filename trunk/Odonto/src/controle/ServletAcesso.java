@@ -1,7 +1,6 @@
 package controle;
 
 import java.io.IOException;
-import java.sql.BatchUpdateException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,8 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import modelo.Acesso;
 
+import org.hibernate.AssertionFailure;
 import org.hibernate.exception.ConstraintViolationException;
-import org.hibernate.exception.GenericJDBCException;
 
 import persistencia.DaoAcesso;
 
@@ -39,18 +38,19 @@ public class ServletAcesso extends HttpServlet {
 			ca.sendRedirect(request, response, null, null, "principal.jsp");
 		}else if (btn.equals("Cadastrar")){
 			acesso = preencheObjeto(request, response);
-			if (validaCampos(acesso)){				
-				try{
-					DaoAcesso daoAcesso = new DaoAcesso();
+			if (validaCampos(acesso)){		
+				DaoAcesso daoAcesso = new DaoAcesso();
+				try{					
 					daoAcesso.cadastrarAcesso(acesso);
 					ca.sendRedirect(request, response, "Acesso cadastrado com sucesso!", null, "acesso.jsp");
+				}catch (AssertionFailure e) {
+					daoAcesso.doRollBack();
+					ca.sendRedirect(request, response, null, "Erro: Já existe um acesso com essa descrição cadastrado.", "acesso.jsp");
 				}catch(ConstraintViolationException cve){
-					ca.sendRedirect(request, response, null, "Erro: Já existe um acesso com essa descrição cadastrado. "+cve.getMessage(), "acesso.jsp");
-					cve = null;
-				}
-				catch (Exception e) {
+					daoAcesso.doRollBack();
+					ca.sendRedirect(request, response, null, "Erro: Já existe um acesso com essa descrição cadastrado.", "acesso.jsp");
+				}catch (Exception e) {
 					ca.sendRedirect(request, response, null, "Erro: "+e.getMessage(), "acesso.jsp");
-					e = null;
 				}
 			}else{
 				ca.sendRedirect(request, response, null, mensagem, "acesso.jsp");
@@ -86,24 +86,17 @@ public class ServletAcesso extends HttpServlet {
 		}else if(btn.equals("Alterar")){
 			acesso = preencheObjeto(request, response);
 			acesso.setIdAcesso(((Acesso)objetoSessao.getAttribute("acesso")).getIdAcesso());
-			if (validaCampos(acesso)){	
-				try{					
-					DaoAcesso daoAcesso = new DaoAcesso();
+			if (validaCampos(acesso)){
+				DaoAcesso daoAcesso = new DaoAcesso();
+				try{
 					daoAcesso.alterarAcesso(acesso);
 					objetoSessao.removeAttribute("acesso");
 					ca.sendRedirect(request, response, "Acesso alterado com sucesso.", null, "acesso.jsp");
 				}catch(ConstraintViolationException cve){
-					ca.sendRedirect(request, response, null, "Erro: Já existe um acesso com essa descrição cadastrado. "+cve.getMessage(), "acesso_alterar.jsp");
-					cve = null;
-				}catch (BatchUpdateException bue) {
-					ca.sendRedirect(request, response, null, "Erro: Já existe um acesso com essa descrição cadastrado. "+bue.getMessage(), "acesso_alterar.jsp");
-					bue = null;
-				}catch (GenericJDBCException ge){
-					ca.sendRedirect(request, response, null, "Erro: Já existe um acesso com essa descrição cadastrado. "+ge.getMessage(), "acesso_alterar.jsp");
-					ge = null;
-				}
-				catch (Exception e) {
-					ca.sendRedirect(request, response, null, "Ocorreu algum erro ao alterar o acesso. " + e.getMessage(), "acesso.jsp");
+					daoAcesso.doRollBack();
+					ca.sendRedirect(request, response, null, "Erro: Já existe um acesso com essa descrição cadastrado.", "acesso_alterar.jsp");
+				}catch (Exception e) {
+					ca.sendRedirect(request, response, null, "Ocorreu algum erro ao alterar o acesso.", "acesso_alterar.jsp");
 				}
 			}else{
 				ca.sendRedirect(request, response, null, "Preencha o nome do acesso corretamente.", "acesso_alterar.jsp");
