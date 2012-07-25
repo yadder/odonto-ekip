@@ -23,34 +23,39 @@ public class DaoOdontogramaProcedimento {
 		session = fabrica.openSession();
 		transaction = session.beginTransaction();
 	}	
+	public void doRollBack() {
+		transaction.rollback();
+		closeSession();
+	}
+	
+	public void closeSession(){
+		session.flush();
+		session.close();
+	}
 	
 	public void cadastrarOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) throws Exception{
 			session.persist(odontogramaProcedimento);
 			transaction.commit();
-			session.flush();
-			session.close();
+			closeSession();
 	}
 
 	public void alterarOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) throws Exception{
 			session.update(odontogramaProcedimento);
 			transaction.commit();
-			session.flush();
-			session.close();
+			closeSession();
 	}
 
 	public void excluirOdontogramaProcedimento(OdontogramaProcedimento odontogramaProcedimento) throws Exception{
 			session.delete(odontogramaProcedimento);
 			transaction.commit();
-			session.flush();
-			session.close();
+			closeSession();
 	}
 
 	public OdontogramaProcedimento pesquisarOdontogramaProcedimentoPorId(long idOdontogramaProcedimento) throws Exception{
 		OdontogramaProcedimento o = null;
 		Criteria cr = session.createCriteria(OdontogramaProcedimento.class).add(Restrictions.eq("idOdontogramaProcedimento", idOdontogramaProcedimento));
 		o = (OdontogramaProcedimento)cr.uniqueResult();
-		session.flush();
-		session.close();
+		closeSession();
 		return o;
 	}
 	
@@ -58,8 +63,7 @@ public class DaoOdontogramaProcedimento {
 		List<OdontogramaProcedimento> lista = null;
 		Criteria cr = session.createCriteria(OdontogramaProcedimento.class).add(Restrictions.eq("odontograma", odontograma));
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
 
@@ -67,9 +71,7 @@ public class DaoOdontogramaProcedimento {
 		List<OdontogramaProcedimento> lista = null;
 		Criteria cr = session.createCriteria(OdontogramaProcedimento.class);
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
-
 }

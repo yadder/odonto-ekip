@@ -23,41 +23,46 @@ public class DaoUsuario {
 		transaction = session.beginTransaction();
 	}	
 	
+	public void doRollBack() {
+		transaction.rollback();
+		closeSession();
+	}
+	
+	public void closeSession(){
+		session.flush();
+		session.close();
+	}
+	
 	public void cadastrarUsuario(Usuario usuario) throws Exception{
 			session.persist(usuario);
 			transaction.commit();
-			session.flush();
-			session.close();
+			closeSession();
 	}
 
 	public void alterarUsuario(Usuario usuario) throws Exception{
 			session.update(usuario);
 			transaction.commit();
-			session.flush();
-			session.close();
+			closeSession();
 	}
 
 	public void excluirUsuario(Usuario usuario) throws Exception{
 			session.delete(usuario);
 			transaction.commit();
-			session.flush();
-			session.close();
+			closeSession();
 	}
 
 	public Usuario pesquisarUsuarioPorCpf(Usuario usuario) throws Exception{
 		Usuario u = null;
 		Criteria cr = session.createCriteria(Usuario.class).add(Restrictions.eq("cpfUsuario", usuario.getCpfUsuario()));
 		u = (Usuario) cr.uniqueResult();
-		session.flush();
-		session.close();
+		closeSession();
 		return u;
 	}
 	
 	public Usuario pesquisarUsuarioPorNome(Usuario usuario) throws Exception{
 		Criteria cr = session.createCriteria(Usuario.class).add(Restrictions.eq("nomeUsuario", usuario.getNomeUsuario()));
 		Usuario u = (Usuario)cr.uniqueResult();
-		session.flush();
-		session.close();
+		closeSession();
 		return u;
 	}
 
@@ -65,9 +70,7 @@ public class DaoUsuario {
 		List<Usuario> lista = null;
 		Criteria cr = session.createCriteria(Usuario.class);
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
-
 }

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.exception.ConstraintViolationException;
+
 import modelo.Usuario;
 import persistencia.DaoUsuario;
 
@@ -39,14 +41,17 @@ public class ServletRecepcionista extends HttpServlet {
 			usuario = preencheObjeto(request, response);
 			objetoSessao.setAttribute("usuario", usuario);
 			if (validaCampos(usuario)){
-				try{
-					DaoUsuario daoUsuario = new DaoUsuario();
+				DaoUsuario daoUsuario = new DaoUsuario();
+				try{					
 					daoUsuario.cadastrarUsuario(usuario);
 					objetoSessao.removeAttribute("usuario");
 					mensagem = "Recepcionista cadastrado(a) com sucesso!";
 					request.setAttribute("msg", mensagem);
 					RequestDispatcher disp = request.getRequestDispatcher("recepcionista.jsp");
 					disp.forward(request, response);
+				}catch(ConstraintViolationException cve){
+					daoUsuario.doRollBack();
+					ca.sendRedirect(request, response, null, "Erro: Já existe um(a) recepcionista com este CPF cadastrado(a).", "recepcionista.jsp");
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -106,8 +111,8 @@ public class ServletRecepcionista extends HttpServlet {
 			usuario = preencheObjeto(request, response);
 			usuario.setIdUsuario(((Usuario)objetoSessao.getAttribute("usuario")).getIdUsuario());
 			if (validaCampos(usuario)){	
-				try{					
-					DaoUsuario daoUsuario = new DaoUsuario();
+				DaoUsuario daoUsuario = new DaoUsuario();
+				try{										
 					daoUsuario.alterarUsuario(usuario);
 					mensagem = "Recepcionista alterado(a) com sucesso.";
 					request.setAttribute("msg", mensagem);
@@ -115,6 +120,9 @@ public class ServletRecepcionista extends HttpServlet {
 					objetoSessao.removeAttribute("data");
 					RequestDispatcher disp = request.getRequestDispatcher("recepcionista.jsp");
 					disp.forward(request, response);
+				}catch(ConstraintViolationException cve){
+					daoUsuario.doRollBack();
+					ca.sendRedirect(request, response, null, "Erro: Já existe um(a) recepcionista com este CPF cadastrado(a).", "recepcionista_alterar.jsp");
 				}catch (Exception e) {
 					mensagem = "Ocorreu algum erro ao alterar o(a) recepcionista.";
 					request.setAttribute("msg", mensagem);

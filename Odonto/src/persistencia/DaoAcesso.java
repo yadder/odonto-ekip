@@ -26,29 +26,35 @@ public class DaoAcesso {
 	public void cadastrarAcesso(Acesso acesso) throws Exception{
 		session.persist(acesso);
 		transaction.commit();
-		session.flush();
-		session.close();
+		closeSession();
 	}
 
 	public void alterarAcesso(Acesso acesso) throws Exception{
 		session.update(acesso);
 		transaction.commit();
+		closeSession();
+	}
+	
+	public void doRollBack() {
+		transaction.rollback();
+		closeSession();
+	}
+	
+	public void closeSession(){
 		session.flush();
 		session.close();
 	}
-
+	
 	public void excluirAcesso(Acesso acesso) throws Exception{
 		session.delete(acesso);
 		transaction.commit();
-		session.flush();
-		session.close();
+		closeSession();
 	}
 
 	public Acesso pesquisarAcessoPorNome(Acesso acesso) throws Exception{
 		Criteria cr = session.createCriteria(Acesso.class).add(Restrictions.eq("descricaoAcesso", acesso.getDescricaoAcesso()));
 		Acesso a = (Acesso)cr.uniqueResult();
-		session.flush();
-		session.close();
+		closeSession();
 		return a;
 	}
 
@@ -56,8 +62,7 @@ public class DaoAcesso {
 		List<Acesso> lista = null;
 		Criteria cr = session.createCriteria(Acesso.class);
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
 

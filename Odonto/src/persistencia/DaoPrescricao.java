@@ -22,33 +22,39 @@ public class DaoPrescricao {
 		transaction = session.beginTransaction();
 	}	
 	
+	public void doRollBack() {
+		transaction.rollback();
+		closeSession();
+	}
+	
+	public void closeSession(){
+		session.flush();
+		session.close();
+	}
+	
 	public void cadastrarPrescricao(Prescricao prescricao) throws Exception{
 			session.persist(prescricao);
 			transaction.commit();
-			session.flush();
-			session.close();
+			closeSession();
 	}
 
 	public void alterarPrescricao(Prescricao prescricao) throws Exception{
 			session.update(prescricao);
 			transaction.commit();
-			session.flush();
-			session.close();
+			closeSession();
 	}
 
 	public void excluirPrescricao(Prescricao prescricao) throws Exception{
 			session.delete(prescricao);
 			transaction.commit();
-			session.flush();
-			session.close();
+			closeSession();
 	}
 
 	public List<Prescricao> pesquisarTodosPrescricao() throws Exception{
 		List<Prescricao> lista = null;
 		Criteria cr = session.createCriteria(Prescricao.class);
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
 

@@ -26,33 +26,39 @@ public class DaoConsulta {
 		transaction = session.beginTransaction();
 	}	
 	
+	public void doRollBack() {
+		transaction.rollback();
+		closeSession();
+	}
+	
+	public void closeSession(){
+		session.flush();
+		session.close();
+	}
+	
 	public void cadastrarConsulta(Consulta consulta) throws Exception{
 		session.persist(consulta);
 		transaction.commit();
-		session.flush();
-		session.close();
+		closeSession();
 	}
 
 	public void alterarConsulta(Consulta consulta) throws Exception{
 		session.update(consulta);
 		transaction.commit();
-		session.flush();
-		session.close();
+		closeSession();
 	}
 
 	public void excluirConsulta(Consulta consulta) throws Exception{
 		session.delete(consulta);
 		transaction.commit();
-		session.flush();
-		session.close();
+		closeSession();
 	}
 
 	public Consulta pesquisarConsultaPorId(long id) throws Exception{
 		Consulta c = new Consulta();
 		Criteria cr = session.createCriteria(Consulta.class).add(Restrictions.eq("idConsulta",id));
 		c = (Consulta)cr.uniqueResult();
-		session.flush();
-		session.close();
+		closeSession();
 		return c;
 	}
 	
@@ -60,8 +66,7 @@ public class DaoConsulta {
 		List<Consulta> lista = null;
 		Criteria cr = session.createCriteria(Consulta.class);
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
 	
@@ -69,8 +74,7 @@ public class DaoConsulta {
 		List<Consulta> lista = null;
 		Criteria cr = session.createCriteria(Consulta.class).add(Restrictions.eq("statusConsulta", "AGENDADA")).addOrder(Order.asc("dataConsulta"));
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
 	
@@ -78,8 +82,7 @@ public class DaoConsulta {
 		List<Consulta> lista = null;
 		Criteria cr = session.createCriteria(Consulta.class).add(Restrictions.eq("dataConsulta", data));
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
 	
@@ -88,8 +91,7 @@ public class DaoConsulta {
 		//Criteria cr = session.createCriteria(Consulta.class).add(Restrictions.between(Data, dataini, datafim)eq("dataConsulta", data));
 		Criteria cr = session.createCriteria(Consulta.class).add(Restrictions.between("dataConsulta", dataini,datafim));
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
 	
@@ -97,8 +99,7 @@ public class DaoConsulta {
 		List<Consulta> lista = null;
 		Criteria cr = session.createCriteria(Consulta.class).add(Restrictions.between("dataConsulta", dataini,datafim)).add(Restrictions.eq("statusConsulta", status));
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
 	
@@ -107,8 +108,7 @@ public class DaoConsulta {
 		List<Consulta> lista = null;
 		Criteria cr = session.createCriteria(Consulta.class).add(Restrictions.eq("paciente", paciente));
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}	
 }

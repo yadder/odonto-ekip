@@ -23,40 +23,45 @@ public class DaoDentista {
 		transaction = session.beginTransaction();
 	}	
 	
+	public void doRollBack() {
+		transaction.rollback();
+		closeSession();
+	}
+	
+	public void closeSession(){
+		session.flush();
+		session.close();
+	}
+	
 	public void cadastrarDentista(Dentista dentista) throws Exception{
 		session.persist(dentista);
 		transaction.commit();
-		session.flush();
-		session.close();
+		closeSession();
 	}
 
 	public void alterarDentista(Dentista dentista) throws Exception{
 		session.update(dentista);
 		transaction.commit();
-		session.flush();
-		session.close();
+		closeSession();
 	}
 
 	public void excluirDentista(Dentista dentista) throws Exception{
 		session.delete(dentista);
 		transaction.commit();
-		session.flush();
-		session.close();
+		closeSession();
 	}
 
 	public Dentista pesquisarDentistaPorNome(Dentista dentista) throws Exception{
 		Criteria cr = session.createCriteria(Dentista.class).add(Restrictions.eq("nomeUsuario", dentista.getNomeUsuario()));
 		Dentista d = (Dentista)cr.uniqueResult();
-		session.flush();
-		session.close();
+		closeSession();
 		return d;
 	}
 	
 	public Dentista pesquisarDentistaPorId(Dentista dentista) throws Exception{
 		Criteria cr = session.createCriteria(Dentista.class).add(Restrictions.eq("idUsuario", dentista.getIdUsuario()));
 		Dentista d = (Dentista)cr.uniqueResult();
-		session.flush();
-		session.close();
+		closeSession();
 		return d;
 	}
 
@@ -64,8 +69,7 @@ public class DaoDentista {
 		List<Dentista> lista = null;
 		Criteria cr = session.createCriteria(Dentista.class);
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
 }

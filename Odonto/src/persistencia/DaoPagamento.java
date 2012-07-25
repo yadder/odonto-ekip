@@ -25,33 +25,39 @@ public class DaoPagamento {
 		transaction = session.beginTransaction();
 	}	
 	
+	public void doRollBack() {
+		transaction.rollback();
+		closeSession();
+	}
+	
+	public void closeSession(){
+		session.flush();
+		session.close();
+	}
+	
 	public void cadastrarPagamento(Pagamento pagamento) throws Exception{
 			session.persist(pagamento);
 			transaction.commit();
-			session.flush();
-			session.close();
+			closeSession();
 	}
 
 	public void alterarPagamento(Pagamento pagamento) throws Exception{
 			session.update(pagamento);
 			transaction.commit();
-			session.flush();
-			session.close();
+			closeSession();
 	}
 
 	public void excluirPagamento(Pagamento pagamento) throws Exception{
 			session.delete(pagamento);
 			transaction.commit();
-			session.flush();
-			session.close();
+			closeSession();
 	}
 
 	public List<Pagamento> pesquisarPagamentoPorOdontograma(Odontograma odontograma) throws Exception{
 		List<Pagamento> lista = null;
 		Criteria cr = session.createCriteria(Pagamento.class).add(Restrictions.eq("odontograma",odontograma));
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
 	
@@ -59,8 +65,7 @@ public class DaoPagamento {
 		List<Pagamento> lista = null;
 		Criteria cr = session.createCriteria(Pagamento.class).add(Restrictions.eq("paciente",paciente)).add(Restrictions.eq("statusPagamento","PENDENTE"));
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
 	
@@ -68,8 +73,7 @@ public class DaoPagamento {
 		Pagamento p = null;
 		Criteria cr = session.createCriteria(Pagamento.class).add(Restrictions.eq("idPagamento",id));
 		p = (Pagamento)cr.uniqueResult();
-		session.flush();
-		session.close();
+		closeSession();
 		return p;
 	}
 	
@@ -77,8 +81,7 @@ public class DaoPagamento {
 		List<Pagamento> lista = null;
 		Criteria cr = session.createCriteria(Pagamento.class);
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
 

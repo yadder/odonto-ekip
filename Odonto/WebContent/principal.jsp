@@ -15,7 +15,6 @@
 </div>
 
 	<h6><font color="red">À fazer:</font></h6>
-	<a href=#>Pesquisar paciente (Odontograma) quando clica em voltar esta com bug</a><br/>
 	<a href=#>Botao excluir procedimento (Odontograma) esta com bug</a><br/>
 	<a href=#>Verificação inicial</a><br/>
 	<a href=#>Conceder acesso</a><br/>

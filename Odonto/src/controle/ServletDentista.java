@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.exception.ConstraintViolationException;
+
 import modelo.Dentista;
 import persistencia.DaoDentista;
 
@@ -38,14 +40,17 @@ public class ServletDentista extends HttpServlet {
 				dentista = preencheObjeto(request, response);
 				objetoSessao.setAttribute("dentista",dentista);
 				if (validaCampos(dentista)){
-					try{
-						DaoDentista dao = new DaoDentista();
+					DaoDentista dao = new DaoDentista();
+					try{						
 						dao.cadastrarDentista(dentista);
 						mensagem = "Dentista cadastrado(a) com sucesso!";
 						request.setAttribute("msg", mensagem);
 						objetoSessao.removeAttribute("dentista");
 						RequestDispatcher disp = request.getRequestDispatcher("dentista.jsp");
 						disp.forward(request, response);
+					}catch(ConstraintViolationException cve){
+						dao.doRollBack();
+						ca.sendRedirect(request, response, null, "Erro: Já existe um dentista com este CPF ou CRO cadastrado.", "dentista.jsp");
 					}catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -105,8 +110,8 @@ public class ServletDentista extends HttpServlet {
 			dentista = preencheObjeto(request, response);
 			dentista.setIdUsuario(((Dentista)objetoSessao.getAttribute("dentista")).getIdUsuario());
 			if (validaCampos(dentista)){	
-				try{					
-					DaoDentista daoDentista = new DaoDentista();
+				DaoDentista daoDentista = new DaoDentista();
+				try{										
 					daoDentista.alterarDentista(dentista);
 					mensagem = "Dentista alterado(a) com sucesso.";
 					request.setAttribute("msg", mensagem);
@@ -114,6 +119,9 @@ public class ServletDentista extends HttpServlet {
 					objetoSessao.removeAttribute("data");
 					RequestDispatcher disp = request.getRequestDispatcher("dentista.jsp");
 					disp.forward(request, response);
+				}catch(ConstraintViolationException cve){
+					daoDentista.doRollBack();
+					ca.sendRedirect(request, response, null, "Erro: Já existe um dentista com este CPF ou CRO cadastrado.", "dentista_alterar.jsp");
 				}catch (Exception e) {
 					mensagem = "Ocorreu algum erro ao alterar o(a) dentista.";
 					request.setAttribute("msg", mensagem);

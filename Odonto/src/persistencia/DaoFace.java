@@ -23,32 +23,38 @@ public class DaoFace {
 		transaction = session.beginTransaction();
 	}	
 	
+	public void doRollBack() {
+		transaction.rollback();
+		closeSession();
+	}
+	
+	public void closeSession(){
+		session.flush();
+		session.close();
+	}
+	
 	public void cadastrarFace(Face face) throws Exception{
-			session.persist(face);
-			transaction.commit();
-			session.flush();
-			session.close();
+		session.persist(face);
+		transaction.commit();
+		closeSession();
 	}
 
 	public void alterarFace(Face face) throws Exception{
-			session.update(face);
-			transaction.commit();
-			session.flush();
-			session.close();
+		session.update(face);
+		transaction.commit();
+		closeSession();
 	}
 
 	public void excluirFace(Face face) throws Exception{
-			session.delete(face);
-			transaction.commit();
-			session.flush();
-			session.close();
+		session.delete(face);
+		transaction.commit();
+		closeSession();
 	}
 
 	public Face pesquisarFacePorNome(Face face) throws Exception{
 		Criteria cr = session.createCriteria(Face.class).add(Restrictions.eq("nomeFace", face.getNomeFace()));
 		Face f = (Face) cr.uniqueResult();
-		session.flush();
-		session.close();
+		closeSession();
 		return f;
 	}
 
@@ -56,8 +62,7 @@ public class DaoFace {
 		List<Face> lista = null;
 		Criteria cr = session.createCriteria(Face.class);
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
 }

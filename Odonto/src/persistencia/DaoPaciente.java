@@ -23,40 +23,45 @@ public class DaoPaciente {
 		transaction = session.beginTransaction();
 	}	
 	
+	public void doRollBack() {
+		transaction.rollback();
+		closeSession();
+	}
+	
+	public void closeSession(){
+		session.flush();
+		session.close();
+	}
+	
 	public void cadastrarPaciente(Paciente paciente) throws Exception{
 		session.persist(paciente);
 		transaction.commit();
-		session.flush();
-		session.close();
+		closeSession();
 	}
 
 	public void alterarPaciente(Paciente paciente) throws Exception{
 		session.update(paciente);
 		transaction.commit();
-		session.flush();
-		session.close();
+		closeSession();
 	}
 
 	public void excluirPaciente(Paciente paciente) throws Exception{
 		session.delete(paciente);
 		transaction.commit();
-		session.flush();
-		session.close();
+		closeSession();
 	}
 	
 	public Paciente pesquisarPacientePorNome(Paciente paciente) throws Exception{
 		Criteria cr = session.createCriteria(Paciente.class).add(Restrictions.eq("nomeUsuario", paciente.getNomeUsuario()));
 		Paciente p = (Paciente)cr.uniqueResult();
-		session.flush();
-		session.close();
+		closeSession();
 		return p;
 	}
 
 	public Paciente pesquisarPacientePorId(Paciente paciente) throws Exception{
 		Criteria cr = session.createCriteria(Paciente.class).add(Restrictions.eq("idUsuario", paciente.getIdUsuario()));
 		Paciente p = (Paciente)cr.uniqueResult();
-		session.flush();
-		session.close();
+		closeSession();
 		return p;
 	}
 	
@@ -64,8 +69,7 @@ public class DaoPaciente {
 		ArrayList<Paciente> lista = null;
 		Criteria cr = session.createCriteria(Paciente.class);
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
 }

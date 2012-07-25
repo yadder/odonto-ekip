@@ -24,40 +24,45 @@ public class DaoProcedimento {
 		transaction = session.beginTransaction();
 	}	
 	
+	public void doRollBack() {
+		transaction.rollback();
+		closeSession();
+	}
+	
+	public void closeSession(){
+		session.flush();
+		session.close();
+	}
+	
 	public void cadastrarProcedimento(Procedimento procedimento) throws Exception, Exception{
 			session.persist(procedimento);
 			transaction.commit();
-			session.flush();
-			session.close();
+			closeSession();
 	}
 
 	public void alterarProcedimento(Procedimento procedimento) throws Exception{
 			session.update(procedimento);
 			transaction.commit();
-			session.flush();
-			session.close();
+			closeSession();
 	}
 	
 	public void excluirProcedimento(Procedimento procedimento) throws Exception{
 			session.delete(procedimento);
 			transaction.commit();
-			session.flush();
-			session.close();
+			closeSession();
 	}
 
 	public Procedimento pesquisarProcedimentoPorDescricao(Procedimento procedimento) throws Exception{
 		Criteria cr = session.createCriteria(Procedimento.class).add(Restrictions.eq("descricaoProcedimento",procedimento.getDescricaoProcedimento()));
 		Procedimento p = (Procedimento)cr.uniqueResult();
-		session.flush();
-		session.close();
+		closeSession();
 		return p;
 	}
 	
 	public Procedimento pesquisarProcedimentoPorDescricaoEConvenio(Procedimento procedimento) throws Exception{
 		Criteria cr = session.createCriteria(Procedimento.class).add(Restrictions.eq("descricaoProcedimento",procedimento.getDescricaoProcedimento())).add(Restrictions.eq("convenio",procedimento.getConvenio()));
 		Procedimento p = (Procedimento)cr.uniqueResult();
-		session.flush();
-		session.close();
+		closeSession();
 		return p;
 	}
 	
@@ -65,8 +70,7 @@ public class DaoProcedimento {
 	public Procedimento pesquisarProcedimentoPorId(Procedimento procedimento) throws Exception{
 		Criteria cr = session.createCriteria(Procedimento.class).add(Restrictions.eq("idProcedimento",procedimento.getIdProcedimento()));
 		Procedimento p = (Procedimento)cr.uniqueResult();
-		session.flush();
-		session.close();
+		closeSession();
 		return p;
 	}
 	
@@ -74,8 +78,7 @@ public class DaoProcedimento {
 		List<Procedimento> lista = null;
 		Criteria cr = session.createCriteria(Procedimento.class).add(Restrictions.eq("convenio",convenio));
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
 
@@ -83,9 +86,7 @@ public class DaoProcedimento {
 		List<Procedimento> lista = null;
 		Criteria cr = session.createCriteria(Procedimento.class);
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
-
 }

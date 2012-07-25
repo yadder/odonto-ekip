@@ -3,7 +3,7 @@ package util;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
-public class HibernateUtil {
+public class REMOVER_HibernateUtil {
 
 	private static final SessionFactory sessionFactory;
 	

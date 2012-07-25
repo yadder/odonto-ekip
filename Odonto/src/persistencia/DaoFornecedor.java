@@ -23,32 +23,38 @@ public class DaoFornecedor {
 		transaction = session.beginTransaction();
 	}		
 
+	public void doRollBack() {
+		transaction.rollback();
+		closeSession();
+	}
+	
+	public void closeSession(){
+		session.flush();
+		session.close();
+	}
+	
 	public void cadastrarFornecedor(Fornecedor fornecedor) throws Exception{
-			session.persist(fornecedor);
-			transaction.commit();
-			session.flush();
-			session.close();
+		session.persist(fornecedor);
+		transaction.commit();
+		closeSession();
 	}
 
 	public void alterarFornecedor(Fornecedor fornecedor) throws Exception{
-			session.update(fornecedor);
-			transaction.commit();
-			session.flush();
-			session.close();
+		session.update(fornecedor);
+		transaction.commit();
+		closeSession();
 	}
 
 	public void excluirFornecedor(Fornecedor fornecedor) throws Exception{
-			session.delete(fornecedor);
-			transaction.commit();
-			session.flush();
-			session.close();
+		session.delete(fornecedor);
+		transaction.commit();
+		closeSession();
 	}
 
 	public Fornecedor pesquisarFornecedorPorNome(Fornecedor fornecedor) throws Exception{
 		Criteria cr = session.createCriteria(Fornecedor.class).add(Restrictions.eq("nomeFornecedor", fornecedor.getNomeFornecedor()));
 		Fornecedor f = (Fornecedor)cr.uniqueResult();
-		session.flush();
-		session.close();
+		closeSession();
 		return f;
 	}
 
@@ -56,8 +62,7 @@ public class DaoFornecedor {
 		List<Fornecedor> lista = null;
 		Criteria cr = session.createCriteria(Fornecedor.class);
 		lista = (ArrayList)cr.list();
-		session.flush();
-		session.close();
+		closeSession();
 		return lista;
 	}
 }
