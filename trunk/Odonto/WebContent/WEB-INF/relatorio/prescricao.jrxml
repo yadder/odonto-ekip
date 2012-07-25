@@ -24,14 +24,14 @@
 				<reportElement positionType="FixRelativeToBottom" x="0" y="51" width="555" height="1"/>
 			</line>
 			<staticText>
-				<reportElement x="68" y="11" width="424" height="35"/>
+				<reportElement x="65" y="12" width="424" height="35"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="20" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PRESCRIÇÃO]]></text>
 			</staticText>
 			<image>
-				<reportElement x="1" y="11" width="180" height="38"/>
+				<reportElement x="0" y="11" width="180" height="38"/>
 				<imageExpression class="java.lang.String"><![CDATA["C:\\TCC\\trunk\\Odonto\\WebContent\\arquivos\\odontoEkip.jpg"]]></imageExpression>
 			</image>
 		</band>
@@ -88,7 +88,7 @@
 	<pageFooter>
 		<band>
 			<textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
-				<reportElement key="textField" x="444" y="-121" width="109" height="19" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement key="textField" x="446" y="0" width="109" height="19" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>

@@ -25,7 +25,7 @@
 		<fieldDescription><![CDATA[convenio]]></fieldDescription>
 	</field>
 	<sortField name="dataFimOdontograma"/>
-	<filterExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}.get( Paciente )]]></filterExpression>
+	<filterExpression><![CDATA[]]></filterExpression>
 	<background>
 		<band/>
 	</background>
@@ -38,14 +38,14 @@
 				<reportElement positionType="FixRelativeToBottom" x="0" y="51" width="555" height="1"/>
 			</line>
 			<staticText>
-				<reportElement x="65" y="13" width="424" height="35"/>
-				<textElement textAlignment="Center">
+				<reportElement x="65" y="12" width="424" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="20" isBold="true"/>
 				</textElement>
 				<text><![CDATA[RELATÓRIO DE ODONTOGRAMAS]]></text>
 			</staticText>
 			<image>
-				<reportElement x="1" y="11" width="180" height="38"/>
+				<reportElement x="0" y="11" width="180" height="38"/>
 				<imageExpression class="java.lang.String"><![CDATA["C:\\TCC\\trunk\\Odonto\\WebContent\\arquivos\\odontoEkip.jpg"]]></imageExpression>
 			</image>
 		</band>
@@ -101,11 +101,6 @@
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{paciente}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="342" y="0" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{convenio}]]></textFieldExpression>
-			</textField>
 		</band>
 	</detail>
 	<columnFooter>
@@ -151,11 +146,6 @@
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="270" y="12" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{convenio}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>

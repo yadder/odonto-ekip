@@ -19,7 +19,7 @@
 	<title>
 		<band height="58">
 			<image>
-				<reportElement x="1" y="12" width="180" height="38"/>
+				<reportElement x="0" y="12" width="180" height="38"/>
 				<imageExpression class="java.lang.String"><![CDATA["C:\\TCC\\trunk\\Odonto\\WebContent\\arquivos\\odontoEkip.jpg"]]></imageExpression>
 			</image>
 			<line>
@@ -29,7 +29,7 @@
 				<reportElement x="0" y="52" width="555" height="1"/>
 			</line>
 			<staticText>
-				<reportElement x="68" y="12" width="424" height="35"/>
+				<reportElement x="65" y="12" width="424" height="35"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="20" isBold="true"/>
 				</textElement>
