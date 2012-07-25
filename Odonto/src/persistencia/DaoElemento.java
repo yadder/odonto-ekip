@@ -7,19 +7,23 @@ import modelo.Elemento;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import util.HibernateUtil;
-
 public class DaoElemento {
 
+	private SessionFactory fabrica;
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public void cadastrarElemento(Elemento elemento) throws Exception{
-		session = HibernateUtil.getSessionFactory().openSession();
+	public DaoElemento(){
+		fabrica = Fabrica.obtemFabrica();
+		session = fabrica.openSession();
 		transaction = session.beginTransaction();
+	}	
+	
+	public void cadastrarElemento(Elemento elemento) throws Exception{
 		session.persist(elemento);
 		transaction.commit();
 		session.flush();
@@ -27,8 +31,6 @@ public class DaoElemento {
 	}
 
 	public void alterarElemento(Elemento elemento) throws Exception{
-		session = HibernateUtil.getSessionFactory().openSession();
-		transaction = session.beginTransaction();
 		session.update(elemento);
 		transaction.commit();
 		session.flush();
@@ -36,8 +38,6 @@ public class DaoElemento {
 	}
 
 	public void excluirElemento(Elemento elemento) throws Exception{
-		session = HibernateUtil.getSessionFactory().openSession();
-		transaction = session.beginTransaction();
 		session.delete(elemento);
 		transaction.commit();
 		session.flush();
@@ -45,7 +45,6 @@ public class DaoElemento {
 	}
 
 	public Elemento pesquisarElementoPorNome(Elemento elemento) throws Exception{
-		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Elemento.class).add(Restrictions.eq("nomeElemento", elemento.getNomeElemento()));
 		Elemento e = (Elemento) cr.uniqueResult();
 		session.flush();
@@ -55,7 +54,6 @@ public class DaoElemento {
 
 	public List<Elemento> pesquisarTodosElemento() throws Exception{
 		List<Elemento> lista = null;
-		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Elemento.class);
 		lista = (ArrayList)cr.list();
 		session.flush();

@@ -7,19 +7,23 @@ import modelo.Dentista;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import util.HibernateUtil;
-
 public class DaoDentista {
 
+	private SessionFactory fabrica;
 	private Session session = null;
 	private Transaction transaction = null;
 	
-	public void cadastrarDentista(Dentista dentista) throws Exception{
-		session = HibernateUtil.getSessionFactory().openSession();
+	public DaoDentista(){
+		fabrica = Fabrica.obtemFabrica();
+		session = fabrica.openSession();
 		transaction = session.beginTransaction();
+	}	
+	
+	public void cadastrarDentista(Dentista dentista) throws Exception{
 		session.persist(dentista);
 		transaction.commit();
 		session.flush();
@@ -27,8 +31,6 @@ public class DaoDentista {
 	}
 
 	public void alterarDentista(Dentista dentista) throws Exception{
-		session = HibernateUtil.getSessionFactory().openSession();
-		transaction = session.beginTransaction();
 		session.update(dentista);
 		transaction.commit();
 		session.flush();
@@ -36,8 +38,6 @@ public class DaoDentista {
 	}
 
 	public void excluirDentista(Dentista dentista) throws Exception{
-		session = HibernateUtil.getSessionFactory().openSession();
-		transaction = session.beginTransaction();
 		session.delete(dentista);
 		transaction.commit();
 		session.flush();
@@ -45,7 +45,6 @@ public class DaoDentista {
 	}
 
 	public Dentista pesquisarDentistaPorNome(Dentista dentista) throws Exception{
-		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Dentista.class).add(Restrictions.eq("nomeUsuario", dentista.getNomeUsuario()));
 		Dentista d = (Dentista)cr.uniqueResult();
 		session.flush();
@@ -54,7 +53,6 @@ public class DaoDentista {
 	}
 	
 	public Dentista pesquisarDentistaPorId(Dentista dentista) throws Exception{
-		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Dentista.class).add(Restrictions.eq("idUsuario", dentista.getIdUsuario()));
 		Dentista d = (Dentista)cr.uniqueResult();
 		session.flush();
@@ -64,7 +62,6 @@ public class DaoDentista {
 
 	public List<Dentista> pesquisarTodosDentista() throws Exception{
 		List<Dentista> lista = null;
-		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria cr = session.createCriteria(Dentista.class);
 		lista = (ArrayList)cr.list();
 		session.flush();

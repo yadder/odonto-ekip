@@ -105,4 +105,5 @@ public class ConfiguraAtributo {
 		RequestDispatcher disp = request.getRequestDispatcher(url);
 		disp.forward(request, response);
 	}
+	
 }
