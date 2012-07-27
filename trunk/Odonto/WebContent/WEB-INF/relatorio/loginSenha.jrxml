@@ -1,101 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="loginSenha" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<subDataset name="dataset1"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="loginSenha" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="senhaUsuario" class="java.lang.String">
-		<fieldDescription><![CDATA[senhaUsuario]]></fieldDescription>
+	<field name="cpfUsuario" class="java.lang.String">
+		<fieldDescription><![CDATA[cpfUsuario]]></fieldDescription>
 	</field>
 	<field name="nomeUsuario" class="java.lang.String">
 		<fieldDescription><![CDATA[nomeUsuario]]></fieldDescription>
 	</field>
-	<field name="cpfUsuario" class="java.lang.String">
-		<fieldDescription><![CDATA[cpfUsuario]]></fieldDescription>
+	<field name="senhaUsuario" class="java.lang.String">
+		<fieldDescription><![CDATA[senhaUsuario]]></fieldDescription>
 	</field>
 	<background>
 		<band/>
 	</background>
 	<title>
-		<band height="58">
-			<image>
-				<reportElement x="0" y="12" width="180" height="38"/>
-				<imageExpression class="java.lang.String"><![CDATA["C:\\TCC\\trunk\\Odonto\\WebContent\\arquivos\\odontoEkip.jpg"]]></imageExpression>
+		<band height="63">
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+				<reportElement x="70" y="2" width="414" height="59"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\TCC\\trunk\\Odonto\\WebContent\\arquivos\\logo_horizontal.jpg"]]></imageExpression>
 			</image>
-			<line>
-				<reportElement x="0" y="9" width="555" height="1"/>
-			</line>
-			<line>
-				<reportElement x="0" y="52" width="555" height="1"/>
-			</line>
-			<staticText>
-				<reportElement x="65" y="12" width="424" height="35"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="20" isBold="true"/>
-				</textElement>
-				<text><![CDATA[LOGIN E SENHA ]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="116" y="120" width="305" height="20"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{senhaUsuario}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="116" y="66" width="305" height="20"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{nomeUsuario}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="7" y="120" width="100" height="20"/>
-				<textElement>
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Senha:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="7" y="66" width="100" height="20"/>
-				<textElement>
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Usuário:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="7" y="94" width="100" height="20"/>
-				<textElement>
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Login:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="116" y="94" width="305" height="20"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{cpfUsuario}]]></textFieldExpression>
-			</textField>
 		</band>
 	</title>
 	<pageHeader>
-		<band/>
+		<band height="35">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="35"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="63" y="0" width="428" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LOGIN E SENHA]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band/>
 	</columnHeader>
 	<detail>
-		<band height="87"/>
+		<band height="92">
+			<textField>
+				<reportElement x="62" y="38" width="465" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cpfUsuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="62" y="66" width="465" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{senhaUsuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="62" y="10" width="465" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nomeUsuario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="10" width="57" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuário:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="38" width="57" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Login:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="66" width="57" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Senha:]]></text>
+			</staticText>
+		</band>
 	</detail>
 	<columnFooter>
 		<band/>
 	</columnFooter>
 	<pageFooter>
-		<band height="22">
+		<band height="21">
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="454" y="2" width="100" height="20"/>
-				<textElement/>
+				<reportElement x="455" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>

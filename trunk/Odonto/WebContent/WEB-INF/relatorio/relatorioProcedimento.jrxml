@@ -19,24 +19,73 @@
 	<variable name="codigoProcedimento_1" class="java.lang.Integer" resetType="Column" calculation="Count">
 		<variableExpression><![CDATA[$F{codigoProcedimento}]]></variableExpression>
 	</variable>
+	<variable name="codigoProcedimento_2" class="java.lang.Integer" resetType="Group" resetGroup="convenio" calculation="Count">
+		<variableExpression><![CDATA[$F{codigoProcedimento}]]></variableExpression>
+	</variable>
+	<group name="convenio">
+		<groupExpression><![CDATA[$F{convenio}]]></groupExpression>
+		<groupHeader>
+			<band height="22">
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="70" height="20" backcolor="#CCCCFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Convênio:]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="69" y="0" width="486" height="20" backcolor="#CCCCFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[""+$F{convenio}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="22">
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="47" height="20" backcolor="#CCCCFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total de procedimentos:]]></text>
+				</staticText>
+				<textField pattern="###0">
+					<reportElement mode="Opaque" x="47" y="0" width="36" height="20" backcolor="#CCCCFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{codigoProcedimento_2}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="83" y="0" width="472" height="20" backcolor="#CCCCFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[procedimentos]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
 	<background>
 		<band/>
 	</background>
 	<title>
-		<band height="66">
+		<band height="62">
 			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
-				<reportElement x="70" y="4" width="414" height="59"/>
+				<reportElement x="70" y="2" width="414" height="59"/>
 				<imageExpression class="java.lang.String"><![CDATA["C:\\TCC\\trunk\\Odonto\\WebContent\\arquivos\\logo_horizontal.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="49">
+		<band height="41">
 			<rectangle>
-				<reportElement x="0" y="7" width="555" height="35"/>
+				<reportElement x="0" y="3" width="555" height="35"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="63" y="7" width="428" height="35"/>
+				<reportElement x="63" y="3" width="428" height="35"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="20" isBold="true"/>
 				</textElement>
@@ -45,65 +94,48 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="52">
+		<band height="27">
 			<rectangle>
-				<reportElement x="0" y="4" width="555" height="20"/>
+				<reportElement x="0" y="3" width="555" height="20"/>
 			</rectangle>
-			<line>
-				<reportElement x="0" y="49" width="555" height="1"/>
-			</line>
 			<staticText>
-				<reportElement mode="Opaque" x="144" y="26" width="109" height="20"/>
-				<textElement verticalAlignment="Bottom">
+				<reportElement mode="Opaque" x="144" y="4" width="109" height="18"/>
+				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Descrição]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="26" width="100" height="20"/>
-				<textElement verticalAlignment="Bottom">
+				<reportElement mode="Opaque" x="1" y="4" width="100" height="18"/>
+				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Código]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="455" y="26" width="100" height="20"/>
-				<textElement verticalAlignment="Bottom">
+				<reportElement mode="Opaque" x="455" y="4" width="100" height="18"/>
+				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Valor]]></text>
 			</staticText>
-			<staticText>
-				<reportElement mode="Transparent" x="0" y="5" width="64" height="20" backcolor="#999999"/>
-				<textElement textAlignment="Justified" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Convênio: ]]></text>
-			</staticText>
-			<textField>
-				<reportElement mode="Transparent" x="75" y="5" width="170" height="20" backcolor="#999999"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="14" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{convenio}]]></textFieldExpression>
-			</textField>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="22">
-			<textField pattern="###0.00">
-				<reportElement x="3" y="0" width="113" height="20"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{codigoProcedimento}]]></textFieldExpression>
-			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="144" y="0" width="301" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{descricaoProcedimento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="3" y="0" width="113" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{codigoProcedimento}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00">
 				<reportElement x="455" y="0" width="100" height="20"/>
@@ -115,22 +147,7 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="22">
-			<textField>
-				<reportElement x="132" y="0" width="98" height="20"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{codigoProcedimento_1}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="0" y="0" width="131" height="20"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Total de procedimentos:]]></text>
-			</staticText>
-		</band>
+		<band/>
 	</columnFooter>
 	<pageFooter>
 		<band height="22">
@@ -142,7 +159,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["Página "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement x="515" y="0" width="40" height="20"/>
@@ -153,7 +170,7 @@
 			</textField>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="0" y="0" width="83" height="20"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
