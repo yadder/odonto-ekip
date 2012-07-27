@@ -29,13 +29,13 @@
 			<td align="center">${colecao.elemento}</td>
 			<td align="center">${colecao.procedimento}</td>
 			<td align="center">${colecao.face}</td>
-			<td align="center">${colecao.statusAutorizacao}</td>									
+			<td align="center">${colecao.statusAutorizacao}</td>
 			<td align="center"><a href="ServletOdontograma?btn=Excluir&index=${colecao.idOdontogramaProcedimento}">Excluir</a></td>
 		</tr>	
 		</c:forEach>
 	</table>
 	<form name="formBtn" method="post" action="ServletOdontograma">
-		<input type="submit" name="btn" value="Voltar"/>
+		<input type="submit" name="btn" value="Voltar ao odontograma"/>
 	</form>	
 </center>
 </div>

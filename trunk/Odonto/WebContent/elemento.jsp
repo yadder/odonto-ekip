@@ -11,13 +11,13 @@
 <h1>:: Cadastro de elemento</h1>
 <div id="msg">
 	<h5 class="information">${msg}</h5>
+	<h5 class="error">${msgE}</h5>
 </div>
-
 <form name="formElemento" method="post" action="ServletElemento">
 	<table>
 		<tr>
 			<td align="right">Nome do elemento:</td>
-			<td><input type="text" name="nomeElemento" value="${elemento.nomeElemento}" size="20" maxlength="2" /><input type="submit" name="btn" value="Pesquisar" />
+			<td><input type="text" name="nomeElemento" size="20" maxlength="2" /><input type="submit" name="btn" value="Pesquisar" />
 			</td>
 		</tr>
 		<tr>

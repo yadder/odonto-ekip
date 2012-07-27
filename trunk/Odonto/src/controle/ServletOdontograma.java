@@ -42,6 +42,8 @@ public class ServletOdontograma extends HttpServlet {
 		
 		if(btn.equals("Voltar")){
 			ca.sendRedirect(request, response, null, null, "principal.jsp");
+		}else if(btn.equals("Voltar ao odontograma")){
+			ca.sendRedirect(request, response, null, null, "novo_odontograma.jsp");
 		}else if(btn.equals("Pesquisar Paciente")){
 			if (validaNome(((String)request.getParameter("nomePaciente")))){
 				Paciente paciente = new Paciente();
@@ -111,8 +113,7 @@ public class ServletOdontograma extends HttpServlet {
 		}else if(btn.equals("Cancelar")){
 			objetoSessao.removeAttribute("listaTratamento");
 			ca.sendRedirect(request, response, null, null, "novo_odontograma.jsp");
-		}
-				
+		}				
 		else if(btn.equals("Gravar procedimento")){
 			try{
 				DaoOdontogramaProcedimento daoOdontogramaProcedimento = new DaoOdontogramaProcedimento();
@@ -159,9 +160,22 @@ public class ServletOdontograma extends HttpServlet {
 			}catch(Exception e){
 				ca.sendRedirect(request, response, null, "Erro ao buscar os procedimentos deste odontograma." +e.getMessage(), "novo_odontograma.jsp");
 			}
-		}
-		
-		else if(btn.equals("Gravar odontograma")){
+		}else if(btn.equals("Excluir")){
+			long idOdontogramaProcedimento = Long.parseLong((String)request.getParameter("index"));
+			OdontogramaProcedimento odontogramaProcedimento = new OdontogramaProcedimento();
+			odontogramaProcedimento = po.getOdontogramaProcedimentoPorId(idOdontogramaProcedimento);
+			if (odontogramaProcedimento!=null){
+				DaoOdontogramaProcedimento daoOdontogramaProcedimento = new DaoOdontogramaProcedimento();
+				try{
+					daoOdontogramaProcedimento.excluirOdontogramaProcedimento(odontogramaProcedimento);
+					ca.sendRedirect(request, response, null, null, "ServletOdontograma?btn=Visualizar tratamento");
+				}catch (Exception e) {
+					ca.sendRedirect(request, response, null, "Erro ao excluir o procedimento. "+e.getMessage(), "lista_odontograma.jsp"); 
+				}
+			}else{
+				ca.sendRedirect(request, response, null, "Procedimento não encontrado. ", "lista_odontograma.jsp");
+			}
+		}else if(btn.equals("Gravar odontograma")){
 			odontograma = (Odontograma)objetoSessao.getAttribute("odontograma");
 			DaoOdontograma daoOdontograma = new DaoOdontograma();
 			
