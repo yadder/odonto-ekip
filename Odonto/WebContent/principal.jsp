@@ -15,7 +15,8 @@
 </div>
 
 	<h6><font color="red">À fazer:</font></h6>
-	<a href=#>Botao excluir procedimento (Odontograma) esta com bug</a><br/>
+	<a href=#>Listar pagamentos pendentes</a><br/>
+	<a href=#>Listar pagamentos realizados por período</a><br/>
 	<a href=#>Verificação inicial</a><br/>
 	<a href=#>Conceder acesso</a><br/>
 	<a href=#>Tratar busca de procedimento por procedimento</a><br/>

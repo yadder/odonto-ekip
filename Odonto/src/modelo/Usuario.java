@@ -43,13 +43,6 @@ public class Usuario implements Serializable {
     private Date dataNascimentoUsuario;
     @Column(name = "sexo_usuario", nullable = false, length = 1)
     private String sexoUsuario;
-
-    @ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="tb_usuario_acesso",
-				joinColumns={@JoinColumn(name="id_usuario")},
-				inverseJoinColumns={@JoinColumn(name="id_acesso")})
-	private Set<Acesso> acesso;
-    
     
     public Usuario() {
     }
@@ -148,13 +141,6 @@ public class Usuario implements Serializable {
         this.sexoUsuario = sexoUsuario;
     }
 
-    public Set<Acesso> getAcesso() {
-		return acesso;
-	}
-	public void setAcesso(Set<Acesso> acesso) {
-		this.acesso = acesso;
-	}
-	
     @Override
     public String toString() {
     	return nomeUsuario;

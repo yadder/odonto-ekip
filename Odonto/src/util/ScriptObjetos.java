@@ -22,8 +22,12 @@ public class ScriptObjetos {
 	
 	public static void main(String[] args) {
 		ConfiguraAtributo ca = new ConfiguraAtributo();
+
+		
+		
 		Convenio conv = new Convenio();
 		Convenio conv1 = new Convenio();
+
 		try{
 			System.out.println("--- Inserindo convênios");
 			Convenio convenio1 = new Convenio("AMIL");
@@ -34,17 +38,23 @@ public class ScriptObjetos {
 			Convenio convenio6 = new Convenio("PARTICULAR");
 			DaoConvenio daoConvenio = new DaoConvenio();
 			daoConvenio.cadastrarConvenio(convenio1);
+			daoConvenio = new DaoConvenio();
 			daoConvenio.cadastrarConvenio(convenio2);
+			daoConvenio = new DaoConvenio();
 			daoConvenio.cadastrarConvenio(convenio3);
+			daoConvenio = new DaoConvenio();
 			daoConvenio.cadastrarConvenio(convenio4);
+			daoConvenio = new DaoConvenio();
 			daoConvenio.cadastrarConvenio(convenio5);
+			daoConvenio = new DaoConvenio();
 			daoConvenio.cadastrarConvenio(convenio6);
 			conv = convenio6;
 			conv1 = convenio2;
 			System.out.println("--- Convênios cadastrados");
 		}catch (Exception e) {
-			System.out.println("Erro ao inserir convênios...");
+			System.out.println("Erro ao inserir convênios..." +e.getMessage());
 		}
+
 /////////////////////////////////////////////////////
 			
 		try{
@@ -58,6 +68,7 @@ public class ScriptObjetos {
 			daoProcedimento.cadastrarProcedimento(procedimento);
 			
 			procedimento = new Procedimento();
+			daoProcedimento = new DaoProcedimento();
 			procedimento.setConvenio(conv);
 			procedimento.setCodigoProcedimento("1024");
 			procedimento.setDescricaoProcedimento("Extração de dentes decíduos");
@@ -65,6 +76,7 @@ public class ScriptObjetos {
 			daoProcedimento.cadastrarProcedimento(procedimento);
 			
 			procedimento = new Procedimento();
+			daoProcedimento = new DaoProcedimento();
 			procedimento.setConvenio(conv);
 			procedimento.setCodigoProcedimento("1032");
 			procedimento.setDescricaoProcedimento("Extração simples");
@@ -72,6 +84,7 @@ public class ScriptObjetos {
 			daoProcedimento.cadastrarProcedimento(procedimento);
 			
 			procedimento = new Procedimento();
+			daoProcedimento = new DaoProcedimento();
 			procedimento.setConvenio(conv);
 			procedimento.setCodigoProcedimento("1123");
 			procedimento.setDescricaoProcedimento("Remoção de tórus");
@@ -79,6 +92,7 @@ public class ScriptObjetos {
 			daoProcedimento.cadastrarProcedimento(procedimento);
 			
 			procedimento = new Procedimento();
+			daoProcedimento = new DaoProcedimento();
 			procedimento.setConvenio(conv1);
 			procedimento.setCodigoProcedimento("1016");
 			procedimento.setDescricaoProcedimento("Ulotomia / Ulectomia");
@@ -86,6 +100,7 @@ public class ScriptObjetos {
 			daoProcedimento.cadastrarProcedimento(procedimento);
 			
 			procedimento = new Procedimento();
+			daoProcedimento = new DaoProcedimento();
 			procedimento.setConvenio(conv1);
 			procedimento.setCodigoProcedimento("1024");
 			procedimento.setDescricaoProcedimento("Extração de dentes decíduos");
@@ -93,6 +108,7 @@ public class ScriptObjetos {
 			daoProcedimento.cadastrarProcedimento(procedimento);
 			
 			procedimento = new Procedimento();
+			daoProcedimento = new DaoProcedimento();
 			procedimento.setConvenio(conv1);
 			procedimento.setCodigoProcedimento("1032");
 			procedimento.setDescricaoProcedimento("Extração simples");
@@ -100,6 +116,7 @@ public class ScriptObjetos {
 			daoProcedimento.cadastrarProcedimento(procedimento);
 			
 			procedimento = new Procedimento();
+			daoProcedimento = new DaoProcedimento();
 			procedimento.setConvenio(conv1);
 			procedimento.setCodigoProcedimento("1123");
 			procedimento.setDescricaoProcedimento("Remoção de tórus");
@@ -109,17 +126,16 @@ public class ScriptObjetos {
 			
 			System.out.println("--- Procedimentos cadastrados");
 		}catch (Exception e) {
-			System.out.println("Erro ao inserir procedimentos...");
+			System.out.println("Erro ao inserir procedimentos..." + e.getMessage());
 		}
 		
 		
 /////////////////////////////////////////////////////
 		try{
 			System.out.println("--- Inserindo elemento");
-			
-			DaoElemento daoElemento = new DaoElemento();
 			for (int i=11; i<49;i++){
 				Elemento elemento = new Elemento(""+i);
+				DaoElemento daoElemento = new DaoElemento();				
 				daoElemento.cadastrarElemento(elemento);
 			}
 			System.out.println("--- Elementos cadastrados");
@@ -136,9 +152,13 @@ public class ScriptObjetos {
 			Face face4 = new Face("DISTAL");
 			Face face5 = new Face("OCLUSAL OU INCISAL");
 			daoFace.cadastrarFace(face1);
+			daoFace = new DaoFace();
 			daoFace.cadastrarFace(face2);
+			daoFace = new DaoFace();
 			daoFace.cadastrarFace(face3);
+			daoFace = new DaoFace();
 			daoFace.cadastrarFace(face4);
+			daoFace = new DaoFace();
 			daoFace.cadastrarFace(face5);
 			System.out.println("--- Faces cadastradas");
 		}catch (Exception e) {
@@ -163,18 +183,31 @@ public class ScriptObjetos {
 			Acesso acesso13 = new Acesso("TelaPagamento");
 			Acesso acesso14 = new Acesso("TelaPrescricao");
 			daoAcesso.cadastrarAcesso(acesso1);
+			daoAcesso = new DaoAcesso();
 			daoAcesso.cadastrarAcesso(acesso2);
+			daoAcesso = new DaoAcesso();
 			daoAcesso.cadastrarAcesso(acesso3);
+			daoAcesso = new DaoAcesso();
 			daoAcesso.cadastrarAcesso(acesso4);
+			daoAcesso = new DaoAcesso();
 			daoAcesso.cadastrarAcesso(acesso5);
+			daoAcesso = new DaoAcesso();
 			daoAcesso.cadastrarAcesso(acesso6);
+			daoAcesso = new DaoAcesso();
 			daoAcesso.cadastrarAcesso(acesso7);
+			daoAcesso = new DaoAcesso();
 			daoAcesso.cadastrarAcesso(acesso8);
+			daoAcesso = new DaoAcesso();
 			daoAcesso.cadastrarAcesso(acesso9);
+			daoAcesso = new DaoAcesso();
 			daoAcesso.cadastrarAcesso(acesso10);
+			daoAcesso = new DaoAcesso();
 			daoAcesso.cadastrarAcesso(acesso11);
+			daoAcesso = new DaoAcesso();
 			daoAcesso.cadastrarAcesso(acesso12);
+			daoAcesso = new DaoAcesso();
 			daoAcesso.cadastrarAcesso(acesso13);
+			daoAcesso = new DaoAcesso();
 			daoAcesso.cadastrarAcesso(acesso14);
 			System.out.println("--- Acessos cadastrados");
 		}catch (Exception e) {
@@ -248,6 +281,8 @@ public class ScriptObjetos {
 			System.out.println("Erro ao inserir paciente...");
 		}
 /////////////////////////////////////////////////////
+
+ 
 	}
 
 }
