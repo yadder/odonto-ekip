@@ -26,6 +26,7 @@
     <mapping class="modelo.Prescricao"/>
     <mapping class="modelo.Procedimento"/>
     <mapping class="modelo.Acesso"/>
+    <mapping class="modelo.UsuarioAcesso"/>
     
  </session-factory>
 </hibernate-configuration>

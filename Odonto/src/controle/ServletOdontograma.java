@@ -176,29 +176,29 @@ public class ServletOdontograma extends HttpServlet {
 				ca.sendRedirect(request, response, null, "Procedimento não encontrado. ", "lista_odontograma.jsp");
 			}
 		}else if(btn.equals("Gravar odontograma")){
-			odontograma = (Odontograma)objetoSessao.getAttribute("odontograma");
-			DaoOdontograma daoOdontograma = new DaoOdontograma();
-			
-			// mudar o status para "em andamento"
-			odontograma.setStatusOdontograma("EM ANDAMENTO");
-			
-			// calcular o valor do odontograma
 			DaoOdontogramaProcedimento daoOdontogramaProcedimento = new DaoOdontogramaProcedimento();
+			DaoOdontograma daoOdontograma = new DaoOdontograma();
 			List<OdontogramaProcedimento> listaTratamento = new ArrayList<OdontogramaProcedimento>();
-			try{
-				listaTratamento = daoOdontogramaProcedimento.pesquisarOdontogramaProcedimentoPorOdontograma(odontograma);
-				double valor = 0.;
-				for (OdontogramaProcedimento o : listaTratamento) {
-					valor = valor + o.getProcedimento().getValorProcedimento();
+			odontograma = (Odontograma)objetoSessao.getAttribute("odontograma");
+			if (odontograma!=null){
+				try{
+					odontograma.setStatusOdontograma("EM ANDAMENTO");
+					listaTratamento = daoOdontogramaProcedimento.pesquisarOdontogramaProcedimentoPorOdontograma(odontograma);
+					// calcular o valor do odontograma
+					if (!listaTratamento.isEmpty()){
+						double valor = 0.;
+						for (OdontogramaProcedimento op : listaTratamento) {
+							valor = valor + op.getProcedimento().getValorProcedimento();
+						}
+						odontograma.setValorOdontograma(valor);
+						// gravar odontograma			
+						daoOdontograma.alterarOdontograma(odontograma);
+					}else{
+						ca.sendRedirect(request, response, null, "A lista de procedimentos esta vazia. ", "novo_odontograma.jsp");
+					}
+				}catch (Exception e) {
+					ca.sendRedirect(request, response, null, "Erro ao calcular e gravar o valor do odontograma. "+e.getMessage(), "novo_odontograma.jsp");
 				}
-				odontograma.setValorOdontograma(valor);
-			}catch (Exception e) {
-				ca.sendRedirect(request, response, null, "Erro ao calcular valor do odontograma. "+e.getMessage(), "novo_odontograma.jsp");
-			}			
-						
-			// gravar odontograma
-			try{
-				daoOdontograma.alterarOdontograma(odontograma);
 				objetoSessao.removeAttribute("listaFace");
 				objetoSessao.removeAttribute("pacienteNovoOdontograma");
 				objetoSessao.removeAttribute("listaProcedimento");
@@ -207,11 +207,8 @@ public class ServletOdontograma extends HttpServlet {
 				objetoSessao.removeAttribute("elemento");
 				objetoSessao.removeAttribute("dentista");
 				ca.sendRedirect(request, response, "Odontograma gravado com sucesso!", null, "principal.jsp");
-			}catch (Exception e) {
-				ca.sendRedirect(request, response, null, "Erro ao gravar odontograma. "+e.getMessage(), "novo_odontograma.jsp");
 			}
 		}
-				
 	}
 	
 	public boolean validaNome(String nome){
