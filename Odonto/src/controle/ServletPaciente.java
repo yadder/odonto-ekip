@@ -53,7 +53,7 @@ public class ServletPaciente extends HttpServlet {
 				DaoPaciente dao = new DaoPaciente();
 				try{					
 					dao.cadastrarPaciente(paciente);
-					ca.sendRedirect(request, response, "Paciente cadastrado(a) com sucesso!", null, "ServletPaciente?btn=Imprimir");					
+					ca.sendRedirect(request, response, null, null, "ServletPaciente?btn=Imprimir");					
 				}catch (AssertionFailure e) {
 					dao.doRollBack();
 					ca.sendRedirect(request, response, null, "Erro: Já existe um(a) paciente com este CPF cadastrado(a).", "paciente.jsp");
@@ -132,7 +132,7 @@ public class ServletPaciente extends HttpServlet {
 						JasperViewer.viewReport("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\loginSenha.jrprint", false, false);
 						jr=null;
 						objetoSessao.removeAttribute("paciente");
-						ca.sendRedirect(request, response, mensagem+"... Imprima login e senha do paciente.", null, "paciente.jsp");
+						ca.sendRedirect(request, response, "Paciente cadastrado(a) com sucesso! Imprima login e senha.", null, "paciente.jsp");
 					}else{
 						ca.sendRedirect(request, response, "Paciente cadastrado", "Erro ao imprimir login e senha", "paciente.jsp");
 					}					
