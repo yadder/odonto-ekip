@@ -29,7 +29,7 @@ function calculaParcela(){
 	document.getElementById("valorParcela").value = resultado;	
 }
 
-function verifica(){
+function soNumero(){
   if ((event.keyCode<44)||(event.keyCode>57)){
     if ((event.keyCode<96)||(event.keyCode>106)){
        alert("Somente números são permitidos");
