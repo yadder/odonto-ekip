@@ -45,21 +45,21 @@
 		<groupFooter>
 			<band height="22">
 				<staticText>
-					<reportElement mode="Opaque" x="0" y="0" width="47" height="20" backcolor="#CCCCFF"/>
+					<reportElement mode="Opaque" x="0" y="0" width="47" height="20" backcolor="#CCCCCC"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Times New Roman" size="12" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Total de procedimentos:]]></text>
 				</staticText>
 				<textField pattern="###0">
-					<reportElement mode="Opaque" x="47" y="0" width="36" height="20" backcolor="#CCCCFF"/>
+					<reportElement mode="Opaque" x="47" y="0" width="36" height="20" backcolor="#CCCCCC"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Times New Roman" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{codigoProcedimento_2}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement mode="Opaque" x="83" y="0" width="472" height="20" backcolor="#CCCCFF"/>
+					<reportElement mode="Opaque" x="83" y="0" width="472" height="20" backcolor="#CCCCCC"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Times New Roman" size="12" isBold="true"/>
 					</textElement>
