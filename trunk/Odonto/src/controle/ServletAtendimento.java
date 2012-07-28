@@ -59,6 +59,7 @@ public class ServletAtendimento extends HttpServlet {
 							if (listaTratamento.isEmpty()){
 								ca.sendRedirect(request, response, null, "Não existem procedimentos pendentes para este odontograma.", "pesquisar_paciente_atendimento.jsp");
 							}else{
+								objetoSessao.removeAttribute("listaTratamento");
 								objetoSessao.setAttribute("listaTratamento", listaTratamento);
 								ca.sendRedirect(request, response, null, null, "lista_odontograma_atendimento.jsp");
 							}
@@ -84,18 +85,26 @@ public class ServletAtendimento extends HttpServlet {
 						odontogramaProcedimento.setDataExecucaoProcedimento(new Date());
 						DaoOdontogramaProcedimento daoOdontogramaProcedimento = new DaoOdontogramaProcedimento();
 						try{							
-							daoOdontogramaProcedimento.alterarOdontogramaProcedimento(odontogramaProcedimento);							
+							daoOdontogramaProcedimento.alterarOdontogramaProcedimento(odontogramaProcedimento);
+							objetoSessao.removeAttribute("listaTratamento");
+							List<OdontogramaProcedimento> listaTratamento = new ArrayList<OdontogramaProcedimento>();
+							Odontograma odontograma = new Odontograma();
+							odontograma = (Odontograma)objetoSessao.getAttribute("odontograma");
+							daoOdontogramaProcedimento = new DaoOdontogramaProcedimento();
+							listaTratamento = daoOdontogramaProcedimento.pesquisarOdontogramaProcedimentoPorOdontograma(odontograma);
+							objetoSessao.setAttribute("listaTratamento", listaTratamento);
+							ca.sendRedirect(request, response, "Procedimento concluído com sucesso!", null, "lista_odontograma_atendimento.jsp");
 						}catch(Exception e){
 							ca.sendRedirect(request, response, null, "Erro ao gravar odontogramaProcedimento"+e.getMessage(), "lista_odontograma_atendimento.jsp");
 							e.printStackTrace();
 						}	
-						Odontograma odontograma = new Odontograma();
+			/*			Odontograma odontograma = new Odontograma();
 						odontograma = (Odontograma)objetoSessao.getAttribute("odontograma");
 						daoOdontogramaProcedimento = new DaoOdontogramaProcedimento();						
 						//verificar se existir procedimentos a serem feitos no odontograma
-						if (verificarPendenciaOdontograma(request, response, odontograma)){
-							List<OdontogramaProcedimento> listaTratamento = new ArrayList<OdontogramaProcedimento>();
+						if (getTratamentoPendente(odontograma)){
 							try{
+								List<OdontogramaProcedimento> listaTratamento = new ArrayList<OdontogramaProcedimento>();
 								listaTratamento = daoOdontogramaProcedimento.pesquisarOdontogramaProcedimentoPorOdontograma(odontograma);
 								objetoSessao.setAttribute("listaTratamento", listaTratamento);
 								ca.sendRedirect(request, response, "Procedimento concluído com sucesso!", null, "lista_odontograma_atendimento.jsp");
@@ -103,9 +112,10 @@ public class ServletAtendimento extends HttpServlet {
 								e.printStackTrace();
 							}							
 						}else{  //nao existe mais procedimentos pendentes no odontograma
-							finalizarAtendimentoOdontograma(request,response,odontograma);
+							finalizarAtendimentoOdontograma(odontograma);
+							ca.sendRedirect(request, response, "Tratamento concluído!", null, "principal.jsp");
 						}					
-							
+			*/				
 					}else{
 						ca.sendRedirect(request, response, null, "Este procedimento já foi realizado ou cancelado pelo plano.", "lista_odontograma_atendimento.jsp");
 					}	
@@ -115,43 +125,38 @@ public class ServletAtendimento extends HttpServlet {
 			}else{
 				ca.sendRedirect(request, response, null, "Erro ao buscar o odontogramaProcedimento.", "lista_odontograma_atendimento.jsp");
 			}	
+		}else if(btn.equals("Finalizar tratamento")){
+			Odontograma odontograma = new Odontograma();
+			odontograma = (Odontograma)objetoSessao.getAttribute("odontograma");
+			if (getTratamentoPendente(odontograma)){
+				ca.sendRedirect(request, response, null, "Conclua todos os procedimentos antes de finalizar o tratamento.", "lista_odontograma_atendimento.jsp");
+			}else{
+				finalizarAtendimentoOdontograma(odontograma);
+				ca.sendRedirect(request, response, "Tratamento concluído!", null, "ServletAtendimento?btn=Voltar");								
+			}
+			
 		}
-					
 	}
 	
-	public boolean verificarPendenciaOdontograma(HttpServletRequest request, HttpServletResponse response, Odontograma odontograma) throws ServletException, IOException{
-		ConfiguraAtributo ca = new ConfiguraAtributo();
-		DaoOdontogramaProcedimento daoOdontogramaProcedimento = new DaoOdontogramaProcedimento();
+	public boolean getTratamentoPendente(Odontograma odontograma){
+		ProcurarObjeto po = new ProcurarObjeto();
 		List<OdontogramaProcedimento> listaTratamento = new ArrayList<OdontogramaProcedimento>();
-		try{														
-			listaTratamento = daoOdontogramaProcedimento.pesquisarOdontogramaProcedimentoPorOdontograma(odontograma);
-			if (!listaTratamento.isEmpty()){
-				for (OdontogramaProcedimento op : listaTratamento) {
-					if (op.getStatusProcedimento().equals("PENDENTE")){
-						return true;
-					}
-				}
-			}else{
-				ca.sendRedirect(request, response, null, "Erro ao buscar lista de procedimentos pendentes por odontograma. A lista esta vazia.", "lista_odontograma_atendimento.jsp");
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
+		listaTratamento = po.getOdontogramaProcedimentoPendentePorOdontograma(odontograma);
+		if (!(listaTratamento == null)){
+			return true;
+		}else{
+			return false;
 		}
-		return false;
 	}
 		
-	public void finalizarAtendimentoOdontograma(HttpServletRequest request, HttpServletResponse response, Odontograma odontograma) throws ServletException, IOException{
-		ConfiguraAtributo ca = new ConfiguraAtributo();
+	public void finalizarAtendimentoOdontograma(Odontograma odontograma){
 		DaoOdontograma daoOdontograma = new DaoOdontograma();
-		
 		odontograma.setStatusOdontograma("FINALIZADO");
 		odontograma.setDataFimOdontograma(new Date());								
-		
 		try{
 			daoOdontograma.alterarOdontograma(odontograma);
-			ca.sendRedirect(request, response, "Tratamento concluído!", null, "principal.jsp");
+			
 		}catch(Exception e){
-			ca.sendRedirect(request, response, null, "Erro ao finalizar o odontograma. "+ e.getMessage(), "lista_odontograma_atendimento.jsp");
 			e.printStackTrace();
 		}							
 	}

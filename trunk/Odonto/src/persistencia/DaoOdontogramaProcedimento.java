@@ -67,6 +67,14 @@ public class DaoOdontogramaProcedimento {
 		return lista;
 	}
 
+	public List<OdontogramaProcedimento> pesquisarOdontogramaProcedimentoPendentePorOdontograma(Odontograma odontograma) throws Exception{
+		List<OdontogramaProcedimento> lista = null;
+		Criteria cr = session.createCriteria(OdontogramaProcedimento.class).add(Restrictions.eq("odontograma", odontograma)).add(Restrictions.eq("statusProcedimento", "PENDENTE"));
+		lista = (ArrayList)cr.list();
+		closeSession();
+		return lista;
+	}
+	
 	public List<OdontogramaProcedimento> pesquisarTodosOdontogramaProcedimento() throws Exception{
 		List<OdontogramaProcedimento> lista = null;
 		Criteria cr = session.createCriteria(OdontogramaProcedimento.class);

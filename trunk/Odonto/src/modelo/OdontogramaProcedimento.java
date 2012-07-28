@@ -106,5 +106,9 @@ public class OdontogramaProcedimento implements Serializable {
 		this.procedimento = procedimento;
 	}
 
+	@Override
+	public String toString() {
+		return ""+idOdontogramaProcedimento;
+	}
     
 }

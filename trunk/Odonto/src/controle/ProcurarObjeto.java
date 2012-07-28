@@ -273,6 +273,35 @@ public class ProcurarObjeto {
 		}
 	}
 	
+	public List<OdontogramaProcedimento> getOdontogramaProcedimentoPendentePorOdontograma(Odontograma odontograma){
+		try{
+			List<OdontogramaProcedimento> lista = new ArrayList<OdontogramaProcedimento>();
+			DaoOdontogramaProcedimento daoOdontogramaProcedimento = new DaoOdontogramaProcedimento();
+			lista = daoOdontogramaProcedimento.pesquisarOdontogramaProcedimentoPendentePorOdontograma(odontograma);
+			if (lista.isEmpty()){
+				return null;
+			}else{
+				return lista;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static void main(String[] args) {
+		ProcurarObjeto po = new ProcurarObjeto();
+		Odontograma odontograma = new Odontograma();
+		odontograma.setIdOdontograma(3);
+		List<OdontogramaProcedimento> lista = new ArrayList<OdontogramaProcedimento>();
+		try{
+			lista = po.getOdontogramaProcedimentoPendentePorOdontograma(odontograma);
+			System.out.println(lista);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 	public Pagamento getPagamentoPorId(long id){
 		try{
 			Pagamento pagamento = new Pagamento();

@@ -38,6 +38,7 @@
 	</table>
 	<form name="formBtn" method="post" action="ServletAtendimento">
 		<input type="submit" name="btn" value="Voltar"/>
+		<input type="submit" name="btn" value="Finalizar tratamento"/>
 	</form>	
 </center>
 </div>
