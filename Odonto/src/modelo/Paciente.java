@@ -15,7 +15,7 @@ public class Paciente extends Usuario implements Serializable {
     private String responsavelPaciente;
     @Column(name = "logradouro_paciente", length = 100)
     private String logradouroPaciente;
-    @Column(name = "numero_logradouro_paciente")
+    @Column(name = "numero_logradouro_paciente", length= 10)
     private String numeroLogradouroPaciente;
     @Column(name = "complemento_logradouro_paciente", length = 50)
     private String complementoLogradouroPaciente;
