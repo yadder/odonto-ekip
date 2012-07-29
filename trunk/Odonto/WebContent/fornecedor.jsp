@@ -82,13 +82,13 @@
 		</tr>
 		<tr>
 			<td align="right">DDD:</td>
-			<td><input type="text" name="ddd1Fornecedor" value="${fornecedor.ddd1Fornecedor}" size="2" maxlength="2"/>
+			<td><input type="text" name="ddd1Fornecedor" value="${fornecedor.ddd1Fornecedor}" size="2" maxlength="2" OnKeyPress="soNumero()" />
 			Telefone 1:
 			<input type="text" name="telefone1Fornecedor" value="${fornecedor.telefone1Fornecedor}" size="9" maxlength="9" OnKeyPress="formatar(this, '####-####')"/></td>
 		</tr>
 		<tr>
 			<td align="right">DDD:</td>
-			<td><input type="text" name="ddd2Fornecedor" value="${fornecedor.ddd2Fornecedor}" size="2" maxlength="2" />
+			<td><input type="text" name="ddd2Fornecedor" value="${fornecedor.ddd2Fornecedor}" size="2" maxlength="2" OnKeyPress="soNumero()" />
 			Telefone 2:
 			<input type="text" name="telefone2Fornecedor" value="${fornecedor.telefone2Fornecedor}" size="9" maxlength="9" OnKeyPress="formatar(this, '####-####')"/></td>
 		</tr>
