@@ -18,11 +18,11 @@
 	<table>
 		<tr>
 			<td align="right">Nome:</td>
-			<td><input type="text" name="nomeDentista" value="${dentista.nomeUsuario}" size="20" /><input type="submit" name="btn" value="Pesquisar" /></td>
+			<td><input type="text" name="nomeDentista" value="${dentista.nomeUsuario}" size="20" maxlength="50" /><input type="submit" name="btn" value="Pesquisar" /></td>
 		</tr>
 		<tr>
 			<td align="right">Rg:</td>
-			<td><input type="text" name="rgDentista" value="${dentista.rgUsuario}" size="20" /></td>
+			<td><input type="text" name="rgDentista" value="${dentista.rgUsuario}" size="20" maxlength="20" /></td>
 		</tr>
 		<tr>
 			<td align="right">Cpf:</td>

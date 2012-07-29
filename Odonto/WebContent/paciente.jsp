@@ -21,7 +21,7 @@
 	<table>
 		<tr>
 			<td align="right">Nome:</td>
-			<td><input type="text" name="nomePaciente" value="${paciente.nomeUsuario}" size="45" /><input type="submit" name="btn" value="Pesquisar" /></td>
+			<td><input type="text" name="nomePaciente" value="${paciente.nomeUsuario}" size="45" maxlength="50" /><input type="submit" name="btn" value="Pesquisar" /></td>
 		</tr>
 		<tr>
 			<td align="right">Rg:</td>
