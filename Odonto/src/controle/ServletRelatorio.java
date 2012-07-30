@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import modelo.Consulta;
 import modelo.Convenio;
 import modelo.Odontograma;
+import modelo.Pagamento;
 import modelo.Procedimento;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -21,6 +22,7 @@ import net.sf.jasperreports.view.JasperViewer;
 import persistencia.DaoConsulta;
 import persistencia.DaoConvenio;
 import persistencia.DaoOdontograma;
+import persistencia.DaoPagamento;
 import persistencia.DaoProcedimento;
 
 public class ServletRelatorio extends HttpServlet {
@@ -113,7 +115,33 @@ public class ServletRelatorio extends HttpServlet {
 				
 			}catch (Exception e) {
 				e.printStackTrace();
-			}	
+			}
+			
+			
+		}else if (btn.equals("Gerar relatório de Pagamentos")){						
+			try{	
+				DaoPagamento daoPagamento= new DaoPagamento();
+				List<Pagamento> listaPagamento= new ArrayList<Pagamento>();
+				listaPagamento= daoPagamento.pesquisarTodosPagamentoStatusDataIniDataFim(
+						ca.dataStringParaDataSql((String)request.getParameter("dataInicio")), 
+						ca.dataStringParaDataSql((String)request.getParameter("dataFim")), 
+						(String)request.getParameter("statusPagamento"));
+				
+				if(!listaPagamento.isEmpty()){			
+					JRBeanCollectionDataSource jr = new JRBeanCollectionDataSource(listaPagamento); 
+					JasperFillManager.fillReportToFile("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\relatorioPagamento.jasper", new HashMap(), jr);
+					JasperViewer.viewReport("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\relatorioPagamento.jrprint", false, false);
+					jr=null;
+					ca.sendRedirect(request, response, null, null, "relatorioPagamento.jsp");
+				}else{
+					ca.sendRedirect(request, response, null, "Nenhum pagamento encontrado", "relatorioPagamento.jsp");
+				}					                                    
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
 			
 		}	
 	
