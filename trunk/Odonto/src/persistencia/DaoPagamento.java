@@ -1,5 +1,6 @@
 package persistencia;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,6 +69,15 @@ public class DaoPagamento {
 		closeSession();
 		return lista;
 	}
+	
+	public List<Pagamento> pesquisarTodosPagamentoStatusDataIniDataFim(Date dataini,Date datafim, String status ) throws Exception{
+		List<Pagamento> lista = null;
+		Criteria cr = session.createCriteria(Pagamento.class).add(Restrictions.between("dataPagamento", dataini,datafim)).add(Restrictions.eq("statusPagamento", status));
+		lista = (ArrayList)cr.list();
+		closeSession();
+		return lista;
+	}
+	
 	
 	public Pagamento pesquisarPagamentoPorId(long id) throws Exception{
 		Pagamento p = null;
