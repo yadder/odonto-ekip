@@ -45,8 +45,6 @@
 				<ul>
 					<li><a href="pesquisar_paciente_gerar_pagamento.jsp">Gerar pagamento</a></li>
 					<li><a href="pesquisar_paciente_efetuar_pagamento.jsp">Efetuar pagamento</a></li>
-					<li><a href="#">Listar pagamentos pendentes</a></li>
-					<li><a href="#">Listar pagamentos realizados por período</a></li>
 				</ul>
 			</li>
 			<li>
@@ -63,8 +61,8 @@
 			</li>
 			<li><a href="#"><b>Ajuda</b></a>
 				<ul>
-					<li><a href="#">Mapa de navegação</a></li>
-					<li><a href="#">Sobre</a></li>
+					<li><a href="mapa_de_navegacao.jsp">Mapa de navegação</a></li>
+					<li><a href="sobre.jsp">Sobre</a></li>
 				</ul>
 			</li>
 			<li><a href="ServletPrincipal?acao=logout"><b>Logout</b></a></li>
