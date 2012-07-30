@@ -97,8 +97,10 @@ public class ServletPagamento extends HttpServlet {
 						pagamento.setDataPagamento(null);							
 						try{
 							daoPagamento.cadastrarPagamento(pagamento);
+							daoPagamento = new DaoPagamento();
 						}catch (Exception e) {
 							ca.sendRedirect(request, response, null, "Erro ao gravar pagamento.", "gerar_pagamento.jsp");
+							e.printStackTrace();
 						}
 					}
 					objetoSessao.removeAttribute("paciente");
@@ -125,6 +127,7 @@ public class ServletPagamento extends HttpServlet {
 									daoPagamento.cadastrarPagamento(pagamento);
 								}catch (Exception e) {
 									ca.sendRedirect(request, response, null, "Erro ao gravar pagamento.", "gerar_pagamento.jsp");
+									e.printStackTrace();
 								}
 							}
 							objetoSessao.removeAttribute("paciente");
@@ -178,6 +181,7 @@ public class ServletPagamento extends HttpServlet {
 					ca.sendRedirect(request, response, "Pagamento realizado com sucesso", null, "efetuar_pagamento.jsp");
 				}catch (Exception e) {
 					ca.sendRedirect(request, response, null, "Erro ao alterar o status do pagamento", "efetuar_pagamento.jsp");
+					e.printStackTrace();
 				}
 			}else{
 				ca.sendRedirect(request, response, null, "Pagamento não encontrado.", "efetuar_pagamento.jsp");

@@ -18,8 +18,8 @@ a{text-decoration: none; color: #008cff;}
 .navbar li li a:hover{background-color: #8d8dff;}
 
 .cabecalho{left: 0px; background-color: #D6E0FF; width: 100%; height: 13%;}
-.rodape{background-color: #5E8CE9; position: absolute; left: 0px; bottom: 0px; color: #FFF; font-family: cursive; font-size: 7pt; text-shadow: 1px 1px 1px #000; width: 100%;}
-.pagina{background-color: #fff;	position: fixed; top: 140px; left: 20px; right: 20px; margin: 5px; }
+.rodape{background-color: #5E8CE9; position: absolute; left: 0px; bottom: auto; color: #FFF; font-family: cursive; font-size: 7pt; text-shadow: 1px 1px 1px #000; width: 100%;}
+.pagina{background-color: #fff;	position: absolute; top: 140px; left: 20px; right: 20px; margin: 5px; }
 .sessao{background-color: #5E8CE9; position:absolute; right:0px; top: 0px; width: 310px; height: 20px; color: #F00; font-family: cursive; font-size: 9pt; text-shadow: 1px 1px 1px #F00;}
 .odontograma a{text-decoration: none;}
 
