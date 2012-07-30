@@ -192,7 +192,7 @@ public class ServletPaciente extends HttpServlet {
 		paciente.setCpfUsuario(paciente.getCpfUsuario().trim()); 
 		paciente.setResponsavelPaciente(paciente.getResponsavelPaciente().trim());
 		paciente.setLogradouroPaciente(paciente.getLogradouroPaciente().trim());
-		paciente.setNumeroLogradouroPaciente(paciente.getLogradouroPaciente().trim());
+		paciente.setNumeroLogradouroPaciente(paciente.getNumeroLogradouroPaciente().trim());
 		paciente.setComplementoLogradouroPaciente(paciente.getComplementoLogradouroPaciente().trim());
 		paciente.setBairroPaciente(paciente.getBairroPaciente().trim());
 		paciente.setCidadePaciente(paciente.getCidadePaciente().trim());
