@@ -289,16 +289,19 @@ public class ProcurarObjeto {
 		}
 	}
 	
-	public static void main(String[] args) {
-		ProcurarObjeto po = new ProcurarObjeto();
-		Odontograma odontograma = new Odontograma();
-		odontograma.setIdOdontograma(3);
-		List<OdontogramaProcedimento> lista = new ArrayList<OdontogramaProcedimento>();
+	public List<OdontogramaProcedimento> getOdontogramaProcedimentoPendente(){
 		try{
-			lista = po.getOdontogramaProcedimentoPendentePorOdontograma(odontograma);
-			System.out.println(lista);
-		}catch(Exception e){
+			List<OdontogramaProcedimento> lista = new ArrayList<OdontogramaProcedimento>();
+			DaoOdontogramaProcedimento daoOdontogramaProcedimento = new DaoOdontogramaProcedimento();
+			lista = daoOdontogramaProcedimento.pesquisarOdontogramaProcedimentoPendente();
+			if (lista.isEmpty()){
+				return null;
+			}else{
+				return lista;
+			}
+		}catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 	
