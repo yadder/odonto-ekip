@@ -14,6 +14,7 @@ import modelo.Paciente;
 import modelo.Pagamento;
 import modelo.Procedimento;
 import persistencia.DaoConsulta;
+import persistencia.DaoConvenio;
 import persistencia.DaoDentista;
 import persistencia.DaoElemento;
 import persistencia.DaoFace;
@@ -319,6 +320,23 @@ public class ProcurarObjeto {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public Convenio getConvenioPorNome(String nome){
+		try{
+			Convenio convenio = new Convenio();
+			convenio.setNomeConvenio(nome);
+			DaoConvenio daoConvenio = new DaoConvenio();
+			convenio = daoConvenio.pesquisarConvenioPorNome(convenio);
+			if (convenio!= null){
+				return convenio;
+			}else{
+				return null;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}		
 	}
 	
 }

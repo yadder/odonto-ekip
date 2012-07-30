@@ -15,11 +15,9 @@
 </div>
 
 	<h6><font color="red">À fazer:</font></h6>
-	<a href=#>Listar pagamentos pendentes</a><br/>
-	<a href=#>Listar pagamentos realizados por período</a><br/>
-	<a href=#>Verificação inicial</a><br/>
+	<a href=#>Verificação inicial - 50%</a><br/>
 	<a href=#>Conceder acesso</a><br/>
-	<a href=#>Tratar busca de procedimento por procedimento</a><br/>
+	<a href=#>Não deixar agendar consulta com data anterior a data atual</a><br/>
 	
 	
 	<h6><font color="red">Melhorias:</font></h6>

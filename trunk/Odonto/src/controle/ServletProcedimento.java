@@ -2,7 +2,6 @@ package controle;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,70 +29,54 @@ public class ServletProcedimento extends HttpServlet {
 		String btn = (String)request.getParameter("btn");
 		HttpSession objetoSessao = request.getSession();
 		Procedimento procedimento = new Procedimento();
-
+		ConfiguraAtributo ca = new ConfiguraAtributo();
+		ProcurarObjeto po = new ProcurarObjeto();
+		
 		if (btn.equals("Voltar")){
 			objetoSessao.removeAttribute("procedimento");
-			RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
-			disp.forward(request, response);
+			ca.sendRedirect(request, response, null, null, "principal.jsp");
 		}else if (btn.equals("Cadastrar")){
 			procedimento = preencheObjeto(request, response);
 			if (validaCampos(procedimento)){				
 				try{
 					DaoProcedimento dao = new DaoProcedimento();
 					dao.cadastrarProcedimento(procedimento);
-					mensagem = "Procedimento cadastrado com sucesso!";
-					request.setAttribute("msg", mensagem);
-					RequestDispatcher disp = request.getRequestDispatcher("procedimento.jsp");
-					disp.forward(request, response);
+					ca.sendRedirect(request, response, "Procedimento cadastrado com sucesso!", null, "procedimento.jsp");
 				}catch (Exception e) {
+					ca.sendRedirect(request, response, null, "Erro ao cadastrar o procedimento.", "procedimento.jsp");
 					e.printStackTrace();
 				}
 			}else{
-				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("procedimento.jsp");
-				disp.forward(request, response);
+				ca.sendRedirect(request, response, null, mensagem, "procedimento.jsp");
 			}
 		}else if (btn.equals("Pesquisar")){
 			procedimento = preencheObjeto(request, response);
+			Convenio convenio = new Convenio();
+			convenio = po.getConvenioPorNome((String)request.getParameter("convenio"));			
 			if (procedimento.getDescricaoProcedimento()!=null){
 				try{
-					DaoProcedimento dao = new DaoProcedimento();
-					procedimento = dao.pesquisarProcedimentoPorDescricao(procedimento);
+					procedimento = po.getProcedimentoPorNomeEConvenio(procedimento.getDescricaoProcedimento(), convenio);
 					if (procedimento != null){
-						mensagem = "Procedimento encontrado.";
-						request.setAttribute("msg", mensagem);
 						objetoSessao.setAttribute("procedimento", procedimento);
-						RequestDispatcher disp = request.getRequestDispatcher("procedimento_alterar.jsp");
-						disp.forward(request, response);
+						ca.sendRedirect(request, response, "Procedimento encontrado.", null, "procedimento_alterar.jsp");
 					}else{
-						mensagem = "Procedimento não encontrado.";
-						request.setAttribute("msg", mensagem);
-						RequestDispatcher disp = request.getRequestDispatcher("procedimento.jsp");
-						disp.forward(request, response);
+						ca.sendRedirect(request, response, null, "Procedimento não encontrado.", "procedimento.jsp");
 					}
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
 			}else{
-				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("procedimento.jsp");
-				disp.forward(request, response);
+				ca.sendRedirect(request, response, null, mensagem, "procedimento.jsp");
 			}
 		}else if(btn.equals("Excluir")){
 			try{
 				procedimento = (Procedimento)objetoSessao.getAttribute("procedimento");
 				DaoProcedimento dao = new DaoProcedimento();
 				dao.excluirProcedimento(procedimento);
-				mensagem = "Procedimento excluído com sucesso.";
-				request.setAttribute("msg", mensagem);
 				objetoSessao.removeAttribute("procedimento");
-				RequestDispatcher disp = request.getRequestDispatcher("procedimento.jsp");
-				disp.forward(request, response);
+				ca.sendRedirect(request, response, "Procedimento excluído com sucesso.", null, "procedimento.jsp");
 			}catch (Exception e) {
-				mensagem = "Ocorreu algum erro ao excluir o procedimento.";
-				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("procedimento.jsp");
-				disp.forward(request, response);
+				ca.sendRedirect(request, response, null, "Erro ao excluir o procedimento.", "procedimento.jsp");
 				e.printStackTrace();
 			}
 		}else if(btn.equals("Alterar")){
@@ -103,21 +86,13 @@ public class ServletProcedimento extends HttpServlet {
 				try{					
 					DaoProcedimento dao = new DaoProcedimento();
 					dao.alterarProcedimento(procedimento);
-					mensagem = "Procedimento alterado com sucesso.";
-					request.setAttribute("msg", mensagem);
 					objetoSessao.removeAttribute("procedimento");
-					RequestDispatcher disp = request.getRequestDispatcher("procedimento.jsp");
-					disp.forward(request, response);
+					ca.sendRedirect(request, response, "Procedimento alterado com sucesso.", null, "procedimento.jsp");
 				}catch (Exception e) {
-					mensagem = "Ocorreu algum erro ao alterar o procedimento.";
-					request.setAttribute("msg", mensagem);
-					RequestDispatcher disp = request.getRequestDispatcher("procedimento.jsp");
-					disp.forward(request, response);
+					ca.sendRedirect(request, response, null, "Erro ao alterar o procedimento.", "procedimento.jsp");
 				}
 			}else{
-				request.setAttribute("msg", mensagem);
-				RequestDispatcher disp = request.getRequestDispatcher("procedimento_alterar.jsp");
-				disp.forward(request, response);
+				ca.sendRedirect(request, response, null, mensagem, "procedimento_alterar.jsp");
 			}
 		}	
 	}

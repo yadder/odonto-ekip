@@ -8,6 +8,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
+
+<link type="text/css" href="css/ui-lightness/jquery-ui-1.7.3.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.7.3.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery.ui.datepicker-pt-BR.js"></script>
+<script>
+	$(function() {
+		$("#t1").datepicker($.datepicker.regional['pt-BR']);
+	});
+</script>
+
 </head>
 <body>
 <fieldset class="pagina">
@@ -27,7 +38,7 @@
 			<td align="right">Rg:</td>
 			<td><input type="text" name="rgPaciente" value="${paciente.rgUsuario}" size="13" maxlength="15"/>
 			Cpf:<input type="text" name="cpfPaciente" value="${paciente.cpfUsuario}" size="12" maxlength="14" OnKeyPress="formatar(this, '###.###.###-##')" />
-			Dt nasc.:<input type="text" name="dtNascPaciente" value="${data}" size="8" maxlength="10" OnKeyPress="formatar(this, '##/##/####')" /></td>
+			Dt nasc.:<input type="text" id="t1" name="dtNascPaciente" value="${data}" size="10" maxlength="10" OnKeyPress="formatar(this, '##/##/####')" /></td>
 		</tr>
 		<tr>
 			<td align="right">Sexo:</td>
