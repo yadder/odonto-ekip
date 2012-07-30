@@ -35,12 +35,16 @@ public class ServletOdontograma extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		response.setHeader("Cache-Control", "no-cache");  
+		response.addHeader("Cache-Control", "post-check=0, pre-check=0");  
+		response.setHeader("Pragma", "no-cache");
+		
 		String btn = (String)request.getParameter("btn");
 		HttpSession objetoSessao = request.getSession();	
 		Odontograma odontograma = new Odontograma();
 		
 		if(btn.equals("Voltar")){
+			objetoSessao.removeAttribute("listaPendente");
 			ca.sendRedirect(request, response, null, null, "principal.jsp");
 		}else if(btn.equals("Voltar ao odontograma")){
 			ca.sendRedirect(request, response, null, null, "novo_odontograma.jsp");
@@ -207,6 +211,46 @@ public class ServletOdontograma extends HttpServlet {
 				objetoSessao.removeAttribute("elemento");
 				objetoSessao.removeAttribute("dentista");
 				ca.sendRedirect(request, response, "Odontograma gravado com sucesso!", null, "principal.jsp");
+			}
+		}else if (btn.equals("listarProcedimentosPendentes")){
+			objetoSessao.removeAttribute("listaPendente");
+			List<OdontogramaProcedimento> listaPendente = new ArrayList<OdontogramaProcedimento>();
+			listaPendente = po.getOdontogramaProcedimentoPendente();
+			if (listaPendente != null){
+				objetoSessao.setAttribute("listaPendente", listaPendente);
+				ca.sendRedirect(request, response, null, null, "listar_procedimentos_pendentes.jsp");
+			}else{
+				ca.sendRedirect(request, response, null, "Nenhum procedimento pendente foi encontrado.", "principal.jsp");
+			}
+		}else if (btn.equals("Autorizado")){
+			long id = Long.parseLong((String)request.getParameter("index"));
+			OdontogramaProcedimento odontogramaProcedimento = new OdontogramaProcedimento();
+			odontogramaProcedimento = po.getOdontogramaProcedimentoPorId(id);
+			if (odontogramaProcedimento != null){
+				odontogramaProcedimento.setStatusAutorizacao("APROVADO");
+				try{
+					DaoOdontogramaProcedimento daoOdontogramaProcedimento = new DaoOdontogramaProcedimento();
+					daoOdontogramaProcedimento.alterarOdontogramaProcedimento(odontogramaProcedimento);
+					ca.sendRedirect(request, response, "Procedimento aprovado.", null, "ServletOdontograma?btn=listarProcedimentosPendentes");
+				}catch(Exception e){
+					ca.sendRedirect(request, response, null, "Erro ao aprovar procedimento.", "listar_procedimentos_pendentes.jsp");
+					e.printStackTrace();
+				}
+			}
+		}else if (btn.equals("Negado")){
+			long id = Long.parseLong((String)request.getParameter("index"));
+			OdontogramaProcedimento odontogramaProcedimento = new OdontogramaProcedimento();
+			odontogramaProcedimento = po.getOdontogramaProcedimentoPorId(id);
+			if (odontogramaProcedimento != null){
+				odontogramaProcedimento.setStatusAutorizacao("NEGADO");
+				try{
+					DaoOdontogramaProcedimento daoOdontogramaProcedimento = new DaoOdontogramaProcedimento();
+					daoOdontogramaProcedimento.alterarOdontogramaProcedimento(odontogramaProcedimento);
+					ca.sendRedirect(request, response, "Procedimento negado.", null, "ServletOdontograma?btn=listarProcedimentosPendentes");
+				}catch(Exception e){
+					ca.sendRedirect(request, response, null, "Erro ao negar procedimento.", "listar_procedimentos_pendentes.jsp");
+					e.printStackTrace();
+				}
 			}
 		}
 	}
