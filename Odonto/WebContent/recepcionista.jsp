@@ -5,6 +5,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
+
+<link type="text/css" href="css/ui-lightness/jquery-ui-1.7.3.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.7.3.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery.ui.datepicker-pt-BR.js"></script>
+<script>
+	$(function() {
+		$("#t1").datepicker($.datepicker.regional['pt-BR']);
+	});
+</script>
+
 </head>
 <body>
 <fieldset class="pagina">
@@ -30,7 +41,7 @@
 		</tr>
 		<tr>
 			<td align="right">Data nasc.:</td>
-			<td><input type="text" name="dtNascUsuario" id="calendario" value="${data}" size="20" maxlength="10" OnKeyPress="formatar(this, '##/##/####')"/></td>
+			<td><input type="text" id="t1" name="dtNascUsuario" value="${data}" size="20" maxlength="10" OnKeyPress="formatar(this, '##/##/####')"/></td>
 		</tr>
 		<tr>
 			<td align="right">Sexo:</td>
