@@ -18,11 +18,11 @@
 	<table>
 		<tr>
 			<td align="right">Nome:</td>
-			<td><input type="text" name="nomeUsuario" value="${usuario.nomeUsuario}" size="20" /></td>
+			<td><input type="text" name="nomeUsuario" value="${usuario.nomeUsuario}" size="20" maxlength="50" /></td>
 		</tr>
 		<tr>
 			<td align="right">Rg:</td>
-			<td><input type="text" name="rgUsuario" value="${usuario.rgUsuario}" size="20" /></td>
+			<td><input type="text" name="rgUsuario" value="${usuario.rgUsuario}" size="20" maxlength="15" /></td>
 		</tr>
 		<tr>
 			<td align="right">Cpf:</td>
@@ -49,6 +49,6 @@
 </form>	
 </fieldset>
 <c:import url="cabecalho.jsp"/>
-<c:import url="rodape.jsp" />
+
 </body>
 </html>

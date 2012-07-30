@@ -37,6 +37,6 @@
 </form>	
 </fieldset>
 <c:import url="cabecalho.jsp"/>
-<c:import url="rodape.jsp" />
+
 </body>
 </html>
