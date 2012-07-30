@@ -27,6 +27,6 @@ a informação e redução de custos, alem de um melhor gerenciamento da clínic
 
 </fieldset>
 <c:import url="cabecalho.jsp"/>
-<c:import url="rodape.jsp" />
+
 </body>
 </html>
