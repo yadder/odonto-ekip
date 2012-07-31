@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.Convenio;
 import modelo.Odontograma;
 import modelo.Paciente;
 
