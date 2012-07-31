@@ -171,6 +171,7 @@ public class ServletPagamento extends HttpServlet {
 			pagamento = po.getPagamentoPorId(index); 
 			if (pagamento!=null){
 				pagamento.setStatusPagamento("PAGO");
+				pagamento.setDataPagamento(new Date());
 				try{
 					daoPagamento.alterarPagamento(pagamento);
 					Paciente paciente = new Paciente();
