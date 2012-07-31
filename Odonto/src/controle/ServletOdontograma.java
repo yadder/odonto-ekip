@@ -45,6 +45,7 @@ public class ServletOdontograma extends HttpServlet {
 		
 		if(btn.equals("Voltar")){
 			objetoSessao.removeAttribute("listaPendente");
+			objetoSessao.removeAttribute("listaTratamento");
 			ca.sendRedirect(request, response, null, null, "principal.jsp");
 		}else if(btn.equals("Voltar ao odontograma")){
 			ca.sendRedirect(request, response, null, null, "novo_odontograma.jsp");
@@ -206,6 +207,7 @@ public class ServletOdontograma extends HttpServlet {
 				objetoSessao.removeAttribute("listaFace");
 				objetoSessao.removeAttribute("pacienteNovoOdontograma");
 				objetoSessao.removeAttribute("listaProcedimento");
+				objetoSessao.removeAttribute("listaTratamento");
 				objetoSessao.removeAttribute("convenioPaciente");
 				objetoSessao.removeAttribute("odontograma");
 				objetoSessao.removeAttribute("elemento");

@@ -22,9 +22,7 @@
 	
 	<h6><font color="red">Melhorias:</font></h6>
 	<a href=#>Na tela de consulta, só mostrar horarios disponiveis</a><br/>
-	<a href=#>Trocar o campo data por componente calendario</a><br/>
 	<a href=#>Fazer validação com jQuery</a><br/>
-	
 	
 	
 </fieldset>

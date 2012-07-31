@@ -1,6 +1,8 @@
 package controle;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import modelo.Consulta;
@@ -272,6 +274,31 @@ public class ProcurarObjeto {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public List<Pagamento> getPagamentoPendente(Date data){
+		try{
+			List<Pagamento> listaPagamento = new ArrayList<Pagamento>();
+			DaoPagamento daoPagamento = new DaoPagamento();
+			listaPagamento = daoPagamento.pesquisarPagamentoPendente(data);
+			if (listaPagamento.isEmpty()){
+				return null;
+			}else{
+				return listaPagamento;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static void main(String[] args) {
+		ProcurarObjeto po = new ProcurarObjeto();
+		List<Pagamento> listaPagamento = new ArrayList<Pagamento>();
+		System.out.println(new Date());
+		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+		listaPagamento = po.getPagamentoPendente(new Date());
+		System.out.println(listaPagamento);
 	}
 	
 	public List<OdontogramaProcedimento> getOdontogramaProcedimentoPendentePorOdontograma(Odontograma odontograma){
