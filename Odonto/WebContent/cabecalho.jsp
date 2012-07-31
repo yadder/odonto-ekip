@@ -43,7 +43,7 @@
 			</li>
 			<li><a href="#"><b>Gerenciamento</b></a>
 				<ul>
-					<li><a href="ServletOdontograma?btn=listarProcedimentosPendentes">Listar prodecimentos pendentes</a></li>
+					<li><a href="ServletOdontograma?btn=listarProcedimentosPendentes">Listar procedimentos pendentes</a></li>
 					<li><a href="pagamentos_vencidos_em_aberto.jsp">Pagamentos vencidos em aberto</a></li>
 				</ul>
 			</li>
