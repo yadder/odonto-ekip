@@ -72,7 +72,7 @@ public class DaoPagamento {
 	
 	public List<Pagamento> pesquisarTodosPagamentoStatusDataIniDataFim(Date dataini,Date datafim, String status ) throws Exception{
 		List<Pagamento> lista = null;
-		Criteria cr = session.createCriteria(Pagamento.class).add(Restrictions.between("dataPagamento", dataini,datafim)).add(Restrictions.eq("statusPagamento", status));
+		Criteria cr = session.createCriteria(Pagamento.class).add(Restrictions.between("dataVencimento", dataini,datafim)).add(Restrictions.eq("statusPagamento", status));
 		lista = (ArrayList)cr.list();
 		closeSession();
 		return lista;

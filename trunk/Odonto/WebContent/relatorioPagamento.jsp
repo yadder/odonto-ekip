@@ -8,6 +8,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="arquivos/styleOdontoEkip.css" />
 <script type="text/javascript" src="arquivos/scriptValidation.js"></script>
+<link type="text/css" href="css/ui-lightness/jquery-ui-1.7.3.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.7.3.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery.ui.datepicker-pt-BR.js"></script>
+<script>
+	$(function() {
+		$("#t1").datepicker($.datepicker.regional['pt-BR']);
+		$("#t2").datepicker($.datepicker.regional['pt-BR']);
+	});
+</script>
+
 </head>
 <body>
 <fieldset class="pagina">
@@ -21,11 +32,11 @@
 	<table>
 		<tr>
 			<td align="right">Data início:</td>
-			<td><input type="text" name="dataInicio" value="${data}" size="17" maxlength="10" OnKeyPress="formatar(this, '##/##/####')" /></td>
+			<td><input type="text" id="t1" name="dataInicio" value="${data}" size="17" maxlength="10" OnKeyPress="formatar(this, '##/##/####')" /></td>
 		</tr>
 		<tr>
 			<td align="right">Data fim:</td>
-			<td><input type="text" name="dataFim" value="${data}" size="17" maxlength="10" OnKeyPress="formatar(this, '##/##/####')" /></td>
+			<td><input type="text" id="t2" name="dataFim" value="${data}" size="17" maxlength="10" OnKeyPress="formatar(this, '##/##/####')" /></td>
 		<tr>
 		<tr>
 			<td align="right">Selecione o status do pagamento:</td>
