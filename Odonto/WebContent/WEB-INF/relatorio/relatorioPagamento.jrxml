@@ -46,8 +46,11 @@
 		<groupExpression><![CDATA[$F{paciente}]]></groupExpression>
 		<groupHeader>
 			<band height="21">
+				<rectangle>
+					<reportElement x="0" y="0" width="555" height="21" backcolor="#CCCCFF"/>
+				</rectangle>
 				<textField>
-					<reportElement mode="Opaque" x="0" y="0" width="555" height="21" backcolor="#CCCCFF"/>
+					<reportElement mode="Transparent" x="0" y="0" width="554" height="21" backcolor="#FFFFFF"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Times New Roman" size="12" isBold="true"/>
 					</textElement>
@@ -57,27 +60,30 @@
 		</groupHeader>
 		<groupFooter>
 			<band height="20">
-				<textField pattern="¤ #,##0.00">
-					<reportElement mode="Opaque" x="304" y="0" width="251" height="20" backcolor="#CCCCCC"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Times New Roman" size="12" isBold="true"/>
-					</textElement>
-					<textFieldExpression class="java.lang.Double"><![CDATA[$V{valorParcela_2}]]></textFieldExpression>
-				</textField>
+				<rectangle>
+					<reportElement x="0" y="0" width="555" height="20" backcolor="#CCCCCC"/>
+				</rectangle>
 				<textField>
-					<reportElement mode="Opaque" x="225" y="0" width="79" height="20" backcolor="#CCCCCC"/>
+					<reportElement mode="Transparent" x="225" y="0" width="79" height="20" backcolor="#FFFFFF"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Times New Roman" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{statusPagamento}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement mode="Opaque" x="0" y="0" width="229" height="20" backcolor="#CCCCCC"/>
+					<reportElement mode="Transparent" x="0" y="0" width="229" height="20" backcolor="#FFFFFF"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="Times New Roman" size="12" isBold="true"/>
 					</textElement>
 					<text><![CDATA[TOTAL]]></text>
 				</staticText>
+				<textField pattern="¤ #,##0.00">
+					<reportElement mode="Transparent" x="304" y="0" width="251" height="20" backcolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{valorParcela_2}]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupFooter>
 	</group>
@@ -168,13 +174,23 @@
 	</detail>
 	<columnFooter>
 		<band height="20">
-			<textField>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20" backcolor="#CCCCCC"/>
+			</rectangle>
+			<textField pattern="¤ #,##0.00">
 				<reportElement x="304" y="0" width="100" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{valorParcela_5}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="209" y="0" width="85" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total relatório:]]></text>
+			</staticText>
 		</band>
 	</columnFooter>
 	<pageFooter>
