@@ -26,44 +26,56 @@
 		<groupExpression><![CDATA[$F{convenio}]]></groupExpression>
 		<groupHeader>
 			<band height="22">
-				<staticText>
-					<reportElement mode="Opaque" x="0" y="0" width="70" height="20" backcolor="#CCCCFF"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Times New Roman" size="12" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Convênio:]]></text>
-				</staticText>
+				<rectangle>
+					<reportElement x="0" y="0" width="555" height="22" backcolor="#CCCCFF"/>
+					<graphicElement>
+						<pen lineWidth="0.25" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</rectangle>
 				<textField>
-					<reportElement mode="Opaque" x="69" y="0" width="486" height="20" backcolor="#CCCCFF"/>
+					<reportElement mode="Transparent" x="69" y="0" width="486" height="20" backcolor="#FFFFFF"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Times New Roman" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[""+$F{convenio}]]></textFieldExpression>
 				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="0" width="70" height="20" backcolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Convênio:]]></text>
+				</staticText>
 			</band>
 		</groupHeader>
 		<groupFooter>
 			<band height="22">
-				<staticText>
-					<reportElement mode="Opaque" x="0" y="0" width="47" height="20" backcolor="#CCCCCC"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Times New Roman" size="12" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Total de procedimentos:]]></text>
-				</staticText>
+				<rectangle>
+					<reportElement x="0" y="0" width="555" height="22" backcolor="#CCCCCC"/>
+					<graphicElement>
+						<pen lineStyle="Double" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</rectangle>
 				<textField pattern="###0">
-					<reportElement mode="Opaque" x="47" y="0" width="36" height="20" backcolor="#CCCCCC"/>
+					<reportElement mode="Transparent" x="47" y="0" width="36" height="20" backcolor="#FFFFFF"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Times New Roman" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{codigoProcedimento_2}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement mode="Opaque" x="83" y="0" width="472" height="20" backcolor="#CCCCCC"/>
+					<reportElement mode="Transparent" x="83" y="0" width="472" height="20" backcolor="#FFFFFF"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Times New Roman" size="12" isBold="true"/>
 					</textElement>
 					<text><![CDATA[procedimentos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="0" width="47" height="20" backcolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total de procedimentos:]]></text>
 				</staticText>
 			</band>
 		</groupFooter>
@@ -124,21 +136,21 @@
 	<detail>
 		<band height="22">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="144" y="0" width="301" height="20"/>
+				<reportElement x="144" y="1" width="301" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{descricaoProcedimento}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00">
-				<reportElement x="3" y="0" width="113" height="20"/>
+				<reportElement x="3" y="1" width="113" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{codigoProcedimento}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00">
-				<reportElement x="455" y="0" width="100" height="20"/>
+				<reportElement x="455" y="1" width="100" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman"/>
 				</textElement>

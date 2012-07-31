@@ -44,6 +44,9 @@
 			<band height="24">
 				<rectangle>
 					<reportElement x="0" y="0" width="555" height="24" backcolor="#CCCCFF"/>
+					<graphicElement>
+						<pen lineColor="#FFFFFF"/>
+					</graphicElement>
 				</rectangle>
 				<textField pattern="dd/MM/yyyy">
 					<reportElement mode="Transparent" x="34" y="3" width="521" height="20" backcolor="#FFFFFF"/>
@@ -64,17 +67,13 @@
 		<groupFooter>
 			<band height="21">
 				<rectangle>
-					<reportElement x="0" y="0" width="555" height="21"/>
+					<reportElement x="0" y="0" width="555" height="21" backcolor="#CCCCCC"/>
+					<graphicElement>
+						<pen lineColor="#FFFFFF"/>
+					</graphicElement>
 				</rectangle>
 				<staticText>
-					<reportElement mode="Transparent" x="0" y="0" width="45" height="20" backcolor="#FFFFFF"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Times New Roman" size="12" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Total de ]]></text>
-				</staticText>
-				<staticText>
-					<reportElement mode="Transparent" x="86" y="0" width="469" height="20" backcolor="#FFFFFF"/>
+					<reportElement mode="Transparent" x="86" y="0" width="92" height="20" backcolor="#FFFFFF"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Times New Roman" size="12" isBold="true"/>
 					</textElement>
@@ -87,6 +86,13 @@
 					</textElement>
 					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{statusConsulta_3}]]></textFieldExpression>
 				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="0" width="45" height="20" backcolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total de ]]></text>
+				</staticText>
 			</band>
 		</groupFooter>
 	</group>
