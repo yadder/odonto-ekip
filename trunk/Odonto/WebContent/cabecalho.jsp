@@ -44,7 +44,7 @@
 			<li><a href="#"><b>Gerenciamento</b></a>
 				<ul>
 					<li><a href="ServletOdontograma?btn=listarProcedimentosPendentes">Listar procedimentos pendentes</a></li>
-					<li><a href="pagamentos_vencidos_em_aberto.jsp">Pagamentos vencidos em aberto</a></li>
+					<li><a href="ServletPagamento?btn=listarPagamentosVencidosEmAberto">Pagamentos vencidos em aberto</a></li>
 				</ul>
 			</li>
 			<li><a href="#"><b>Pagamento</b></a>
@@ -58,7 +58,6 @@
 			</li>
 			<li><a href="#"><b>Relatórios</b></a>
 				<ul>
-					<li><a href="pesquisar_paciente_prescricao.jsp">Emitir atestado/receituário médico</a></li>
 					<li><a href="relatorioConsulta.jsp">Emitir relatório de consultas</a></li>												
 					<li><a href="relatorioProcedimento.jsp">Emitir relatório de procedimentos</a></li>
 					<li><a href="relatorioPagamento.jsp">Emitir relatório de pagamentos</a></li>
