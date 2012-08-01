@@ -191,7 +191,7 @@ public class ServletPagamento extends HttpServlet {
 			objetoSessao.removeAttribute("listaPagamento");
 			//pesquisar pagamentos por paciente 
 			List<Pagamento> listaPagamento = new ArrayList<Pagamento>();
-			listaPagamento = po.getPagamentoPendente(new Date());
+			listaPagamento = po.getPagamentoPendente(new java.sql.Date());
 			if (listaPagamento == null){
 				ca.sendRedirect(request, response, null, "Não existe pagamento pendente.", "pagamentos_vencidos_em_aberto.jsp");
 			}else{

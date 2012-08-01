@@ -1,6 +1,5 @@
 package controle;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -276,7 +275,7 @@ public class ProcurarObjeto {
 		}
 	}
 	
-	public List<Pagamento> getPagamentoPendente(Date data){
+	public List<Pagamento> getPagamentoPendente(java.sql.Date data){
 		try{
 			List<Pagamento> listaPagamento = new ArrayList<Pagamento>();
 			DaoPagamento daoPagamento = new DaoPagamento();
@@ -294,10 +293,9 @@ public class ProcurarObjeto {
 	
 	public static void main(String[] args) {
 		ProcurarObjeto po = new ProcurarObjeto();
+		ConfiguraAtributo ca = new ConfiguraAtributo();
 		List<Pagamento> listaPagamento = new ArrayList<Pagamento>();
-		System.out.println(new Date());
-		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-		listaPagamento = po.getPagamentoPendente(new Date());
+		listaPagamento = po.getPagamentoPendente(ca.dataStringParaDataSql("31/07/2013"));
 		System.out.println(listaPagamento);
 	}
 	
