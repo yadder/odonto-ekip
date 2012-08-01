@@ -1,7 +1,6 @@
 package controle;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import modelo.Consulta;
@@ -289,14 +288,6 @@ public class ProcurarObjeto {
 			e.printStackTrace();
 			return null;
 		}
-	}
-	
-	public static void main(String[] args) {
-		ProcurarObjeto po = new ProcurarObjeto();
-		ConfiguraAtributo ca = new ConfiguraAtributo();
-		List<Pagamento> listaPagamento = new ArrayList<Pagamento>();
-		listaPagamento = po.getPagamentoPendente(ca.dataStringParaDataSql("31/07/2013"));
-		System.out.println(listaPagamento);
 	}
 	
 	public List<OdontogramaProcedimento> getOdontogramaProcedimentoPendentePorOdontograma(Odontograma odontograma){

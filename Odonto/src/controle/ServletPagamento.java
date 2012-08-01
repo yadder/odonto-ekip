@@ -189,15 +189,16 @@ public class ServletPagamento extends HttpServlet {
 			}
 		}else if (btn.equals("listarPagamentosVencidosEmAberto")){
 			objetoSessao.removeAttribute("listaPagamento");
-			//pesquisar pagamentos por paciente 
 			List<Pagamento> listaPagamento = new ArrayList<Pagamento>();
-			listaPagamento = po.getPagamentoPendente(new java.sql.Date());
+			Date dataSql = new Date();
+			String dataString = dataSql.toString();
+			listaPagamento = po.getPagamentoPendente(ca.dataStringParaDataSql(dataString));
 			if (listaPagamento == null){
 				ca.sendRedirect(request, response, null, "Não existe pagamento pendente.", "pagamentos_vencidos_em_aberto.jsp");
 			}else{
 				objetoSessao.setAttribute("listaPagamento", listaPagamento);
 				ca.sendRedirect(request, response, null, null, "pagamentos_vencidos_em_aberto.jsp");
-			}					
+			}
 		}
 						
 	} // post
