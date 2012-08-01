@@ -95,9 +95,9 @@ public class DaoPagamento {
 		return lista;
 	}
 	
-	public List<Pagamento> pesquisarPagamentoPendente(java.util.Date data) throws Exception{
+	public List<Pagamento> pesquisarPagamentoPendente(java.sql.Date data) throws Exception{
 		List<Pagamento> lista = null;
-		Criteria cr = session.createCriteria(Pagamento.class).add(Restrictions.eq("statusPagamento", "PENDENTE")).add(Restrictions.le("dataVencimento", data));
+		Criteria cr = session.createCriteria(Pagamento.class).add(Restrictions.eq("statusPagamento", "PENDENTE")).add(Restrictions.gt("dataVencimento", data));
 		lista = (ArrayList)cr.list();
 		closeSession();
 		return lista;

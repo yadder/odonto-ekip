@@ -9,6 +9,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 public class DaoPrescricao {
 
@@ -56,6 +57,14 @@ public class DaoPrescricao {
 		lista = (ArrayList)cr.list();
 		closeSession();
 		return lista;
+	}
+	
+	public Prescricao pesquisarPrescricaoPorId(Prescricao prescricao) throws Exception{
+		Prescricao p = new Prescricao();
+		Criteria cr = session.createCriteria(Prescricao.class).add(Restrictions.eq("idPrescricao", prescricao.getIdPrescricao()));
+		p = (Prescricao)cr.uniqueResult();
+		closeSession();
+		return p;
 	}
 
 }
