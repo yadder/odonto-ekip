@@ -12,6 +12,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 public class DaoPagamento {
@@ -97,7 +98,7 @@ public class DaoPagamento {
 	
 	public List<Pagamento> pesquisarPagamentoPendente(java.sql.Date data) throws Exception{
 		List<Pagamento> lista = null;
-		Criteria cr = session.createCriteria(Pagamento.class).add(Restrictions.eq("statusPagamento", "PENDENTE")).add(Restrictions.gt("dataVencimento", data));
+		Criteria cr = session.createCriteria(Pagamento.class).add(Restrictions.eq("statusPagamento", "PENDENTE")).add(Restrictions.lt("dataVencimento", data));
 		lista = (ArrayList)cr.list();
 		closeSession();
 		return lista;
