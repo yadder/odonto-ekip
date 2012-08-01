@@ -1,6 +1,9 @@
 package controle;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +14,9 @@ import javax.servlet.http.HttpSession;
 import modelo.Dentista;
 import modelo.Paciente;
 import modelo.Prescricao;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 import persistencia.DaoPrescricao;
 
 public class ServletPrescricao extends HttpServlet {
@@ -53,16 +59,43 @@ public class ServletPrescricao extends HttpServlet {
 				prescricao.setTipoPrescricao((String)request.getParameter("tipoPrescricao"));
 				try{
 					daoPrescricao.cadastrarPrescricao(prescricao);
-					ca.sendRedirect(request, response, "Prescrição cadastrada com sucesso!", null, "principal.jsp");
+					ca.sendRedirect(request, response, null, null, "ServletPrescricao?btn=Imprimir");
+					
 				}catch (Exception e) {
 					ca.sendRedirect(request, response, null, "Erro ao gravar a prescrição. "+e.getMessage(), "prescricao.jsp");
 				}
 			}else{
 				ca.sendRedirect(request, response, null, "Preencha o campo prescrição.", "prescricao.jsp");
 			}
+			
+		}else if (btn.equals("Imprimir")){						
+			try{	
+				Prescricao prescricao = new Prescricao();
+				List<Prescricao>listaPrescricao=new ArrayList<Prescricao>();				
+				DaoPrescricao daoPrescricao= new DaoPrescricao();
+				prescricao=daoPrescricao.pesquisarPrescricaoPorId();
+				System.out.println("----------------------------------"+prescricao);
+				listaPrescricao.add(prescricao);
+				System.out.println("----------------------------------"+listaPrescricao);
+				
+				if(!listaPrescricao.isEmpty()){			
+					JRBeanCollectionDataSource jr = new JRBeanCollectionDataSource(listaPrescricao); 
+					JasperFillManager.fillReportToFile("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\relatorioPrescricao.jasper", new HashMap(), jr);
+					JasperViewer.viewReport("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\relatorioPrescricao.jrprint", false, false);
+					jr=null;					
+					ca.sendRedirect(request, response, "Prescrição cadastrada com sucesso!", null, "prescricao.jsp");
+				}else{
+					ca.sendRedirect(request, response, "Prescrição cadastrada", null, "prescricao.jsp");
+				}					
+			}catch (Exception e) {
+				ca.sendRedirect(request, response, null, "Erro ao gerar o relatório. "+e.getMessage(), "prescricao.jsp");
+			}
+			
+			
+			
+			
+			
 		}
-		
-		
 		
 	}
 

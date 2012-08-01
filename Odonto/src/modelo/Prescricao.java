@@ -88,5 +88,12 @@ public class Prescricao implements Serializable {
 
 	public void setTipoPrescricao(String tipoPrescricao) {
 		this.tipoPrescricao = tipoPrescricao;
-	}   
+	}
+	
+	@Override
+	public String toString() {
+	
+		return observacao;
+		
+	}
 }

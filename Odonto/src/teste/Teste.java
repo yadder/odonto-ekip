@@ -1,9 +1,31 @@
 package teste;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import modelo.Prescricao;
+import persistencia.DaoPrescricao;
+
 
 public class Teste {
 
 	public static void main(String[] args) {
+		
+		
+		try {
+			
+			Prescricao prescricao = new Prescricao();
+			List<Prescricao>listaPrescricao=new ArrayList<Prescricao>();				
+			DaoPrescricao daoPrescricao= new DaoPrescricao();
+			prescricao=daoPrescricao.pesquisarPrescricaoPorId();
+			System.out.println("----------------------------------"+prescricao);
+			listaPrescricao.add(prescricao);
+			System.out.println("----------------------------------"+listaPrescricao);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 		
 /*
