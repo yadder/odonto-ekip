@@ -132,6 +132,7 @@ public class ServletPaciente extends HttpServlet {
 						JasperViewer.viewReport("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\loginSenha.jrprint", false, false);
 						jr=null;
 						objetoSessao.removeAttribute("paciente");
+						objetoSessao.removeAttribute("data");
 						ca.sendRedirect(request, response, "Paciente cadastrado(a) com sucesso! Imprima login e senha.", null, "paciente.jsp");
 					}else{
 						ca.sendRedirect(request, response, "Paciente cadastrado", "Erro ao imprimir login e senha", "paciente.jsp");

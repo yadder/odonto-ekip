@@ -61,7 +61,7 @@
 					<li><a href="relatorioConsulta.jsp">Emitir relatório de consultas</a></li>												
 					<li><a href="relatorioProcedimento.jsp">Emitir relatório de procedimentos</a></li>
 					<li><a href="relatorioPagamento.jsp">Emitir relatório de pagamentos</a></li>
-					<li><a href="relatorioOdontograma.jsp">Emitir relatório de odontogramas</a></li>
+			<!--		<li><a href="relatorioOdontograma.jsp">Emitir relatório de odontogramas</a></li>  -->
 				</ul>
 			</li>
 			<li><a href="#"><b>Ajuda</b></a>
@@ -77,7 +77,6 @@
 </div> <!-- fim do div cabeçalho -->
 <div class="sessao">
 		${msgCabecalho} Usuário: ${usuarioLogado.nomeUsuario}<br>
-		Perdidos na sessao: ${perdidosNaSessao}
 </div><!-- fim do div sessao -->
 
 </body>
