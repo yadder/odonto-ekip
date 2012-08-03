@@ -24,7 +24,7 @@
 			<td align="center" bgcolor="#5e8ce9" width="30%"><b>Dt Vencimento</b></td>
 			<td align="center" bgcolor="#5e8ce9" width="15%"><b>Status</b>
 		</tr>
-		<c:forEach items="${sessionScope.listaPendente}" var="colecao">
+		<c:forEach items="${sessionScope.listaPagamento}" var="colecao">
 		<tr>
 			<td align="center">${colecao.odontograma}</td>
 			<td align="center">${colecao.paciente}</td>

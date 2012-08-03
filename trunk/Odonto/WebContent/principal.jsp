@@ -13,17 +13,6 @@
 	<h5 class="information">${msg}</h5>
 	<h5 class="error">${msgE}</h5>
 </div>
-
-	<h6><font color="red">À fazer:</font></h6>
-	<a href=#>Verificação inicial - 50%</a><br/>
-	<a href=#>Conceder acesso</a><br/>
-	<a href=#>Não deixar agendar consulta com data anterior a data atual</a><br/>
-	
-	
-	<h6><font color="red">Melhorias:</font></h6>
-	<a href=#>Na tela de consulta, só mostrar horarios disponiveis</a><br/>
-	<a href=#>Fazer validação com jQuery</a><br/>
-	
 	
 </fieldset>
 <c:import url="cabecalho.jsp" />

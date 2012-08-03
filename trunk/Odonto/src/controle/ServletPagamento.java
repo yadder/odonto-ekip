@@ -124,6 +124,7 @@ public class ServletPagamento extends HttpServlet {
 								pagamento.setDataVencimento(ca.dataStringParaDataSql(dataFormatada.format(calendar.getTime())));
 								pagamento.setDataPagamento(null);							
 								try{
+									daoPagamento = new DaoPagamento();
 									daoPagamento.cadastrarPagamento(pagamento);
 								}catch (Exception e) {
 									ca.sendRedirect(request, response, null, "Erro ao gravar pagamento.", "gerar_pagamento.jsp");
@@ -200,7 +201,6 @@ public class ServletPagamento extends HttpServlet {
 				ca.sendRedirect(request, response, null, null, "pagamentos_vencidos_em_aberto.jsp");
 			}
 		}
-						
 	} // post
 
 }
