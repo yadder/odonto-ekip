@@ -355,4 +355,20 @@ public class ProcurarObjeto {
 		}		
 	}
 	
+	public boolean getConsultaPorAgendamento(Consulta con){
+		try{
+			DaoConsulta daoConsulta = new DaoConsulta();
+			Consulta consulta = null;
+			consulta = daoConsulta.pesquisarConsultaPorAgendamento(con);
+			if (consulta == null){
+				return false;
+			}else{
+				return true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 }

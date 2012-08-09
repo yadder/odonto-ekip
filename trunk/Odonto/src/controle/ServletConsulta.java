@@ -59,16 +59,20 @@ public class ServletConsulta extends HttpServlet {
 		}else if(btn.equals("Agendar Consulta")){
 			consulta = preencheObjeto(request, response);
 			objetoSessao.setAttribute("consulta", consulta);
-			if (validaCampos(consulta)){				
-				try{
-					consulta.setPaciente((Paciente)objetoSessao.getAttribute("paciente"));
-					DaoConsulta daoConsulta = new DaoConsulta();
-					daoConsulta.cadastrarConsulta(consulta);
-					objetoSessao.removeAttribute("consulta");
-					objetoSessao.removeAttribute("paciente");
-					ca.sendRedirect(request, response, "Consulta agendada com sucesso!", null, "principal.jsp");
-				}catch (Exception e) {
-					ca.sendRedirect(request, response, null, "Erro ao agendar consulta. "+e.getMessage(), "agendar_consulta.jsp");
+			if (validaCampos(consulta)){	
+				if (po.getConsultaPorAgendamento(consulta) == false){
+					try{
+						consulta.setPaciente((Paciente)objetoSessao.getAttribute("paciente"));
+						DaoConsulta daoConsulta = new DaoConsulta();
+						daoConsulta.cadastrarConsulta(consulta);
+						objetoSessao.removeAttribute("consulta");
+						objetoSessao.removeAttribute("paciente");
+						ca.sendRedirect(request, response, "Consulta agendada com sucesso!", null, "principal.jsp");
+					}catch (Exception e) {
+						ca.sendRedirect(request, response, null, "Erro ao agendar consulta. "+e.getMessage(), "agendar_consulta.jsp");
+					}
+				}else{
+					ca.sendRedirect(request, response, null, "Já existe uma consulta agendada para este dia e horário. ", "agendar_consulta.jsp");
 				}
 			}else{
 				ca.sendRedirect(request, response, null, mensagem, "agendar_consulta.jsp");
@@ -191,11 +195,15 @@ public class ServletConsulta extends HttpServlet {
 						ca.sendRedirect(request, response, null, mensagem, "remarcar_consulta.jsp");
 					}
 					consulta.setHoraConsulta((String)request.getParameter("horaConsulta"));
-					DaoConsulta daoConsulta = new DaoConsulta();
-					daoConsulta.alterarConsulta(consulta);
-					ca.sendRedirect(request, response, "Consulta remarcada com sucesso!", null, "ServletConsulta?btn=listarconsultas");
+					if (po.getConsultaPorAgendamento(consulta) == false){
+						DaoConsulta daoConsulta = new DaoConsulta();
+						daoConsulta.alterarConsulta(consulta);
+						ca.sendRedirect(request, response, "Consulta remarcada com sucesso!", null, "ServletConsulta?btn=listarconsultas");
+					}else{
+						ca.sendRedirect(request, response, null, "Já existe uma consulta agendada para este dia e horário. ", "remarcar_consulta.jsp");
+					}
 				}catch (Exception e) {
-					ca.sendRedirect(request, response, null, "Erro ao remarcar a consulta. "+e.getMessage(),"remarcar_consultas.jsp");
+					ca.sendRedirect(request, response, null, "Erro ao remarcar a consulta. "+e.getMessage(),"remarcar_consulta.jsp");
 				}	
 			}else{
 				ca.sendRedirect(request, response, null, "Consulta não encontrada.", "listar_consultas.jsp");
