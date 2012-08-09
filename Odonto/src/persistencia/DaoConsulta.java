@@ -110,7 +110,18 @@ public class DaoConsulta {
 		lista = (ArrayList)cr.list();
 		closeSession();
 		return lista;
-	}	
+	}
+	
+	public Consulta pesquisarConsultaPorAgendamento(Consulta consulta) throws Exception{
+		Consulta con = null;
+		Criteria cr = session.createCriteria(Consulta.class).add(Restrictions.eq("dataConsulta", consulta.getDataConsulta()))
+															.add(Restrictions.eq("horaConsulta",consulta.getHoraConsulta()))
+															.add(Restrictions.eq("dentista", consulta.getDentista()))
+															.add(Restrictions.eq("statusConsulta", "AGENDADA"));
+		con = (Consulta)cr.uniqueResult(); 	
+		closeSession();
+		return con;	
+	}
 }
 
 
