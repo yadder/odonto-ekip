@@ -37,9 +37,9 @@
 		<band/>
 	</background>
 	<title>
-		<band height="65">
+		<band height="61">
 			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
-				<reportElement x="70" y="3" width="414" height="59"/>
+				<reportElement x="70" y="0" width="414" height="59"/>
 				<imageExpression class="java.lang.String"><![CDATA["C:\\TCC\\trunk\\Odonto\\WebContent\\arquivos\\logo_horizontal.jpg"]]></imageExpression>
 			</image>
 		</band>

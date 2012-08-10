@@ -73,19 +73,17 @@ public class ServletPrescricao extends HttpServlet {
 				Prescricao prescricao = new Prescricao();
 				List<Prescricao>listaPrescricao=new ArrayList<Prescricao>();				
 				DaoPrescricao daoPrescricao= new DaoPrescricao();
-				prescricao=daoPrescricao.pesquisarPrescricaoPorId();
-				System.out.println("----------------------------------"+prescricao);
-				listaPrescricao.add(prescricao);
-				System.out.println("----------------------------------"+listaPrescricao);
+				prescricao=daoPrescricao.pesquisarPrescricaoPorId();				
+				listaPrescricao.add(prescricao);				
 				
 				if(!listaPrescricao.isEmpty()){			
 					JRBeanCollectionDataSource jr = new JRBeanCollectionDataSource(listaPrescricao); 
 					JasperFillManager.fillReportToFile("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\relatorioPrescricao.jasper", new HashMap(), jr);
 					JasperViewer.viewReport("C:\\TCC\\trunk\\Odonto\\WebContent\\WEB-INF\\relatorio\\relatorioPrescricao.jrprint", false, false);
 					jr=null;					
-					ca.sendRedirect(request, response, "Prescrição cadastrada com sucesso!", null, "prescricao.jsp");
+					ca.sendRedirect(request, response, "Prescrição cadastrada com sucesso!", null, "principal.jsp");
 				}else{
-					ca.sendRedirect(request, response, "Prescrição cadastrada", null, "prescricao.jsp");
+					ca.sendRedirect(request, response, "Prescrição cadastrada", null, "principal.jsp");
 				}					
 			}catch (Exception e) {
 				ca.sendRedirect(request, response, null, "Erro ao gerar o relatório. "+e.getMessage(), "prescricao.jsp");
